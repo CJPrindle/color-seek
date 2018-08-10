@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": [ "es6", "dom" ],
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "C:/Code/node/color-seek/js",
+    "pretty": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es6"
+  },
+    "exclude": [
+        "node_modules"
+    ]
+}

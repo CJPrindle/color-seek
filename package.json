@@ -1,0 +1,22 @@
+{
+  "name": "color-seek",
+  "version": "0.1.0",
+  "description": "color-finder",
+  "main": "colorseek.js",
+  "author": {
+    "name": "Christopher Prindle",
+    "email": "cjprindle@vivaldi.net",
+    "url": "http://www.github.com/cjprindle"
+  },
+  "devDependencies": {
+    "@types/async": "^2.0.49",
+    "@types/htmlparser2": "^3.7.31",
+    "@types/node": "^6.0.116",
+    "@types/request": "^2.47.1"
+  },
+  "dependencies": {
+    "htmlparser2": "^3.9.2",
+    "minimist2": "^1.0.2",
+    "request": "^2.87.0"
+  }
+}
