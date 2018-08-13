@@ -1,9 +1,24 @@
+/**
+  * @namespace
+  * @name - File
+  * @description - Contains file system related classes
+ */
 export declare namespace File {
     /**
-    * @description Provides file read and write functionality
+     * @class
+     * @name - Filesystem
+     * @classdesc Provides file read and write functionality
     */
     class FileSystem {
-        constructor(sourceFile: string);
-        readFile(filePath: any): void;
+        inputSource: string;
+        outputName: string;
+        constructor(source: string, name: string);
+        /**
+         * @function
+         * @name - readFile
+         * @description - Reads a file to parse for color values
+         * @param filePath
+         */
+        readFile(): void;
     }
 }

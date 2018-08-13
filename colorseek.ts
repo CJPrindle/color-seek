@@ -37,11 +37,22 @@ and limitations under the License.
  * Module Entry
  * Parse the command line and determine which options to call
  */
+import * as Chalk from 'chalk';
 import * as minimist2 from 'minimist2';
 import { File } from './File';
 import { Parse } from './Parse';
 import { Web } from './Web';
 import { parse } from 'path';
+import { Helpers } from './Helpers';
+
+const log = console.log;
+const logerr = console.error;
+const exit = process.exit;
+const chalk = Chalk.default;
+const info = chalk.green;
+const infoBold = chalk.bold.green;
+const error = chalk.bold.red;
+const warning = chalk.bold.yellow;
 
 const Command = Parse.Command;
 const Palette = Parse.Palette;
@@ -50,44 +61,64 @@ const args = (minimist2)(process.argv.slice(2));
 
 //- All Console switches and commands
 const commands: Parse.Command[] = [
-   new Command('-c, --parse-css                     ', 'Flag indicating css files will be searched when parsing a web page'),
-   new Command('-o, --output [DIRECTORY]            ', 'The directory where the output file will be created'),
-   new Command('-p, --open                          ', 'Open the HTML file when complete'),
-   new Command('-i, --input [FILE_PATH] or [URL]    ', 'The source file or html page to parse for color values'),
-   new Command('--css                               ', 'Create a CSS version of the color palette'),
-   new Command('--gimp                              ', 'Create a GPL (Gimp Palette file) version of the color palette'),
-   new Command('--html                              ', 'Create a HTML version of the color palette'),
-   new Command('--less                              ', 'Create a LESS version of the color palette'),
-   new Command('--scss                              ', 'Create a SASS version of the color palette'),
+   new Command('-c, --parse-css                 ', 'Flag indicating css files will be searched when parsing a web page'),
+   new Command('-o, --output [DIRECTORY]        ', 'The directory where the output file will be created'),
+   new Command('-n, --name                      ', 'The name to use when creating the output files (No extension)'),
+   new Command('-i, --input [FILE_PATH] or [URL]', 'The source file or html page to parse for color values'),
+   new Command('--css                           ', 'Create a CSS version of the color palette'),
+   new Command('--gimp                          ', 'Create a GPL (Gimp Palette file) version of the color palette'),
+   new Command('--html                          ', 'Create a HTML version of the color palette'),
+   new Command('--less                          ', 'Create a LESS version of the color palette'),
+   new Command('--scss                          ', 'Create a SASS version of the color palette'),
 ];
 
+//onerror = showError()
 const path: string = (args.i) ? args.i : args.input;
+const name: string = (args.n) ? args.n : args.name;
+main();
 
-if(path.length) {
-   if(path.toLowerCase().startsWith('http')) {
-      console.log('path', path);
-      new Http().parseUrl(path, htmlTextHandler);
+
+/**
+  * @function
+  * @name - main
+  * @description - Entry function for the application
+  *
+  */
+function main() {
+   try {
+      if(path) {
+         if(path.length) {
+            if(path.toLowerCase().startsWith('http')) {
+               console.log('path', path);
+               new Http().getUrlData(path, htmlTextHandler);
+            } else {
+               new File.FileSystem(path, name).readFile();
+            }
+         } else {
+            Helpers.raiseError(new Error('Missing input file'));
+         }
+      } else {
+         printHelp();
+      }
    }
-} else {
-   printHelp();
+   catch(e) {
+      Helpers.raiseError(e);
+   }
 }
 
 function htmlTextHandler(data: string): void {
-   console.log('data', data);
-   new Palette(path).buildHtmlOutput(data);
+   new Palette(path, name).buildHtmlOutput(data);
 }
 
 function printHelp() {
-   console.log('\nUsage: node colorfinder\n');
-   commands.forEach((c) => console.log(' ' + c.Argument + '\t' + c.Description));
-   console.log('\nIf no output type is specified then only a [DIRECTORY]/color-palette.txt file will be created.');
-   console.log('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --html).');
+   log(infoBold('\nUsage: node colorfinder [OPTIONS]\n'));
+   commands.forEach((c) => log(info(' ' + c.Argument + '\t' + c.Description)));
+   log(warning('\nIf no output type is specified then only a [DIRECTORY]/[NAME].html file will be created.'));
+   log(warning('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --html).'));
    exit();
 }
 
-function error(err: Error, params: any[]) {
-   console.error(err.message, params);
-}
-function exit(code: number = 1) {
-   process.exit(code);
+function showError(ex: Error, params: any) {
+   logerr(error(`ERROR: ${ex.message}`), chalk.redBright(params));
+   exit();
 }

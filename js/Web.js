@@ -25,25 +25,31 @@ and limitations under the License.
 //import * as http from 'http';
 const request = require("request");
 const buffer_1 = require("buffer");
+/**
+ * @namespace
+ * @name - Web
+ * @description - Contains classes for web access
+ */
 var Web;
 (function (Web) {
     /**
-     * @name Http
-     * @description Provides access to HTML and/or CSS files to parse for
-     *              color values
+     * @class
+     * @name - Http
+     * @classdesc - Provides access to HTML and/or CSS files to parse for color values
      * */
     class Http {
-        parseUrl(url, callback) {
+        /**
+         * @function
+         * @name - getUrlData
+         * @param {string} - The Url to parse
+         * @param {Function} - The callback function for further processing
+         */
+        getUrlData(url, callback) {
             return __awaiter(this, void 0, void 0, function* () {
                 let html = '';
                 request.get(url)
-                    .on('data', (chunk) => {
-                    html += buffer_1.Buffer.from(chunk).toString();
-                })
-                    .on('end', () => {
-                    console.log(html);
-                    callback(html);
-                });
+                    .on('data', (chunk) => html += buffer_1.Buffer.from(chunk).toString())
+                    .on('end', () => callback(html));
             });
         }
     }

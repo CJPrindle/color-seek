@@ -23,27 +23,30 @@ import { concat } from 'async';
 import { Buffer } from 'buffer';
 
 /**
- * Contains classes for web access
- * @namespace - Web
+ * @namespace
+ * @name - Web
+ * @description - Contains classes for web access
  */
 export namespace Web {
    /**
-    * @class - Http
+    * @class 
+    * @name - Http
     * @classdesc - Provides access to HTML and/or CSS files to parse for color values
     * */
    export class Http {
 
-      public async parseUrl(url: string, callback) {
+      /**
+       * @function
+       * @name - getUrlData
+       * @param {string} - The Url to parse
+       * @param {Function} - The callback function for further processing
+       */
+      public async getUrlData(url: string, callback) {
          let html = '';
 
          request.get(url)
-            .on('data', (chunk) => {
-               html += Buffer.from(chunk).toString();
-            })
-            .on('end', () => {
-               console.log(html);
-               callback(html);
-            });
+            .on('data', (chunk) => html += Buffer.from(chunk).toString())
+            .on('end', () => callback(html) );
       }
    }
 }

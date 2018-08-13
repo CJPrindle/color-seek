@@ -14,33 +14,28 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ******************************************************************************/
-/**
-* @description Provides file read and write functionality
-*/
-class CssColor {
-    constructor() {
-        this.RGB = {
-            R: 0, G: 0, B: 0
-        };
-        this.HSB = {
-            H: 0, S: '', B: ''
-        };
-        this.Hex = '';
+const Chalk = require("chalk");
+class Helpers {
+    static getRandomInteger(min = 1, max = 100) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
-    //constructor(r: number, g: number, b: number);
-    //constructor(h: number, s: string, b: string);
-    //constructor(hex: string, a?: number) {
-    //   //let thisa = hex;
-    //}
-    setHexColor(hex) {
+    static getRandomDecimal(min = 1, max = 100, places = 2) {
+        const val = Math.floor(Math.random() * (max - min + 1) + min) + Math.random();
+        return parseFloat(val.toFixed(places));
     }
-    setHSBColor(h, s, b, a = 1) {
+    static getMilliseconds(numOfDigits = 0) {
+        let mSecs = new Date().valueOf();
+        const mLen = mSecs.toString().length;
+        if (numOfDigits > 0) {
+            var start = mLen - numOfDigits;
+            mSecs = parseInt(mSecs.toString().substring(start));
+        }
+        return mSecs;
     }
-    setRGBColor(r, g, b, a = 1) {
-    }
-    get Alpha() {
-        return this.alpha;
+    static raiseError(error) {
+        const red = Chalk.default.bold.redBright;
+        console.error(red(error.message), red(error.stack));
     }
 }
-exports.CssColor = CssColor;
-//# sourceMappingURL=CssColor.js.map
+exports.Helpers = Helpers;
+//# sourceMappingURL=Helpers.js.map

@@ -1,8 +1,8 @@
-# Color Finder
+# Color Seek - Version 1.0
 
 ## File and Web Search
 
-**Color Finder** allows you to build color palettes from an existing source. Text files and web pages including .css urls are both valid sources. The file is opened and parsed to locate valid CSS color values. All unique colors are then converted into a _color palette_.
+**Color Seek** allows you to build color palettes from an existing source. Text files and web pages including .css urls are both valid sources. The file is opened and parsed to locate valid CSS color values. All unique colors are then converted into a _color palette_.
 
 ##### CSS Color Values
 
