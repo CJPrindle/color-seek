@@ -13,10 +13,15 @@ See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ******************************************************************************/
 import * as fs from 'fs';
+import * as opn from 'opn';
 
+/** Contains classes related to parsing and/or building the color palette
+ * @namespace 
+ */
 export namespace Parse {
    /**
-   * @description Represents all valid switches for ColorFinder
+    * @class - Command
+    * @classdesc - Represents all valid switches for ColorFinder
    */
    export class Command {
       Argument: string;
@@ -29,14 +34,20 @@ export namespace Parse {
    }
 
    /**
-   * @description Provides methods to find color values in provided text
+   * @class - Palette
+   * @classdesc - Contains methods for building the color palette
    */
    export class Palette {
+      Source: string;
+      Name: string;
 
-      constructor() { }
+      constructor(source: string = '') {
+         this.Source = source;
+      }
 
       /**
-      * @description Creates a Html file containing the color palette
+      * @description - 
+      * @param {string} searchText - The string to search for colors
       */
       public buildHtmlOutput(searchText: string): void {
          let hexColors = this.findColors(searchText);
@@ -44,27 +55,29 @@ export namespace Parse {
          let thumbnails = '';
 
          for(let x = 0; x < hexColors.length; x++) {
-            let thumbnail = '' +
-               '<div class="box">' +
-               '   <div class="header">' +
-               '       <div>hex :&nbsp;&nbsp;<b>' + hexColors[x] + '</b></div>' +
-               '       <div>rgba:&nbsp;&nbsp;<b>' + '255, 255, 255, 1.0' + '</b></div>' +
-               '       <div>hsla:&nbsp;&nbsp;<b>' + '120, 80%, 65%, 1.0' + '</b></div>' +
-               '   </div>' +
-               '   <div class="thumbnail" style="background-color:' + hexColors[x] + '">&#160;</div>' +
-               '</div>\n';
+            let thumbnail = `
+               <div class="box"> 
+                  <div class="header">
+                      <div class="label">hex :&nbsp;&nbsp;<b class="color">${hexColors[x]}</b></div> 
+                      <div class="label">rgba:&nbsp;&nbsp;<b class="color">255, 255, 255, 1</b></div>
+                      <div class="label">hsla:&nbsp;&nbsp;<b class="color">120, 80%, 65%, 1</b></div>
+                  </div>
+                  <div class="thumbnail" style="background-color:${hexColors[x]}">&#160;</div>
+               </div>\n`;
+
             thumbnails = thumbnails + thumbnail;
          }
 
-         html = html.replace('{colors}', thumbnails);
+         html = html.replace('{source}', this.Source).replace('{colors}', thumbnails);
 
          fs.writeFileSync('ColorBuilder.html', html.toString());
+         opn('ColorBuilder.html');
       }
 
       /**
       * @description Finds hex color values (#FFFFFF) in current search text
-      * @param searchText
-      * @returns string[] containing found hex colors
+      * @param {string} searchText - The string to search
+      * @returns {string[]} - An array containing the found hex colors
       */
       private findColors(searchText: string): string[] {
          let hexColors: string[] = [];
@@ -75,22 +88,35 @@ export namespace Parse {
          for(let x = 0; x < searchAreas.length; x++) {
 
             //- Get search range
-            let str = searchAreas[x] + 1;
-            let end = searchAreas[x] + 7;
+            const str = searchAreas[x] + 1;
+            const end = searchAreas[x] + 7;
 
             //- Check for valid hex value
-            let hex_color = searchText.substring(str, end);
-            const isHexColor = parseInt(hex_color, 16).toString();
+            let hexColor = searchText.substring(str, end);
+
+            if((hexColor[0] == hexColor[1]) && (hexColor[1] == hexColor[2])) {
+               hexColor = hexColor.substring(0, 3);
+            }
+            
+            const isHexColor = parseInt(hexColor, 16)
+               .toString();
 
             //- Add  to color array
             if(isHexColor != 'NaN') {
-               hexColors.push('#' + hex_color);
+               hexColors.push('#' + hexColor);
             }
          }
 
-         return [...new Set(hexColors.map(item => item.toLowerCase().valueOf()).sort())];
+         return [...new Set(hexColors.map(item => item.toUpperCase().valueOf()).sort())];
       }
 
+      /**
+      * @description Finds the indexes of a search value in the given string
+      * @param {string} searchStr - The value to search for within the given string
+      * @param {string} str - The string to search
+      * @param {boolean} caseSensitive - True/False for case sensitivity
+      * @returns {number[]} containing found hex colors
+      */
       private getIndicesOf(searchStr, str, caseSensitive = true): number[] {
          const searchStrLen = searchStr.length;
 

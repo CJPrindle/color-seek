@@ -74,7 +74,7 @@ if(path.length) {
 
 function htmlTextHandler(data: string): void {
    console.log('data', data);
-   new Palette().buildHtmlOutput(data);
+   new Palette(path).buildHtmlOutput(data);
 }
 
 function printHelp() {

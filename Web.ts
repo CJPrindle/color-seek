@@ -22,11 +22,14 @@ import { write } from 'fs';
 import { concat } from 'async';
 import { Buffer } from 'buffer';
 
+/**
+ * Contains classes for web access
+ * @namespace - Web
+ */
 export namespace Web {
    /**
-    * @name Http
-    * @description Provides access to HTML and/or CSS files to parse for
-    *              color values
+    * @class - Http
+    * @classdesc - Provides access to HTML and/or CSS files to parse for color values
     * */
    export class Http {
 

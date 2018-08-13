@@ -16,9 +16,13 @@ import * as fs from 'fs';
 import { Parse } from './Parse'
 const Palette = Parse.Palette;
 
+/**
+ * @namespace File - Contains file system related classes
+ */
 export namespace File {
    /**
-   * @description Provides file read and write functionality
+    * @class - Filesystem
+    * @classdesc Provides file read and write functionality
    */
    export class FileSystem {
 

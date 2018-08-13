@@ -17,6 +17,7 @@
   "dependencies": {
     "htmlparser2": "^3.9.2",
     "minimist2": "^1.0.2",
+    "opn": "^5.3.0",
     "request": "^2.87.0"
   }
 }
