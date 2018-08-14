@@ -37,8 +37,8 @@ export namespace Palette {
       /**
        * Sets the input file or url and the output file name (if provided)
        * @constructor
-       * @param {string} source
-       * @param {string} name
+       * @param {string} source - The source file/url parsed for color values
+       * @param {string} name   - The provided name for the generated output files
       */
       constructor(source: string, name: string) {
          this.inputSource = (source) ? source : 'N/A';
@@ -48,11 +48,18 @@ export namespace Palette {
       /**
        * Creates the color palette Html file
        * @function
-       * @param {string} searchText - The text to parse for colors values used to generate the color palette
+       * @param {string} searchText - The text to parse for colors values
       */
       public buildHtmlOutput(searchText: string): void {
          try {
             let hexColors = this.parseHexColors(searchText);
+
+            hexColors.map((hc, idx, arr) => {
+               let pColor = new PaletteColor();
+               pColor.setHex(hc.valueOf());
+               this.paletteColors.push(pColor);
+            });
+
             let html = fs.readFileSync('template.html').toString();
             let thumbnails = '';
             const fileName = `${this.outputName.trim().replace(new RegExp(' ', 'g'), '')}.html`;
@@ -66,9 +73,13 @@ export namespace Palette {
                       <div class="label">hsla:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSL}</b></div>
                   </div>
                   <div class="thumbnail" style="background-color:${hexColors[x]}">&#160;</div>
+                  <div class="header">
+                     <div class="label">cmyk :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].CMYK}</b></div> 
+                     <div class="label">hsv :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSV}</b></div>
+                  </div>
                </div>\n`;
 
-               thumbnails = thumbnails + thumbnail;
+               thumbnails += thumbnail;
             }
 
             html = html
@@ -84,7 +95,7 @@ export namespace Palette {
       }
          
       /**
-       * Finds hex color values (#FFFFFF) in current search text
+       * Finds hex color values (ex: #FFFFFF) in current search text
        * @function
        * @param {string} searchText - The text to parse
        * @returns {string[]} An Array<string> containing the parsed hex colors
@@ -97,30 +108,31 @@ export namespace Palette {
 
          for(let x = 0; x < searchAreas.length; x++) {
 
-            //- Get search range
-            const str = searchAreas[x] + 1;
-            const end = searchAreas[x] + 7;
+            try {
+               //- Get search range
+               const str = searchAreas[x] + 1;
+               const end = searchAreas[x] + 7;
 
-            //- Check for valid hex value
-            let hexColor = searchText.substring(str, end);
+               //- Check for valid hex value
+               let hexColor = searchText.substring(str, end);
 
-            //- Convert any three letter hex value to six letters
-            if((hexColor[0] == hexColor[1]) && (hexColor[1] == hexColor[2])) {
-               hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
-            }
-            
-            const isHexColor = parseInt(hexColor, 16)
-               .toString();
+               //- Convert any three letter hex value to six letters
+               if((hexColor[0] == hexColor[1]) && (hexColor[1] == hexColor[2])) {
+                  hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
+               }
 
-            //- Add  to color array
-            if(isHexColor != 'NaN') {
-               let pColor = new PaletteColor();
-               pColor.setHex('#' + hexColor);
-               this.paletteColors.push(pColor);
+               const isHexColor = parseInt(hexColor, 16).toString();
+
+               //- Add  to color array
+               if(isHexColor != 'NaN') {
+                  hexColors.push('#' + hexColor);
+               }
+            } catch(e) {
+               Helpers.outputError(e);
             }
          }
-         
-         return [...new Set(this.paletteColors.map(color => color.Hex.toUpperCase().valueOf()).sort())];
+
+         return [...new Set(hexColors.map(hc => hc.valueOf().toUpperCase()).sort())];
       }
 
       /**
@@ -156,10 +168,30 @@ export namespace Palette {
       }
    }
 
+   /**
+    * @class
+    * @classdesc Contains the color formats used by the color palette
+   */
    export class PaletteColor {
+      CMYK: number[] = [0, 0, 0, 0];
       Hex: string = '';
-      RGB: number[] = [0, 0, 0];
       HSL: number[] = [0, 0, 0];
+      HSV: number[] = [0, 0, 0];
+      RGB: number[] = [0, 0, 0];
+
+      Red: number = this.RGB[0];
+      Green: number = this.RGB[1];
+      Blue: number = this.RGB[2];
+
+      Hue: number = this.HSL[0];
+      Saturation: number = this.HSL[1];
+      Light: number = this.HSL[2];
+      Value: number = this.HSV[2];
+
+      Cyan: number = this.CMYK[0];
+      Magenta: number = this.CMYK[1];
+      Yellow: number = this.CMYK[2];
+      Black: number = this.CMYK[3];
 
       constructor() { }
 
@@ -168,9 +200,10 @@ export namespace Palette {
             this.Hex = hexValue.toUpperCase();
 
             const ColorConvert = new ColorConversion();
-            this.RGB = ColorConvert.HEXtoRGB(this.Hex.substring(1));
-            this.HSL = ColorConvert.RGBtoHSL(this.RGB[0], this.RGB[1], this.RGB[2]);
-            console.log(this.Hex, this.RGB, this.HSL);
+            this.RGB = ColorConvert.HexToRgb(this.Hex.substring(1));
+            this.HSL = ColorConvert.RgbToHsl(this.RGB[0], this.RGB[1], this.RGB[2]);
+            this.CMYK = ColorConvert.RgbToCmyk(this.RGB[0], this.RGB[1], this.RGB[2]);
+            this.HSV = ColorConvert.RgbToHsv(this.RGB[0], this.RGB[1], this.RGB[2]);
          }
          else {
             Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));

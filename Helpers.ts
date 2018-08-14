@@ -25,7 +25,7 @@ export class Helpers {
     * @function
     * @param min {number} - The minimum random value
     * @param max {number} - The maximum random value
-    * @returns {number} - An integer within the specified range
+    * @returns {number} An integer within the specified range
    */
    static getRandomInteger(min: number = 1, max: number = 100): number {
       return Math.floor(Math.random() * (max - min + 1) + min);
@@ -37,7 +37,7 @@ export class Helpers {
     * @param min {number} - The minimum random value
     * @param max {number} - The maximum random value
     * @param places {number} - The maximum number of decimal places
-    * @returns {number} - A float within the specified range
+    * @returns {number} A float within the specified range
    */
    static getRandomDecimal(min: number = 1, max: number = 100, places = 2): number {
       const val: number = Math.floor(Math.random() * (max - min + 1) + min) + Math.random();
@@ -48,7 +48,7 @@ export class Helpers {
     * The milliseconds since Jan, 1 1970
     * @function
     * @param {number} numOfDigits - Truncates the value from the end of the number
-    * @returns The milliseconds since Jan, 1 1970 as truncated
+    * @returns {number} The milliseconds since Jan, 1 1970 as truncated
    */
    static getMilliseconds(numOfDigits: number = 0): number {
       let mSecs: number = new Date().valueOf();
@@ -69,6 +69,6 @@ export class Helpers {
     */
    static outputError(error: Error): void {
       const err = chalk.redBright;
-      console.error(err(error.message), err(error.stack));
+      console.log(err(error.message), err(error.stack));
    }
 }

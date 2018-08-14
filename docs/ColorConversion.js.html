@@ -28,16 +28,13 @@
         <article>
             <pre class="prettyprint source linenums"><code>"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * @class
- * @classdesc Provides conversion methods to various color formats
- * */
 class ColorConversion {
     /**
-     * Converts a binary value to the RGB color values
+     * Converts a binary color value to a hexadecimal color value
      * @function
-     * @param {string }bin - The binary value to convert
-     * @returns {Array&lt;number>} An Array containing values for Red (0-255), Green (0-255), and Blue (0-255)
+     * @param {string} bin
+     * @returns {Array&lt;number>} An Array of Red (0-255), Green (0-255),
+     *                          and Blue (0-255) values
     */
     BinToRgb(bin) {
         const pbin = parseInt(bin, 2);
@@ -47,14 +44,14 @@ class ColorConversion {
         return [red, green, blue];
     }
     /**
-     * Converts a CMYK color value to RGB color values
+     * Converts CMYK color values to RGB color values
      * @function
-     * @param {number} cyan    - The Cyan color value (0-100)
-     * @param {number} magenta - The Magenta color value (0-100)
-     * @param {number} yellow  - The Yellow color value (0-100)
-     * @param {number} black   - The Black color value  (0-100)
-     * @returns {Array&lt;number>} An Array containing values for Red (0-255),
-     *                          Green (0-255), and Blue (0-255)
+     * @param {number} cyan    - color value (0-100)
+     * @param {number} magenta - color value (0-100)
+     * @param {number} yellow  - color value (0-100)
+     * @param {number} black   - color value (0-100)
+     * @returns {Array&lt;number>} An Array of Red (0-255), Green (0-255),
+     *                          and Blue (0-255) values
     */
     CmykToRgb(cyan, magenta, yellow, black) {
         cyan = cyan / 100;
@@ -73,26 +70,26 @@ class ColorConversion {
     /**
      * Converts a hexadecimal color value to RGB color values
      * @function
-     * @param {string} hex - The Hexadecimal value to convert
-     * @returns {Array&lt;number>} An Array containing values for Red (0-255),
-     *                          Green (0-255), and Blue (0-255)
+     * @param hex
+     * @returns {Array&lt;number>} An Array of Red (0-255), Green (0-255),
+     *                          and Blue (0-255) values
     */
     HexToRgb(hex) {
         hex = hex.replace(/[^0-9a-f]/gi, '');
         const hexValue = parseInt(hex, 16);
-        const r = hexValue >> 16;
-        const g = hexValue >> 8 &amp; 0xFF;
-        const b = hexValue &amp; 0xFF;
-        return [r, g, b];
+        const red = hexValue >> 16;
+        const green = hexValue >> 8 &amp; 0xFF;
+        const blue = hexValue &amp; 0xFF;
+        return [red, green, blue];
     }
     /**
      * Converts HSL color values to RGB color values
      * @function
-     * @param {number} hue        - The hue value (0-359)
-     * @param {number} saturation - The saturation value (0-100)
-     * @param {number} lightness  - The lightness value (0-100)
-     * @returns {Array&lt;number>} An Array containing values for Red (0-255),
-     *                          Green (0-255), and Blue (0-255)
+     * @param {number} hue        - color value (0-359)
+     * @param {number} saturation - color value (0-100)
+     * @param {number} lightness  - color value (0-100)
+     * @returns {Array&lt;number>} An Array of Red (0-255), Green (0-255),
+     *                          and Blue (0-255) values
     */
     HslToRgb(hue, saturation, lightness) {
         let red = 0;
@@ -159,11 +156,11 @@ class ColorConversion {
     /**
      * Converts HSV color values to RGB color values
      * @function
-     * @param {number} hue        - The hue value (0-359)
-     * @param {number} saturation - The saturation value (0-100)
-     * @param {number} value      - The value number (0-100)
-     * @returns {Array&lt;number>} An Array containing values for Red (0-255),
-     *                          Green (0-255), and Blue (0-255)
+     * @param {number} hue        - color value (0-359)
+     * @param {number} saturation - color value (0-100)
+     * @param {number} value      - color value (0-100)
+     * @returns {Array&lt;number>} An Array of Red (0-255), Green (0-255),
+     *                          and Blue (0-255) values
     */
     HsvToRgb(hue, saturation, value) {
         hue = hue / 360;
@@ -224,13 +221,13 @@ class ColorConversion {
         return [red, green, blue];
     }
     /**
-     * Converts RGB color values to a binary value
+     * Converts RGB color values to a binary color value
      * @function
-     * @param {number} red   - Red value (0-255)
-     * @param {number} green - Green value (0-255)
-     * @param {number} blue  - Blue value (0-255)
-     * @returns {string} The binary value
-     */
+     * @param {number} red   - color value (0-255)
+     * @param {number} green - color value (0-255)
+     * @param {number} blue  - color value (0-255)
+     * @returns {string} A binary color value
+    */
     RgbToBin(red, green, blue) {
         const bin = red &lt;&lt; 16 | green &lt;&lt; 8 | blue;
         return (function (h) {
@@ -240,12 +237,11 @@ class ColorConversion {
     /**
      * Converts RGB color values to CMYK color values
      * @function
-     * @param {number} red   - Red value (0-255)
-     * @param {number} green - Green value (0-255)
-     * @param {number} blue  - Blue value (0-255)
-     * @returns {Array&lt;number>} An Array containing values for Cyan (0-100),
-     *                          Magenta (0-100), Yellow (0-100),
-     *                          and Black (0-100)
+     * @param {number} red   - color value (0-255)
+     * @param {number} green - color value (0-255)
+     * @param {number} blue  - color value (0-255)
+     * @returns {Array&lt;number>} An Array of Cyan (0-100), Magenta (0-100),
+     *                          Yellow (0-100), and Black (0-100) values
     */
     RgbToCmyk(red, green, blue) {
         red = red / 255;
@@ -263,12 +259,12 @@ class ColorConversion {
         ];
     }
     /**
-     * Converts RGB color values to Hexadecimal format
+     * Converts RGB color values to  hexadecimal color value
      * @function
-     * @param {number} red   - Red value (0-255)
-     * @param {number} green - Green value (0-255)
-     * @param {number} blue  - Blue value (0-255)
-     * @returns {string} A hexadecimal color value (#000000 - #FFFFFF)
+     * @param {number} red   - color value (0-255)
+     * @param {number} green - color value (0-255)
+     * @param {number} blue  - color value (0-255)
+     * @returns {string} A hexadecimal color value
     */
     RgbToHex(red, green, blue) {
         const bin = red &lt;&lt; 16 | green &lt;&lt; 8 | blue;
@@ -279,10 +275,11 @@ class ColorConversion {
     /**
      * Converts RGB color values to HSL color values
      * @function
-     * @param {number} red   - Red value (0-255)
-     * @param {number} green - Green value (0-255)
-     * @param {number} blue  - Blue value (0-255)
-     * @returns {Array&lt;number>} An array containing values for Hue (0-359), Saturation (0-100), and Lightness (0-100)
+     * @param {number} red   - color value (0-255)
+     * @param {number} green - color value (0-255)
+     * @param {number} blue  - color value (0-255)
+     * @returns {Array&lt;number>} An Array of Hue (0-359), Saturation (0-100),
+     *                          and Lightness (0-100) values
     */
     RgbToHsl(red, green, blue) {
         red /= 255;
@@ -325,10 +322,11 @@ class ColorConversion {
     /**
      * Converts RGB color values to HSV color values
      * @function
-     * @param {number} red   - Red value (0-255)
-     * @param {number} green - Green value (0-255)
-     * @param {number} blue  - Blue value (0-255)
-     * @returns {Array&lt;number>} An array containing values for Hue (0-359), Saturation (0-100), and Value (0-100)
+     * @param {number} red   - color value (0-255)
+     * @param {number} green - color value (0-255)
+     * @param {number} blue  - color value (0-255)
+     * @returns {Array&lt;number>} An Array of Hue (0-359), Saturation (0-100),
+     *                          and Value (light) (0-100) values
     */
     RgbToHsv(red, green, blue) {
         red = red / 255;
@@ -385,13 +383,13 @@ exports.ColorConversion = ColorConversion;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="Http.html">Http</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li></ul><h3>Namespaces</h3><ul><li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li><li><a href="Web.html">Web</a></li></ul><h3>Global</h3><ul><li><a href="global.html#chalk_1">chalk_1</a></li><li><a href="global.html#commands">commands</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#path">path</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="Http.html">Http</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li><li><a href="PaletteColor.html">PaletteColor</a></li></ul><h3>Namespaces</h3><ul><li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li><li><a href="Web.html">Web</a></li></ul><h3>Global</h3><ul><li><a href="global.html#chalk_1">chalk_1</a></li><li><a href="global.html#commands">commands</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#path">path</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Aug 14 2018 12:05:59 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Aug 14 2018 16:18:57 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

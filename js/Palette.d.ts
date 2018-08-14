@@ -16,18 +16,18 @@ export declare namespace Palette {
         /**
          * Sets the input file or url and the output file name (if provided)
          * @constructor
-         * @param {string} source
-         * @param {string} name
+         * @param {string} source - The source file/url parsed for color values
+         * @param {string} name   - The provided name for the generated output files
         */
         constructor(source: string, name: string);
         /**
          * Creates the color palette Html file
          * @function
-         * @param {string} searchText - The text to parse for colors values used to generate the color palette
+         * @param {string} searchText - The text to parse for colors values
         */
         buildHtmlOutput(searchText: string): void;
         /**
-         * Finds hex color values (#FFFFFF) in current search text
+         * Finds hex color values (ex: #FFFFFF) in current search text
          * @function
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
@@ -43,10 +43,27 @@ export declare namespace Palette {
         */
         private getIndicesOf;
     }
+    /**
+     * @class
+     * @classdesc Contains the color formats used by the color palette
+    */
     class PaletteColor {
+        CMYK: number[];
         Hex: string;
-        RGB: number[];
         HSL: number[];
+        HSV: number[];
+        RGB: number[];
+        Red: number;
+        Green: number;
+        Blue: number;
+        Hue: number;
+        Saturation: number;
+        Light: number;
+        Value: number;
+        Cyan: number;
+        Magenta: number;
+        Yellow: number;
+        Black: number;
         constructor();
         setHex(hexValue: string): void;
     }

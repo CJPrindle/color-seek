@@ -7,7 +7,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Red (0-255), Green (0-255), 
     *                          and Blue (0-255) values
    */
-   BinToRgb(bin: string) {
+   BinToRgb(bin: string): Array<number> {
       const pbin = parseInt(bin, 2);
       const red = pbin >> 16;
       const green = pbin >> 8 & 0xFF;
@@ -26,7 +26,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
     *                          and Blue (0-255) values
    */
-   CmykToRgb(cyan: number, magenta: number, yellow: number, black: number) {
+   CmykToRgb(cyan: number, magenta: number, yellow: number, black: number): Array<number> {
       cyan = cyan / 100;
       magenta = magenta / 100;
       yellow = yellow / 100;
@@ -49,7 +49,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
     *                          and Blue (0-255) values
    */
-   HexToRgb(hex: string) {
+   HexToRgb(hex: string): Array<number> {
       hex = hex.replace(/[^0-9a-f]/gi, '');
       const hexValue = parseInt(hex, 16);
 
@@ -69,7 +69,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
     *                          and Blue (0-255) values
    */
-   HslToRgb(hue: number, saturation: number, lightness: number) {
+   HslToRgb(hue: number, saturation: number, lightness: number): Array<number> {
       let red = 0;
       let green = 0;
       let blue = 0;
@@ -141,7 +141,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
     *                          and Blue (0-255) values
    */
-   HsvToRgb(hue: number, saturation: number, value: number) {
+   HsvToRgb(hue: number, saturation: number, value: number): Array<number> {
       hue = hue / 360;
       saturation = saturation / 100;
       value = value / 100;
@@ -208,7 +208,7 @@ export class ColorConversion {
     * @param {number} blue  - color value (0-255)
     * @returns {string} A binary color value
    */
-   RgbToBin(red: number, green: number, blue: number) {
+   RgbToBin(red: number, green: number, blue: number): string {
       const bin = red << 16 | green << 8 | blue;
       return (
          function (h: string) {
@@ -225,7 +225,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Cyan (0-100), Magenta (0-100),
     *                          Yellow (0-100), and Black (0-100) values
    */
-   RgbToCmyk(red: number, green: number, blue: number) {
+   RgbToCmyk(red: number, green: number, blue: number): Array<number> {
       red = red / 255;
       green = green / 255;
       blue = blue / 255;
@@ -250,7 +250,7 @@ export class ColorConversion {
     * @param {number} blue  - color value (0-255)
     * @returns {string} A hexadecimal color value
    */
-   RgbToHex(red: number, green: number, blue: number) {
+   RgbToHex(red: number, green: number, blue: number): string {
       const bin = red << 16 | green << 8 | blue;
 
       return (
@@ -268,7 +268,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100),
     *                          and Lightness (0-100) values
    */
-   RgbToHsl(red: number, green: number, blue: number) {
+   RgbToHsl(red: number, green: number, blue: number): Array<number> {
       red /= 255;
       green /= 255;
       blue /= 255;
@@ -322,7 +322,7 @@ export class ColorConversion {
     * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100),
     *                          and Value (light) (0-100) values
    */
-   RgbToHsv(red: number, green: number, blue: number) {
+   RgbToHsv(red: number, green: number, blue: number): Array<number> {
       red = red / 255;
       green = green / 255;
       blue = blue / 255;

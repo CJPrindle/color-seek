@@ -32,8 +32,8 @@ var Palette;
         /**
          * Sets the input file or url and the output file name (if provided)
          * @constructor
-         * @param {string} source
-         * @param {string} name
+         * @param {string} source - The source file/url parsed for color values
+         * @param {string} name   - The provided name for the generated output files
         */
         constructor(source, name) {
             this.paletteColors = [];
@@ -43,11 +43,16 @@ var Palette;
         /**
          * Creates the color palette Html file
          * @function
-         * @param {string} searchText - The text to parse for colors values used to generate the color palette
+         * @param {string} searchText - The text to parse for colors values
         */
         buildHtmlOutput(searchText) {
             try {
                 let hexColors = this.parseHexColors(searchText);
+                hexColors.map((hc, idx, arr) => {
+                    let pColor = new PaletteColor();
+                    pColor.setHex(hc.valueOf());
+                    this.paletteColors.push(pColor);
+                });
                 let html = fs.readFileSync('template.html').toString();
                 let thumbnails = '';
                 const fileName = `${this.outputName.trim().replace(new RegExp(' ', 'g'), '')}.html`;
@@ -60,8 +65,12 @@ var Palette;
                       <div class="label">hsla:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSL}</b></div>
                   </div>
                   <div class="thumbnail" style="background-color:${hexColors[x]}">&#160;</div>
+                  <div class="header">
+                     <div class="label">cmyk :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].CMYK}</b></div> 
+                     <div class="label">hsv :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSV}</b></div>
+                  </div>
                </div>\n`;
-                    thumbnails = thumbnails + thumbnail;
+                    thumbnails += thumbnail;
                 }
                 html = html
                     .replace('{name}', this.outputName)
@@ -75,7 +84,7 @@ var Palette;
             }
         }
         /**
-         * Finds hex color values (#FFFFFF) in current search text
+         * Finds hex color values (ex: #FFFFFF) in current search text
          * @function
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
@@ -85,25 +94,27 @@ var Palette;
             //- Find all '#' positions (start of hex color value)
             const searchAreas = this.getIndicesOf('#', searchText, false);
             for (let x = 0; x < searchAreas.length; x++) {
-                //- Get search range
-                const str = searchAreas[x] + 1;
-                const end = searchAreas[x] + 7;
-                //- Check for valid hex value
-                let hexColor = searchText.substring(str, end);
-                //- Convert any three letter hex value to six letters
-                if ((hexColor[0] == hexColor[1]) && (hexColor[1] == hexColor[2])) {
-                    hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
+                try {
+                    //- Get search range
+                    const str = searchAreas[x] + 1;
+                    const end = searchAreas[x] + 7;
+                    //- Check for valid hex value
+                    let hexColor = searchText.substring(str, end);
+                    //- Convert any three letter hex value to six letters
+                    if ((hexColor[0] == hexColor[1]) && (hexColor[1] == hexColor[2])) {
+                        hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
+                    }
+                    const isHexColor = parseInt(hexColor, 16).toString();
+                    //- Add  to color array
+                    if (isHexColor != 'NaN') {
+                        hexColors.push('#' + hexColor);
+                    }
                 }
-                const isHexColor = parseInt(hexColor, 16)
-                    .toString();
-                //- Add  to color array
-                if (isHexColor != 'NaN') {
-                    let pColor = new PaletteColor();
-                    pColor.setHex('#' + hexColor);
-                    this.paletteColors.push(pColor);
+                catch (e) {
+                    Helpers_1.Helpers.outputError(e);
                 }
             }
-            return [...new Set(this.paletteColors.map(color => color.Hex.toUpperCase().valueOf()).sort())];
+            return [...new Set(hexColors.map(hc => hc.valueOf().toUpperCase()).sort())];
         }
         /**
          * Finds the indexes of a search value in the provided string
@@ -133,19 +144,37 @@ var Palette;
         }
     }
     Palette.PaletteBuilder = PaletteBuilder;
+    /**
+     * @class
+     * @classdesc Contains the color formats used by the color palette
+    */
     class PaletteColor {
         constructor() {
+            this.CMYK = [0, 0, 0, 0];
             this.Hex = '';
-            this.RGB = [0, 0, 0];
             this.HSL = [0, 0, 0];
+            this.HSV = [0, 0, 0];
+            this.RGB = [0, 0, 0];
+            this.Red = this.RGB[0];
+            this.Green = this.RGB[1];
+            this.Blue = this.RGB[2];
+            this.Hue = this.HSL[0];
+            this.Saturation = this.HSL[1];
+            this.Light = this.HSL[2];
+            this.Value = this.HSV[2];
+            this.Cyan = this.CMYK[0];
+            this.Magenta = this.CMYK[1];
+            this.Yellow = this.CMYK[2];
+            this.Black = this.CMYK[3];
         }
         setHex(hexValue) {
             if (RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) {
                 this.Hex = hexValue.toUpperCase();
                 const ColorConvert = new ColorConversion_1.ColorConversion();
-                this.RGB = ColorConvert.HEXtoRGB(this.Hex.substring(1));
-                this.HSL = ColorConvert.RGBtoHSL(this.RGB[0], this.RGB[1], this.RGB[2]);
-                console.log(this.Hex, this.RGB, this.HSL);
+                this.RGB = ColorConvert.HexToRgb(this.Hex.substring(1));
+                this.HSL = ColorConvert.RgbToHsl(this.RGB[0], this.RGB[1], this.RGB[2]);
+                this.CMYK = ColorConvert.RgbToCmyk(this.RGB[0], this.RGB[1], this.RGB[2]);
+                this.HSV = ColorConvert.RgbToHsv(this.RGB[0], this.RGB[1], this.RGB[2]);
             }
             else {
                 Helpers_1.Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));

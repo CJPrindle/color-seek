@@ -1,7 +1,7 @@
   
 /**
  * @class 
- * @classdesc - Represents all valid switches for ColorFinder
+ * @classdesc Represents all valid console switches
 */
   export class Command {
     /** The valid switch for this command */
@@ -11,7 +11,7 @@
 
     /**
      * Sets the commands for the application
-     * @param argument - The valid switch for this command
+     * @param argument - The valid switch value(s) for this command
      * @param description - A description of the command
     */
     constructor(argument, description) {

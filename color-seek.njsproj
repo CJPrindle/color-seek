@@ -60,6 +60,7 @@
     <Content Include="template.html">
       <Publish>True</Publish>
     </Content>
+    <TypeScriptCompile Include="Command.ts" />
     <TypeScriptCompile Include="Helpers.ts" />
     <TypeScriptCompile Include="FileSystem.ts">
       <SubType>Code</SubType>
