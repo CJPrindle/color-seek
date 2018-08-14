@@ -15,61 +15,55 @@ and limitations under the License.
 import * as fs from 'fs';
 import * as opn from 'opn';
 import { Helpers } from './Helpers';
-
+import { ColorConversion } from './ColorConversion';
 /** 
-  * @namespace 
-  * @name - Parse
+  * Contains classes related to the parsing of provided data
+  * @namespace
   */
-export namespace Parse {
+export namespace Palette {
+ 
    /**
-    * @class 
-    * @name - Command
-    * @classdesc - Represents all valid switches for ColorFinder
+    * @class
+    * @classdesc Contains methods for building the color palette
    */
-   export class Command {
-      Argument: string;
-      Description: string;
-
-      constructor(argument, description) {
-         this.Argument = argument;
-         this.Description = description;
-      }
-   }
-
-   /**
-    * @class 
-    * @name - Palette
-    * @classdesc - Contains methods for building the color palette
-   */
-   export class Palette {
+   export class PaletteBuilder {
+      /** The input file path or Url */
       inputSource: string;
+      /** The output file name */
       outputName: string;
 
+      paletteColors: PaletteColor[] = [];
+
+      /**
+       * Sets the input file or url and the output file name (if provided)
+       * @constructor
+       * @param {string} source
+       * @param {string} name
+      */
       constructor(source: string, name: string) {
          this.inputSource = (source) ? source : 'N/A';
          this.outputName = (name) ? name : `Color Seek - ${Helpers.getMilliseconds(6)}`;
       }
 
       /**
+       * Creates the color palette Html file
        * @function
-       * @name - buildHtmloutput
-       * @description - Creates the color palette Html file
-       * @param {string} searchText - The string to search for colors
+       * @param {string} searchText - The text to parse for colors values used to generate the color palette
       */
       public buildHtmlOutput(searchText: string): void {
          try {
-            let hexColors = this.findColors(searchText);
+            let hexColors = this.parseHexColors(searchText);
             let html = fs.readFileSync('template.html').toString();
             let thumbnails = '';
             const fileName = `${this.outputName.trim().replace(new RegExp(' ', 'g'), '')}.html`;
 
-            for(let x = 0; x < hexColors.length; x++) {
+            for(let x = 0; x < this.paletteColors.length; x++) {
                let thumbnail = `
                <div class="box"> 
                   <div class="header">
-                      <div class="label">hex :&nbsp;&nbsp;<b class="color">${hexColors[x]}</b></div> 
-                      <div class="label">rgba:&nbsp;&nbsp;<b class="color">255, 255, 255, 1</b></div>
-                      <div class="label">hsla:&nbsp;&nbsp;<b class="color">120, 80%, 65%, 1</b></div>
+                      <div class="label">hex :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].Hex}</b></div> 
+                      <div class="label">rgba:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].RGB}</b></div>
+                      <div class="label">hsla:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSL}</b></div>
                   </div>
                   <div class="thumbnail" style="background-color:${hexColors[x]}">&#160;</div>
                </div>\n`;
@@ -85,18 +79,17 @@ export namespace Parse {
             fs.writeFileSync(fileName, html.toString());
             opn(fileName);
          } catch(e) {
-            Helpers.raiseError(e);
+            Helpers.outputError(e);
          }
       }
          
       /**
+       * Finds hex color values (#FFFFFF) in current search text
        * @function
-       * @name - findColors
-       * @description Finds hex color values (#FFFFFF) in current search text
-       * @param {string} searchText - The string to search
-       * @returns {string[]} - An array containing the found hex colors
+       * @param {string} searchText - The text to parse
+       * @returns {string[]} An Array<string> containing the parsed hex colors
       */
-      private findColors(searchText: string): string[] {
+      private parseHexColors(searchText: string): string[] {
          let hexColors: string[] = [];
 
          //- Find all '#' positions (start of hex color value)
@@ -111,8 +104,9 @@ export namespace Parse {
             //- Check for valid hex value
             let hexColor = searchText.substring(str, end);
 
+            //- Convert any three letter hex value to six letters
             if((hexColor[0] == hexColor[1]) && (hexColor[1] == hexColor[2])) {
-               hexColor = hexColor.substring(0, 3);
+               hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
             }
             
             const isHexColor = parseInt(hexColor, 16)
@@ -120,21 +114,22 @@ export namespace Parse {
 
             //- Add  to color array
             if(isHexColor != 'NaN') {
-               hexColors.push('#' + hexColor);
+               let pColor = new PaletteColor();
+               pColor.setHex('#' + hexColor);
+               this.paletteColors.push(pColor);
             }
          }
-
-         return [...new Set(hexColors.map(item => item.toUpperCase().valueOf()).sort())];
+         
+         return [...new Set(this.paletteColors.map(color => color.Hex.toUpperCase().valueOf()).sort())];
       }
 
       /**
+       * Finds the indexes of a search value in the provided string
        * @function 
-       * @name getIndicesOf
-       * @description Finds the indexes of a search value in the given string
        * @param {string} searchStr - The value to search for within the given string
        * @param {string} str - The string to search
        * @param {boolean} caseSensitive - True/False for case sensitivity
-       * @returns {number[]} containing found hex colors
+       * @returns {number[]} An Array<number> containing the position indexes of the hex color values
       */
       private getIndicesOf(searchStr, str, caseSensitive = true): number[] {
          const searchStrLen = searchStr.length;
@@ -159,24 +154,27 @@ export namespace Parse {
 
          return indices;
       }
+   }
 
-      /**
-       * @function
-       * @name getMilliseconds
-       * @description Returns the milliseconds since Jan 1, 1970
-       * @param {number} numOfDigits - Returns the number of places from the end of the value
-       * @returns {number} Milliseconds since Jan 1, 1970
-       */
-      getMilliseconds(numOfDigits: number = 0): number {
-         let mSecs: number = new Date().valueOf();
-         const mLen = mSecs.toString().length;
+   export class PaletteColor {
+      Hex: string = '';
+      RGB: number[] = [0, 0, 0];
+      HSL: number[] = [0, 0, 0];
 
-         if(numOfDigits > 0) {
-            var start = mLen - numOfDigits;
-            mSecs = parseInt(mSecs.toString().substring(start));
+      constructor() { }
+
+      setHex(hexValue: string): void {
+         if(RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) {
+            this.Hex = hexValue.toUpperCase();
+
+            const ColorConvert = new ColorConversion();
+            this.RGB = ColorConvert.HEXtoRGB(this.Hex.substring(1));
+            this.HSL = ColorConvert.RGBtoHSL(this.RGB[0], this.RGB[1], this.RGB[2]);
+            console.log(this.Hex, this.RGB, this.HSL);
          }
-
-         return mSecs;
+         else {
+            Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));
+         }
       }
    }
 }

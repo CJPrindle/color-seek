@@ -2,7 +2,7 @@
   * Contains classes related to the parsing of provided data
   * @namespace
   */
-export declare namespace Parse {
+export declare namespace Palette {
     /**
      * @class
      * @classdesc Contains methods for building the color palette

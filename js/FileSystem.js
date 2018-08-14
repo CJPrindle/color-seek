@@ -15,26 +15,24 @@ See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ******************************************************************************/
 const fs = require("fs");
-const Parse_1 = require("./Parse");
+const Palette_1 = require("./Palette");
 const buffer_1 = require("buffer");
 const Helpers_1 = require("./Helpers");
-const Palette = Parse_1.Parse.Palette;
+const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
 /**
+  * Contains file system related classes
   * @namespace
-  * @name - File
-  * @description - Contains file system related classes
  */
-var File;
-(function (File) {
+var FileSystem;
+(function (FileSystem) {
     /**
      * @class
-     * @name - Filesystem
      * @classdesc Provides file read and write functionality
+     * @property {string} inputSource - The source file/url parsed for color values
+     * @property {string} outputName  - The provided name for the generated output files
     */
-    class FileSystem {
+    class FileAccess {
         constructor(source, name) {
-            console.log('Source', source);
-            console.log('name', name);
             if (source) {
                 this.inputSource = source;
             }
@@ -43,16 +41,14 @@ var File;
             }
         }
         /**
+         * Reads a file and sends the text to be parsed for color values
          * @function
-         * @name - readFile
-         * @description - Reads a file to parse for color values
-         * @param filePath
-         */
+        */
         readFile() {
             try {
                 let fileData = '';
                 let buffer;
-                const palette = new Palette(this.inputSource, this.outputName);
+                const palette = new PaletteBuilder(this.inputSource, this.outputName);
                 if (fs.existsSync(this.inputSource)) {
                     var readStream = fs.createReadStream(this.inputSource)
                         .on('data', (chunk) => {
@@ -63,14 +59,14 @@ var File;
                     });
                 }
                 else {
-                    Helpers_1.Helpers.raiseError(new Error('File does not exist'));
+                    Helpers_1.Helpers.outputError(new Error('File does not exist'));
                 }
             }
             catch (e) {
-                Helpers_1.Helpers.raiseError(e);
+                Helpers_1.Helpers.outputError(e);
             }
         }
     }
-    File.FileSystem = FileSystem;
-})(File = exports.File || (exports.File = {}));
-//# sourceMappingURL=File.js.map
+    FileSystem.FileAccess = FileAccess;
+})(FileSystem = exports.FileSystem || (exports.FileSystem = {}));
+//# sourceMappingURL=FileSystem.js.map

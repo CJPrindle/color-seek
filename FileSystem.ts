@@ -13,29 +13,29 @@ See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ******************************************************************************/
 import * as fs from 'fs';
-import { Parse } from './Parse'
+import { Palette } from './Palette'
 import { Buffer } from 'buffer';
 import { Helpers } from './Helpers';
-const Palette = Parse.Palette;
+
+const PaletteBuilder = Palette.PaletteBuilder;
 
 /**
+  * Contains file system related classes
   * @namespace
-  * @name - File
-  * @description - Contains file system related classes
  */
-export namespace File {
+export namespace FileSystem {
+
    /**
     * @class 
-    * @name - Filesystem
     * @classdesc Provides file read and write functionality
+    * @property {string} inputSource - The source file/url parsed for color values
+    * @property {string} outputName  - The provided name for the generated output files
    */
-   export class FileSystem {
+   export class FileAccess {
       inputSource: string;
       outputName: string;
 
       constructor(source: string, name: string) {
-         console.log('Source', source);
-         console.log('name', name);
          if(source) {
             this.inputSource = source;
          }
@@ -46,18 +46,16 @@ export namespace File {
       }
 
       /**
+       * Reads a file and sends the text to be parsed for color values
        * @function
-       * @name - readFile
-       * @description - Reads a file to parse for color values
-       * @param filePath
-       */
-      public readFile() {
+      */
+      public readFile(): void {
          try {
             let fileData: string = '';
             let buffer: Buffer;
 
-            const palette = new Palette(this.inputSource, this.outputName);
-
+            const palette = new PaletteBuilder(this.inputSource, this.outputName);
+            
             if(fs.existsSync(this.inputSource)) {
                var readStream = fs.createReadStream(this.inputSource)
                   .on('data', (chunk) => {
@@ -67,10 +65,10 @@ export namespace File {
                      palette.buildHtmlOutput(fileData.toString());
                   });
             } else {
-               Helpers.raiseError(new Error('File does not exist'));
+               Helpers.outputError(new Error('File does not exist'));
             }
          } catch(e) {
-            Helpers.raiseError(e);
+            Helpers.outputError(e);
          }
 
       }

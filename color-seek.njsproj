@@ -50,7 +50,6 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="js\template.html" />
     <Content Include="tsconfig.json">
       <SubType>Code</SubType>
     </Content>
@@ -61,10 +60,11 @@
     <Content Include="template.html">
       <Publish>True</Publish>
     </Content>
+    <TypeScriptCompile Include="Helpers.ts" />
     <TypeScriptCompile Include="Parse.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="File.ts">
+    <TypeScriptCompile Include="FileSystem.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Web.ts">
@@ -72,12 +72,7 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="js\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Helpers.ts">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="ColorConversion.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

@@ -22,28 +22,25 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ******************************************************************************/
-//import * as http from 'http';
 const request = require("request");
 const buffer_1 = require("buffer");
 /**
+ * Contains classes concerns with web access
  * @namespace
- * @name - Web
- * @description - Contains classes for web access
  */
 var Web;
 (function (Web) {
     /**
      * @class
-     * @name - Http
-     * @classdesc - Provides access to HTML and/or CSS files to parse for color values
+     * @classdesc Provides access to HTML and/or CSS files to parse for color values
      * */
     class Http {
         /**
+         * Connects to the provided Url and parses the text data
          * @function
-         * @name - getUrlData
-         * @param {string} - The Url to parse
-         * @param {Function} - The callback function for further processing
-         */
+         * @param {string}  url - The Url to parse
+         * @param {Function} callback - The callback function for further processing
+        */
         getUrlData(url, callback) {
             return __awaiter(this, void 0, void 0, function* () {
                 let html = '';

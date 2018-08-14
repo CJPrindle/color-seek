@@ -17,53 +17,47 @@ and limitations under the License.
 const fs = require("fs");
 const opn = require("opn");
 const Helpers_1 = require("./Helpers");
+const ColorConversion_1 = require("./ColorConversion");
 /**
+  * Contains classes related to the parsing of provided data
   * @namespace
-  * @name - Parse
   */
-var Parse;
-(function (Parse) {
+var Palette;
+(function (Palette) {
     /**
      * @class
-     * @name - Command
-     * @classdesc - Represents all valid switches for ColorFinder
+     * @classdesc Contains methods for building the color palette
     */
-    class Command {
-        constructor(argument, description) {
-            this.Argument = argument;
-            this.Description = description;
-        }
-    }
-    Parse.Command = Command;
-    /**
-     * @class
-     * @name - Palette
-     * @classdesc - Contains methods for building the color palette
-    */
-    class Palette {
+    class PaletteBuilder {
+        /**
+         * Sets the input file or url and the output file name (if provided)
+         * @constructor
+         * @param {string} source
+         * @param {string} name
+        */
         constructor(source, name) {
+            this.paletteColors = [];
             this.inputSource = (source) ? source : 'N/A';
             this.outputName = (name) ? name : `Color Seek - ${Helpers_1.Helpers.getMilliseconds(6)}`;
         }
         /**
+         * Creates the color palette Html file
          * @function
-         * @name - buildHtmloutput
-         * @description - Creates the color palette Html file
-         * @param {string} searchText - The string to search for colors
+         * @param {string} searchText - The text to parse for colors values used to generate the color palette
         */
         buildHtmlOutput(searchText) {
             try {
-                let hexColors = this.findColors(searchText);
+                let hexColors = this.parseHexColors(searchText);
                 let html = fs.readFileSync('template.html').toString();
                 let thumbnails = '';
                 const fileName = `${this.outputName.trim().replace(new RegExp(' ', 'g'), '')}.html`;
-                for (let x = 0; x < hexColors.length; x++) {
+                for (let x = 0; x < this.paletteColors.length; x++) {
                     let thumbnail = `
                <div class="box"> 
                   <div class="header">
-                      <div class="label">hex :&nbsp;&nbsp;<b class="color">${hexColors[x]}</b></div> 
-                      <div class="label">rgba:&nbsp;&nbsp;<b class="color">255, 255, 255, 1</b></div>
-                      <div class="label">hsla:&nbsp;&nbsp;<b class="color">120, 80%, 65%, 1</b></div>
+                      <div class="label">hex :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].Hex}</b></div> 
+                      <div class="label">rgba:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].RGB}</b></div>
+                      <div class="label">hsla:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSL}</b></div>
                   </div>
                   <div class="thumbnail" style="background-color:${hexColors[x]}">&#160;</div>
                </div>\n`;
@@ -77,17 +71,16 @@ var Parse;
                 opn(fileName);
             }
             catch (e) {
-                Helpers_1.Helpers.raiseError(e);
+                Helpers_1.Helpers.outputError(e);
             }
         }
         /**
+         * Finds hex color values (#FFFFFF) in current search text
          * @function
-         * @name - findColors
-         * @description Finds hex color values (#FFFFFF) in current search text
-         * @param {string} searchText - The string to search
-         * @returns {string[]} - An array containing the found hex colors
+         * @param {string} searchText - The text to parse
+         * @returns {string[]} An Array<string> containing the parsed hex colors
         */
-        findColors(searchText) {
+        parseHexColors(searchText) {
             let hexColors = [];
             //- Find all '#' positions (start of hex color value)
             const searchAreas = this.getIndicesOf('#', searchText, false);
@@ -97,26 +90,28 @@ var Parse;
                 const end = searchAreas[x] + 7;
                 //- Check for valid hex value
                 let hexColor = searchText.substring(str, end);
+                //- Convert any three letter hex value to six letters
                 if ((hexColor[0] == hexColor[1]) && (hexColor[1] == hexColor[2])) {
-                    hexColor = hexColor.substring(0, 3);
+                    hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
                 }
                 const isHexColor = parseInt(hexColor, 16)
                     .toString();
                 //- Add  to color array
                 if (isHexColor != 'NaN') {
-                    hexColors.push('#' + hexColor);
+                    let pColor = new PaletteColor();
+                    pColor.setHex('#' + hexColor);
+                    this.paletteColors.push(pColor);
                 }
             }
-            return [...new Set(hexColors.map(item => item.toUpperCase().valueOf()).sort())];
+            return [...new Set(this.paletteColors.map(color => color.Hex.toUpperCase().valueOf()).sort())];
         }
         /**
+         * Finds the indexes of a search value in the provided string
          * @function
-         * @name getIndicesOf
-         * @description Finds the indexes of a search value in the given string
          * @param {string} searchStr - The value to search for within the given string
          * @param {string} str - The string to search
          * @param {boolean} caseSensitive - True/False for case sensitivity
-         * @returns {number[]} containing found hex colors
+         * @returns {number[]} An Array<number> containing the position indexes of the hex color values
         */
         getIndicesOf(searchStr, str, caseSensitive = true) {
             const searchStrLen = searchStr.length;
@@ -136,23 +131,27 @@ var Parse;
             }
             return indices;
         }
-        /**
-         * @function
-         * @name getMilliseconds
-         * @description Returns the milliseconds since Jan 1, 1970
-         * @param {number} numOfDigits - Returns the number of places from the end of the value
-         * @returns {number} Milliseconds since Jan 1, 1970
-         */
-        getMilliseconds(numOfDigits = 0) {
-            let mSecs = new Date().valueOf();
-            const mLen = mSecs.toString().length;
-            if (numOfDigits > 0) {
-                var start = mLen - numOfDigits;
-                mSecs = parseInt(mSecs.toString().substring(start));
+    }
+    Palette.PaletteBuilder = PaletteBuilder;
+    class PaletteColor {
+        constructor() {
+            this.Hex = '';
+            this.RGB = [0, 0, 0];
+            this.HSL = [0, 0, 0];
+        }
+        setHex(hexValue) {
+            if (RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) {
+                this.Hex = hexValue.toUpperCase();
+                const ColorConvert = new ColorConversion_1.ColorConversion();
+                this.RGB = ColorConvert.HEXtoRGB(this.Hex.substring(1));
+                this.HSL = ColorConvert.RGBtoHSL(this.RGB[0], this.RGB[1], this.RGB[2]);
+                console.log(this.Hex, this.RGB, this.HSL);
             }
-            return mSecs;
+            else {
+                Helpers_1.Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));
+            }
         }
     }
-    Parse.Palette = Palette;
-})(Parse = exports.Parse || (exports.Parse = {}));
-//# sourceMappingURL=Parse.js.map
+    Palette.PaletteColor = PaletteColor;
+})(Palette = exports.Palette || (exports.Palette = {}));
+//# sourceMappingURL=Palette.js.map

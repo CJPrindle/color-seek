@@ -11,8 +11,8 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
-******************************************************************************/
-/******************************************************************************
+**************************************************************************** */ 
+/* ***************************************************************************
  * @author      Christopher Prindle
  * @version     1.0
  * @description Searches the provided file or web page for color values in the
@@ -23,67 +23,75 @@ and limitations under the License.
  *              The resulting color palette can be saved to the following 
  *              formats:
  *                  - CSS (Cascading Style Sheet)
- *                  - GPL (Gimp Color Palette)
+ *                  - GPL (Gimp Color PaletteBuilder)
  *                  - HTML (Web Page)
  *                  - LESS (Less Style Sheet)
  *                  - SCSS (Sass Style Sheet)
  *              
- ** **************************************************************************/
-/// <reference path="./Parse.ts" />
-/// <reference path="./File.ts" />
+ *************************************************************************** */
+
+/// <reference path="./FileSystem.ts" />
+/// <reference path="./Palette.ts" />
 /// <reference path="./Web.ts" />
 
 /**
  * Module Entry
  * Parse the command line and determine which options to call
  */
-import * as Chalk from 'chalk';
+import chalk from 'chalk';
 import * as minimist2 from 'minimist2';
-import { File } from './File';
-import { Parse } from './Parse';
+import { FileSystem } from './FileSystem';
 import { Web } from './Web';
-import { parse } from 'path';
 import { Helpers } from './Helpers';
+import { Palette } from './Palette';
+import { Command } from './Command';
 
 const log = console.log;
 const logerr = console.error;
 const exit = process.exit;
-const chalk = Chalk.default;
 const info = chalk.green;
 const infoBold = chalk.bold.green;
 const error = chalk.bold.red;
 const warning = chalk.bold.yellow;
-
-const Command = Parse.Command;
-const Palette = Parse.Palette;
 const Http = Web.Http;
+const PaletteBuilder = Palette.PaletteBuilder;
+const PaletteColor = Palette.PaletteColor;
 const args = (minimist2)(process.argv.slice(2));
 
-//- All Console switches and commands
-const commands: Parse.Command[] = [
+/** 
+ * Creates all Console switches and commands
+ * @instance 
+ */
+const commands: Command[] = [
    new Command('-c, --parse-css                 ', 'Flag indicating css files will be searched when parsing a web page'),
    new Command('-o, --output [DIRECTORY]        ', 'The directory where the output file will be created'),
    new Command('-n, --name                      ', 'The name to use when creating the output files (No extension)'),
    new Command('-i, --input [FILE_PATH] or [URL]', 'The source file or html page to parse for color values'),
    new Command('--css                           ', 'Create a CSS version of the color palette'),
-   new Command('--gimp                          ', 'Create a GPL (Gimp Palette file) version of the color palette'),
+   new Command('--gimp                          ', 'Create a GPL (Gimp PaletteBuilder file) version of the color palette'),
    new Command('--html                          ', 'Create a HTML version of the color palette'),
    new Command('--less                          ', 'Create a LESS version of the color palette'),
    new Command('--scss                          ', 'Create a SASS version of the color palette'),
 ];
 
-//onerror = showError()
+/** 
+ * The file path or url specified on the command line (-i or --input)
+ * @member {string} 
+ */
 const path: string = (args.i) ? args.i : args.input;
+/** 
+ * The name to use when creating the color palette output files (-n or --name)
+ * @member {string} 
+ */
 const name: string = (args.n) ? args.n : args.name;
+
+//- Enter the matrix
 main();
 
-
 /**
+  * Entry function for the application
   * @function
-  * @name - main
-  * @description - Entry function for the application
-  *
-  */
+ */
 function main() {
    try {
       if(path) {
@@ -92,26 +100,31 @@ function main() {
                console.log('path', path);
                new Http().getUrlData(path, htmlTextHandler);
             } else {
-               new File.FileSystem(path, name).readFile();
+               new FileSystem.FileAccess(path, name).readFile();
             }
          } else {
-            Helpers.raiseError(new Error('Missing input file'));
+            Helpers.outputError(new Error('Missing input file'));
          }
       } else {
          printHelp();
       }
    }
    catch(e) {
-      Helpers.raiseError(e);
+      Helpers.outputError(e);
    }
 }
 
+/**
+ * Handles the html data sent from Web~Html~getUrlData
+ * @callback htmlTextHandler 
+ * @param data
+ */
 function htmlTextHandler(data: string): void {
-   new Palette(path, name).buildHtmlOutput(data);
+   new PaletteBuilder(path, name).buildHtmlOutput(data);
 }
 
 function printHelp() {
-   log(infoBold('\nUsage: node colorfinder [OPTIONS]\n'));
+   log(infoBold('\nUsage: node colorseek [OPTIONS]\n'));
    commands.forEach((c) => log(info(' ' + c.Argument + '\t' + c.Description)));
    log(warning('\nIf no output type is specified then only a [DIRECTORY]/[NAME].html file will be created.'));
    log(warning('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --html).'));
