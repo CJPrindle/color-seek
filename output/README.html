@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Color Seek - Version 1.0</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="assets/markdown.css" />
+        <link rel="stylesheet" href="assets/tomorrow.css" />
+        <link rel="stylesheet" href="assets/hljs.css" />
+    </head>
+    <body>
+
+    <div id="toc">
+        <div id="toc-inner">
+        <h2 class="contents">Contents</h2><ul class="nav nav-list">
+    <li class="sidebar-header-1"><a href="#color-seek---version-1.0">Color Seek - Version 1.0</a></li>
+    <li class="sidebar-header-2"><a href="#file-and-url-sources">File and Url Sources</a></li>
+    <li class="sidebar-header-3"><a href="#css-color-values">CSS Color Values</a></li>
+    <li class="sidebar-header-2"><a href="#output-file-types">Output File Types</a></li>
+    <li class="sidebar-header-3"><a href="#file-formats">File Formats</a></li>
+</ul>
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <div class="clear"></div>
+        <div id="main">
+        <div id="content" class="post"><h1 id="color-seek---version-1.0"><a class="header-link" href="#color-seek---version-1.0"></a>Color Seek - Version 1.0</h1>
+<h2 id="file-and-url-sources"><a class="header-link" href="#file-and-url-sources"></a>File and Url Sources</h2>
+<p><strong>Color Seek</strong> allows you to build a color palette from an existing file or 
+Url. The specified file path or Url is opened and parsed for valid CSS color 
+values. The resulting list of values is formatted &amp; sorted while duplicates 
+are removed to create the <em><strong>Color Palette</strong></em>.  The palette is written to each
+of the specified file formats along with and Html page presenting the color
+palette as a grid of color swatches showing all three valid Css color formats.</p>
+<h3 id="css-color-values"><a class="header-link" href="#css-color-values"></a>CSS Color Values</h3>
+<p>CSS accepts three formats for color specification. All color in the palette
+are displayed with each format.</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hex</td>
+<td><code>#FFFFFF</code></td>
+<td>Hexadecimals of Red (FF), Green (FF), Blue (FF)</td>
+</tr>
+<tr>
+<td>RGB[a]</td>
+<td><code>rgba(255, 255, 255, 1.0)</code></td>
+<td>Range for Red (0-255), Green (0-255), Blue (0-255), <em>Alpha</em>* (0.0-1.0)</td>
+</tr>
+<tr>
+<td>HSL[a]</td>
+<td><code>hsla(359, 100%, 100%, 1.0)</code></td>
+<td>Range for Hue (0-359), Percentage for Saturation (0-100%), Lightness (0-100%), Range for  <em>Alpha</em>* (0.0-1.0)</td>
+</tr>
+</tbody>
+</table>
+<p><em>*Alpha</em> is short for <strong>Alpha Channel</strong>, which specifies the opacity of the 
+color. An alpha value of zero (0) is totally transparent and one (1) is totally
+opaque. The Alpha Channel value is <em>optional</em> with the default set to one (1).</p>
+<h2 id="output-file-types"><a class="header-link" href="#output-file-types"></a>Output File Types</h2>
+<p>A color palette may be rendered into several formats simultaneously. An HTML 
+version is generated automatically.</p>
+<h3 id="file-formats"><a class="header-link" href="#file-formats"></a>File Formats</h3>
+<p>Each of the formats below can be generated when creating a palette.</p>
+<table>
+<thead>
+<tr>
+<th>File Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSS</td>
+<td><em>Cascading Style Sheet</em></td>
+</tr>
+<tr>
+<td>GPL</td>
+<td><em>Gimp Color Palette</em></td>
+</tr>
+<tr>
+<td>LESS</td>
+<td><em>Less Style Sheet</em></td>
+</tr>
+<tr>
+<td>SCSS</td>
+<td><em>Sass Style Sheet</em></td>
+</tr>
+</tbody>
+</table>
+        </div>
+        </div>
+
+        <div class="clear">
+        </div>
+
+        <div id="footer">
+        </div>
+    </div>
+    <script type="text/javascript" src="assets/loading.js"></script>
+    <script type="text/javascript" src="assets/main.js"></script>
+    <script type="text/javascript" src="assets/csp.js"></script>
+
+</body>
+</html>

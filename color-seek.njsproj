@@ -61,12 +61,10 @@
       <Publish>True</Publish>
     </Content>
     <TypeScriptCompile Include="Helpers.ts" />
-    <TypeScriptCompile Include="Parse.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="FileSystem.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Palette.ts" />
     <TypeScriptCompile Include="Web.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

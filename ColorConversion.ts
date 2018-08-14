@@ -1,7 +1,257 @@
 export class ColorConversion {
-   // R,G,B values to a hexadecimal color string
-   RGBtoHEX(r: number, g: number, b: number) {
-      const bin = r << 16 | g << 8 | b;
+
+   /**
+    * Converts a binary color value to a hexadecimal color value
+    * @function
+    * @param {string} bin
+    * @returns {Array<number>} An Array of Red (0-255), Green (0-255), 
+    *                          and Blue (0-255) values
+   */
+   BinToRgb(bin: string) {
+      const pbin = parseInt(bin, 2);
+      const red = pbin >> 16;
+      const green = pbin >> 8 & 0xFF;
+      const blue = pbin & 0xFF;
+
+      return [red, green, blue];
+   }
+
+   /**
+    * Converts CMYK color values to RGB color values
+    * @function
+    * @param {number} cyan    - color value (0-100)
+    * @param {number} magenta - color value (0-100)
+    * @param {number} yellow  - color value (0-100)
+    * @param {number} black   - color value (0-100)
+    * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
+    *                          and Blue (0-255) values
+   */
+   CmykToRgb(cyan: number, magenta: number, yellow: number, black: number) {
+      cyan = cyan / 100;
+      magenta = magenta / 100;
+      yellow = yellow / 100;
+      black = black / 100;
+
+      let red = 1 - Math.min(1, cyan * (1 - black) + black);
+      let green = 1 - Math.min(1, magenta * (1 - black) + black);
+      let blue = 1 - Math.min(1, yellow * (1 - black) + black);
+
+      return [
+         Math.round(red * 255),
+         Math.round(green * 255),
+         Math.round(blue * 255)];
+   }
+
+   /**
+    * Converts a hexadecimal color value to RGB color values
+    * @function
+    * @param hex
+    * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
+    *                          and Blue (0-255) values
+   */
+   HexToRgb(hex: string) {
+      hex = hex.replace(/[^0-9a-f]/gi, '');
+      const hexValue = parseInt(hex, 16);
+
+      const red = hexValue >> 16;
+      const green = hexValue >> 8 & 0xFF;
+      const blue = hexValue & 0xFF;
+
+      return [red, green, blue];
+   }
+
+   /**
+    * Converts HSL color values to RGB color values
+    * @function
+    * @param {number} hue        - color value (0-359)
+    * @param {number} saturation - color value (0-100)
+    * @param {number} lightness  - color value (0-100)
+    * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
+    *                          and Blue (0-255) values
+   */
+   HslToRgb(hue: number, saturation: number, lightness: number) {
+      let red = 0;
+      let green = 0;
+      let blue = 0;
+      let m = 0;
+      let c = 0;
+      let x = 0;
+      
+      hue = Number(String(hue).replace(/[^0-9\.]/gi, ''));
+      saturation = Number(String(saturation).replace(/[^0-9\.]/gi, ''));
+      lightness = Number(String(lightness).replace(/[^0-9\.]/gi, ''));
+      
+      if(!isFinite(hue)) hue = 0;
+      if(!isFinite(saturation)) saturation = 0;
+      if(!isFinite(lightness)) lightness = 0;
+
+      hue /= 60;
+      
+      if(hue < 0) { 
+          hue = 6 - (-hue % 6); 
+      }
+      
+      hue %= 6;
+      saturation = Math.max(0, Math.min(1, saturation / 100));
+      lightness = Math.max(0, Math.min(1, lightness / 100));
+      
+      c = (1 - Math.abs((2 * lightness) - 1)) * saturation;
+      x = c * (1 - Math.abs((hue % 2) - 1));
+      
+      if(hue < 1) {
+         red = c; 
+         green = x; 
+         blue = 0;
+      } else if(hue < 2) {
+         red = x; 
+         green = c; 
+         blue = 0;
+      } else if(hue < 3) {
+         red = 0; 
+         green = c; 
+         blue = x;
+      } else if(hue < 4) {
+         red = 0; 
+         green = x;
+         blue = c;
+      } else if(hue < 5) {
+         red = x; 
+         green = 0;
+         blue = c;
+      } else {
+         red = c;
+         green = 0;
+         blue = x;
+      }
+
+      m = lightness - c / 2;
+
+      return [
+        Math.round((red + m) * 255),
+        Math.round((green + m) * 255),
+        Math.round((blue + m) * 255)];
+   }
+
+   /**
+    * Converts HSV color values to RGB color values
+    * @function
+    * @param {number} hue        - color value (0-359)
+    * @param {number} saturation - color value (0-100)
+    * @param {number} value      - color value (0-100)
+    * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
+    *                          and Blue (0-255) values
+   */
+   HsvToRgb(hue: number, saturation: number, value: number) {
+      hue = hue / 360;
+      saturation = saturation / 100;
+      value = value / 100;
+
+      let red: number = 0;
+      let green: number = 0;
+      let blue: number = 0;
+
+      if(saturation == 0) {
+         red = value * 255;
+         green = value * 255;
+         blue = value * 255;
+      } else {
+         let var_h = hue * 6;
+         let var_i = Math.floor(var_h);
+         
+         let var_1 = value * (1 - saturation);
+         let var_2 = value * (1 - saturation * (var_h - var_i));
+         let var_3 = value * (1 - saturation * (1 - (var_h - var_i)));
+
+         let var_r = 0;
+         let var_g = 0;
+         let var_b = 0;
+
+         if(var_i == 0) {
+            var_r = value;
+            var_g = var_3;
+            var_b = var_1;
+         } else if(var_i == 1) {
+            var_r = var_2;
+            var_g = value;
+            var_b = var_1;
+         } else if(var_i == 2) {
+             var_r = var_1; 
+             var_g = value; 
+             var_b = var_3;
+         } else if(var_i == 3) { 
+             var_r = var_1;
+             var_g = var_2;
+             var_b = value;
+         } else if(var_i == 4) { 
+             var_r = var_3;
+             var_g = var_1;
+             var_b = value;
+         } else { 
+             var_r = value; 
+             var_g = var_1; 
+             var_b = var_2;
+         };
+
+         red = Math.round(var_r * 255);
+         green = Math.round(var_g * 255);
+         blue = Math.round(var_b * 255);
+      }
+
+      return [red, green, blue];
+   }
+
+   /**
+    * Converts RGB color values to a binary color value
+    * @function
+    * @param {number} red   - color value (0-255)
+    * @param {number} green - color value (0-255)
+    * @param {number} blue  - color value (0-255)
+    * @returns {string} A binary color value
+   */
+   RgbToBin(red: number, green: number, blue: number) {
+      const bin = red << 16 | green << 8 | blue;
+      return (
+         function (h: string) {
+            return new Array(25 - h.length).join("0") + h
+         })(bin.toString(2))
+   }
+
+   /**
+    * Converts RGB color values to CMYK color values
+    * @function
+    * @param {number} red   - color value (0-255)
+    * @param {number} green - color value (0-255)
+    * @param {number} blue  - color value (0-255)
+    * @returns {Array<number>} An Array of Cyan (0-100), Magenta (0-100),
+    *                          Yellow (0-100), and Black (0-100) values
+   */
+   RgbToCmyk(red: number, green: number, blue: number) {
+      red = red / 255;
+      green = green / 255;
+      blue = blue / 255;
+
+      let black = Math.min(1 - red, 1 - green, 1 - blue);
+      let cyan = (1 - red - black) / (1 - black);
+      let magenta = (1 - green - black) / (1 - black);
+      let yellow = (1 - blue - black) / (1 - black);
+
+      return [
+         Math.round(cyan * 100),
+         Math.round(magenta * 100),
+         Math.round(yellow * 100),
+         Math.round(black * 100)];
+   }
+
+   /**
+    * Converts RGB color values to  hexadecimal color value
+    * @function
+    * @param {number} red   - color value (0-255)
+    * @param {number} green - color value (0-255)
+    * @param {number} blue  - color value (0-255)
+    * @returns {string} A hexadecimal color value
+   */
+   RgbToHex(red: number, green: number, blue: number) {
+      const bin = red << 16 | green << 8 | blue;
 
       return (
          function (h: string) {
@@ -9,279 +259,109 @@ export class ColorConversion {
          })(bin.toString(16).toUpperCase())
    }
 
-   // hexadecimal color string to R,G,B
-   HEXtoRGB(hex: string) {
-      hex = hex.replace(/[^0-9a-f]/gi, '');
-      const hexValue = parseInt(hex, 16);
+   /**
+    * Converts RGB color values to HSL color values
+    * @function
+    * @param {number} red   - color value (0-255)
+    * @param {number} green - color value (0-255)
+    * @param {number} blue  - color value (0-255)
+    * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100),
+    *                          and Lightness (0-100) values
+   */
+   RgbToHsl(red: number, green: number, blue: number) {
+      red /= 255;
+      green /= 255;
+      blue /= 255;
 
-      const r = hexValue >> 16;
-      const g = hexValue >> 8 & 0xFF;
-      const b = hexValue & 0xFF;
+      let hue = 0;
+      let saturation = 0;
+      let lightness = 0;
+      let delta = 0;
 
-      return [r, g, b];
-   }
+      let max = Math.max(red, green, blue);
+      let min = Math.min(red, green, blue);
 
-   // R,G,B values to binary string
-   RGBtoBIN(r: number, g: number, b: number) {
-      const bin = r << 16 | g << 8 | b;
-      return (
-         function (h: string) {
-            return new Array(25 - h.length).join("0") + h
-         })(bin.toString(2))
-   }
-
-   // 24 bit binary color to R,G,B
-   BINtoRGB(bin: string) {
-      const pbin = parseInt(bin, 2);
-      const r = pbin >> 16;
-      const g = pbin >> 8 & 0xFF;
-      const b = pbin & 0xFF;
-
-      return [r, g, b];
-   }
-
-   // R,G,B values to H,S,L
-   RGBtoHSL(r: number, g: number, b: number) {
-      r /= 255;
-      g /= 255;
-      b /= 255;
-
-      let h = 0;
-      let s = 0;
-      let l = 0;
-      let d = 0;
-
-      let max = Math.max(r, g, b);
-      let min = Math.min(r, g, b);
-
-      l = (max + min) / 2;
+      lightness = (max + min) / 2;
 
       if(max == min) {
-         h = s = 0;
+         hue = saturation = 0;
       } else {
-         d = max - min;
+         delta = max - min;
 
-         s = l > 0.5
-            ? d / (2 - max - min)
-            : d / (max + min);
+         saturation = lightness > 0.5
+            ? delta / (2 - max - min)
+            : delta / (max + min);
 
          switch(max) {
-            case r:
-               h = (g - b) / d + (g < b ? 6 : 0);
+            case red:
+               hue = (green - blue) / delta + (green < blue ? 6 : 0);
                break;
-            case g:
-               h = (b - r) / d + 2;
+            case green:
+               hue = (blue - red) / delta + 2;
                break;
-            case b:
-               h = (r - g) / d + 4;
+            case blue:
+               hue = (red - green) / delta + 4;
                break;
          }
 
-         h /= 6;
+         hue /= 6;
       }
 
       return [
-         this.round(h * 360, 0),
-         this.round(s * 100, 0),
-         this.round(l * 100, 0)];
+         this.round(hue * 360, 0),
+         this.round(saturation * 100, 0),
+         this.round(lightness * 100, 0)];
    }
 
-   // H,S,L values to R,G,B
-   HSLtoRGB(h: number, s: number, l: number) {
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      let m = 0;
-      let c = 0;
-      let x = 0;
-      
-      h = Number(String(h).replace(/[^0-9\.]/gi, ''));
-      s = Number(String(s).replace(/[^0-9\.]/gi, ''));
-      l = Number(String(l).replace(/[^0-9\.]/gi, ''));
-      
-      if(!isFinite(h)) h = 0;
-      if(!isFinite(s)) s = 0;
-      if(!isFinite(l)) l = 0;
+   /**
+    * Converts RGB color values to HSV color values
+    * @function
+    * @param {number} red   - color value (0-255)
+    * @param {number} green - color value (0-255)
+    * @param {number} blue  - color value (0-255)
+    * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100),
+    *                          and Value (light) (0-100) values
+   */
+   RgbToHsv(red: number, green: number, blue: number) {
+      red = red / 255;
+      green = green / 255;
+      blue = blue / 255;
 
-      h /= 60;
-      
-      if(h < 0) { 
-          h = 6 - (-h % 6); 
-      }
-      
-      h %= 6;
-      s = Math.max(0, Math.min(1, s / 100));
-      l = Math.max(0, Math.min(1, l / 100));
-      
-      c = (1 - Math.abs((2 * l) - 1)) * s;
-      x = c * (1 - Math.abs((h % 2) - 1));
-      
-      if(h < 1) {
-         r = c; 
-         g = x; 
-         b = 0;
-      } else if(h < 2) {
-         r = x; 
-         g = c; 
-         b = 0;
-      } else if(h < 3) {
-         r = 0; 
-         g = c; 
-         b = x;
-      } else if(h < 4) {
-         r = 0; 
-         g = x;
-         b = c;
-      } else if(h < 5) {
-         r = x; 
-         g = 0;
-         b = c;
-      } else {
-         r = c;
-         g = 0;
-         b = x;
-      }
-
-      m = l - c / 2;
-
-      return [
-        Math.round((r + m) * 255),
-        Math.round((g + m) * 255),
-        Math.round((b + m) * 255)];
-   }
-
-   RGBtoHSV(r: number, g: number, b: number) {
-      r = r / 255;
-      g = g / 255;
-      b = b / 255;
-
-      const minVal = Math.min(r, g, b);
-      const maxVal = Math.max(r, g, b);
+      const minVal = Math.min(red, green, blue);
+      const maxVal = Math.max(red, green, blue);
       const delta = maxVal - minVal;
 
-      let h = 0;
-      let s = 0;
-      let v = maxVal;
+      let hue = 0;
+      let saturation = 0;
+      let value = maxVal;
 
       if(delta == 0) {
-         h = 0;
-         s = 0;
+         hue = 0;
+         saturation = 0;
       } else {
-         s = delta / maxVal;
+         saturation = delta / maxVal;
 
-         const del_R = (((maxVal - r) / 6) + (delta / 2)) / delta;
-         const del_G = (((maxVal - g) / 6) + (delta / 2)) / delta;
-         const del_B = (((maxVal - b) / 6) + (delta / 2)) / delta;
+         const del_R = (((maxVal - red) / 6) + (delta / 2)) / delta;
+         const del_G = (((maxVal - green) / 6) + (delta / 2)) / delta;
+         const del_B = (((maxVal - blue) / 6) + (delta / 2)) / delta;
 
-         if(r == maxVal) {
-            h = del_B - del_G;
-         } else if(g == maxVal) {
-            h = (1 / 3) + del_R - del_B;
-         } else if(b == maxVal) {
-            h = (2 / 3) + del_G - del_R;
+         if(red == maxVal) {
+            hue = del_B - del_G;
+         } else if(green == maxVal) {
+            hue = (1 / 3) + del_R - del_B;
+         } else if(blue == maxVal) {
+            hue = (2 / 3) + del_G - del_R;
          }
 
-         if(h < 0) { h += 1; }
-         if(h > 1) { h -= 1; }
+         if(hue < 0) { hue += 1; }
+         if(hue > 1) { hue -= 1; }
       }
 
-      h = Math.round(h * 360);
-      s = Math.round(s * 100);
-      v = Math.round(v * 100);
+      hue = Math.round(hue * 360);
+      saturation = Math.round(saturation * 100);
+      value = Math.round(value * 100);
 
-      return [h, s, v];
-   }
-
-   HSVtoRGB(h: number, s: number, v: number) {
-      h = h / 360;
-      s = s / 100;
-      v = v / 100;
-
-      let r: number = 0;
-      let g: number = 0;
-      let b: number = 0;
-
-      if(s == 0) {
-         r = v * 255;
-         g = v * 255;
-         b = v * 255;
-      } else {
-         let var_h = h * 6;
-         let var_i = Math.floor(var_h);
-         
-         let var_1 = v * (1 - s);
-         let var_2 = v * (1 - s * (var_h - var_i));
-         let var_3 = v * (1 - s * (1 - (var_h - var_i)));
-
-         let var_r = 0;
-         let var_g = 0;
-         let var_b = 0;
-
-         if(var_i == 0) {
-            var_r = v;
-            var_g = var_3;
-            var_b = var_1;
-         } else if(var_i == 1) {
-            var_r = var_2;
-            var_g = v;
-            var_b = var_1;
-         } else if(var_i == 2) {
-             var_r = var_1; 
-             var_g = v; 
-             var_b = var_3;
-         } else if(var_i == 3) { 
-             var_r = var_1;
-             var_g = var_2;
-             var_b = v;
-         } else if(var_i == 4) { 
-             var_r = var_3;
-             var_g = var_1;
-             var_b = v;
-         } else { 
-             var_r = v; 
-             var_g = var_1; 
-             var_b = var_2;
-         };
-
-         r = Math.round(var_r * 255);
-         g = Math.round(var_g * 255);
-         b = Math.round(var_b * 255);
-      }
-
-      return [r, g, b];
-   }
-
-   CMYKtoRGB(c: number, m: number, y: number, k: number) {
-      c = c / 100;
-      m = m / 100;
-      y = y / 100;
-      k = k / 100;
-
-      let r = 1 - Math.min(1, c * (1 - k) + k);
-      let g = 1 - Math.min(1, m * (1 - k) + k);
-      let b = 1 - Math.min(1, y * (1 - k) + k);
-
-      return [
-         Math.round(r * 255),
-         Math.round(g * 255),
-         Math.round(b * 255)];
-   }
-
-   RGBtoCMYK(r: number, g: number, b: number) {
-      r = r / 255;
-      g = g / 255;
-      b = b / 255;
-
-      let k = Math.min(1 - r, 1 - g, 1 - b);
-      let c = (1 - r - k) / (1 - k);
-      let m = (1 - g - k) / (1 - k);
-      let y = (1 - b - k) / (1 - k);
-
-      return [
-         Math.round(c * 100),
-         Math.round(m * 100),
-         Math.round(y * 100),
-         Math.round(k * 100)];
+      return [hue, saturation, value];
    }
 
    round(value: any, decimals: any) {
@@ -289,49 +369,3 @@ export class ColorConversion {
    }
 }
 
-   //blendColors(c0: string, c1: string, p: number) {
-   //   const f = parseInt(c0.slice(1), 16);
-   //   const t = parseInt(c1.slice(1), 16);
-   //   const R1 = f >> 16;
-   //   const G1 = f >> 8 & 0x00FF;
-   //   const B1 = f & 0x0000F;
-   //   const R2 = t >> 16;
-   //   const G2 = t >> 8 & 0x00FF;
-   //   const B2 = t & 0x0000FF;
-
-   //   return `#${
-   //      (
-   //         0x1000000
-   //         + (Math.round((R2 - R1) * p) + R1)
-   //         * 0x10000
-   //         + (Math.round((G2 - G1) * p) + G1)
-   //         * 0x100
-   //         + (Math.round((B2 - B1) * p) + B1)
-   //      ).toString(16).slice(1)}`;
-   //}
-
-   //RGBlightness(r, g, b) {
-   //   return (0.2126 * r + 0.7152 * g + 0.0722 * b);
-   //}
-
-   //colorLuminance(hex, lum) {
-   //   console.log('new luminance');
-   //   // validate hex string
-   //   hex = String(hex).replace(/[^0-9a-f]/gi, '');
-   //   if(hex.length < 6) {
-   //      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
-   //   }
-   //   lum = lum || 0;
-   //   // convert to decimal and change luminosity
-   //   var rgb = "#", c, i;
-   //   for(i = 0; i < 3; i++) {
-   //      c = parseInt(hex.substr(i * 2, 2), 16);
-   //      if(Math.min(Math.max(0, c + (c * lum)), 255) < (lum * -100)) {
-   //         lum = lum * -1;
-   //      }
-   //      c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-   //      rgb += ("00" + c).substr(c.length);
-   //   }
-   //   console.log(rgb);
-   //   return rgb;
-   //}
