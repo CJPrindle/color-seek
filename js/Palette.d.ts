@@ -21,7 +21,7 @@ export declare namespace Palette {
          */
         constructor(source: string, name: string);
         /**
-         * Creates the color palette Html file
+         * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
          * @function
          * @param {string} searchText - The text to parse for colors values
          */
@@ -44,6 +44,7 @@ export declare namespace Palette {
         private getIndicesOf(searchStr, str, caseSensitive?);
     }
     /**
+     * @public
      * @class
      * @classdesc Contains the color formats used by the color palette
      */
@@ -55,15 +56,24 @@ export declare namespace Palette {
         Red: number;
         Green: number;
         Blue: number;
+        Luminosity: number;
+        Huenosity: number;
         Hue: number;
         Saturation: number;
         Light: number;
-        Luminosity: number;
         Cyan: number;
         Magenta: number;
         Yellow: number;
         Black: number;
+        /**
+         * @constructor
+         */
         constructor();
+        /**
+         * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
+         * constituent properties of each format.
+         * @param hexValue
+         */
         createColorFormats(hexValue: string): void;
     }
 }

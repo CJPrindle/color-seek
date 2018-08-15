@@ -55,7 +55,7 @@ export namespace Palette {
       }
 
       /**
-       * Creates the color palette Html file
+       * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
        * @function
        * @param {string} searchText - The text to parse for colors values
        */
@@ -70,11 +70,10 @@ export namespace Palette {
                this.paletteColors.push(pColor);
             });
 
-            var colors = this.paletteColors.slice(0);
-            colors.sort(function (a, b) {
-               return (a.Luminosity) - (b.Luminosity);
+            //- Sort by 'Luminosity' property. Not ideal but better than Hue
+            this.paletteColors.sort((a, b) => {
+               return (b.Luminosity) - (a.Luminosity);
             });
-
 
             let html = fs.readFileSync("template.html").toString();
             let thumbnails = "";
@@ -83,27 +82,32 @@ export namespace Palette {
                .trim()
                .replace(new RegExp(" ", "g"), "")}.html`;
 
-            colors.forEach((col) => {
-               let pc = col;
-               let pcl = pc.Light;
+            this.paletteColors.forEach((pc) => {
 
+               //- Based on the current Light value (part of HSL), 
+               //- determine the offset Light value for the text color.
+               let pcl = pc.Light;
+               
                if(pcl <= 10) {
-                  pcl = pcl + 40;
+                  pcl = 35;
+               } else if(pcl <= 25) {
+                  pcl = 45;
                } else if(pcl <= 40) {
-                  pcl = pcl + 30;
+                  pcl = pcl + 25;
                } else if(pcl <= 70) {
                   pcl = pcl - 30;
                } else {
                   pcl = pcl - 40;
                }
 
+               //- Set the text on the color swatch either brighter or dimmer for readability
                let textLight = pcl;
                let textHSL = `hsl(${pc.Hue},${pc.Saturation}%,${textLight}%);`;
 
                let thumbnail = `
                   <div class="thumbnail" 
-                       style="background-color:${col.Hex};
-                              border: 2px solid ${textHSL}">
+                       style="background-color:${pc.Hex};
+                              border: 1px solid ${textHSL}">
                      <div class="header">
                         <div class="left">
                           <div style="color:${textHSL}">HEX</div>
@@ -189,7 +193,7 @@ export namespace Palette {
          searchStr: string,
          str: string,
          caseSensitive: boolean = true
-      ): number[] {
+      ): Array<number> {
          const searchStrLen = searchStr.length;
 
          if(searchStrLen === 0) {
@@ -215,33 +219,44 @@ export namespace Palette {
    }
 
    /**
+    * @public
     * @class
     * @classdesc Contains the color formats used by the color palette
     */
    export class PaletteColor {
-      CMYK: number[] = [0, 0, 0, 0];
-      Hex: string = "";
-      HSL: number[] = [0, 0, 0];
-      RGB: number[] = [0, 0, 0];
+      public CMYK: number[] = [0, 0, 0, 0];
+      public Hex: string = "";
+      public HSL: number[] = [0, 0, 0];
+      public RGB: number[] = [0, 0, 0];
 
-      Red: number = 0;
-      Green: number = 0;
-      Blue: number = 0;
+      public Red: number = 0;
+      public Green: number = 0;
+      public Blue: number = 0;
+      public Luminosity: number = 0; //- RGB derived
+      public Huenosity: number = 0; //- RGB derived
 
-      Hue: number = 0;
-      Saturation: number = 0;
-      Light: number = 0;
-      Luminosity: number = 0;
+      public Hue: number = 0;
+      public Saturation: number = 0;
+      public Light: number = 0;
 
-      Cyan: number = 0;
-      Magenta: number = 0;
-      Yellow: number = 0;
-      Black: number = 0;
+      public Cyan: number = 0;
+      public Magenta: number = 0;
+      public Yellow: number = 0;
+      public Black: number = 0;
 
+      /**
+       * @constructor
+       */
       constructor() { }
 
-      createColorFormats(hexValue: string): void {
-         if(RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) {
+      /**
+       * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
+       * constituent properties of each format.
+       * @param hexValue
+       */
+      public createColorFormats(hexValue: string): void {
+         if(RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) { //- Valid Hexadecimal
+
             const ColorConvert = new ColorConversion();
 
             this.Hex = hexValue;
@@ -255,6 +270,7 @@ export namespace Palette {
             this.HSL = ColorConvert.RgbToHsl(this.Red, this.Green, this.Blue);
             [this.Hue, this.Saturation, this.Light] = this.HSL;
 
+            //- The magic numbers correspond to how the human eye perceives RGB
             this.Luminosity = Math.sqrt(.241 * this.Red + .691 * this.Green + .068 * this.Blue);
 
          } else {
