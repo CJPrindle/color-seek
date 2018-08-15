@@ -32,7 +32,7 @@ export declare namespace Palette {
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
-        private parseHexColors;
+        private parseHexColors(searchText);
         /**
          * Finds the indexes of a search value in the provided string
          * @function
@@ -41,7 +41,7 @@ export declare namespace Palette {
          * @param {boolean} caseSensitive - True/False for case sensitivity
          * @returns {number[]} An Array<number> containing the position indexes of the hex color values
          */
-        private getIndicesOf;
+        private getIndicesOf(searchStr, str, caseSensitive?);
     }
     /**
      * @class
@@ -51,7 +51,6 @@ export declare namespace Palette {
         CMYK: number[];
         Hex: string;
         HSL: number[];
-        HSV: number[];
         RGB: number[];
         Red: number;
         Green: number;
@@ -59,7 +58,7 @@ export declare namespace Palette {
         Hue: number;
         Saturation: number;
         Light: number;
-        Value: number;
+        Luminosity: number;
         Cyan: number;
         Magenta: number;
         Yellow: number;

@@ -246,6 +246,18 @@ class ColorConversion {
         let cyan = (1 - red - black) / (1 - black);
         let magenta = (1 - green - black) / (1 - black);
         let yellow = (1 - blue - black) / (1 - black);
+        if (Number.isNaN(cyan)) {
+            cyan = 0;
+        }
+        if (Number.isNaN(magenta)) {
+            magenta = 0;
+        }
+        if (Number.isNaN(yellow)) {
+            yellow = 0;
+        }
+        if (Number.isNaN(black)) {
+            black = 0;
+        }
         return [
             Math.round(cyan * 100),
             Math.round(magenta * 100),

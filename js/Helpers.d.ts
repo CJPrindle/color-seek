@@ -32,5 +32,5 @@ export declare class Helpers {
      * @function
      * @param {Error} error - The error to show in the console
      */
-    static outputError(error: Error): void;
+    static outputError(error: Error, logOnly?: boolean): void;
 }

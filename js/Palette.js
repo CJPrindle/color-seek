@@ -63,33 +63,56 @@ var Palette;
                     pColor.createColorFormats(h.valueOf());
                     this.paletteColors.push(pColor);
                 });
+                var colors = this.paletteColors.slice(0);
+                colors.sort(function (a, b) {
+                    return (a.Luminosity) - (b.Luminosity);
+                });
                 let html = fs.readFileSync("template.html").toString();
                 let thumbnails = "";
                 const fileName = `${this.outputName
                     .trim()
                     .replace(new RegExp(" ", "g"), "")}.html`;
-                for (let x = 0; x < this.paletteColors.length; x++) {
-                    let bgColor = this.paletteColors[x].HSL;
+                colors.forEach((col) => {
+                    let pc = col;
+                    let pcl = pc.Light;
+                    if (pcl <= 10) {
+                        pcl = pcl + 40;
+                    }
+                    else if (pcl <= 40) {
+                        pcl = pcl + 30;
+                    }
+                    else if (pcl <= 70) {
+                        pcl = pcl - 30;
+                    }
+                    else {
+                        pcl = pcl - 40;
+                    }
+                    let textLight = pcl;
+                    let textHSL = `hsl(${pc.Hue},${pc.Saturation}%,${textLight}%);`;
                     let thumbnail = `
-               <div class="box"> 
+               <!-- <div class="box"> -->
                   <div class="thumbnail" 
-                       style="background-color:${hexColors[x]}">
-                    <div class="header">
-                      <div class="label">cmyk:&nbsp;&nbsp;
-                        <b class="color" style="color:${hexColors[x]}">
-                          ${this.paletteColors[x].CMYK}
-                        </b>
-                      </div>
-                      <div class="label">hex :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].Hex}</b></div> 
-                      <div class="label">rgb:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].RGB}</b></div>
-                      <div class="label">hsl:&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSL}</b></div>                      
-                      <div class="label">hsv :&nbsp;&nbsp;<b class="color">${this.paletteColors[x].HSV}</b></div>
+                       style="background-color:${col.Hex};
+                              border: 2px solid ${textHSL}">
+                     <div class="header">
+                        <div class="left">
+                          <div style="color:${textHSL}">HEX</div>
+                          <div style="color:${textHSL}">RGB</div>
+                          <div style="color:${textHSL}">HSL</div>
+                          <div style="color:${textHSL}">CMYK</div>
+                        </div>
+                        <div class="right">
+                           <div style="color:${textHSL}">${pc.Hex}</div>
+                           <div style="color:${textHSL}">${pc.RGB}</div>
+                           <div style="color:${textHSL}">${pc.HSL}</div>
+                           <div style="color:${textHSL}">${pc.CMYK}</div>
+                        </div>
                     </div>
+                    <p>${col.Hue}</p>
                   </div>
-                </div>
-               </div>\n`;
+               <!--</div>-->\n`;
                     thumbnails += thumbnail;
-                }
+                });
                 html = html
                     .replace("{name}", this.outputName)
                     .replace("{source}", this.inputSource)
@@ -129,7 +152,7 @@ var Palette;
                     }
                 }
                 catch (e) {
-                    Helpers_1.Helpers.outputError(e);
+                    Helpers_1.Helpers.outputError(e, true);
                 }
             }
             return [
@@ -173,7 +196,6 @@ var Palette;
             this.CMYK = [0, 0, 0, 0];
             this.Hex = "";
             this.HSL = [0, 0, 0];
-            this.HSV = [0, 0, 0];
             this.RGB = [0, 0, 0];
             this.Red = 0;
             this.Green = 0;
@@ -181,7 +203,7 @@ var Palette;
             this.Hue = 0;
             this.Saturation = 0;
             this.Light = 0;
-            this.Value = 0;
+            this.Luminosity = 0;
             this.Cyan = 0;
             this.Magenta = 0;
             this.Yellow = 0;
@@ -190,15 +212,14 @@ var Palette;
         createColorFormats(hexValue) {
             if (RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) {
                 const ColorConvert = new ColorConversion_1.ColorConversion();
-                //- Assign the color format arrays
                 this.Hex = hexValue;
                 this.RGB = ColorConvert.HexToRgb(hexValue.substring(1));
                 [this.Red, this.Green, this.Blue] = this.RGB;
                 this.CMYK = ColorConvert.RgbToCmyk(this.Red, this.Green, this.Blue);
                 [this.Cyan, this.Magenta, this.Yellow, this.Black] = this.CMYK;
                 this.HSL = ColorConvert.RgbToHsl(this.Red, this.Green, this.Blue);
-                this.HSV = ColorConvert.RgbToHsv(this.Red, this.Green, this.Blue);
-                //- Assign the individual color properties
+                [this.Hue, this.Saturation, this.Light] = this.HSL;
+                this.Luminosity = Math.sqrt(.241 * this.Red + .691 * this.Green + .068 * this.Blue);
             }
             else {
                 Helpers_1.Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));

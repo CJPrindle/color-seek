@@ -69,9 +69,14 @@ class Helpers {
      * @function
      * @param {Error} error - The error to show in the console
      */
-    static outputError(error) {
+    static outputError(error, logOnly = false) {
         const err = chalk_1.default.redBright;
-        console.log(err(error.message), err(error.stack));
+        if (!logOnly) {
+            console.error(error);
+        }
+        else {
+            console.log(err(error.message), err(error.stack));
+        }
     }
 }
 exports.Helpers = Helpers;
