@@ -1,56 +1,107 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Color Seek Index</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.Cerulean.css">
+
 </head>
 
 <body>
 
-<div id="main">
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Color Seek</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call.html">Parse the command line and determine which options to call</a></li><li><a href="module-Web.html">Web</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-Http.Http.html">Parse the command line and determine which options to call~Http.Http</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-PaletteColor.PaletteColor.html">Parse the command line and determine which options to call~PaletteColor.PaletteColor</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
 
-    <h1 class="page-title">Home</h1>
-
-    
-
+</div>
+</div>
 
 
-    
+<div class="container" id="toc-content">
+<div class="row">
 
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
+	
+	
 
 
 
 
-    <section>
-        <article><h1>Color Seek - Version 1.0</h1><h2>File and Url Sources</h2><p><strong>Color Seek</strong> allows you to build a color palette from an existing file or 
-Url. The specified file path or Url is opened and parsed for valid CSS color 
-values. The resulting list of values is formatted &amp; sorted while duplicates 
-are removed to create the <em><strong>Color Palette</strong></em>.  The palette is written to each
-of the specified file formats along with and Html page presenting the color
-palette as a grid of color swatches showing all three valid Css color formats.</p>
-<h3>CSS Color Values</h3><p>CSS accepts three formats for color specification. All color in the palette
-are displayed with each format.</p>
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>Color Seek - Version 1.0</h1><h2>Overview</h2><p><strong>Color Seek</strong> allows you to build a color palette from an existing file or Url. The specified file path or Url is<br>opened and parsed for valid CSS color values. The resulting list of color values is formatted &amp; sorted with duplicates<br>removed to create the <em><strong>Color Palette</strong></em>.  The palette is written to each of the specified file formats along with<br>and Html page presenting the color palette as a grid of color swatches showing all three valid Css color formats.</p>
+<h3>CSS Color Formats</h3><p>CSS currently accepts three formats for color specification.</p>
 <table>
 <thead>
 <tr>
@@ -62,27 +113,45 @@ are displayed with each format.</p>
 <tbody>
 <tr>
 <td>Hex</td>
-<td><code>#FFFFFF</code></td>
-<td>Hexadecimals of Red (FF), Green (FF), Blue (FF)</td>
+<td><code>#1188FF</code></td>
+<td>Hexadecimals of Red (11), Green (88), Blue (FF)</td>
 </tr>
 <tr>
-<td>RGB[a]</td>
-<td><code>rgba(255, 255, 255, 1.0)</code></td>
-<td>Range for Red (0-255), Green (0-255), Blue (0-255), <em>Alpha</em>* (0.0-1.0)</td>
+<td>RGB</td>
+<td><code>rgb(32, 128, 255)</code></td>
+<td>Range for Red (0-255), Green (0-255), Blue (0-255)</td>
 </tr>
 <tr>
-<td>HSL[a]</td>
-<td><code>hsla(359, 100%, 100%, 1.0)</code></td>
-<td>Range for Hue (0-359), Percentage for Saturation (0-100%), Lightness (0-100%), Range for  <em>Alpha</em>* (0.0-1.0)</td>
+<td>HSL</td>
+<td><code>hsl(359, 25, 100)</code></td>
+<td>Range for Hue (0-359), Saturation (0-100), Lightness (0-100)</td>
 </tr>
 </tbody>
 </table>
-<p><em>*Alpha</em> is short for <strong>Alpha Channel</strong>, which specifies the opacity of the 
-color. An alpha value of zero (0) is totally transparent and one (1) is totally
-opaque. The Alpha Channel value is <em>optional</em> with the default set to one (1).</p>
-<h2>Output File Types</h2><p>A color palette may be rendered into several formats simultaneously. An HTML 
-version is generated automatically.</p>
-<h3>File Formats</h3><p>Each of the formats below can be generated when creating a palette.</p>
+<h3>Possible CSS4 Color Formats</h3><p>Proposals exist for at least two additional formats in CSS4. One, proposed as 'HSB', is also known as HSV and is<br>referred to as such in this application. The other, CMYK, is well known outside of CSS and has many years of use.</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMYK</td>
+<td><code>cmyk(100, 25, 50, 75)</code></td>
+<td>Range of Cyan, Magenta, Yellow, Black (0-100)</td>
+</tr>
+<tr>
+<td>HSV</td>
+<td><code>hsv(359, 25, 100)</code></td>
+<td>Range for Hue (0-359), Saturation (0-100), Value (0-100)</td>
+</tr>
+</tbody>
+</table>
+<h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Css along with Sass and Less, the two most popular<br>stylesheet extension formats, are output options Less An HTML version is generated automatically.</p>
+<h4>File Formats</h4><p>Each of the formats below can be generated when creating a palette.</p>
 <table>
 <thead>
 <tr>
@@ -104,7 +173,7 @@ version is generated automatically.</p>
 <td><em>Less Style Sheet</em></td>
 </tr>
 <tr>
-<td>SCSS</td>
+<td>SASS</td>
 <td><em>Sass Style Sheet</em></td>
 </tr>
 </tbody>
@@ -116,19 +185,137 @@ version is generated automatically.</p>
 
 
 
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="Http.html">Http</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li><li><a href="PaletteColor.html">PaletteColor</a></li></ul><h3>Namespaces</h3><ul><li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li><li><a href="Web.html">Web</a></li></ul><h3>Global</h3><ul><li><a href="global.html#chalk_1">chalk_1</a></li><li><a href="global.html#commands">commands</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#path">path</a></li></ul>
-</nav>
 
-<br class="clear">
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Aug 14 2018 16:18:57 GMT-0400 (Eastern Daylight Time)
+
+
+	<span class="copyright">
+	Christopher Prindle Copyright © 2018
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Aug We, 2018
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
 </body>
 </html>

@@ -1,18 +1,47 @@
 "use strict";
+/*! ***************************************************************************
+Copyright (c) 2018 Christopher Prindle. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+******************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * @class
+ * @classdesc Contains methods for converting color formats into other format types. The formats available are:
+ *      + Hexadecimal
+ *      + RGB
+ *      + HSL
+ *      + HSV
+ *      + CMYK
+ */
 class ColorConversion {
     /**
      * Converts a binary color value to a hexadecimal color value
      * @function
      * @param {string} bin
-     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
-     *                          and Blue (0-255) values
-    */
+     * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
+     */
     BinToRgb(bin) {
         const pbin = parseInt(bin, 2);
         const red = pbin >> 16;
-        const green = pbin >> 8 & 0xFF;
-        const blue = pbin & 0xFF;
+        const green = (pbin >> 8) & 0xff;
+        const blue = pbin & 0xff;
         return [red, green, blue];
     }
     /**
@@ -22,9 +51,8 @@ class ColorConversion {
      * @param {number} magenta - color value (0-100)
      * @param {number} yellow  - color value (0-100)
      * @param {number} black   - color value (0-100)
-     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
-     *                          and Blue (0-255) values
-    */
+     * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
+     */
     CmykToRgb(cyan, magenta, yellow, black) {
         cyan = cyan / 100;
         magenta = magenta / 100;
@@ -43,15 +71,14 @@ class ColorConversion {
      * Converts a hexadecimal color value to RGB color values
      * @function
      * @param hex
-     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
-     *                          and Blue (0-255) values
-    */
+     * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
+     */
     HexToRgb(hex) {
-        hex = hex.replace(/[^0-9a-f]/gi, '');
+        hex = hex.replace(/[^0-9a-f]/gi, "");
         const hexValue = parseInt(hex, 16);
         const red = hexValue >> 16;
-        const green = hexValue >> 8 & 0xFF;
-        const blue = hexValue & 0xFF;
+        const green = (hexValue >> 8) & 0xff;
+        const blue = hexValue & 0xff;
         return [red, green, blue];
     }
     /**
@@ -60,9 +87,8 @@ class ColorConversion {
      * @param {number} hue        - color value (0-359)
      * @param {number} saturation - color value (0-100)
      * @param {number} lightness  - color value (0-100)
-     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
-     *                          and Blue (0-255) values
-    */
+     * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
+     */
     HslToRgb(hue, saturation, lightness) {
         let red = 0;
         let green = 0;
@@ -70,9 +96,9 @@ class ColorConversion {
         let m = 0;
         let c = 0;
         let x = 0;
-        hue = Number(String(hue).replace(/[^0-9\.]/gi, ''));
-        saturation = Number(String(saturation).replace(/[^0-9\.]/gi, ''));
-        lightness = Number(String(lightness).replace(/[^0-9\.]/gi, ''));
+        hue = Number(String(hue).replace(/[^0-9\.]/gi, ""));
+        saturation = Number(String(saturation).replace(/[^0-9\.]/gi, ""));
+        lightness = Number(String(lightness).replace(/[^0-9\.]/gi, ""));
         if (!isFinite(hue))
             hue = 0;
         if (!isFinite(saturation))
@@ -86,7 +112,7 @@ class ColorConversion {
         hue %= 6;
         saturation = Math.max(0, Math.min(1, saturation / 100));
         lightness = Math.max(0, Math.min(1, lightness / 100));
-        c = (1 - Math.abs((2 * lightness) - 1)) * saturation;
+        c = (1 - Math.abs(2 * lightness - 1)) * saturation;
         x = c * (1 - Math.abs((hue % 2) - 1));
         if (hue < 1) {
             red = c;
@@ -131,9 +157,8 @@ class ColorConversion {
      * @param {number} hue        - color value (0-359)
      * @param {number} saturation - color value (0-100)
      * @param {number} value      - color value (0-100)
-     * @returns {Array<number>} An Array of Red (0-255), Green (0-255),
-     *                          and Blue (0-255) values
-    */
+     * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
+     */
     HsvToRgb(hue, saturation, value) {
         hue = hue / 360;
         saturation = saturation / 100;
@@ -141,7 +166,7 @@ class ColorConversion {
         let red = 0;
         let green = 0;
         let blue = 0;
-        if (saturation == 0) {
+        if (saturation === 0) {
             red = value * 255;
             green = value * 255;
             blue = value * 255;
@@ -155,27 +180,27 @@ class ColorConversion {
             let var_r = 0;
             let var_g = 0;
             let var_b = 0;
-            if (var_i == 0) {
+            if (var_i === 0) {
                 var_r = value;
                 var_g = var_3;
                 var_b = var_1;
             }
-            else if (var_i == 1) {
+            else if (var_i === 1) {
                 var_r = var_2;
                 var_g = value;
                 var_b = var_1;
             }
-            else if (var_i == 2) {
+            else if (var_i === 2) {
                 var_r = var_1;
                 var_g = value;
                 var_b = var_3;
             }
-            else if (var_i == 3) {
+            else if (var_i === 3) {
                 var_r = var_1;
                 var_g = var_2;
                 var_b = value;
             }
-            else if (var_i == 4) {
+            else if (var_i === 4) {
                 var_r = var_3;
                 var_g = var_1;
                 var_b = value;
@@ -185,7 +210,6 @@ class ColorConversion {
                 var_g = var_1;
                 var_b = var_2;
             }
-            ;
             red = Math.round(var_r * 255);
             green = Math.round(var_g * 255);
             blue = Math.round(var_b * 255);
@@ -199,9 +223,9 @@ class ColorConversion {
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
      * @returns {string} A binary color value
-    */
+     */
     RgbToBin(red, green, blue) {
-        const bin = red << 16 | green << 8 | blue;
+        const bin = (red << 16) | (green << 8) | blue;
         return (function (h) {
             return new Array(25 - h.length).join("0") + h;
         })(bin.toString(2));
@@ -212,9 +236,8 @@ class ColorConversion {
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
-     * @returns {Array<number>} An Array of Cyan (0-100), Magenta (0-100),
-     *                          Yellow (0-100), and Black (0-100) values
-    */
+     * @returns {Array<number>} An Array of Cyan (0-100), Magenta (0-100), Yellow (0-100), and Black (0-100) values
+     */
     RgbToCmyk(red, green, blue) {
         red = red / 255;
         green = green / 255;
@@ -237,9 +260,9 @@ class ColorConversion {
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
      * @returns {string} A hexadecimal color value
-    */
+     */
     RgbToHex(red, green, blue) {
-        const bin = red << 16 | green << 8 | blue;
+        const bin = (red << 16) | (green << 8) | blue;
         return (function (h) {
             return new Array(7 - h.length).join("0") + h;
         })(bin.toString(16).toUpperCase());
@@ -250,9 +273,8 @@ class ColorConversion {
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
-     * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100),
-     *                          and Lightness (0-100) values
-    */
+     * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100), and Lightness (0-100) values
+     */
     RgbToHsl(red, green, blue) {
         red /= 255;
         green /= 255;
@@ -264,14 +286,13 @@ class ColorConversion {
         let max = Math.max(red, green, blue);
         let min = Math.min(red, green, blue);
         lightness = (max + min) / 2;
-        if (max == min) {
+        if (max === min) {
             hue = saturation = 0;
         }
         else {
             delta = max - min;
-            saturation = lightness > 0.5
-                ? delta / (2 - max - min)
-                : delta / (max + min);
+            saturation =
+                lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
             switch (max) {
                 case red:
                     hue = (green - blue) / delta + (green < blue ? 6 : 0);
@@ -297,9 +318,8 @@ class ColorConversion {
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
-     * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100),
-     *                          and Value (light) (0-100) values
-    */
+     * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100), and Value (light) (0-100) values
+     */
     RgbToHsv(red, green, blue) {
         red = red / 255;
         green = green / 255;
@@ -310,23 +330,23 @@ class ColorConversion {
         let hue = 0;
         let saturation = 0;
         let value = maxVal;
-        if (delta == 0) {
+        if (delta === 0) {
             hue = 0;
             saturation = 0;
         }
         else {
             saturation = delta / maxVal;
-            const del_R = (((maxVal - red) / 6) + (delta / 2)) / delta;
-            const del_G = (((maxVal - green) / 6) + (delta / 2)) / delta;
-            const del_B = (((maxVal - blue) / 6) + (delta / 2)) / delta;
-            if (red == maxVal) {
+            const del_R = ((maxVal - red) / 6 + delta / 2) / delta;
+            const del_G = ((maxVal - green) / 6 + delta / 2) / delta;
+            const del_B = ((maxVal - blue) / 6 + delta / 2) / delta;
+            if (red === maxVal) {
                 hue = del_B - del_G;
             }
-            else if (green == maxVal) {
-                hue = (1 / 3) + del_R - del_B;
+            else if (green === maxVal) {
+                hue = 1 / 3 + del_R - del_B;
             }
-            else if (blue == maxVal) {
-                hue = (2 / 3) + del_G - del_R;
+            else if (blue === maxVal) {
+                hue = 2 / 3 + del_G - del_R;
             }
             if (hue < 0) {
                 hue += 1;
@@ -341,7 +361,7 @@ class ColorConversion {
         return [hue, saturation, value];
     }
     round(value, decimals) {
-        return Number(Math.round(eval(value + 'e' + decimals)) + 'e-' + decimals);
+        return Number(Math.round(eval(value + "e" + decimals)) + "e-" + decimals);
     }
 }
 exports.ColorConversion = ColorConversion;

@@ -1,73 +1,127 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>JSDoc: Class: PaletteBuilder</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Color Seek Class: PaletteBuilder</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.Cerulean.css">
+
 </head>
 
 <body>
 
-<div id="main">
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Color Seek</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call.html">Parse the command line and determine which options to call</a></li><li><a href="module-Web.html">Web</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-Http.Http.html">Parse the command line and determine which options to call~Http.Http</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-PaletteColor.PaletteColor.html">Parse the command line and determine which options to call~PaletteColor.PaletteColor</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
 
-    <h1 class="page-title">Class: PaletteBuilder</h1>
-
-    
-
+</div>
+</div>
 
 
+<div class="container" id="toc-content">
+<div class="row">
 
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	<h1 class="page-title">Class: PaletteBuilder</h1>
 <section>
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>PaletteBuilder<span class="signature">(source, name)</span><span class="type-signature"></span></h2>
+        <h2>
+        PaletteBuilder
+        </h2>
         
-            <div class="class-description">Contains methods for building the color palette</div>
+            <div class="class-description"><p>Contains methods for building the color palette</p></div>
         
     
 </header>
+
 
 <article>
     <div class="container-overview">
     
         
+<hr>
+<dt>
+    <h4 class="name" id="PaletteBuilder"><span class="type-signature"></span>new PaletteBuilder(source, name)</h4>
+    
+    
+</dt>
+<dd>
 
     
-    <h2>Constructor</h2>
+    <div class="description">
+        <p>Sets the input file or url and the output file name (if provided)</p>
+    </div>
     
 
     
-    <h4 class="name" id="PaletteBuilder"><span class="type-signature"></span>new PaletteBuilder<span class="signature">(source, name)</span><span class="type-signature"></span></h4>
-    
 
     
 
-
-
-<div class="description">
-    Sets the input file or url and the output file name (if provided)
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
     
+    
+        <h5>Parameters:</h5>
+        
 
-<table class="params">
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -98,6 +152,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -105,7 +160,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>The source file/url parsed for color values</p></td>
         </tr>
 
     
@@ -121,6 +176,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -128,19 +184,24 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>The provided name for the generated output files</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
+    
 
-
-
-
-
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -150,52 +211,52 @@
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="Palette.js.html">Palette.js</a>,
+				 <a href="Palette.js.html#sunlight-1-line-38">line 38</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Palette.js.html">Palette.js</a>, <a href="Palette.js.html#line31">line 31</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
+    
+</dd>
 
     
     </div>
@@ -213,39 +274,34 @@
     
 
     
-
-    
         <h3 class="subsection-title">Methods</h3>
 
-        
+        <dl>
             
+<hr>
+<dt>
+    <h4 class="name" id="buildHtmlOutput"><span class="type-signature"></span>buildHtmlOutput(searchText)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Creates the color palette Html file</p>
+    </div>
+    
+
+    
 
     
 
     
-    <h4 class="name" id="buildHtmlOutput"><span class="type-signature"></span>buildHtmlOutput<span class="signature">(searchText)</span><span class="type-signature"></span></h4>
     
+        <h5>Parameters:</h5>
+        
 
-    
-
-
-
-<div class="description">
-    Creates the color palette Html file
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -276,6 +332,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -283,19 +340,24 @@
 
             
 
-            <td class="description last">The text to parse for colors values used to generate the color palette</td>
+            <td class="description last"><p>The text to parse for colors values</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
+    
 
-
-
-
-
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -305,82 +367,79 @@
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="Palette.js.html">Palette.js</a>,
+				 <a href="Palette.js.html#sunlight-1-line-57">line 57</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Palette.js.html">Palette.js</a>, <a href="Palette.js.html#line48">line 48</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
+    
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="getIndicesOf"><span class="type-signature"></span>getIndicesOf(searchStr, str, caseSensitive)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Finds the indexes of a search value in the provided string</p>
+    </div>
+    
+
+    
 
     
 
     
-    <h4 class="name" id="getIndicesOf"><span class="type-signature"></span>getIndicesOf<span class="signature">(searchStr, str, caseSensitive)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
     
+        <h5>Parameters:</h5>
+        
 
-    
-
-
-
-<div class="description">
-    Finds the indexes of a search value in the provided string
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -413,6 +472,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -424,7 +484,7 @@
                 </td>
             
 
-            <td class="description last">The value to search for within the given string</td>
+            <td class="description last"><p>The value to search for within the given string</p></td>
         </tr>
 
     
@@ -440,6 +500,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -451,7 +512,7 @@
                 </td>
             
 
-            <td class="description last">The string to search</td>
+            <td class="description last"><p>The string to search</p></td>
         </tr>
 
     
@@ -467,6 +528,7 @@
 <span class="param-type">boolean</span>
 
 
+
             
             </td>
 
@@ -480,19 +542,24 @@
                 </td>
             
 
-            <td class="description last">True/False for case sensitivity</td>
+            <td class="description last"><p>True/False for case sensitivity</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
+    
 
-
-
-
-
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -502,53 +569,54 @@
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="Palette.js.html">Palette.js</a>,
+				 <a href="Palette.js.html#sunlight-1-line-144">line 144</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Palette.js.html">Palette.js</a>, <a href="Palette.js.html#line122">line 122</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
-    An Array<number> containing the position indexes of the hex color values
+    <p>An Array<number> containing the position indexes of the hex color values</p>
 </div>
 
 
@@ -562,44 +630,42 @@
 <span class="param-type">Array.&lt;number></span>
 
 
+
     </dd>
 </dl>
 
+
+        
+
     
-
-
-
-
+</dd>
 
         
             
+<hr>
+<dt>
+    <h4 class="name" id="parseHexColors"><span class="type-signature"></span>parseHexColors(searchText)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Finds hex color values (ex: #FFFFFF) in current search text</p>
+    </div>
+    
+
+    
 
     
 
     
-    <h4 class="name" id="parseHexColors"><span class="type-signature"></span>parseHexColors<span class="signature">(searchText)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
     
+        <h5>Parameters:</h5>
+        
 
-    
-
-
-
-<div class="description">
-    Finds hex color values (#FFFFFF) in current search text
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -630,6 +696,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -637,19 +704,24 @@
 
             
 
-            <td class="description last">The text to parse</td>
+            <td class="description last"><p>The text to parse</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
+    
 
-
-
-
-
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -659,53 +731,54 @@
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="Palette.js.html">Palette.js</a>,
+				 <a href="Palette.js.html#sunlight-1-line-107">line 107</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Palette.js.html">Palette.js</a>, <a href="Palette.js.html#line92">line 92</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
+    
+    <h5>Returns:</h5>
+    
+            
 <div class="param-desc">
-    An Array<string> containing the parsed hex colors
+    <p>An Array<string> containing the parsed hex colors</p>
 </div>
 
 
@@ -719,16 +792,17 @@
 <span class="param-type">Array.&lt;string></span>
 
 
+
     </dd>
 </dl>
 
-    
-
-
-
-
 
         
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -741,19 +815,136 @@
 
 
 
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="Http.html">Http</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li><li><a href="PaletteColor.html">PaletteColor</a></li></ul><h3>Namespaces</h3><ul><li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li><li><a href="Web.html">Web</a></li></ul><h3>Global</h3><ul><li><a href="global.html#chalk_1">chalk_1</a></li><li><a href="global.html#commands">commands</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#path">path</a></li></ul>
-</nav>
 
-<br class="clear">
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Aug 14 2018 16:18:57 GMT-0400 (Eastern Daylight Time)
+
+
+	<span class="copyright">
+	Christopher Prindle Copyright © 2018
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Aug We, 2018
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
 </body>
 </html>
