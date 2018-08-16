@@ -4,14 +4,14 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Color Seek Index</title>
+	<title>Color Seek Home Index</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
-	<link type="text/css" rel="stylesheet" href="styles/site.Cerulean.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.Simplex.css">
 
 </head>
 
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html">Color Seek</a>
+		<a class="navbar-brand" href="index.html">Color Seek Home</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -33,21 +33,21 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li>
+					<li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li><li><a href="Web.html">Web</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call.html">Parse the command line and determine which options to call</a></li><li><a href="module-Web.html">Web</a></li>
+					<li><a href="module-colorseek.html">colorseek</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-Http.Http.html">Parse the command line and determine which options to call~Http.Http</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-PaletteColor.PaletteColor.html">Parse the command line and determine which options to call~PaletteColor.PaletteColor</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li>
+					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-colorseek-Http.Http.html">colorseek~Http.Http</a></li><li><a href="module-colorseek-PaletteColor.PaletteColor.html">colorseek~PaletteColor.PaletteColor</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li>
 				</ul>
 			</li>
 			
@@ -100,7 +100,7 @@
 
 
     <section class="readme-section">
-        <article><h1>Color Seek - Version 1.0</h1><h2>Overview</h2><p><strong>Color Seek</strong> allows you to build a color palette from an existing file or Url. The specified file path or Url is<br>opened and parsed for valid CSS color values. The resulting list of color values is formatted &amp; sorted with duplicates<br>removed to create the <em><strong>Color Palette</strong></em>.  The palette is written to each of the specified file formats along with<br>and Html page presenting the color palette as a grid of color swatches showing all three valid Css color formats.</p>
+        <article><h1>Color Seek - Version 1.0</h1><h2>Overview</h2><p><strong>Color Seek</strong> allows you to build a color palette from an existing file or Url. The specified file path or Url is<br>opened and parsed for valid CSS color values. The resulting list of color values is formatted &amp; sorted with duplicates<br>removed to create the <em><strong>Color Palette</strong></em>.  The palette is written to each of the specified file formats along with<br>and Html page presenting the color palette as a grid of color swatches showing all three valid Css color formats in<br>addition to CMYK, a possible future addition.</p>
 <h3>CSS Color Formats</h3><p>CSS currently accepts three formats for color specification.</p>
 <table>
 <thead>
@@ -128,7 +128,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Possible CSS4 Color Formats</h3><p>Proposals exist for at least two additional formats in CSS4. One, proposed as 'HSB', is also known as HSV and is<br>referred to as such in this application. The other, CMYK, is well known outside of CSS and has many years of use.</p>
+<h3>Possible CSS4 Color Formats</h3><p>Proposals exist for additional color formats in CSS4. One, CMYK, is well known outside of CSS and has many years of<br>use in printing and graphic design. Therefore, we've decided to add it as a bit of future-proofing.</p>
 <table>
 <thead>
 <tr>
@@ -143,13 +143,9 @@
 <td><code>cmyk(100, 25, 50, 75)</code></td>
 <td>Range of Cyan, Magenta, Yellow, Black (0-100)</td>
 </tr>
-<tr>
-<td>HSV</td>
-<td><code>hsv(359, 25, 100)</code></td>
-<td>Range for Hue (0-359), Saturation (0-100), Value (0-100)</td>
-</tr>
 </tbody>
 </table>
+<h4>Named Colors</h4><p>Another naming convention for color values is a <em>named color</em>. There are currently 140 color names available ranging<br>from <em>black</em> to white. Color Seek looks for named colors and converts them to hexadecimal. The value is ignored if<br>the hexadecimal already exists.</p>
 <h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Css along with Sass and Less, the two most popular<br>stylesheet extension formats, are output options Less An HTML version is generated automatically.</p>
 <h4>File Formats</h4><p>Each of the formats below can be generated when creating a palette.</p>
 <table>
@@ -173,8 +169,56 @@
 <td><em>Less Style Sheet</em></td>
 </tr>
 <tr>
-<td>SASS</td>
+<td>SCSS</td>
 <td><em>Sass Style Sheet</em></td>
+</tr>
+</tbody>
+</table>
+<h2>Using Color Seek</h2><h3>Command Line</h3><p>All interaction with Color Seek is through the Command Line Interface (CLI). All valid commands and switches are<br>available via the help display.</p>
+<h4>Help</h4><p>Typing 'colorseek -h' or 'colorseek --help' displays the command listings.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c, --parse-css</td>
+<td>Flag indicating css files will be searched when parsing a web page</td>
+</tr>
+<tr>
+<td>-o, --output [DIRECTORY]</td>
+<td>The directory where the output file will be created</td>
+</tr>
+<tr>
+<td>-n, --name</td>
+<td>The name to use when creating the output files (No extension)</td>
+</tr>
+<tr>
+<td>-i, --input [FILE_PATH] or [URL]</td>
+<td>The source file or html page to parse for color values</td>
+</tr>
+<tr>
+<td>--css</td>
+<td>Create a CSS version of the color palette</td>
+</tr>
+<tr>
+<td>--gimp</td>
+<td>Create a GPL (Gimp PaletteBuilder file) version of the color palette</td>
+</tr>
+<tr>
+<td>--html</td>
+<td>Create a HTML version of the color palette</td>
+</tr>
+<tr>
+<td>--less</td>
+<td>Create a LESS version of the color palette</td>
+</tr>
+<tr>
+<td>--scss</td>
+<td>Create a SASS version of the color palette</td>
 </tr>
 </tbody>
 </table></article>
@@ -227,7 +271,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Aug We, 2018
+		on Aug Th, 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

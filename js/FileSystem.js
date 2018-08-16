@@ -39,6 +39,11 @@ var FileSystem;
      * @property {string} outputName  - The provided name for the generated output files
     */
     class FileAccess {
+        /**
+         * @constructor
+         * @param source
+         * @param name
+         */
         constructor(source, name) {
             if (source) {
                 this.inputSource = source;
@@ -49,6 +54,7 @@ var FileSystem;
         }
         /**
          * Reads a file and sends the text to be parsed for color values
+         * @public
          * @function
         */
         readFile() {

@@ -1,9 +1,10 @@
 /**
  * Contains classes pertaining to the web
- * @module
+ * @namespace
  */
 export declare namespace Web {
     /**
+     * public
      * @class
      * @classdesc Provides access to HTML and/or CSS files to parse for color values
      */

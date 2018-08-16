@@ -29,6 +29,7 @@ const chalk_1 = require("chalk");
 class Helpers {
     /**
      * Generates a random integer
+     * @public
      * @function
      * @param min {number} - The minimum random value
      * @param max {number} - The maximum random value
@@ -39,6 +40,7 @@ class Helpers {
     }
     /**
      * Generates a random float
+     * @public
      * @function
      * @param min {number} - The minimum random value
      * @param max {number} - The maximum random value
@@ -51,6 +53,7 @@ class Helpers {
     }
     /**
      * The milliseconds since Jan, 1 1970
+     * @public
      * @function
      * @param {number} numOfDigits - Truncates the value from the end of the number
      * @returns {number} The milliseconds since Jan, 1 1970 as truncated
@@ -66,8 +69,10 @@ class Helpers {
     }
     /**
      * Outputs the provided Error object to the console
+     * @public
      * @function
-     * @param {Error} error - The error to show in the console
+     * @param {Error} error     - The error to show in the console
+     * @param {boolean} logOnly - Determines if console will write to error or log
      */
     static outputError(error, logOnly = false) {
         const err = chalk_1.default.redBright;

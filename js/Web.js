@@ -33,11 +33,12 @@ const request = require("request");
 const buffer_1 = require("buffer");
 /**
  * Contains classes pertaining to the web
- * @module
+ * @namespace
  */
 var Web;
 (function (Web) {
     /**
+     * public
      * @class
      * @classdesc Provides access to HTML and/or CSS files to parse for color values
      */

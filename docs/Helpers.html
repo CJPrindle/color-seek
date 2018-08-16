@@ -4,14 +4,14 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Color Seek Class: Helpers</title>
+	<title>Color Seek Home Class: Helpers</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
-	<link type="text/css" rel="stylesheet" href="styles/site.Cerulean.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.Simplex.css">
 
 </head>
 
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html">Color Seek</a>
+		<a class="navbar-brand" href="index.html">Color Seek Home</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -33,21 +33,21 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li>
+					<li><a href="FileSystem.html">FileSystem</a></li><li><a href="Palette.html">Palette</a></li><li><a href="Web.html">Web</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call.html">Parse the command line and determine which options to call</a></li><li><a href="module-Web.html">Web</a></li>
+					<li><a href="module-colorseek.html">colorseek</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-Http.Http.html">Parse the command line and determine which options to call~Http.Http</a></li><li><a href="module-Parse%2520the%2520command%2520line%2520and%2520determine%2520which%2520options%2520to%2520call-PaletteColor.PaletteColor.html">Parse the command line and determine which options to call~PaletteColor.PaletteColor</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li>
+					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-colorseek-Http.Http.html">colorseek~Http.Http</a></li><li><a href="module-colorseek-PaletteColor.PaletteColor.html">colorseek~PaletteColor.PaletteColor</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li>
 				</ul>
 			</li>
 			
@@ -315,7 +315,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="Helpers.js.html">Helpers.js</a>,
-				 <a href="Helpers.js.html#sunlight-1-line-58">line 58</a>
+				 <a href="Helpers.js.html#sunlight-1-line-61">line 61</a>
 			</li>
 		</ul>
 	</dd>
@@ -545,7 +545,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="Helpers.js.html">Helpers.js</a>,
-				 <a href="Helpers.js.html#sunlight-1-line-48">line 48</a>
+				 <a href="Helpers.js.html#sunlight-1-line-50">line 50</a>
 			</li>
 		</ul>
 	</dd>
@@ -745,7 +745,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="Helpers.js.html">Helpers.js</a>,
-				 <a href="Helpers.js.html#sunlight-1-line-37">line 37</a>
+				 <a href="Helpers.js.html#sunlight-1-line-38">line 38</a>
 			</li>
 		</ul>
 	</dd>
@@ -802,7 +802,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".outputError"><span class="type-signature">&lt;static> </span>outputError(error)</h4>
+    <h4 class="name" id=".outputError"><span class="type-signature">&lt;static> </span>outputError(error, logOnly)</h4>
     
     
 </dt>
@@ -835,6 +835,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -861,8 +863,42 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"><p>The error to show in the console</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>logOnly</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Determines if console will write to error or log</p></td>
         </tr>
 
     
@@ -907,7 +943,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="Helpers.js.html">Helpers.js</a>,
-				 <a href="Helpers.js.html#sunlight-1-line-72">line 72</a>
+				 <a href="Helpers.js.html#sunlight-1-line-77">line 77</a>
 			</li>
 		</ul>
 	</dd>
@@ -990,7 +1026,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Aug We, 2018
+		on Aug Th, 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

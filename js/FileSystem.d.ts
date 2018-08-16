@@ -12,9 +12,15 @@ export declare namespace FileSystem {
     class FileAccess {
         inputSource: string;
         outputName: string;
+        /**
+         * @constructor
+         * @param source
+         * @param name
+         */
         constructor(source: string, name: string);
         /**
          * Reads a file and sends the text to be parsed for color values
+         * @public
          * @function
         */
         readFile(): void;

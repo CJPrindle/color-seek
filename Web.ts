@@ -24,10 +24,11 @@ import { Buffer } from "buffer";
 
 /**
  * Contains classes pertaining to the web
- * @module
+ * @namespace
  */
 export namespace Web {
   /**
+   * public
    * @class
    * @classdesc Provides access to HTML and/or CSS files to parse for color values
    */

@@ -1,4 +1,4 @@
- /*! ***************************************************************************
+/*! ***************************************************************************
 Copyright (c) 2018 Christopher Prindle. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
@@ -23,19 +23,19 @@ IN THE SOFTWARE.
  * @class 
  * @classdesc Represents all valid console switches
 */
-  export class Command {
-    /** The valid switch for this command */
-    Argument: string;
-    /** A description of the command */
-    Description: string;
+export class Command {
+   /** The valid switch for this command */
+   public Argument: string;
+   /** A description of the command */
+   public Description: string;
 
-    /**
-     * Sets the commands for the application
-     * @param argument - The valid switch value(s) for this command
-     * @param description - A description of the command
-    */
-    constructor(argument, description) {
-       this.Argument = argument;
-       this.Description = description;
-    }
- }
+   /**
+    * Sets the commands for the application
+    * @param argument - The valid switch value(s) for this command
+    * @param description - A description of the command
+   */
+   constructor(argument, description) {
+      this.Argument = argument;
+      this.Description = description;
+   }
+}

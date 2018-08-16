@@ -28,6 +28,7 @@ import chalk from "chalk";
 export class Helpers {
   /**
    * Generates a random integer
+   * @public
    * @function
    * @param min {number} - The minimum random value
    * @param max {number} - The maximum random value
@@ -39,13 +40,14 @@ export class Helpers {
 
   /**
    * Generates a random float
+   * @public
    * @function
    * @param min {number} - The minimum random value
    * @param max {number} - The maximum random value
    * @param places {number} - The maximum number of decimal places
    * @returns {number} A float within the specified range
    */
-  static getRandomDecimal(
+   public static getRandomDecimal(
     min: number = 1,
     max: number = 100,
     places = 2
@@ -57,11 +59,12 @@ export class Helpers {
 
   /**
    * The milliseconds since Jan, 1 1970
+   * @public
    * @function
    * @param {number} numOfDigits - Truncates the value from the end of the number
    * @returns {number} The milliseconds since Jan, 1 1970 as truncated
    */
-  static getMilliseconds(numOfDigits: number = 0): number {
+   public static getMilliseconds(numOfDigits: number = 0): number {
     let mSecs: number = new Date().valueOf();
     const mLen = mSecs.toString().length;
 
@@ -75,10 +78,12 @@ export class Helpers {
 
   /**
    * Outputs the provided Error object to the console
+   * @public
    * @function
-   * @param {Error} error - The error to show in the console
+   * @param {Error} error     - The error to show in the console
+   * @param {boolean} logOnly - Determines if console will write to error or log
    */
-  static outputError(error: Error, logOnly: boolean = false): void {
+   public static outputError(error: Error, logOnly: boolean = false): void {
    const err = chalk.redBright;
 
      if(!logOnly) {

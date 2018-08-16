@@ -35,17 +35,16 @@ IN THE SOFTWARE.
 *                  - HTML (Web Page)
 *                  - LESS (Less Style Sheet)
 *                  - SCSS (Sass Style Sheet)
-*
+* @fileOverview - EntryPoint
 **************************************************************************** */
+/// <reference path="./Command.ts" />
 /// <reference path="./FileSystem.ts" />
 /// <reference path="./Palette.ts" />
 /// <reference path="./Web.ts" />
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Module Entry
+ * Color Seek entry point
  * @module
- *
- * Parse the command line and determine which options to call
  */
 const chalk_1 = require("chalk");
 const minimist2 = require("minimist2");
@@ -54,6 +53,11 @@ const Web_1 = require("./Web");
 const Helpers_1 = require("./Helpers");
 const Palette_1 = require("./Palette");
 const Command_1 = require("./Command");
+/**
+ *  Abstracts the console.log method
+ *  @constant
+ *  @type {}
+ * */
 const log = console.log;
 const logerr = console.error;
 const exit = process.exit;
@@ -67,7 +71,9 @@ const PaletteColor = Palette_1.Palette.PaletteColor;
 const args = (minimist2)(process.argv.slice(2));
 /**
  * Creates all Console switches and commands
- * @instance
+ * @constant
+ * @type {Command[]}
+ * @default
  */
 const commands = [
     new Command_1.Command('-c, --parse-css                 ', 'Flag indicating css files will be searched when parsing a web page'),
@@ -82,18 +88,24 @@ const commands = [
 ];
 /**
  * The file path or url specified on the command line (-i or --input)
- * @member {string}
+ * @constant
+ * @type {string}
+ * @default
  */
 const path = (args.i) ? args.i : args.input;
 /**
  * The name to use when creating the color palette output files (-n or --name)
- * @member {string}
+ * @constant
+ * @type {string}
+ * @inner
+ * @default
  */
 const name = (args.n) ? args.n : args.name;
 //- Enter the matrix
 main();
 /**
-  * Entry function for the application
+  * Entry function for Color Seek
+  * @public
   * @function
  */
 function main() {
@@ -122,21 +134,24 @@ function main() {
 }
 /**
  * Handles the html data sent from Web~Html~getUrlData
+ * @public
+ * @function
  * @callback htmlTextHandler
  * @param data
  */
 function htmlTextHandler(data) {
     new PaletteBuilder(path, name).buildHtmlOutput(data);
 }
+/*
+ * Print the CLI command list for Color Seek
+ * @public
+ * @function
+*/
 function printHelp() {
     log(infoBold('\nUsage: node colorseek [OPTIONS]\n'));
     commands.forEach((c) => log(info(' ' + c.Argument + '\t' + c.Description)));
     log(warning('\nIf no output type is specified then only a [DIRECTORY]/[NAME].html file will be created.'));
     log(warning('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --html).'));
-    exit();
-}
-function showError(ex, params) {
-    logerr(error(`ERROR: ${ex.message}`), chalk_1.default.redBright(params));
     exit();
 }
 //# sourceMappingURL=colorseek.js.map

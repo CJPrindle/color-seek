@@ -31,7 +31,6 @@ const PaletteBuilder = Palette.PaletteBuilder;
   * @namespace
  */
 export namespace FileSystem {
-
    /**
     * @class 
     * @classdesc Provides file read and write functionality
@@ -39,9 +38,14 @@ export namespace FileSystem {
     * @property {string} outputName  - The provided name for the generated output files
    */
    export class FileAccess {
-      inputSource: string;
-      outputName: string;
+      public inputSource: string;
+      public outputName: string;
 
+      /**
+       * @constructor
+       * @param source
+       * @param name
+       */
       constructor(source: string, name: string) {
          if(source) {
             this.inputSource = source;
@@ -54,6 +58,7 @@ export namespace FileSystem {
 
       /**
        * Reads a file and sends the text to be parsed for color values
+       * @public
        * @function
       */
       public readFile(): void {
@@ -62,7 +67,7 @@ export namespace FileSystem {
             let buffer: Buffer;
 
             const palette = new PaletteBuilder(this.inputSource, this.outputName);
-            
+
             if(fs.existsSync(this.inputSource)) {
                var readStream = fs.createReadStream(this.inputSource)
                   .on('data', (chunk) => {

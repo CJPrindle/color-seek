@@ -1,3 +1,4 @@
+/// <reference path="Command.d.ts" />
 /// <reference path="FileSystem.d.ts" />
 /// <reference path="Palette.d.ts" />
 /// <reference path="Web.d.ts" />

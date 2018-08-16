@@ -3,14 +3,17 @@
  * @namespace
  */
 export declare namespace Palette {
+    let namedColors: {
+        key: string;
+        value: string;
+    }[];
     /**
+     * @public
      * @class
      * @classdesc Contains methods for building the color palette
      */
     class PaletteBuilder {
-        /** The input file path or Url */
         inputSource: string;
-        /** The output file name */
         outputName: string;
         paletteColors: PaletteColor[];
         /**

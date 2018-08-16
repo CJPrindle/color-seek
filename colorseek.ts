@@ -18,7 +18,7 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
-******************************************************************************/ 
+******************************************************************************/
 /* ***************************************************************************
 * @author      Christopher Prindle
 * @version     1.0
@@ -34,17 +34,16 @@ IN THE SOFTWARE.
 *                  - HTML (Web Page)
 *                  - LESS (Less Style Sheet)
 *                  - SCSS (Sass Style Sheet)
-*              
+* @fileOverview - EntryPoint
 **************************************************************************** */
+/// <reference path="./Command.ts" />
 /// <reference path="./FileSystem.ts" />
 /// <reference path="./Palette.ts" />
 /// <reference path="./Web.ts" />
 
 /**
- * Module Entry
+ * Color Seek entry point
  * @module
- * 
- * Parse the command line and determine which options to call
  */
 import chalk from 'chalk';
 import * as minimist2 from 'minimist2';
@@ -54,6 +53,11 @@ import { Helpers } from './Helpers';
 import { Palette } from './Palette';
 import { Command } from './Command';
 
+/** 
+ *  Abstracts the console.log method
+ *  @constant
+ *  @type {}
+ * */
 const log = console.log;
 const logerr = console.error;
 const exit = process.exit;
@@ -68,7 +72,9 @@ const args = (minimist2)(process.argv.slice(2));
 
 /** 
  * Creates all Console switches and commands
- * @instance 
+ * @constant
+ * @type {Command[]}
+ * @default 
  */
 const commands: Command[] = [
    new Command('-c, --parse-css                 ', 'Flag indicating css files will be searched when parsing a web page'),
@@ -84,12 +90,18 @@ const commands: Command[] = [
 
 /** 
  * The file path or url specified on the command line (-i or --input)
- * @member {string} 
+ * @constant 
+ * @type {string} 
+ * @default
  */
 const path: string = (args.i) ? args.i : args.input;
-/** 
+
+/**
  * The name to use when creating the color palette output files (-n or --name)
- * @member {string} 
+ * @constant
+ * @type {string}
+ * @inner
+ * @default
  */
 const name: string = (args.n) ? args.n : args.name;
 
@@ -97,7 +109,8 @@ const name: string = (args.n) ? args.n : args.name;
 main();
 
 /**
-  * Entry function for the application
+  * Entry function for Color Seek
+  * @public
   * @function
  */
 function main() {
@@ -124,6 +137,8 @@ function main() {
 
 /**
  * Handles the html data sent from Web~Html~getUrlData
+ * @public
+ * @function
  * @callback htmlTextHandler 
  * @param data
  */
@@ -131,15 +146,15 @@ function htmlTextHandler(data: string): void {
    new PaletteBuilder(path, name).buildHtmlOutput(data);
 }
 
+/*
+ * Print the CLI command list for Color Seek
+ * @public
+ * @function 
+*/
 function printHelp() {
    log(infoBold('\nUsage: node colorseek [OPTIONS]\n'));
    commands.forEach((c) => log(info(' ' + c.Argument + '\t' + c.Description)));
    log(warning('\nIf no output type is specified then only a [DIRECTORY]/[NAME].html file will be created.'));
    log(warning('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --html).'));
-   exit();
-}
-
-function showError(ex: Error, params: any) {
-   logerr(error(`ERROR: ${ex.message}`), chalk.redBright(params));
    exit();
 }
