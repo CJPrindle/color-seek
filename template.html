@@ -4,7 +4,7 @@
     <title>Color Seek - Color Palette</title>
     <style>
         * {
-            color: #e5e5e5;
+            color: #999;
             font-family: 'Open Sans', 'Helvetica Neue', 'Lucida Grande', 'Segoe UI', sans-serif;
             font-size: 12px;
         }
@@ -32,66 +32,62 @@
         }
 
         .container {
-            background-color: #111;
+            background-color: #757575;
             display: flex;
             flex-wrap: wrap;
             margin-top: 10px;
             position: relative;
         }
 
-        .box {
-            position: relative;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-            display: inline-grid;
-            border-collapse: collapse;
-            background-color: #333;
-            border-radius: 2px;
-            border: 1px solid #999;
-            margin: 1px;
-            padding: 2px;
-        }
-
         .thumbnail {
-            border-radius: 4px;
-            margin: 2px;
-            display: block;
+            display: inline-grid;
+            border-radius: 10px;
+            margin: 6px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
-            width: 196px;
-            height: 196px;
-            border: 1px solid #eee;
+            width: 160px;
+            height: 160px;
             text-align: center;
         }
 
+
         .header {
-            color: #232323;
-            display: inline-grid;
-            padding: 5px;
             position: relative;
             text-align: left;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid #777;
-            border-left-width: 0;
-            border-top-width: 0;
+            width: 70%;
+            height: 75px;
+            border-radius: 0 0 4px 4px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .header div {
+            font-family: 'Source Code Pro', 'Courier Prime Code', Cousine, Inconsolata, 'Global Monospace', monospace;
+            font-size: 11px;
         }
 
         .left {
             position: absolute;
             left: 0;
-            top: 0;
+            top: 5px;
             bottom: 0;
-            right: 50%;
+        }
+
+        .left div {
+            font-weight: bold
         }
 
         .right {
             position: absolute;
             right: 0;
-            top: 0;
+            top: 5px;
             bottom: 0;
-            left: 50%;
+            text-align: right;
         }
 
         .colorseek {
-            text-shadow: 2px 2px 4px #16D998;
+            text-shadow: 1px 1px 2px #1688D9;
         }
     </style>
 </head>

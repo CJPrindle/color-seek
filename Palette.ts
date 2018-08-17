@@ -23,7 +23,6 @@ import * as fs from "fs";
 import * as opn from "opn";
 import { Helpers } from "./Helpers";
 import { ColorConversion } from "./ColorConversion";
-import { lchmod } from "fs";
 
 /**
  * Contains classes related to the parsing of provided data

@@ -101,6 +101,7 @@
 
     <section class="readme-section">
         <article><h1>Color Seek - Version 1.0</h1><h2>Overview</h2><p><strong>Color Seek</strong> allows you to build a color palette from an existing file or Url. The specified file path or Url is<br>opened and parsed for valid CSS color values. The resulting list of color values is formatted &amp; sorted with duplicates<br>removed to create the <em><strong>Color Palette</strong></em>.  The palette is written to each of the specified file formats along with<br>and Html page presenting the color palette as a grid of color swatches showing all three valid Css color formats in<br>addition to CMYK, a possible future addition.</p>
+<hr>
 <h3>CSS Color Formats</h3><p>CSS currently accepts three formats for color specification.</p>
 <table>
 <thead>
@@ -128,7 +129,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Possible CSS4 Color Formats</h3><p>Proposals exist for additional color formats in CSS4. One, CMYK, is well known outside of CSS and has many years of<br>use in printing and graphic design. Therefore, we've decided to add it as a bit of future-proofing.</p>
+<h4>Possible CSS4 Color Formats</h4><p>Proposals exist for additional color formats in CSS4. One, <em>CMYK</em>, is well known outside of CSS and has many years of<br>use  printing and graphic design. Therefore, we've decided to add it as a bit of future-proofing.</p>
 <table>
 <thead>
 <tr>
@@ -145,7 +146,7 @@
 </tr>
 </tbody>
 </table>
-<h4>Named Colors</h4><p>Another naming convention for color values is a <em>named color</em>. There are currently 140 color names available ranging<br>from <em>black</em> to white. Color Seek looks for named colors and converts them to hexadecimal. The value is ignored if<br>the hexadecimal already exists.</p>
+<h4>Named Colors</h4><p>Another naming convention for color values is a <em>named color</em>. There are currently 140 color names available ranging<br>from <em>black</em> to white. <strong>Color Seek</strong> looks for named colors and converts them to hexadecimal. The value is ignored if<br>the hexadecimal value already exists.</p>
 <h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Css along with Sass and Less, the two most popular<br>stylesheet extension formats, are output options Less An HTML version is generated automatically.</p>
 <h4>File Formats</h4><p>Each of the formats below can be generated when creating a palette.</p>
 <table>
@@ -174,8 +175,9 @@
 </tr>
 </tbody>
 </table>
-<h2>Using Color Seek</h2><h3>Command Line</h3><p>All interaction with Color Seek is through the Command Line Interface (CLI). All valid commands and switches are<br>available via the help display.</p>
-<h4>Help</h4><p>Typing 'colorseek -h' or 'colorseek --help' displays the command listings.</p>
+<hr>
+<h2>Using Color Seek</h2><h3>Command Line</h3><p>All interaction with <strong>Color Seek</strong> is through the Command Line Interface (CLI). All valid commands and switches are<br>available via the help display.</p>
+<h4>Help</h4><p>Typing 'colorseek -h' or 'colorseek --help' displays the command listing:</p>
 <table>
 <thead>
 <tr>
@@ -185,43 +187,40 @@
 </thead>
 <tbody>
 <tr>
-<td>-c, --parse-css</td>
-<td>Flag indicating css files will be searched when parsing a web page</td>
+<td>-i, --input [PATH] <em><strong>required</strong></em></td>
+<td>The source file or url to search for color values</td>
 </tr>
 <tr>
 <td>-o, --output [DIRECTORY]</td>
-<td>The directory where the output file will be created</td>
+<td>The output file(s) directory</td>
 </tr>
 <tr>
 <td>-n, --name</td>
-<td>The name to use when creating the output files (No extension)</td>
-</tr>
-<tr>
-<td>-i, --input [FILE_PATH] or [URL]</td>
-<td>The source file or html page to parse for color values</td>
+<td>The output file(s) name (no extension)</td>
 </tr>
 <tr>
 <td>--css</td>
-<td>Create a CSS version of the color palette</td>
+<td>Create a Css rendering of the color palette</td>
 </tr>
 <tr>
-<td>--gimp</td>
-<td>Create a GPL (Gimp PaletteBuilder file) version of the color palette</td>
-</tr>
-<tr>
-<td>--html</td>
-<td>Create a HTML version of the color palette</td>
+<td>--gpl</td>
+<td>Create a Gimp Palette rendering of the color palette</td>
 </tr>
 <tr>
 <td>--less</td>
-<td>Create a LESS version of the color palette</td>
+<td>Create a Less rendering of the color palette</td>
 </tr>
 <tr>
 <td>--scss</td>
-<td>Create a SASS version of the color palette</td>
+<td>Create a Sass rendering of the color palette</td>
 </tr>
 </tbody>
-</table></article>
+</table>
+<p>When no output directory is specified the current directory will to used. If no output name is specified the input file<br>name will be used.</p>
+<p>All output file types can be rendered or, if desired, none. An Html file displaying each color as a swatch (card) is<br><em>always</em> created and shown upon success.</p>
+<h3>Examples</h3><p>The following command line examples provide a thorough demonstration of <strong>Color Seek</strong> functionality.</p>
+<pre class="prettyprint source"><code>x:~$ colorseek -i ~/json/dracula.json -n Dracula --scss</code></pre><p>This palette was based on a popular text editor theme. No output directory, output name, or file renditions was<br>specified.The result a Html page only as shown:</p>
+<p><img src="../images/dracula-palette.png" alt="Dracula Color Palette"></p></article>
     </section>
 
 

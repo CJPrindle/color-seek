@@ -77,15 +77,13 @@ const args = (minimist2)(process.argv.slice(2));
  * @default 
  */
 const commands: Command[] = [
-   new Command('-c, --parse-css                 ', 'Flag indicating css files will be searched when parsing a web page'),
-   new Command('-o, --output [DIRECTORY]        ', 'The directory where the output file will be created'),
-   new Command('-n, --name                      ', 'The name to use when creating the output files (No extension)'),
-   new Command('-i, --input [FILE_PATH] or [URL]', 'The source file or html page to parse for color values'),
-   new Command('--css                           ', 'Create a CSS version of the color palette'),
-   new Command('--gimp                          ', 'Create a GPL (Gimp PaletteBuilder file) version of the color palette'),
-   new Command('--html                          ', 'Create a HTML version of the color palette'),
-   new Command('--less                          ', 'Create a LESS version of the color palette'),
-   new Command('--scss                          ', 'Create a SASS version of the color palette'),
+   new Command('-i, --input [PATH] _**required','The source file or url to search for color values   '),
+   new Command('-o, --output [DIRECTORY]      ','The output file(s) directory                        '),
+   new Command('-n, --name                    ','The output file(s) name (no extension)              '),
+   new Command('--css                         ','Create a Css rendering of the color palette         '),
+   new Command('--gpl                         ','Create a Gimp Palette rendering of the color palette'),
+   new Command('--less                        ','Create a Less rendering of the color palette        '),
+   new Command('--scss                        ','Create a Sass rendering of the color palette        ')
 ];
 
 /** 
