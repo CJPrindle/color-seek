@@ -23,7 +23,6 @@ import * as fs from "fs";
 import * as opn from "opn";
 import { Helpers } from "./Helpers";
 import { ColorConversion } from "./ColorConversion";
-import { close } from "fs";
 
 /**
  * Contains classes related to the parsing of provided data
@@ -31,430 +30,442 @@ import { close } from "fs";
  */
 export namespace Palette {
 
-   /**
-    * @constant
-    * */
-   export const namedColors = [
-      { key: "Black", value: "#000000" },
-      { key: "Navy", value: "#000080" },
-      { key: "DarkBlue", value: "#00008B" },
-      { key: "MediumBlue", value: "#0000CD" },
-      { key: "Blue", value: "#0000FF" },
-      { key: "DarkGreen", value: "#006400" },
-      { key: "Green", value: "#008000" },
-      { key: "Teal", value: "#008080" },
-      { key: "DarkCyan", value: "#008B8B" },
-      { key: "DeepskyBlue", value: "#00BFFF" },
-      { key: "DarkTurquoise", value: "#00CED1" },
-      { key: "MediumspringGreen", value: "#00FA9A" },
-      { key: "Lime", value: "#00FF00" },
-      { key: "SpringGreen", value: "#00FF7F" },
-      { key: "Aqua", value: "#00FFFF" },
-      { key: "Cyan", value: "#00FFFF" },
-      { key: "MidnightBlue", value: "#191970" },
-      { key: "DodgerBlue", value: "#1E90FF" },
-      { key: "LightseaGreen", value: "#20B2AA" },
-      { key: "ForestGreen", value: "#228B22" },
-      { key: "SeaGreen", value: "#2E8B57" },
-      { key: "DarkSlateGray", value: "#2F4F4F" },
-      { key: "LimeGreen", value: "#32CD32" },
-      { key: "MediumseaGreen", value: "#3CB371" },
-      { key: "Turquoise", value: "#40E0D0" },
-      { key: "RoyalBlue", value: "#4169E1" },
-      { key: "SteelBlue", value: "#4682B4" },
-      { key: "DarkSlateBlue", value: "#483D8B" },
-      { key: "MediumTurquoise", value: "#48D1CC" },
-      { key: "Indigo", value: "#4B0082" },
-      { key: "DarkOliveGreen", value: "#556B2F" },
-      { key: "CadetBlue", value: "#5F9EA0" },
-      { key: "CornflowerBlue", value: "#6495ED" },
-      { key: "MediumAquamarine", value: "#66CDAA" },
-      { key: "DimGray", value: "#696969" },
-      { key: "SlateBlue", value: "#6A5ACD" },
-      { key: "OliveDrab", value: "#6B8E23" },
-      { key: "SlateGray", value: "#708090" },
-      { key: "LightSlateGray", value: "#778899" },
-      { key: "MediumSlateBlue", value: "#7B68EE" },
-      { key: "LawnGreen", value: "#7CFC00" },
-      { key: "Chartreuse", value: "#7FFF00" },
-      { key: "Aquamarine", value: "#7FFFD4" },
-      { key: "Maroon", value: "#800000" },
-      { key: "Purple", value: "#800080" },
-      { key: "Olive", value: "#808000" },
-      { key: "SkyBlue", value: "#87CEEB" },
-      { key: "LightskyBlue", value: "#87CEFA" },
-      { key: "BlueViolet", value: "#8A2BE2" },
-      { key: "DarkRed", value: "#8B0000" },
-      { key: "DarkMagenta", value: "#8B008B" },
-      { key: "SaddleBrown", value: "#8B4513" },
-      { key: "DarkseaGreen", value: "#8FBC8F" },
-      { key: "LightGreen", value: "#90EE90" },
-      { key: "MediumPurple", value: "#9370DB" },
-      { key: "DarkViolet", value: "#9400D3" },
-      { key: "PaleGreen", value: "#98FB98" },
-      { key: "DarkOrchid", value: "#9932CC" },
-      { key: "YellowGreen", value: "#9ACD32" },
-      { key: "Sienna", value: "#A0522D" },
-      { key: "Brown", value: "#A52A2A" },
-      { key: "DarkGray", value: "#A9A9A9" },
-      { key: "LightBlue", value: "#ADD8E6" },
-      { key: "GreenYellow", value: "#ADFF2F" },
-      { key: "PaleTurquoise", value: "#AFEEEE" },
-      { key: "LightsteelBlue", value: "#B0C4DE" },
-      { key: "PowderBlue", value: "#B0E0E6" },
-      { key: "Firebrick", value: "#B22222" },
-      { key: "DarkGoldenrod", value: "#B8860B" },
-      { key: "MediumOrchid", value: "#BA55D3" },
-      { key: "RosyBrown", value: "#BC8F8F" },
-      { key: "DarkKhaki", value: "#BDB76B" },
-      { key: "Gray", value: "#BEBEBE" },
-      { key: "Silver", value: "#C0C0C0" },
-      { key: "MediumVioletRed", value: "#C71585" },
-      { key: "IndianRed", value: "#CD5C5C" },
-      { key: "Peru", value: "#CD853F" },
-      { key: "Chocolate", value: "#D2691E" },
-      { key: "Tan", value: "#D2B48C" },
-      { key: "LightGrey", value: "#D3D3D3" },
-      { key: "Thistle", value: "#D8BFD8" },
-      { key: "Orchid", value: "#DA70D6" },
-      { key: "Goldenrod", value: "#DAA520" },
-      { key: "PaleVioletRed", value: "#DB7093" },
-      { key: "Crimson", value: "#DC143C" },
-      { key: "Gainsboro", value: "#DCDCDC" },
-      { key: "Plum", value: "#DDA0DD" },
-      { key: "Burlywood", value: "#DEB887" },
-      { key: "LightCyan", value: "#E0FFFF" },
-      { key: "Lavender", value: "#E6E6FA" },
-      { key: "DarkSalmon", value: "#E9967A" },
-      { key: "Violet", value: "#EE82EE" },
-      { key: "PaleGoldenrod", value: "#EEE8AA" },
-      { key: "LightCoral", value: "#F08080" },
-      { key: "Khaki", value: "#F0D58C" },
-      { key: "AliceBlue", value: "#F0F8FF" },
-      { key: "Honeydew", value: "#F0FFF0" },
-      { key: "Azure", value: "#F0FFFF" },
-      { key: "SandyBrown", value: "#F4A460" },
-      { key: "Wheat", value: "#F5DEB3" },
-      { key: "Beige", value: "#F5F5DC" },
-      { key: "WhiteSmoke", value: "#F5F5F5" },
-      { key: "MintCream", value: "#F5FFFA" },
-      { key: "GhostWhite", value: "#F8F8FF" },
-      { key: "Salmon", value: "#FA8072" },
-      { key: "AntiqueWhite", value: "#FAEBD7" },
-      { key: "Linen", value: "#FAF0E6" },
-      { key: "LightGoldenrodYellow", value: "#FAFAD2" },
-      { key: "OldLace", value: "#FDF5E6" },
-      { key: "Red", value: "#FF0000" },
-      { key: "Fuchsia", value: "#FF00FF" },
-      { key: "Magenta", value: "#FF00FF" },
-      { key: "DeepPink", value: "#FF1493" },
-      { key: "OrangeRed", value: "#FF4500" },
-      { key: "Tomato", value: "#FF6347" },
-      { key: "HotPink", value: "#FF69B4" },
-      { key: "Coral", value: "#FF7F50" },
-      { key: "DarkOrange", value: "#FF8C00" },
-      { key: "LightSalmon", value: "#FFA07A" },
-      { key: "Orange", value: "#FFA500" },
-      { key: "LightPink", value: "#FFB6C1" },
-      { key: "Pink", value: "#FFC0CB" },
-      { key: "Gold", value: "#FFD700" },
-      { key: "PeachPuff", value: "#FFDAB9" },
-      { key: "NavajoWhite", value: "#FFDEAD" },
-      { key: "Moccasin", value: "#FFE4B5" },
-      { key: "Bisque", value: "#FFE4C4" },
-      { key: "Mistyrose", value: "#FFE4E1" },
-      { key: "BlanchedAlmond", value: "#FFEBCD" },
-      { key: "PapayaWhip", value: "#FFEFD5" },
-      { key: "LavenderBlush", value: "#FFF0F5" },
-      { key: "Seashell", value: "#FFF5EE" },
-      { key: "Cornsilk", value: "#FFF8DC" },
-      { key: "LemonChiffon", value: "#FFFACD" },
-      { key: "FloralWhite", value: "#FFFAF0" },
-      { key: "Snow", value: "#FFFAFA" },
-      { key: "Yellow", value: "#FFFF00" },
-      { key: "LightYellow", value: "#FFFFE0" },
-      { key: "Ivory", value: "#FFFFF0" },
-      { key: "White", value: "#FFFFFF" },
-   ];
+  /**
+   * @constant
+   * */
+  export const namedColors = [
+    { key: "Black", value: "#000000" },
+    { key: "Navy", value: "#000080" },
+    { key: "DarkBlue", value: "#00008B" },
+    { key: "MediumBlue", value: "#0000CD" },
+    { key: "Blue", value: "#0000FF" },
+    { key: "DarkGreen", value: "#006400" },
+    { key: "Green", value: "#008000" },
+    { key: "Teal", value: "#008080" },
+    { key: "DarkCyan", value: "#008B8B" },
+    { key: "DeepSkyBlue", value: "#00BFFF" },
+    { key: "DarkTurquoise", value: "#00CED1" },
+    { key: "MediumSpringGreen", value: "#00FA9A" },
+    { key: "Lime", value: "#00FF00" },
+    { key: "SpringGreen", value: "#00FF7F" },
+    { key: "Aqua", value: "#00FFFF" },
+    { key: "Cyan", value: "#00FFFF" },
+    { key: "MidnightBlue", value: "#191970" },
+    { key: "DodgerBlue", value: "#1E90FF" },
+    { key: "LightSeaGreen", value: "#20B2AA" },
+    { key: "ForestGreen", value: "#228B22" },
+    { key: "SeaGreen", value: "#2E8B57" },
+    { key: "DarkSlateGray", value: "#2F4F4F" },
+    { key: "LimeGreen", value: "#32CD32" },
+    { key: "MediumSeaGreen", value: "#3CB371" },
+    { key: "Turquoise", value: "#40E0D0" },
+    { key: "RoyalBlue", value: "#4169E1" },
+    { key: "SteelBlue", value: "#4682B4" },
+    { key: "DarkSlateBlue", value: "#483D8B" },
+    { key: "MediumTurquoise", value: "#48D1CC" },
+    { key: "Indigo", value: "#4B0082" },
+    { key: "DarkOliveGreen", value: "#556B2F" },
+    { key: "CadetBlue", value: "#5F9EA0" },
+    { key: "CornflowerBlue", value: "#6495ED" },
+    { key: "MediumAquamarine", value: "#66CDAA" },
+    { key: "DimGray", value: "#696969" },
+    { key: "SlateBlue", value: "#6A5ACD" },
+    { key: "OliveDrab", value: "#6B8E23" },
+    { key: "SlateGray", value: "#708090" },
+    { key: "LightSlateGray", value: "#778899" },
+    { key: "MediumSlateBlue", value: "#7B68EE" },
+    { key: "LawnGreen", value: "#7CFC00" },
+    { key: "Chartreuse", value: "#7FFF00" },
+    { key: "Aquamarine", value: "#7FFFD4" },
+    { key: "Maroon", value: "#800000" },
+    { key: "Purple", value: "#800080" },
+    { key: "Olive", value: "#808000" },
+    { key: "SkyBlue", value: "#87CEEB" },
+    { key: "LightSkyBlue", value: "#87CEFA" },
+    { key: "BlueViolet", value: "#8A2BE2" },
+    { key: "DarkRed", value: "#8B0000" },
+    { key: "DarkMagenta", value: "#8B008B" },
+    { key: "SaddleBrown", value: "#8B4513" },
+    { key: "DarkSeaGreen", value: "#8FBC8F" },
+    { key: "LightGreen", value: "#90EE90" },
+    { key: "MediumPurple", value: "#9370DB" },
+    { key: "DarkViolet", value: "#9400D3" },
+    { key: "PaleGreen", value: "#98FB98" },
+    { key: "DarkOrchid", value: "#9932CC" },
+    { key: "YellowGreen", value: "#9ACD32" },
+    { key: "Sienna", value: "#A0522D" },
+    { key: "Brown", value: "#A52A2A" },
+    { key: "DarkGray", value: "#A9A9A9" },
+    { key: "LightBlue", value: "#ADD8E6" },
+    { key: "GreenYellow", value: "#ADFF2F" },
+    { key: "PaleTurquoise", value: "#AFEEEE" },
+    { key: "LightSteelBlue", value: "#B0C4DE" },
+    { key: "PowderBlue", value: "#B0E0E6" },
+    { key: "Firebrick", value: "#B22222" },
+    { key: "DarkGoldenrod", value: "#B8860B" },
+    { key: "MediumOrchid", value: "#BA55D3" },
+    { key: "RosyBrown", value: "#BC8F8F" },
+    { key: "DarkKhaki", value: "#BDB76B" },
+    { key: "Gray", value: "#BEBEBE" },
+    { key: "Silver", value: "#C0C0C0" },
+    { key: "MediumVioletRed", value: "#C71585" },
+    { key: "IndianRed", value: "#CD5C5C" },
+    { key: "Peru", value: "#CD853F" },
+    { key: "Chocolate", value: "#D2691E" },
+    { key: "Tan", value: "#D2B48C" },
+    { key: "LightGrey", value: "#D3D3D3" },
+    { key: "Thistle", value: "#D8BFD8" },
+    { key: "Orchid", value: "#DA70D6" },
+    { key: "Goldenrod", value: "#DAA520" },
+    { key: "PaleVioletRed", value: "#DB7093" },
+    { key: "Crimson", value: "#DC143C" },
+    { key: "Gainsboro", value: "#DCDCDC" },
+    { key: "Plum", value: "#DDA0DD" },
+    { key: "Burlywood", value: "#DEB887" },
+    { key: "LightCyan", value: "#E0FFFF" },
+    { key: "Lavender", value: "#E6E6FA" },
+    { key: "DarkSalmon", value: "#E9967A" },
+    { key: "Violet", value: "#EE82EE" },
+    { key: "PaleGoldenrod", value: "#EEE8AA" },
+    { key: "LightCoral", value: "#F08080" },
+    { key: "Khaki", value: "#F0D58C" },
+    { key: "AliceBlue", value: "#F0F8FF" },
+    { key: "Honeydew", value: "#F0FFF0" },
+    { key: "Azure", value: "#F0FFFF" },
+    { key: "SandyBrown", value: "#F4A460" },
+    { key: "Wheat", value: "#F5DEB3" },
+    { key: "Beige", value: "#F5F5DC" },
+    { key: "WhiteSmoke", value: "#F5F5F5" },
+    { key: "MintCream", value: "#F5FFFA" },
+    { key: "GhostWhite", value: "#F8F8FF" },
+    { key: "Salmon", value: "#FA8072" },
+    { key: "AntiqueWhite", value: "#FAEBD7" },
+    { key: "Linen", value: "#FAF0E6" },
+    { key: "LightGoldenrodYellow", value: "#FAFAD2" },
+    { key: "OldLace", value: "#FDF5E6" },
+    { key: "Red", value: "#FF0000" },
+    { key: "Fuchsia", value: "#FF00FF" },
+    { key: "Magenta", value: "#FF00FF" },
+    { key: "DeepPink", value: "#FF1493" },
+    { key: "OrangeRed", value: "#FF4500" },
+    { key: "Tomato", value: "#FF6347" },
+    { key: "HotPink", value: "#FF69B4" },
+    { key: "Coral", value: "#FF7F50" },
+    { key: "DarkOrange", value: "#FF8C00" },
+    { key: "LightSalmon", value: "#FFA07A" },
+    { key: "Orange", value: "#FFA500" },
+    { key: "LightPink", value: "#FFB6C1" },
+    { key: "Pink", value: "#FFC0CB" },
+    { key: "Gold", value: "#FFD700" },
+    { key: "PeachPuff", value: "#FFDAB9" },
+    { key: "NavajoWhite", value: "#FFDEAD" },
+    { key: "Moccasin", value: "#FFE4B5" },
+    { key: "Bisque", value: "#FFE4C4" },
+    { key: "MistyRose", value: "#FFE4E1" },
+    { key: "BlanchedAlmond", value: "#FFEBCD" },
+    { key: "PapayaWhip", value: "#FFEFD5" },
+    { key: "LavenderBlush", value: "#FFF0F5" },
+    { key: "Seashell", value: "#FFF5EE" },
+    { key: "CornSilk", value: "#FFF8DC" },
+    { key: "LemonChiffon", value: "#FFFACD" },
+    { key: "FloralWhite", value: "#FFFAF0" },
+    { key: "Snow", value: "#FFFAFA" },
+    { key: "Yellow", value: "#FFFF00" },
+    { key: "LightYellow", value: "#FFFFE0" },
+    { key: "Ivory", value: "#FFFFF0" },
+    { key: "White", value: "#FFFFFF" },
+  ];
 
-   /**
-    * @public
-    * @class
-    * @classdesc Contains methods for building the color palette
-    */
-   export class PaletteBuilder {
-      public inputSource: string; /** The input file path or Url */
-      public outputName: string;  /** The output file name */
-      public hueColors: PaletteColor[] = [];
-      public grayColors: PaletteColor[] = [];
+  /**
+   * @public
+   * @class
+   * @classdesc Contains methods for building the color palette
+   */
+  export class PaletteBuilder {
+    public inputSource: string; /** The input file path or Url */
+    public outputName: string;  /** The output file name */
+    public totalColors: number /** The total number of colors created */
+    public hueColors: PaletteColor[] = []; /** Contains all Hue based colors */
+    public grayColors: PaletteColor[] = []; /** Contains all gray based colors */
 
-      /**
-       * Sets the input file or url and the output file name (if provided)
-       * @constructor
-       * @param {string} source - The source file/url parsed for color values
-       * @param {string} name   - The provided name for the generated output files
-       */
-      constructor(source: string, name: string) {
-         this.inputSource = source ? source : "N/A";
-         this.outputName = name
-            ? name
-            : `Color Seek - ${Helpers.getMilliseconds(6)}`;
+    /**
+     * Sets the input file or url and the output file name (if provided)
+     * @constructor
+     * @param {string} source - The source file/url parsed for color values
+     * @param {string} name   - The provided name for the generated output files
+     */
+    constructor(source: string, name: string) {
+      this.inputSource = source ? source : "N/A";
+      this.outputName = name
+        ? name
+        : `Color Seek - ${Helpers.getMilliseconds(6)}`;
+    }
+
+    /**
+     * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
+     * @function
+     * @param {string} SearchText - The text to parse for colors values
+     */
+    public buildHtmlOutput(SearchText: string): void {
+      try {
+        let hexColors = this.parseHexColors(SearchText);
+        this.totalColors = hexColors.length;
+
+        //- Map each hex color into a PaletteColor object
+        hexColors.map((h: string, i: number, a: string[]) => {
+          let pColor = new PaletteColor();
+          pColor.createColorFormats(h.valueOf());
+          this.hueColors.push(pColor);
+        });
+
+        //- The cold fact is this: "Gray-ish" colors do not play nice when sorting by Hue.
+        //- To remedy, remove the 'Grays', sort by Hue, then add 'Grays' at the end sorted by 
+        //- luminosity (light => dark).
+        //- Find 'Grays' in hueColors
+        this.hueColors.map((h, i, a) => {
+          //- Get the Red hi-low range 
+          let pct = ((h.RGB[0] * .05));
+
+          const redMin = h.Red - pct;
+          const redMax = h.Red + pct;
+          const isG = Helpers.between(redMin, redMax, h.Green);
+          const isB = Helpers.between(redMin, redMax, h.Blue);
+
+          if (isG && isB) {
+            this.grayColors.push(h);
+          }
+        });
+
+        //- Remove the Gray colors from the Hue array
+        this.hueColors = this.hueColors.filter((el) => !this.grayColors.includes(el));
+
+        //- Sort by Hue
+        this.hueColors.sort((a, b) => {
+          return (b.Hue) - (a.Hue);
+        });
+
+        //- Sort Grays by Luminosity (light to dark)
+        this.grayColors.sort((a, b) => {
+          return (a.Luminosity) - (b.Luminosity);
+        });
+
+        //- Open the template Html file
+        let html = fs.readFileSync("template.html").toString();
+
+        const fileName = `${this.outputName
+          .trim()
+          .replace(new RegExp(" ", "g"), "")}.html`;
+        
+        //- Write color information into placeholders
+        html = html
+          .replace("{name}", this.outputName)
+          .replace("{source}", this.inputSource)
+          .replace("{total_colors}", this.totalColors.toString())
+          .replace("{hue_colors}", this.createThumbnails(this.hueColors))
+          .replace("{gray_colors}", this.createThumbnails(this.grayColors));
+
+        //- Write out Html palette and open in browser
+        fs.writeFileSync(fileName, html.toString());
+        opn(fileName);
+      } catch (e) {
+        Helpers.outputError(e);
+      }
+    }
+
+    /**
+     * Generates the color palettes as Html
+     * @private
+     * @function
+     * @param {Array<PaletteColor>} paletteColors - An array of PaletteColor objects
+     */
+    private createThumbnails(paletteColors: Array<PaletteColor>): string {
+      let thumbnails = "";
+
+      paletteColors.forEach((pc) => {
+
+        //- Based on the current Light value (part of HSL), 
+        //- determine the offset Light value for the text color.
+        let pcl = pc.Light;
+
+        //TODO: Clean up this formula
+        if (pcl <= 10) {
+          pcl = 35;
+        } else if (pcl <= 25) {
+          pcl = 45;
+        } else if (pcl <= 40) {
+          pcl = pcl + 25;
+        } else if (pcl <= 70) {
+          pcl = pcl - 30;
+        } else {
+          pcl = pcl - 40;
+        }
+
+        //- Set the text on the color swatch either brighter or dimmer for readability
+        let textLight = pcl;
+        let textHSL = `hsl(${pc.Hue},${pc.Saturation}%,${textLight}%);`;
+
+        let thumbnail = `
+          <div class="thumbnail" 
+                style="background-color:${pc.Hex};
+                      border: 1px solid ${textHSL}">
+              <div class="header">
+                <div class="left">
+                  <div style="color:${textHSL}">HEX</div>
+                  <div style="color:${textHSL}">RGB</div>
+                  <div style="color:${textHSL}">HSL</div>
+                  <div style="color:${textHSL}">CMYK</div>
+                </div>
+                <div class="right">
+                    <div style="color:${textHSL}">${pc.Hex}</div>
+                    <div style="color:${textHSL}">${pc.RGB}</div>
+                    <div style="color:${textHSL}">${pc.HSL}</div>
+                    <div style="color:${textHSL}">${pc.CMYK}</div>
+                </div>
+            </div>
+          </div>\n`;
+
+        thumbnails += thumbnail;
+      });
+
+      return thumbnails;
+    }
+
+    /**
+     * Finds hex color values (ex: #FFFFFF) in current Search text
+     * @function
+     * @param {string} SearchText - The text to parse
+     * @returns {string[]} An Array<string> containing the parsed hex colors
+     */
+    private parseHexColors(SearchText: string): string[] {
+      let hexColors: string[] = [];
+
+      //- Find all '#' positions (start of hex color value)
+      const SearchAreas = this.getIndicesOf("#", SearchText, false);
+
+      for (let x = 0; x < SearchAreas.length; x++) {
+        try {
+          //- Get Search range
+          const str = SearchAreas[x] + 1;
+          const end = SearchAreas[x] + 7;
+
+          //- Check for valid hex value
+          let hexColor = SearchText.substring(str, end);
+
+          //- Convert any three letter hex value to six letters
+          if (hexColor[0] == hexColor[1] && hexColor[1] == hexColor[2]) {
+            hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
+          }
+
+          //- Add to color array if valid
+          if (parseInt(hexColor, 16).toString() != "NaN") {
+            hexColors.push("#" + hexColor);
+          }
+        } catch (e) {
+          Helpers.outputError(e, true);
+        }
       }
 
-      /**
-       * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
-       * @function
-       * @param {string} searchText - The text to parse for colors values
-       */
-      public buildHtmlOutput(searchText: string): void {
-         try {
-            let hexColors = this.parseHexColors(searchText);
+      return [
+        ...new Set(hexColors.map(hc => hc.valueOf().toUpperCase()).sort())
+      ];
+    }
 
-            //- Map each hex color into a PaletteColor object
-            hexColors.map((h: string, i: number, a: string[]) => {
-               let pColor = new PaletteColor();
-               pColor.createColorFormats(h.valueOf());
-               this.hueColors.push(pColor);
-            });
+    /**
+     * Finds the indexes of a Search value in the provided string
+     * @function
+     * @param {string} SearchStr - The value to Search for within the given string
+     * @param {string} str - The string to Search
+     * @param {boolean} caseSensitive - True/False for case sensitivity
+     * @returns {number[]} An Array<number> containing the position indexes of the hex color values
+     */
+    private getIndicesOf(
+      SearchStr: string,
+      str: string,
+      caseSensitive: boolean = true
+    ): Array<number> {
+      const SearchStrLen = SearchStr.length;
 
-            //- The cold fact is this: "Gray-ish" colors do not play nice when sorting by Hue.
-            //- To remedy, remove the 'Grays', sort by Hue, then add 'Grays' at the end sorted by 
-            //- luminosity (light => dark).
-            //- Find 'Grays' in hueColors
-
-            this.hueColors.map((h, i, a) => {
-               //- Get the Red hi-low range (+- 10%)
-               const pct = h.RGB[0] * .1;
-               const isG = Helpers.between(h.Red - pct, h.Red + pct, h.Green);
-               const isB = Helpers.between(h.Red - pct, h.Red + pct, h.Blue);
-
-               if(isG && isB) {
-                  this.grayColors.push(h);
-               }
-            });
-            
-            this.hueColors = this.hueColors.filter((el) => !this.grayColors.includes(el));
-
-            //- Sort by 'Luminosity' property. Not ideal but better than Hue
-            //this.hueColors.sort((a, b) => {
-            //   return (b.Luminosity) - (a.Luminosity);
-            //});
-
-            //- Sort by Hue
-            this.hueColors.sort((a, b) => {
-               return (b.Hue) - (a.Hue);
-            });
-
-            let html = fs.readFileSync("template.html").toString();
-
-            const fileName = `${this.outputName
-               .trim()
-               .replace(new RegExp(" ", "g"), "")}.html`;
-
-            html = html
-               .replace("{name}", this.outputName)
-               .replace("{source}", this.inputSource)
-               .replace("{hue_colors}", this.createThumbnails(this.hueColors))
-               .replace("{gray_colors}", this.createThumbnails(this.grayColors));
-
-            fs.writeFileSync(fileName, html.toString());
-            opn(fileName);
-         } catch(e) {
-            Helpers.outputError(e);
-         }
+      if (SearchStrLen === 0) {
+        return [];
       }
 
-      /**
-       * Generates the color palettes as Html
-       * @private
-       * @function
-       * @param {Array<PaletteColor>} paletteColors - An array of PaletteColor objects
-       */
-      private createThumbnails(paletteColors): string {
-         let thumbnails = "";
+      let startIndex = 0;
+      let index = 0;
+      let indices = [];
 
-         paletteColors.forEach((pc) => {
-
-            //- Based on the current Light value (part of HSL), 
-            //- determine the offset Light value for the text color.
-            let pcl = pc.Light;
-
-            if(pcl <= 10) {
-               pcl = 35;
-            } else if(pcl <= 25) {
-               pcl = 45;
-            } else if(pcl <= 40) {
-               pcl = pcl + 25;
-            } else if(pcl <= 70) {
-               pcl = pcl - 30;
-            } else {
-               pcl = pcl - 40;
-            }
-
-            //- Set the text on the color swatch either brighter or dimmer for readability
-            let textLight = pcl;
-            let textHSL = `hsl(${pc.Hue},${pc.Saturation}%,${textLight}%);`;
-
-            let thumbnail = `
-                  <div class="thumbnail" 
-                       style="background-color:${pc.Hex};
-                              border: 1px solid ${textHSL}">
-                     <div class="header">
-                        <div class="left">
-                          <div style="color:${textHSL}">HEX</div>
-                          <div style="color:${textHSL}">RGB</div>
-                          <div style="color:${textHSL}">HSL</div>
-                          <div style="color:${textHSL}">CMYK</div>
-                        </div>
-                        <div class="right">
-                           <div style="color:${textHSL}">${pc.Hex}</div>
-                           <div style="color:${textHSL}">${pc.RGB}</div>
-                           <div style="color:${textHSL}">${pc.HSL}</div>
-                           <div style="color:${textHSL}">${pc.CMYK}</div>
-                        </div>
-                    </div>
-                  </div>\n`;
-
-            thumbnails += thumbnail;
-         });
-
-         return thumbnails;
+      if (!caseSensitive) {
+        str = str.toLowerCase();
+        SearchStr = SearchStr.toLowerCase();
       }
 
-      /**
-       * Finds hex color values (ex: #FFFFFF) in current search text
-       * @function
-       * @param {string} searchText - The text to parse
-       * @returns {string[]} An Array<string> containing the parsed hex colors
-       */
-      private parseHexColors(searchText: string): string[] {
-         let hexColors: string[] = [];
-
-         //- Find all '#' positions (start of hex color value)
-         const searchAreas = this.getIndicesOf("#", searchText, false);
-
-         for(let x = 0; x < searchAreas.length; x++) {
-            try {
-               //- Get search range
-               const str = searchAreas[x] + 1;
-               const end = searchAreas[x] + 7;
-
-               //- Check for valid hex value
-               let hexColor = searchText.substring(str, end);
-
-               //- Convert any three letter hex value to six letters
-               if(hexColor[0] == hexColor[1] && hexColor[1] == hexColor[2]) {
-                  hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
-               }
-
-               //- Add to color array if valid
-               if(parseInt(hexColor, 16).toString() != "NaN") {
-                  hexColors.push("#" + hexColor);
-               }
-            } catch(e) {
-               Helpers.outputError(e, true);
-            }
-         }
-
-         return [
-            ...new Set(hexColors.map(hc => hc.valueOf().toUpperCase()).sort())
-         ];
+      while ((index = str.indexOf(SearchStr, startIndex)) > -1) {
+        indices.push(index);
+        startIndex = index + SearchStrLen;
       }
 
-      /**
-       * Finds the indexes of a search value in the provided string
-       * @function
-       * @param {string} searchStr - The value to search for within the given string
-       * @param {string} str - The string to search
-       * @param {boolean} caseSensitive - True/False for case sensitivity
-       * @returns {number[]} An Array<number> containing the position indexes of the hex color values
-       */
-      private getIndicesOf(
-         searchStr: string,
-         str: string,
-         caseSensitive: boolean = true
-      ): Array<number> {
-         const searchStrLen = searchStr.length;
+      return indices;
+    }
+  }
 
-         if(searchStrLen === 0) {
-            return [];
-         }
+  /**
+   * @public
+   * @class
+   * @classdesc Contains the color formats used by the color palette
+   */
+  export class PaletteColor {
+    public CMYK: number[] = [0, 0, 0, 0];
+    public Hex: string = "";
+    public HSL: number[] = [0, 0, 0];
+    public RGB: number[] = [0, 0, 0];
 
-         let startIndex = 0;
-         let index = 0;
-         let indices = [];
+    public Red: number = 0;
+    public Green: number = 0;
+    public Blue: number = 0;
+    public Luminosity: number = 0; //- RGB derived
 
-         if(!caseSensitive) {
-            str = str.toLowerCase();
-            searchStr = searchStr.toLowerCase();
-         }
+    public Hue: number = 0;
+    public Saturation: number = 0;
+    public Light: number = 0;
 
-         while((index = str.indexOf(searchStr, startIndex)) > -1) {
-            indices.push(index);
-            startIndex = index + searchStrLen;
-         }
+    public Cyan: number = 0;
+    public Magenta: number = 0;
+    public Yellow: number = 0;
+    public Black: number = 0;
 
-         return indices;
+    /**
+     * @constructor
+     */
+    constructor() { }
+
+    /**
+     * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
+     * constituent properties of each format.
+     * @param hexValue
+     */
+    public createColorFormats(hexValue: string): void {
+      if (RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) { //- Valid Hexadecimal
+
+        const ColorConvert = new ColorConversion();
+
+        this.Hex = hexValue;
+
+        //- Assign RGB and the individual properties
+        this.RGB = ColorConvert.HexToRgb(hexValue.substring(1));
+        [this.Red, this.Green, this.Blue] = this.RGB;
+
+        //- Assign CMYK and the individual properties
+        this.CMYK = ColorConvert.RgbToCmyk(this.Red, this.Green, this.Blue);
+        [this.Cyan, this.Magenta, this.Yellow, this.Black] = this.CMYK;
+
+        //- Assign HSL and the individual properties
+        this.HSL = ColorConvert.RgbToHsl(this.Red, this.Green, this.Blue);
+        [this.Hue, this.Saturation, this.Light] = this.HSL;
+
+        //- Create Luminosity. The magic numbers correspond to how the human eye perceives RGB
+        this.Luminosity = Math.sqrt(.241 * this.Red + .691 * this.Green + .068 * this.Blue);
+      } else {
+        Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));
       }
-   }
-
-   /**
-    * @public
-    * @class
-    * @classdesc Contains the color formats used by the color palette
-    */
-   export class PaletteColor {
-      public CMYK: number[] = [0, 0, 0, 0];
-      public Hex: string = "";
-      public HSL: number[] = [0, 0, 0];
-      public RGB: number[] = [0, 0, 0];
-
-      public Red: number = 0;
-      public Green: number = 0;
-      public Blue: number = 0;
-      public Luminosity: number = 0; //- RGB derived
-
-      public Hue: number = 0;
-      public Saturation: number = 0;
-      public Light: number = 0;
-
-      public Cyan: number = 0;
-      public Magenta: number = 0;
-      public Yellow: number = 0;
-      public Black: number = 0;
-
-      /**
-       * @constructor
-       */
-      constructor() { }
-
-      /**
-       * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
-       * constituent properties of each format.
-       * @param hexValue
-       */
-      public createColorFormats(hexValue: string): void {
-         if(RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) { //- Valid Hexadecimal
-
-            const ColorConvert = new ColorConversion();
-
-            this.Hex = hexValue;
-
-            this.RGB = ColorConvert.HexToRgb(hexValue.substring(1));
-            [this.Red, this.Green, this.Blue] = this.RGB;
-
-            this.CMYK = ColorConvert.RgbToCmyk(this.Red, this.Green, this.Blue);
-            [this.Cyan, this.Magenta, this.Yellow, this.Black] = this.CMYK;
-
-            this.HSL = ColorConvert.RgbToHsl(this.Red, this.Green, this.Blue);
-            [this.Hue, this.Saturation, this.Light] = this.HSL;
-
-            //- The magic numbers correspond to how the human eye perceives RGB
-            this.Luminosity = Math.sqrt(.241 * this.Red + .691 * this.Green + .068 * this.Blue);
-
-         } else {
-            Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));
-         }
-      }
-   }
+    }
+  }
 }

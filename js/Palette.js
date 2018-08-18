@@ -216,18 +216,18 @@ var Palette;
                 //- Find 'Grays' in hueColors
                 this.hueColors.map((h, i, a) => {
                     //- Get the Red hi-low range (+- 10%)
-                    const pct = h.RGB[0] * .1;
-                    const isG = Helpers_1.Helpers.between(h.Red - pct, h.Red + pct, h.Green);
-                    const isB = Helpers_1.Helpers.between(h.Red - pct, h.Red + pct, h.Blue);
+                    let pct = ((h.RGB[0] * .1)) < 5
+                        ? 5
+                        : (h.RGB[0] * .1);
+                    const redMin = h.Red - pct;
+                    const redMax = h.Red + pct;
+                    const isG = Helpers_1.Helpers.between(redMin, redMax, h.Green);
+                    const isB = Helpers_1.Helpers.between(redMin, redMax, h.Blue);
                     if (isG && isB) {
                         this.grayColors.push(h);
                     }
                 });
                 this.hueColors = this.hueColors.filter((el) => !this.grayColors.includes(el));
-                //- Sort by 'Luminosity' property. Not ideal but better than Hue
-                //this.hueColors.sort((a, b) => {
-                //   return (b.Luminosity) - (a.Luminosity);
-                //});
                 //- Sort by Hue
                 this.hueColors.sort((a, b) => {
                     return (b.Hue) - (a.Hue);
