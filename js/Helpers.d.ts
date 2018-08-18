@@ -4,6 +4,17 @@
  */
 export declare class Helpers {
     /**
+     * Determines if value is in a given range
+     * @public
+     * @function
+     * @param {number} val - The value to test for between
+     * @param {number} min - The minimum for the range
+     * @param {number} max  - The maximum for the range
+     * @returns {boolean} True if the value is within the given range,
+     *                    otherwise False
+     */
+    static between(min: number, max: number, val: number): boolean;
+    /**
      * Generates a random integer
      * @public
      * @function

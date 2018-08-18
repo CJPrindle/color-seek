@@ -8,6 +8,8 @@ removed to create the _**Color Palette**_.  The palette is written to each of th
 and Html page presenting the color palette as a grid of color swatches showing all three valid Css color formats in
 addition to CMYK, a possible future addition.
 
+
+![Halcyon Full](images/halcyon-full.png)
 ---
 
 ### CSS Color Formats ###
@@ -58,22 +60,24 @@ Each of the formats below can be generated when creating a palette.
 
 ### Command Line ###
 
-All interaction with **Color Seek** is through the Command Line Interface (CLI). All valid commands and switches are 
-available via the help display.
+All interaction with **Color Seek** is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.
 
 #### Help ####
 
 Typing 'colorseek -h' or 'colorseek --help' displays the command listing:
+| Command                 | Description                                          |
+|-------------------------|------------------------------------------------------|
+| -i, --input [PATH]      | *The source file or url to search for color values   |
+| -o, --output [DIRECTORY]| The output file(s) directory                         |
+| -n, --name              | The output file(s) name (no extension)               |
+| --css                   | Create a Css rendering of the color palette          |
+| --gpl                   | Create a Gimp Palette rendering of the color palette |
+| --less                  | Create a Less rendering of the color palette         |
+| --scss                  | Create a Sass rendering of the color palette         |
 
-| Command                           | Description                                          |
-|------------------------------------------------------------------------------------------|
-| -i, --input [PATH] _**required**_ | The source file or url to search for color values    |
-| -o, --output [DIRECTORY]          | The output file(s) directory                         |
-| -n, --name                        | The output file(s) name (no extension)               |
-| --css                             | Create a Css rendering of the color palette          |
-| --gpl                             | Create a Gimp Palette rendering of the color palette |
-| --less                            | Create a Less rendering of the color palette         |
-| --scss                            | Create a Sass rendering of the color palette         |
+***Required**
+
+---
 
 When no output directory is specified the current directory will to used. If no output name is specified the input file
 name will be used.
@@ -85,11 +89,11 @@ _always_ created and shown upon success.
 
 The following command line examples provide a thorough demonstration of **Color Seek** functionality.
 
+    x:~$ colorseek -i ~/json/dracula.json -n Dracula
 
-    x:~$ colorseek -i ~/json/dracula.json -n Dracula --scss
+This palette is based on a popular text editor theme. The Json file was exported from a text editor and then imported into **Color Seek**.
 
+![Dracula Json and Html File](images/dracula-all.png)
 
-This palette is based on a popular text editor theme. No output directory, output name, or file renditions was
-specified.The result a Html page only as shown:
-
-![Dracula Color Palette]('../images/dracula-palette.png')
+In this example no output directory, output name, or file renditions was
+specified. Therefore, only a Html page displaying the unique colors found the the Json file is created.

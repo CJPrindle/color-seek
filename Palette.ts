@@ -23,6 +23,7 @@ import * as fs from "fs";
 import * as opn from "opn";
 import { Helpers } from "./Helpers";
 import { ColorConversion } from "./ColorConversion";
+import { close } from "fs";
 
 /**
  * Contains classes related to the parsing of provided data
@@ -30,145 +31,148 @@ import { ColorConversion } from "./ColorConversion";
  */
 export namespace Palette {
 
-   export let namedColors = [
+   /**
+    * @constant
+    * */
+   export const namedColors = [
       { key: "Black", value: "#000000" },
       { key: "Navy", value: "#000080" },
-      { key: "Darkblue", value: "#00008B" },
-      { key: "Mediumblue", value: "#0000CD" },
+      { key: "DarkBlue", value: "#00008B" },
+      { key: "MediumBlue", value: "#0000CD" },
       { key: "Blue", value: "#0000FF" },
-      { key: "Darkgreen", value: "#006400" },
+      { key: "DarkGreen", value: "#006400" },
       { key: "Green", value: "#008000" },
       { key: "Teal", value: "#008080" },
-      { key: "Darkcyan", value: "#008B8B" },
-      { key: "Deepskyblue", value: "#00BFFF" },
-      { key: "Darkturquoise", value: "#00CED1" },
-      { key: "Mediumspringgreen", value: "#00FA9A" },
+      { key: "DarkCyan", value: "#008B8B" },
+      { key: "DeepskyBlue", value: "#00BFFF" },
+      { key: "DarkTurquoise", value: "#00CED1" },
+      { key: "MediumspringGreen", value: "#00FA9A" },
       { key: "Lime", value: "#00FF00" },
-      { key: "Springgreen", value: "#00FF7F" },
+      { key: "SpringGreen", value: "#00FF7F" },
       { key: "Aqua", value: "#00FFFF" },
       { key: "Cyan", value: "#00FFFF" },
-      { key: "Midnightblue", value: "#191970" },
-      { key: "Dodgerblue", value: "#1E90FF" },
-      { key: "Lightseagreen", value: "#20B2AA" },
-      { key: "Forestgreen", value: "#228B22" },
-      { key: "Seagreen", value: "#2E8B57" },
-      { key: "Darkslategray", value: "#2F4F4F" },
-      { key: "Limegreen", value: "#32CD32" },
-      { key: "Mediumseagreen", value: "#3CB371" },
+      { key: "MidnightBlue", value: "#191970" },
+      { key: "DodgerBlue", value: "#1E90FF" },
+      { key: "LightseaGreen", value: "#20B2AA" },
+      { key: "ForestGreen", value: "#228B22" },
+      { key: "SeaGreen", value: "#2E8B57" },
+      { key: "DarkSlateGray", value: "#2F4F4F" },
+      { key: "LimeGreen", value: "#32CD32" },
+      { key: "MediumseaGreen", value: "#3CB371" },
       { key: "Turquoise", value: "#40E0D0" },
-      { key: "Royalblue", value: "#4169E1" },
-      { key: "Steelblue", value: "#4682B4" },
-      { key: "Darkslateblue", value: "#483D8B" },
-      { key: "Mediumturquoise", value: "#48D1CC" },
+      { key: "RoyalBlue", value: "#4169E1" },
+      { key: "SteelBlue", value: "#4682B4" },
+      { key: "DarkSlateBlue", value: "#483D8B" },
+      { key: "MediumTurquoise", value: "#48D1CC" },
       { key: "Indigo", value: "#4B0082" },
-      { key: "Darkolivegreen", value: "#556B2F" },
-      { key: "Cadetblue", value: "#5F9EA0" },
-      { key: "Cornflowerblue", value: "#6495ED" },
-      { key: "Mediumaquamarine", value: "#66CDAA" },
-      { key: "Dimgray", value: "#696969" },
-      { key: "Slateblue", value: "#6A5ACD" },
-      { key: "Olivedrab", value: "#6B8E23" },
-      { key: "Slategray", value: "#708090" },
-      { key: "Lightslategray", value: "#778899" },
-      { key: "Mediumslateblue", value: "#7B68EE" },
-      { key: "Lawngreen", value: "#7CFC00" },
+      { key: "DarkOliveGreen", value: "#556B2F" },
+      { key: "CadetBlue", value: "#5F9EA0" },
+      { key: "CornflowerBlue", value: "#6495ED" },
+      { key: "MediumAquamarine", value: "#66CDAA" },
+      { key: "DimGray", value: "#696969" },
+      { key: "SlateBlue", value: "#6A5ACD" },
+      { key: "OliveDrab", value: "#6B8E23" },
+      { key: "SlateGray", value: "#708090" },
+      { key: "LightSlateGray", value: "#778899" },
+      { key: "MediumSlateBlue", value: "#7B68EE" },
+      { key: "LawnGreen", value: "#7CFC00" },
       { key: "Chartreuse", value: "#7FFF00" },
       { key: "Aquamarine", value: "#7FFFD4" },
       { key: "Maroon", value: "#800000" },
       { key: "Purple", value: "#800080" },
       { key: "Olive", value: "#808000" },
-      { key: "Skyblue", value: "#87CEEB" },
-      { key: "Lightskyblue", value: "#87CEFA" },
-      { key: "Blueviolet", value: "#8A2BE2" },
-      { key: "Darkred", value: "#8B0000" },
-      { key: "Darkmagenta", value: "#8B008B" },
-      { key: "Saddlebrown", value: "#8B4513" },
-      { key: "Darkseagreen", value: "#8FBC8F" },
-      { key: "Lightgreen", value: "#90EE90" },
-      { key: "Mediumpurple", value: "#9370DB" },
-      { key: "Darkviolet", value: "#9400D3" },
-      { key: "Palegreen", value: "#98FB98" },
-      { key: "Darkorchid", value: "#9932CC" },
-      { key: "Yellowgreen", value: "#9ACD32" },
+      { key: "SkyBlue", value: "#87CEEB" },
+      { key: "LightskyBlue", value: "#87CEFA" },
+      { key: "BlueViolet", value: "#8A2BE2" },
+      { key: "DarkRed", value: "#8B0000" },
+      { key: "DarkMagenta", value: "#8B008B" },
+      { key: "SaddleBrown", value: "#8B4513" },
+      { key: "DarkseaGreen", value: "#8FBC8F" },
+      { key: "LightGreen", value: "#90EE90" },
+      { key: "MediumPurple", value: "#9370DB" },
+      { key: "DarkViolet", value: "#9400D3" },
+      { key: "PaleGreen", value: "#98FB98" },
+      { key: "DarkOrchid", value: "#9932CC" },
+      { key: "YellowGreen", value: "#9ACD32" },
       { key: "Sienna", value: "#A0522D" },
       { key: "Brown", value: "#A52A2A" },
-      { key: "Darkgray", value: "#A9A9A9" },
-      { key: "Lightblue", value: "#ADD8E6" },
-      { key: "Greenyellow", value: "#ADFF2F" },
-      { key: "Paleturquoise", value: "#AFEEEE" },
-      { key: "Lightsteelblue", value: "#B0C4DE" },
-      { key: "Powderblue", value: "#B0E0E6" },
+      { key: "DarkGray", value: "#A9A9A9" },
+      { key: "LightBlue", value: "#ADD8E6" },
+      { key: "GreenYellow", value: "#ADFF2F" },
+      { key: "PaleTurquoise", value: "#AFEEEE" },
+      { key: "LightsteelBlue", value: "#B0C4DE" },
+      { key: "PowderBlue", value: "#B0E0E6" },
       { key: "Firebrick", value: "#B22222" },
-      { key: "Darkgoldenrod", value: "#B8860B" },
-      { key: "Mediumorchid", value: "#BA55D3" },
-      { key: "Rosybrown", value: "#BC8F8F" },
-      { key: "Darkkhaki", value: "#BDB76B" },
+      { key: "DarkGoldenrod", value: "#B8860B" },
+      { key: "MediumOrchid", value: "#BA55D3" },
+      { key: "RosyBrown", value: "#BC8F8F" },
+      { key: "DarkKhaki", value: "#BDB76B" },
       { key: "Gray", value: "#BEBEBE" },
       { key: "Silver", value: "#C0C0C0" },
-      { key: "Mediumvioletred", value: "#C71585" },
-      { key: "Indianred", value: "#CD5C5C" },
+      { key: "MediumVioletRed", value: "#C71585" },
+      { key: "IndianRed", value: "#CD5C5C" },
       { key: "Peru", value: "#CD853F" },
       { key: "Chocolate", value: "#D2691E" },
       { key: "Tan", value: "#D2B48C" },
-      { key: "Lightgrey", value: "#D3D3D3" },
+      { key: "LightGrey", value: "#D3D3D3" },
       { key: "Thistle", value: "#D8BFD8" },
       { key: "Orchid", value: "#DA70D6" },
       { key: "Goldenrod", value: "#DAA520" },
-      { key: "Palevioletred", value: "#DB7093" },
+      { key: "PaleVioletRed", value: "#DB7093" },
       { key: "Crimson", value: "#DC143C" },
       { key: "Gainsboro", value: "#DCDCDC" },
       { key: "Plum", value: "#DDA0DD" },
       { key: "Burlywood", value: "#DEB887" },
-      { key: "Lightcyan", value: "#E0FFFF" },
+      { key: "LightCyan", value: "#E0FFFF" },
       { key: "Lavender", value: "#E6E6FA" },
-      { key: "Darksalmon", value: "#E9967A" },
+      { key: "DarkSalmon", value: "#E9967A" },
       { key: "Violet", value: "#EE82EE" },
-      { key: "Palegoldenrod", value: "#EEE8AA" },
-      { key: "Lightcoral", value: "#F08080" },
+      { key: "PaleGoldenrod", value: "#EEE8AA" },
+      { key: "LightCoral", value: "#F08080" },
       { key: "Khaki", value: "#F0D58C" },
-      { key: "Aliceblue", value: "#F0F8FF" },
+      { key: "AliceBlue", value: "#F0F8FF" },
       { key: "Honeydew", value: "#F0FFF0" },
       { key: "Azure", value: "#F0FFFF" },
-      { key: "Sandybrown", value: "#F4A460" },
+      { key: "SandyBrown", value: "#F4A460" },
       { key: "Wheat", value: "#F5DEB3" },
       { key: "Beige", value: "#F5F5DC" },
-      { key: "Whitesmoke", value: "#F5F5F5" },
-      { key: "Mintcream", value: "#F5FFFA" },
-      { key: "Ghostwhite", value: "#F8F8FF" },
+      { key: "WhiteSmoke", value: "#F5F5F5" },
+      { key: "MintCream", value: "#F5FFFA" },
+      { key: "GhostWhite", value: "#F8F8FF" },
       { key: "Salmon", value: "#FA8072" },
-      { key: "Antiquewhite", value: "#FAEBD7" },
+      { key: "AntiqueWhite", value: "#FAEBD7" },
       { key: "Linen", value: "#FAF0E6" },
-      { key: "Lightgoldenrodyellow", value: "#FAFAD2" },
-      { key: "Oldlace", value: "#FDF5E6" },
+      { key: "LightGoldenrodYellow", value: "#FAFAD2" },
+      { key: "OldLace", value: "#FDF5E6" },
       { key: "Red", value: "#FF0000" },
       { key: "Fuchsia", value: "#FF00FF" },
       { key: "Magenta", value: "#FF00FF" },
-      { key: "Deeppink", value: "#FF1493" },
-      { key: "Orangered", value: "#FF4500" },
+      { key: "DeepPink", value: "#FF1493" },
+      { key: "OrangeRed", value: "#FF4500" },
       { key: "Tomato", value: "#FF6347" },
-      { key: "Hotpink", value: "#FF69B4" },
+      { key: "HotPink", value: "#FF69B4" },
       { key: "Coral", value: "#FF7F50" },
-      { key: "Darkorange", value: "#FF8C00" },
-      { key: "Lightsalmon", value: "#FFA07A" },
+      { key: "DarkOrange", value: "#FF8C00" },
+      { key: "LightSalmon", value: "#FFA07A" },
       { key: "Orange", value: "#FFA500" },
-      { key: "Lightpink", value: "#FFB6C1" },
+      { key: "LightPink", value: "#FFB6C1" },
       { key: "Pink", value: "#FFC0CB" },
       { key: "Gold", value: "#FFD700" },
-      { key: "Peachpuff", value: "#FFDAB9" },
-      { key: "Navajowhite", value: "#FFDEAD" },
+      { key: "PeachPuff", value: "#FFDAB9" },
+      { key: "NavajoWhite", value: "#FFDEAD" },
       { key: "Moccasin", value: "#FFE4B5" },
       { key: "Bisque", value: "#FFE4C4" },
       { key: "Mistyrose", value: "#FFE4E1" },
-      { key: "Blanchedalmond", value: "#FFEBCD" },
-      { key: "Papayawhip", value: "#FFEFD5" },
-      { key: "Lavenderblush", value: "#FFF0F5" },
+      { key: "BlanchedAlmond", value: "#FFEBCD" },
+      { key: "PapayaWhip", value: "#FFEFD5" },
+      { key: "LavenderBlush", value: "#FFF0F5" },
       { key: "Seashell", value: "#FFF5EE" },
       { key: "Cornsilk", value: "#FFF8DC" },
-      { key: "Lemonchiffon", value: "#FFFACD" },
-      { key: "Floralwhite", value: "#FFFAF0" },
+      { key: "LemonChiffon", value: "#FFFACD" },
+      { key: "FloralWhite", value: "#FFFAF0" },
       { key: "Snow", value: "#FFFAFA" },
       { key: "Yellow", value: "#FFFF00" },
-      { key: "Lightyellow", value: "#FFFFE0" },
+      { key: "LightYellow", value: "#FFFFE0" },
       { key: "Ivory", value: "#FFFFF0" },
       { key: "White", value: "#FFFFFF" },
    ];
@@ -181,7 +185,8 @@ export namespace Palette {
    export class PaletteBuilder {
       public inputSource: string; /** The input file path or Url */
       public outputName: string;  /** The output file name */
-      public paletteColors: PaletteColor[] = [];
+      public hueColors: PaletteColor[] = [];
+      public grayColors: PaletteColor[] = [];
 
       /**
        * Sets the input file or url and the output file name (if provided)
@@ -206,47 +211,91 @@ export namespace Palette {
             let hexColors = this.parseHexColors(searchText);
 
             //- Map each hex color into a PaletteColor object
-            hexColors.map((h, i, a) => {
+            hexColors.map((h: string, i: number, a: string[]) => {
                let pColor = new PaletteColor();
                pColor.createColorFormats(h.valueOf());
-               this.paletteColors.push(pColor);
+               this.hueColors.push(pColor);
             });
 
+            //- The cold fact is this: "Gray-ish" colors do not play nice when sorting by Hue.
+            //- To remedy, remove the 'Grays', sort by Hue, then add 'Grays' at the end sorted by 
+            //- luminosity (light => dark).
+            //- Find 'Grays' in hueColors
+
+            this.hueColors.map((h, i, a) => {
+               //- Get the Red hi-low range (+- 10%)
+               const pct = h.RGB[0] * .1;
+               const isG = Helpers.between(h.Red - pct, h.Red + pct, h.Green);
+               const isB = Helpers.between(h.Red - pct, h.Red + pct, h.Blue);
+
+               if(isG && isB) {
+                  this.grayColors.push(h);
+               }
+            });
+            
+            this.hueColors = this.hueColors.filter((el) => !this.grayColors.includes(el));
+
             //- Sort by 'Luminosity' property. Not ideal but better than Hue
-            this.paletteColors.sort((a, b) => {
-               return (b.Luminosity) - (a.Luminosity);
+            //this.hueColors.sort((a, b) => {
+            //   return (b.Luminosity) - (a.Luminosity);
+            //});
+
+            //- Sort by Hue
+            this.hueColors.sort((a, b) => {
+               return (b.Hue) - (a.Hue);
             });
 
             let html = fs.readFileSync("template.html").toString();
-            let thumbnails = "";
 
             const fileName = `${this.outputName
                .trim()
                .replace(new RegExp(" ", "g"), "")}.html`;
 
-            this.paletteColors.forEach((pc) => {
+            html = html
+               .replace("{name}", this.outputName)
+               .replace("{source}", this.inputSource)
+               .replace("{hue_colors}", this.createThumbnails(this.hueColors))
+               .replace("{gray_colors}", this.createThumbnails(this.grayColors));
 
-               //- Based on the current Light value (part of HSL), 
-               //- determine the offset Light value for the text color.
-               let pcl = pc.Light;
+            fs.writeFileSync(fileName, html.toString());
+            opn(fileName);
+         } catch(e) {
+            Helpers.outputError(e);
+         }
+      }
 
-               if(pcl <= 10) {
-                  pcl = 35;
-               } else if(pcl <= 25) {
-                  pcl = 45;
-               } else if(pcl <= 40) {
-                  pcl = pcl + 25;
-               } else if(pcl <= 70) {
-                  pcl = pcl - 30;
-               } else {
-                  pcl = pcl - 40;
-               }
+      /**
+       * Generates the color palettes as Html
+       * @private
+       * @function
+       * @param {Array<PaletteColor>} paletteColors - An array of PaletteColor objects
+       */
+      private createThumbnails(paletteColors): string {
+         let thumbnails = "";
 
-               //- Set the text on the color swatch either brighter or dimmer for readability
-               let textLight = pcl;
-               let textHSL = `hsl(${pc.Hue},${pc.Saturation}%,${textLight}%);`;
+         paletteColors.forEach((pc) => {
 
-               let thumbnail = `
+            //- Based on the current Light value (part of HSL), 
+            //- determine the offset Light value for the text color.
+            let pcl = pc.Light;
+
+            if(pcl <= 10) {
+               pcl = 35;
+            } else if(pcl <= 25) {
+               pcl = 45;
+            } else if(pcl <= 40) {
+               pcl = pcl + 25;
+            } else if(pcl <= 70) {
+               pcl = pcl - 30;
+            } else {
+               pcl = pcl - 40;
+            }
+
+            //- Set the text on the color swatch either brighter or dimmer for readability
+            let textLight = pcl;
+            let textHSL = `hsl(${pc.Hue},${pc.Saturation}%,${textLight}%);`;
+
+            let thumbnail = `
                   <div class="thumbnail" 
                        style="background-color:${pc.Hex};
                               border: 1px solid ${textHSL}">
@@ -266,19 +315,10 @@ export namespace Palette {
                     </div>
                   </div>\n`;
 
-               thumbnails += thumbnail;
-            });
+            thumbnails += thumbnail;
+         });
 
-            html = html
-               .replace("{name}", this.outputName)
-               .replace("{source}", this.inputSource)
-               .replace("{colors}", thumbnails);
-
-            fs.writeFileSync(fileName, html.toString());
-            opn(fileName);
-         } catch(e) {
-            Helpers.outputError(e);
-         }
+         return thumbnails;
       }
 
       /**
@@ -307,10 +347,8 @@ export namespace Palette {
                   hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
                }
 
-               const isHexColor = parseInt(hexColor, 16).toString();
-
-               //- Add  to color array
-               if(isHexColor != "NaN") {
+               //- Add to color array if valid
+               if(parseInt(hexColor, 16).toString() != "NaN") {
                   hexColors.push("#" + hexColor);
                }
             } catch(e) {
@@ -375,7 +413,6 @@ export namespace Palette {
       public Green: number = 0;
       public Blue: number = 0;
       public Luminosity: number = 0; //- RGB derived
-      public Huenosity: number = 0; //- RGB derived
 
       public Hue: number = 0;
       public Saturation: number = 0;

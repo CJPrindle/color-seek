@@ -3,7 +3,10 @@
  * @namespace
  */
 export declare namespace Palette {
-    let namedColors: {
+    /**
+     * @constant
+     * */
+    const namedColors: {
         key: string;
         value: string;
     }[];
@@ -15,7 +18,8 @@ export declare namespace Palette {
     class PaletteBuilder {
         inputSource: string;
         outputName: string;
-        paletteColors: PaletteColor[];
+        hueColors: PaletteColor[];
+        grayColors: PaletteColor[];
         /**
          * Sets the input file or url and the output file name (if provided)
          * @constructor
@@ -29,6 +33,13 @@ export declare namespace Palette {
          * @param {string} searchText - The text to parse for colors values
          */
         buildHtmlOutput(searchText: string): void;
+        /**
+         * Generates the color palettes as Html
+         * @private
+         * @function
+         * @param {Array<PaletteColor>} paletteColors - An array of PaletteColor objects
+         */
+        private createThumbnails(paletteColors);
         /**
          * Finds hex color values (ex: #FFFFFF) in current search text
          * @function
@@ -60,7 +71,6 @@ export declare namespace Palette {
         Green: number;
         Blue: number;
         Luminosity: number;
-        Huenosity: number;
         Hue: number;
         Saturation: number;
         Light: number;

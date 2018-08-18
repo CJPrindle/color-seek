@@ -28,6 +28,19 @@ const chalk_1 = require("chalk");
  */
 class Helpers {
     /**
+     * Determines if value is in a given range
+     * @public
+     * @function
+     * @param {number} val - The value to test for between
+     * @param {number} min - The minimum for the range
+     * @param {number} max  - The maximum for the range
+     * @returns {boolean} True if the value is within the given range,
+     *                    otherwise False
+     */
+    static between(min, max, val) {
+        return (val >= min && val <= max);
+    }
+    /**
      * Generates a random integer
      * @public
      * @function

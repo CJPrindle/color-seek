@@ -315,7 +315,7 @@ export class ColorConversion {
       let hue = 0;
       let saturation = 0;
       let lightness = 0;
-      let delta = 0;
+      let chroma = 0;
 
       let max = Math.max(red, green, blue);
       let min = Math.min(red, green, blue);
@@ -325,20 +325,20 @@ export class ColorConversion {
       if(max === min) {
          hue = saturation = 0;
       } else {
-         delta = max - min;
+         chroma = max - min;
 
          saturation =
-            lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+            lightness > 0.5 ? chroma / (2 - max - min) : chroma / (max + min);
 
          switch(max) {
             case red:
-               hue = (green - blue) / delta + (green < blue ? 6 : 0);
+               hue = (green - blue) / chroma + (green < blue ? 6 : 0);
                break;
             case green:
-               hue = (blue - red) / delta + 2;
+               hue = (blue - red) / chroma + 2;
                break;
             case blue:
-               hue = (red - green) / delta + 4;
+               hue = (red - green) / chroma + 4;
                break;
          }
 

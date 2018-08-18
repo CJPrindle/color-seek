@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": [ "es6", "dom" ],
+    "lib": [ "es7" ],
     "module": "commonjs",
     "noEmitOnError": true,
     "noImplicitAny": false,
@@ -9,7 +9,7 @@
     "pretty": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "es6"
+    "target": "es2018"
   },
     "exclude": [
         "node_modules"
