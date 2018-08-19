@@ -6,5 +6,5 @@ node colorseek -i ../Samples/Halcyon.json -o /c/docs/ -n Halcyon
 node colorseek -i ../Samples/MacOS.json -o /c/docs/ -n MacOS
 node colorseek -i ../Samples/Material.json -o /c/docs/ -n Material
 node colorseek -i ../Samples/OneDarkPro.json -o /c/docs/ -n OneDarkPro
-node colorseek -i ../Samples/Verdandi.json -o /c/docs/ -n Verdandi
-node colorseek -i ../Samples/VerdandiAfter.json -o /c/docs/ -n VerdaniAfter
+node colorseek -i ../Samples/Verandi.json -o /c/docs/ -n Verandi
+node colorseek -i ../Samples/VerandiAfter.json -o /c/docs/ -n VeraniAfter

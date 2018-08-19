@@ -18,6 +18,7 @@ export declare namespace Palette {
     class PaletteBuilder {
         inputSource: string;
         outputName: string;
+        totalColors: number;
         hueColors: PaletteColor[];
         grayColors: PaletteColor[];
         /**
@@ -30,9 +31,9 @@ export declare namespace Palette {
         /**
          * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
          * @function
-         * @param {string} searchText - The text to parse for colors values
+         * @param {string} SearchText - The text to parse for colors values
          */
-        buildHtmlOutput(searchText: string): void;
+        buildHtmlOutput(SearchText: string): void;
         /**
          * Generates the color palettes as Html
          * @private
@@ -41,21 +42,21 @@ export declare namespace Palette {
          */
         private createThumbnails(paletteColors);
         /**
-         * Finds hex color values (ex: #FFFFFF) in current search text
+         * Finds hex color values (ex: #FFFFFF) in current Search text
          * @function
-         * @param {string} searchText - The text to parse
+         * @param {string} SearchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
-        private parseHexColors(searchText);
+        private parseHexColors(SearchText);
         /**
-         * Finds the indexes of a search value in the provided string
+         * Finds the indexes of a Search value in the provided string
          * @function
-         * @param {string} searchStr - The value to search for within the given string
-         * @param {string} str - The string to search
+         * @param {string} SearchStr - The value to Search for within the given string
+         * @param {string} str - The string to Search
          * @param {boolean} caseSensitive - True/False for case sensitivity
          * @returns {number[]} An Array<number> containing the position indexes of the hex color values
          */
-        private getIndicesOf(searchStr, str, caseSensitive?);
+        private getIndicesOf(SearchStr, str, caseSensitive?);
     }
     /**
      * @public
