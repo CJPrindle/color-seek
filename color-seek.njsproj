@@ -8,6 +8,7 @@
     <NodejsPort>9988</NodejsPort>
     <DebuggerPort>9987</DebuggerPort>
     <NodeExePath>c:\local\nodejs\node.exe</NodeExePath>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -26,9 +27,9 @@
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
-    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <EnableTypeScript>true</EnableTypeScript>
-    <StartWebBrowser>True</StartWebBrowser>
+    <StartWebBrowser>False</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,16 +51,18 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="images\material.png" />
     <Content Include="jsdoc.conf" />
+    <AdditionalFiles Include="template.html">
+      <Publish>True</Publish>
+    </AdditionalFiles>
+    <Content Include="js\template.html" />
     <Content Include="tsconfig.json">
       <SubType>Code</SubType>
     </Content>
     <TypeScriptCompile Include="colorseek.ts" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="template.html">
-      <Publish>True</Publish>
-    </Content>
     <TypeScriptCompile Include="Command.ts" />
     <TypeScriptCompile Include="Helpers.ts" />
     <TypeScriptCompile Include="FileSystem.ts">
@@ -72,6 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorConversion.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\" />
+    <Folder Include="js\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

@@ -1,7 +1,3 @@
-/// <reference path="Command.d.ts" />
-/// <reference path="FileSystem.d.ts" />
-/// <reference path="Palette.d.ts" />
-/// <reference path="Web.d.ts" />
 /*! ***************************************************************************
 Copyright (c) 2018 Christopher Prindle. All rights reserved.
 
@@ -23,4 +19,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 ******************************************************************************/
+/// <reference path="Command.d.ts" />
+/// <reference path="FileSystem.d.ts" />
+/// <reference path="Palette.d.ts" />
+/// <reference path="Web.d.ts" />
 export {};

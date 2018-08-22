@@ -126,5 +126,5 @@ export declare class ColorConversion {
      * @returns {Array<number>} An Array of Hue (0-359), Saturation (0-100), and Value (light) (0-100) values
      */
     RgbToHsv(red: number, green: number, blue: number): Array<number>;
-    private round(value, decimals);
+    private round;
 }

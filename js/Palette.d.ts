@@ -16,11 +16,11 @@ export declare namespace Palette {
      * @classdesc Contains methods for building the color palette
      */
     class PaletteBuilder {
-        inputSource: string;
-        outputName: string;
-        totalColors: number;
-        hueColors: PaletteColors[];
-        grayColors: PaletteColors[];
+        inputSource: string; /** The input file path or Url */
+        outputName: string; /** The output file name */
+        totalColors: number; /** The total number of colors created */
+        hueColors: PaletteColors[]; /** Contains all Hue based colors */
+        grayColors: PaletteColors[]; /** Contains all gray based colors */
         /**
          * Sets the input file or url and the output file name (if provided)
          * @constructor
@@ -41,28 +41,28 @@ export declare namespace Palette {
          * @param {Array<PaletteColors>} paletteColors - An array of PaletteColors objects
          * @returns {string} Html string containing the color swatches
          */
-        private createSwatches(paletteColors);
+        private createSwatches;
         /**
          * Finds RGB color values (ex: rgb(255,255,255) in current search text
          * @function
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
-        private parseHSLColors(searchText);
+        private parseHSLColors;
         /**
          * Finds RGB color values (ex: rgb(255,255,255) in current search text
          * @function
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
-        private parseRGBColors(searchText);
+        private parseRGBColors;
         /**
          * Finds hex color values (ex: #FFFFFF) in current search text
          * @function
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
-        private parseHexColors(searchText);
+        private parseHexColors;
         /**
          * Finds the indexes of a Search value in the provided string
          * @function
@@ -71,7 +71,7 @@ export declare namespace Palette {
          * @param {boolean} caseSensitive - True/False for case sensitivity
          * @returns {number[]} An Array<number> containing the position indexes of the hex color values
          */
-        private getIndicesOf(SearchStr, str, caseSensitive?);
+        private getIndicesOf;
     }
     /**
      * @public
