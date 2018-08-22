@@ -67,7 +67,7 @@ const error = chalk.bold.red;
 const warning = chalk.bold.yellow;
 const Http = Web.Http;
 const PaletteBuilder = Palette.PaletteBuilder;
-const PaletteColor = Palette.PaletteColor;
+const PaletteColor = Palette.PaletteColors;
 const args = (minimist2)(process.argv.slice(2));
 
 /** 

@@ -67,7 +67,7 @@ const error = chalk_1.default.bold.red;
 const warning = chalk_1.default.bold.yellow;
 const Http = Web_1.Web.Http;
 const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
-const PaletteColor = Palette_1.Palette.PaletteColor;
+const PaletteColor = Palette_1.Palette.PaletteColors;
 const args = (minimist2)(process.argv.slice(2));
 /**
  * Creates all Console switches and commands

@@ -19,8 +19,8 @@ export declare namespace Palette {
         inputSource: string;
         outputName: string;
         totalColors: number;
-        hueColors: PaletteColor[];
-        grayColors: PaletteColor[];
+        hueColors: PaletteColors[];
+        grayColors: PaletteColors[];
         /**
          * Sets the input file or url and the output file name (if provided)
          * @constructor
@@ -31,23 +31,38 @@ export declare namespace Palette {
         /**
          * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
          * @function
-         * @param {string} SearchText - The text to parse for colors values
+         * @param {string} searchText - The text to parse for colors values
          */
-        buildHtmlOutput(SearchText: string): void;
+        buildHtmlOutput(searchText: string): void;
         /**
          * Generates the color palettes as Html
          * @private
          * @function
-         * @param {Array<PaletteColor>} paletteColors - An array of PaletteColor objects
+         * @param {Array<PaletteColors>} paletteColors - An array of PaletteColors objects
+         * @returns {string} Html string containing the color swatches
          */
-        private createThumbnails(paletteColors);
+        private createSwatches(paletteColors);
         /**
-         * Finds hex color values (ex: #FFFFFF) in current Search text
+         * Finds RGB color values (ex: rgb(255,255,255) in current search text
          * @function
-         * @param {string} SearchText - The text to parse
+         * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
-        private parseHexColors(SearchText);
+        private parseHSLColors(searchText);
+        /**
+         * Finds RGB color values (ex: rgb(255,255,255) in current search text
+         * @function
+         * @param {string} searchText - The text to parse
+         * @returns {string[]} An Array<string> containing the parsed hex colors
+         */
+        private parseRGBColors(searchText);
+        /**
+         * Finds hex color values (ex: #FFFFFF) in current search text
+         * @function
+         * @param {string} searchText - The text to parse
+         * @returns {string[]} An Array<string> containing the parsed hex colors
+         */
+        private parseHexColors(searchText);
         /**
          * Finds the indexes of a Search value in the provided string
          * @function
@@ -63,7 +78,7 @@ export declare namespace Palette {
      * @class
      * @classdesc Contains the color formats used by the color palette
      */
-    class PaletteColor {
+    class PaletteColors {
         CMYK: number[];
         Hex: string;
         HSL: number[];
@@ -86,7 +101,7 @@ export declare namespace Palette {
         /**
          * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
          * constituent properties of each format.
-         * @param hexValue
+         * @param {string} - hexValue used to create the color formats
          */
         createColorFormats(hexValue: string): void;
     }

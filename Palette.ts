@@ -19,11 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 ******************************************************************************/
-import * as fs from "fs";
-import * as opn from "opn";
-import { Helpers } from "./Helpers";
-import { ColorConversion } from "./ColorConversion";
-import { retry } from "async";
+import * as fs from 'fs';
+import * as opn from 'opn';
+import { Helpers } from './Helpers';
+import { ColorConversion } from './ColorConversion';
+import { retry } from 'async';
+import { isNumber } from 'util';
 
 /**
  * Contains classes related to the parsing of provided data
@@ -174,7 +175,7 @@ export namespace Palette {
       { key: "Yellow", value: "#FFFF00" },
       { key: "LightYellow", value: "#FFFFE0" },
       { key: "Ivory", value: "#FFFFF0" },
-      { key: "White", value: "#FFFFFF" },
+      { key: "White", value: "#FFFFFF" }
    ];
 
    /**
@@ -186,8 +187,8 @@ export namespace Palette {
       public inputSource: string; /** The input file path or Url */
       public outputName: string;  /** The output file name */
       public totalColors: number /** The total number of colors created */
-      public hueColors: PaletteColor[] = []; /** Contains all Hue based colors */
-      public grayColors: PaletteColor[] = []; /** Contains all gray based colors */
+      public hueColors: PaletteColors[] = []; /** Contains all Hue based colors */
+      public grayColors: PaletteColors[] = []; /** Contains all gray based colors */
 
       /**
        * Sets the input file or url and the output file name (if provided)
@@ -205,107 +206,108 @@ export namespace Palette {
       /**
        * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
        * @function
-       * @param {string} SearchText - The text to parse for colors values
+       * @param {string} searchText - The text to parse for colors values
        */
-      public buildHtmlOutput(SearchText: string): void {
-         try {
-            let hexColors = this.parseHexColors(SearchText);
-            this.totalColors = hexColors.length;
-            
-            //- Map each hex color into a PaletteColor object
-            hexColors.map((h: string, i: number, a: string[]) => {
-               let pColor = new PaletteColor();
-               pColor.createColorFormats(h.valueOf());
-               this.hueColors.push(pColor);
-            });
+      public buildHtmlOutput(searchText: string): void {
 
-            //- The cold fact is this: "Gray-ish" colors do not play nice when sorting by Hue.
-            //- To remedy, remove the 'Grays', sort by Hue, then add 'Grays' at the end sorted by 
-            //- luminosity (light => dark).
-            //- Find 'Grays' in hueColors
-            this.hueColors.map((h, i, a) => {
-               //- Get the Red hi-low range 
-               let pct = ((h.RGB[0] * .05));
+         let hexColors = [...new Set([
+            ...this.parseHSLColors(searchText),
+            ...this.parseRGBColors(searchText),
+            ...this.parseHexColors(searchText)]
+            .map(hc => hc.valueOf().toUpperCase()).sort())];
 
-               const redMin = h.Red - pct;
-               const redMax = h.Red + pct;
-               const isG = Helpers.between(redMin, redMax, h.Green);
-               const isB = Helpers.between(redMin, redMax, h.Blue);
+         this.totalColors = hexColors.length;
 
-               if(isG && isB) {
-                  this.grayColors.push(h);
-               }
-            });
+         //- Map each hex color into a PaletteColors object
+         hexColors.map((h: string, i: number, a: string[]) => {
+            let pColor = new PaletteColors();
+            pColor.createColorFormats(h.valueOf());
+            this.hueColors.push(pColor);
+         });
 
-            let hueSpectrum = "";
+         //- Find 'Grays' (R,G,B values within +- 5%) and separate them
+         this.hueColors.map((h, i, a) => {
+            //- Get the Red hi-low range 
+            let pct = ((h.RGB[0] * .05));
+            const redMin = h.Red - pct;
+            const redMax = h.Red + pct;
 
-            //- Remove the Gray colors from the Hue array
-            this.hueColors = this.hueColors.filter((el) => !this.grayColors.includes(el));
+            //- Determine if both green and blue are within red's range
+            const isG = Helpers.between(redMin, redMax, h.Green);
+            const isB = Helpers.between(redMin, redMax, h.Blue);
 
-            //- Sort by Hue
-            this.hueColors
-               .sort((a, b) => {
-                  return (b.Hue) - (a.Hue);
-               }).map((v, i, a) => {
-                  hueSpectrum += `
-                     <a href="#${v.Hex}" onclick="colorTarget(this.href)">
-                        <div alt="${v.Hex}" class="strip" style="background-color:${v.Hex};">
-                           <span class="tooltip"
-                                 style="border: 4px solid ${v.Hex};">${v.Hex}</span>
-                        </div>
-                     </a>\n`;
-               });
+            if(isG && isB) {
+               this.grayColors.push(h);
+            }
+         });
 
-            let graySpectrum = "";
+         //- Remove the Gray colors from the Hue array
+         this.hueColors = this.hueColors.filter((el) => !this.grayColors.includes(el));
 
-            //- Sort Grays by Luminosity (light to dark)
-            this.grayColors
-               .sort((a, b) => {
-                  return (b.Luminosity) - (a.Luminosity);
-               })
-               .map((v, i, a) => {
-                  graySpectrum += `
-                     <a href="#${v.Hex}" onclick="colorTarget(this.href)">
-                        <div alt="${v.Hex}" class="strip" style="background-color:${v.Hex};">
-                           <span class="tooltip"
+         //- Sort by Hue
+         let hueSpectrum = '';
+
+         this.hueColors
+            .sort((a, b) => {
+               return (b.Hue) - (a.Hue);
+            }).map((v, i, a) => {
+               hueSpectrum += `
+                  <a href="#${v.Hex}" onclick="colorTarget('${v.Hex}')">
+                     <div alt="${v.Hex}" class="strip" style="background-color:${v.Hex};">
+                        <span class="tooltip"
                               style="border: 4px solid ${v.Hex};">${v.Hex}</span>
-                        </div>
-                     </a>\n`;
-               });
+                     </div>
+                  </a>\n`;
+            });
 
-            //- Open the template Html file
-            let html = fs.readFileSync("template.html").toString();
+         //- Sort Grays by Luminosity (light to dark)
+         let graySpectrum = "";
 
-            const fileName = `${this.outputName
-               .trim()
-               .replace(new RegExp(" ", "g"), "")}.html`;
+         this.grayColors
+            .sort((a, b) => {
+               return (b.Luminosity) - (a.Luminosity);
+            })
+            .map((v, i, a) => {
+               graySpectrum += `
+                  <a href="#${v.Hex}" onclick="colorTarget('${v.Hex}')">
+                     <div alt="${v.Hex}" class="strip" style="background-color:${v.Hex};">
+                        <span class="tooltip"
+                           style="border: 4px solid ${v.Hex};">${v.Hex}</span>
+                     </div>
+                  </a>\n`;
+            });
 
-            //- Write color information into placeholders
-            html = html
-               .replace("{name}", this.outputName)
-               .replace("{source}", this.inputSource)
-               .replace("{hue_spectrum}", hueSpectrum)
-               .replace("{gray_spectrum}", graySpectrum)
-               .replace("{total_colors}", this.totalColors.toString())
-               .replace("{hue_colors}", this.createThumbnails(this.hueColors))
-               .replace("{gray_colors}", this.createThumbnails(this.grayColors));
+         //- Open the template Html file
+         let html = fs.readFileSync("template.html").toString();
 
-            //- Write out Html palette and open in browser
-            fs.writeFileSync(fileName, html.toString());
-            opn(fileName);
-         } catch(e) {
-            Helpers.outputError(e);
-         }
+         const fileName = `${this.outputName
+            .trim()
+            .replace(new RegExp(" ", "g"), "")}.html`;
+
+         //- Write color information into placeholders
+         html = html
+            .replace("{name}", this.outputName)
+            .replace("{source}", this.inputSource)
+            .replace("{hue_spectrum}", hueSpectrum)
+            .replace("{gray_spectrum}", graySpectrum)
+            .replace("{total_colors}", this.totalColors.toString())
+            .replace("{hue_colors}", this.createSwatches(this.hueColors))
+            .replace("{gray_colors}", this.createSwatches(this.grayColors));
+
+         //- Write out Html palette and open in browser
+         fs.writeFileSync(fileName, html.toString());
+         opn(fileName);
       }
 
       /**
        * Generates the color palettes as Html
        * @private
        * @function
-       * @param {Array<PaletteColor>} paletteColors - An array of PaletteColor objects
+       * @param {Array<PaletteColors>} paletteColors - An array of PaletteColors objects
+       * @returns {string} Html string containing the color swatches
        */
-      private createThumbnails(paletteColors: Array<PaletteColor>): string {
-         let thumbnails = "";
+      private createSwatches(paletteColors: Array<PaletteColors>): string {
+         let swatches = "";
 
          paletteColors.forEach((pc) => {
 
@@ -314,23 +316,24 @@ export namespace Palette {
             let pcl = pc.Light;
 
             //TODO: Clean up this formula
+            //- Determine lightness offset for text in swatches
             if(pcl <= 10) {
                pcl = 35;
             } else if(pcl <= 25) {
-               pcl = 45;
+               pcl = 50;
             } else if(pcl <= 40) {
-               pcl = pcl + 25;
+               pcl = pcl + 30;
             } else if(pcl <= 70) {
-               pcl = pcl - 30;
+               pcl = pcl - 20;
             } else {
-               pcl = pcl - 40;
+               pcl = pcl - 50;
             }
 
             //- Set the text on the color swatch either brighter or dimmer for readability
             let textLight = pcl;
             let textHSL = `hsl(${pc.Hue},${pc.Saturation}%,${textLight}%);`;
-            let thumbnail = `
-                <div id="${pc.Hex}" class="thumbnail" 
+            let swatch = `
+                <div id="${pc.Hex}" class="swatch" 
                       style="background-color:${pc.Hex};
                             border: 1px solid ${textHSL}">
                     <div class="header">
@@ -349,45 +352,122 @@ export namespace Palette {
                   </div>
                 </div>\n`;
 
-            thumbnails += thumbnail;
+            swatches += swatch;
          });
 
-         return thumbnails;
+         return swatches;
       }
 
       /**
-       * Finds hex color values (ex: #FFFFFF) in current Search text
+       * Finds RGB color values (ex: rgb(255,255,255) in current search text
        * @function
-       * @param {string} SearchText - The text to parse
+       * @param {string} searchText - The text to parse
        * @returns {string[]} An Array<string> containing the parsed hex colors
        */
-      private parseHexColors(SearchText: string): string[] {
+      private parseHSLColors(searchText: string): string[] {
+         let hexColors: string[] = [];
+         let h: any;
+         let s: any;
+         let l: any;
+
+         searchText = searchText.replace(new RegExp("hsla", "g"), "hsl");
+
+         //- Find all '#' positions (start of hex color value)
+         const matches = this.getIndicesOf("hsl(", searchText, false);
+
+         for(let x = 0; x < matches.length; x++) {
+            //- Get Search range
+            const str = matches[x] + 4;
+            const end = matches[x] + 20;
+            let hsl = searchText.substring(str, end);
+
+            //- split into array and get each value
+            const arrHSL = hsl.substring(0, hsl.indexOf(')')).split(',');
+            [h, s, l] = arrHSL;
+            const colorConv = new ColorConversion();
+
+            //- Convert to RGB
+            const arrRGB = colorConv.HslToRgb(h, s, l);
+
+            //- Convert RGB -> Hex
+            const hex = colorConv.RgbToHex(arrRGB[0], arrRGB[1], arrRGB[2])
+            hexColors.push('#' + hex);
+         }
+
+         return [
+            ...new Set(hexColors.map(hc => hc.valueOf().toUpperCase()).sort())
+         ];
+      }
+
+      /**
+       * Finds RGB color values (ex: rgb(255,255,255) in current search text
+       * @function
+       * @param {string} searchText - The text to parse
+       * @returns {string[]} An Array<string> containing the parsed hex colors
+       */
+      private parseRGBColors(searchText: string): string[] {
+         let hexColors: string[] = [];
+         let r: any;
+         let g: any;
+         let b: any;
+
+         searchText = searchText.replace(new RegExp("rgba", "g"), "rgb");
+
+         //- Find all '#' positions (start of hex color value)
+         const matches = this.getIndicesOf("rgb(", searchText, false);
+
+         for(let x = 0; x < matches.length; x++) {
+            //- Get Search range
+            const str = matches[x] + 4;
+            const end = matches[x] + 20;
+            let rgb = searchText.substring(str, end);
+            const arrRGB = rgb.substring(0, rgb.indexOf(')')).split(',');
+            [r, g, b] = arrRGB;
+            const hex = new ColorConversion().RgbToHex(r, g, b);
+            hexColors.push('#' + hex);
+         }
+
+         return [
+            ...new Set(hexColors.map(hc => hc.valueOf().toUpperCase()).sort())
+         ];
+      }
+
+      /**
+       * Finds hex color values (ex: #FFFFFF) in current search text
+       * @function
+       * @param {string} searchText - The text to parse
+       * @returns {string[]} An Array<string> containing the parsed hex colors
+       */
+      private parseHexColors(searchText: string): string[] {
          let hexColors: string[] = [];
 
          //- Find all '#' positions (start of hex color value)
-         const SearchAreas = this.getIndicesOf("#", SearchText, false);
+         const matches = this.getIndicesOf("#", searchText, false);
 
-         //- TODO: Find a better way to parse Hex
-         for(let x = 0; x < SearchAreas.length; x++) {
+         for(let x = 0; x < matches.length; x++) {
             try {
                //- Get Search range
-               const str = SearchAreas[x] + 1;
-               const end = SearchAreas[x] + 7;
+               const str = matches[x] + 1;
+               const end = matches[x] + 7;
 
-               //- Check for valid hex value
-               let hexColor = SearchText.substring(str, end);
+               //- Possible hex values include (Ignoring opacity for now):
+               //-    - #FFFFFF
+               //-    - #FFF
+               const hexColor6 = searchText.substring(str, end);
+               const hexColor3 = hexColor6.substring(0, 3);
 
-               //- Convert any three letter hex value to six letters
-               if(hexColor[0] == hexColor[1] && hexColor[1] == hexColor[2]) {
-                  hexColor = `${hexColor.substring(0, 3)}${hexColor.substring(0, 3)}`;
-               }
-
-               //- Add to color array if valid
-               if(parseInt(hexColor, 16).toString() != "NaN") {
-                  hexColors.push("#" + hexColor);
+               //- Attempt to validate a six digit hex value. If false, try a three digit hex value.
+               //- If three digits is successful then convert it to six digits.
+               if(/^[0-9A-F]{6}$/i.test(hexColor6)) {
+                  hexColors.push("#" + hexColor6);
+               } else if(/^[0-9A-F]{3}$/i.test(hexColor3)) {
+                  const hexColorChars = hexColor3.split('');
+                  let hexVal = '';
+                  hexColorChars.forEach((h) => hexVal += h + h);
+                  hexColors.push("#" + hexVal);
                }
             } catch(e) {
-               Helpers.outputError(e, true);
+               // Helpers.outputError(e, true);
             }
          }
 
@@ -438,7 +518,7 @@ export namespace Palette {
     * @class
     * @classdesc Contains the color formats used by the color palette
     */
-   export class PaletteColor {
+   export class PaletteColors {
       public CMYK: number[] = [0, 0, 0, 0];
       public Hex: string = "";
       public HSL: number[] = [0, 0, 0];
@@ -447,7 +527,7 @@ export namespace Palette {
       public Red: number = 0;
       public Green: number = 0;
       public Blue: number = 0;
-      public Luminosity: number = 0; //- RGB derived
+      public Luminosity: number = 0;
 
       public Hue: number = 0;
       public Saturation: number = 0;
@@ -466,7 +546,7 @@ export namespace Palette {
       /**
        * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
        * constituent properties of each format.
-       * @param hexValue
+       * @param {string} - hexValue used to create the color formats
        */
       public createColorFormats(hexValue: string): void {
          if(RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) { //- Valid Hexadecimal
