@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Color Seek Home Index</title>
+	<title>Color Seek Home Class: PaletteColors</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,163 +79,272 @@
 		<div id="main">
 			
 
-	
-	
+	<h1 class="page-title">Class: PaletteColors</h1>
+<section>
+
+<header>
+    
+        <h2>
+        PaletteColors
+        </h2>
+        
+            <div class="class-description"><p>Contains the color formats used by the color palette</p></div>
+        
+    
+</header>
 
 
-
-
-
-
-
-
-
-
-
-	
-	
-
-
-
-
-
-    <section class="readme-section">
-        <article><h1>Color Seek</h1><p>Version 0.1 | <a href="https://cjprindle.github.io/color-seek">Full Documentation (API)</a>.</p>
-<h2>Overview</h2><p><strong>Color Seek</strong> allows you to build a color palette from a source file or URL. The source is scanned for valid<br>CSS color values and the results are formatted, purged of duplicates, and then sorted to produce the<br><em>Color Palette</em>. The palette can then be transformed into several predefined file formats for use in your projects.<br>In addition, a HTML page is created which displays the palette as a grid of swatches, with the colors displaying<br>their value in each CSS format.</p>
-<p><img src="images/readme-1.png" alt="Readme Image 1"></p>
+<article>
+    <div class="container-overview">
+    
+        
 <hr>
-<h3>CSS Color Formats</h3><p>CSS currently accepts three formats for color specification.</p>
-<table>
-<thead>
-<tr>
-<th>Format</th>
-<th>Example</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Hex</td>
-<td><code>#1188FF</code></td>
-<td>Hexadecimals of Red (11), Green (88), Blue (FF)</td>
-</tr>
-<tr>
-<td>RGB</td>
-<td><code>rgb(32, 128, 255)</code></td>
-<td>Range for Red (0-255), Green (0-255), Blue (0-255)</td>
-</tr>
-<tr>
-<td>HSL</td>
-<td><code>hsl(359, 25%, 100%)</code></td>
-<td>Range for Hue (0-359), Saturation (0-100%), Lightness (0-100%)</td>
-</tr>
-</tbody>
-</table>
-<h4>Possible CSS4 Color Formats</h4><p>Proposals exist for additional color formats in CSS4. One, <em>CMYK</em>, is well known outside of CSS and has been in use<br>for many years in printing and graphic design. Therefore, we've decided to add it as a bit of future-proofing.</p>
-<table>
-<thead>
-<tr>
-<th>Format</th>
-<th>Example</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CMYK</td>
-<td><code>cmyk(100, 25, 50, 75)</code></td>
-<td>Range of Cyan, Magenta, Yellow, Black (0-100)</td>
-</tr>
-</tbody>
-</table>
-<h4>Named Colors</h4><p>Another naming convention for color values is a <em>named color</em>. There are currently 140 color names available ranging<br>from <em>black</em> to white. <strong>Color Seek</strong> looks for named colors and converts them to hexadecimal. </p>
-<h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available<br>as output options. You may also choose the Gimp Color Palette format as well. An HTML file is always generated<br>automatically regardless of what other options as selected.</p>
-<h4>File Formats</h4><p>Each of the formats below can be generated when creating a palette.</p>
-<table>
-<thead>
-<tr>
-<th>File Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CSS</td>
-<td>Cascading Style Sheet</td>
-</tr>
-<tr>
-<td>GPL</td>
-<td>Gimp Color Palette</td>
-</tr>
-<tr>
-<td>LESS</td>
-<td>Less Style Sheet</td>
-</tr>
-<tr>
-<td>SCSS</td>
-<td>Sass Style Sheet</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2>Using Color Seek</h2><h3>Command Line</h3><p>All interaction with <strong>Color Seek</strong> is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.</p>
-<h4>Help</h4><p>'colorseek -h' or 'colorseek --help' displays the available commands:</p>
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-i, --input [PATH]</td>
-<td>*The source file or url to search for color values</td>
-</tr>
-<tr>
-<td>-o, --output [DIRECTORY]</td>
-<td>The file(s) output directory</td>
-</tr>
-<tr>
-<td>-n, --name</td>
-<td>The output file(s) name (<em>do not add extension</em>)</td>
-</tr>
-<tr>
-<td>--css</td>
-<td>Create a CSS rendering of the color palette</td>
-</tr>
-<tr>
-<td>--gpl</td>
-<td>Create a Gimp Palette rendering of the color palette</td>
-</tr>
-<tr>
-<td>--less</td>
-<td>Create a LESS rendering of the color palette</td>
-</tr>
-<tr>
-<td>--sass</td>
-<td>Create a SASS rendering of the color palette</td>
-</tr>
-</tbody>
-</table>
-<p><strong>*Required</strong></p>
-<hr>
-<p>When no output directory is specified the current directory will to used. If no output name is specified the input file<br>name will be used.</p>
-<p>All file types can be rendered by adding the corresponding command switch. If no output type is given only the HTML<br>file will be generated.</p>
-<h3>Examples</h3><p>The following examples demonstrate various options available with <strong>Color Seek</strong>.</p>
-<pre class="prettyprint source"><code>$ colorseek -i /c/docs/MonokaiSharp.json -css -n &quot;Monokai-Sharp&quot;</code></pre><blockquote>
-<p>Create CSS and HTML output from a file resource. The file used as input is a Visual Studio Code color theme that was exported as a JSON file. <strong>Color Seek</strong> creates<br>a CSS file and a HTML page named <em>Monokai-Sharp.css</em> and <em>Monkikai-Sharp.html</em> respectively.</p>
-</blockquote>
-<p><img src="images/readme-2.png" alt="readme-2"></p>
-<hr>
-<blockquote>
-<p>Create a SASS and Html from a Url</p>
-</blockquote>
-<p>In this example no output directory, output name, or file renditions was<br>specified. Therefore, only a Html page displaying the unique colors found the the Json file is created.</p></article>
-    </section>
+<dt>
+    <h4 class="name" id="PaletteColors"><span class="type-signature"></span>new PaletteColors()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="Palette.js.html">Palette.js</a>,
+				 <a href="Palette.js.html#sunlight-1-line-472">line 472</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id="createColorFormats"><span class="type-signature"></span>createColorFormats(hexValue)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the<br>constituent properties of each format.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hexValue</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>hexValue used to create the color formats</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="Palette.js.html">Palette.js</a>,
+				 <a href="Palette.js.html#sunlight-1-line-498">line 498</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

@@ -51,7 +51,35 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="images\material.png" />
+    <Content Include="docs\classes.list.html" />
+    <Content Include="docs\ColorConversion.html" />
+    <Content Include="docs\ColorConversion.js.html" />
+    <Content Include="docs\colorseek.js.html" />
+    <Content Include="docs\Command.html" />
+    <Content Include="docs\Command.js.html" />
+    <Content Include="docs\FileAccess.html" />
+    <Content Include="docs\FileSystem.html" />
+    <Content Include="docs\FileSystem.js.html" />
+    <Content Include="docs\Helpers.html" />
+    <Content Include="docs\Helpers.js.html" />
+    <Content Include="docs\images\readme-1.png" />
+    <Content Include="docs\images\readme-1.png" />
+    <Content Include="docs\images\readme-2.png" />
+    <Content Include="docs\images\readme-2.png" />
+    <Content Include="docs\index.html" />
+    <Content Include="docs\module-colorseek.html" />
+    <Content Include="docs\module-colorseek_Http.Http.html" />
+    <Content Include="docs\modules.list.html" />
+    <Content Include="docs\namespaces.list.html" />
+    <Content Include="docs\Palette.html" />
+    <Content Include="docs\Palette.js.html" />
+    <Content Include="docs\PaletteBuilder.html" />
+    <Content Include="docs\PaletteColors.html" />
+    <Content Include="docs\quicksearch.html" />
+    <Content Include="docs\Web.html" />
+    <Content Include="docs\Web.js.html" />
+    <Content Include="images\readme-1.png" />
+    <Content Include="images\readme-2.png" />
     <Content Include="jsdoc.conf" />
     <AdditionalFiles Include="template.html">
       <Publish>True</Publish>
@@ -76,6 +104,8 @@
     <Compile Include="ColorConversion.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="docs\" />
+    <Folder Include="docs\images\" />
     <Folder Include="images\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->

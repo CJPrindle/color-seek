@@ -1,5 +1,6 @@
 "use strict";
 /*! ***************************************************************************
+@license
 Copyright (c) 2018 Christopher Prindle. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,7 +23,7 @@ IN THE SOFTWARE.
 ******************************************************************************/
 /* ***************************************************************************
 * @author      Christopher Prindle
-* @version     1.0
+* @version     0.1
 * @description Searches the provided file or web page for color values in the
 *              following formats:
 *                  - Hex:  #FFFFFF
@@ -35,7 +36,7 @@ IN THE SOFTWARE.
 *                  - HTML (Web Page)
 *                  - LESS (Less Style Sheet)
 *                  - SCSS (Sass Style Sheet)
-* @fileOverview - EntryPoint
+* @file Entry point of the Color Seek application
 **************************************************************************** */
 /// <reference path='./Command.ts' />
 /// <reference path='./FileSystem.ts' />
@@ -56,23 +57,53 @@ const Palette_1 = require("./Palette");
 const Command_1 = require("./Command");
 /**
  *  Abstracts the console.log method
- *  @constant
- *  @type {Console.log}
- * */
+ *  @instance
+ */
 const log = console.log;
+/**
+ *  Abstracts the process.exit method
+ *  @instance
+ */
 const exit = process.exit;
+/**
+ *  Displays 'Information' level messages to the console
+ *  @instance
+ */
 const info = chalk_1.default.green;
+/**
+ *  Displays 'Information' level messages to the console with bold text
+ *  @instance
+ */
 const infoBold = chalk_1.default.bold.green;
+/**
+ *  Displays 'Warning' level messages to the console
+ *  @instance
+ */
 const warning = chalk_1.default.bold.yellow;
+/**
+ *  A reference to Web.Http
+ *  @instance
+ */
 const Http = Web_1.Web.Http;
+/**
+ *  A reference to Palette.PaletteBuilder
+ *  @instance
+ */
 const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
+/**
+ *  An array of command line arguments starting with the third array item
+ *  @instance
+ */
 const args = (minimist2)(process.argv.slice(2));
+/**
+ *  An array containing all colors found in the source file or URL
+ *  @instance
+ */
 let hexColors = [];
 /**
  * Creates all Console switches and commands
- * @constant
  * @type {Command[]}
- * @default
+ * @instance
  */
 const commands = [
     new Command_1.Command('-i, --input [PATH] _**required', 'The source file or url to search for color values   '),
@@ -83,22 +114,49 @@ const commands = [
     new Command_1.Command('--less                        ', 'Create a Less rendering of the color palette        '),
     new Command_1.Command('--scss                        ', 'Create a Sass rendering of the color palette        ')
 ];
+/**
+ * The directory to save all output files
+ * @instance
+ */
 let outputPath = (args.o) ? args.o : args.output;
+/**
+ * The source file or URL location
+ * @instance
+ */
 const inputPath = (args.i) ? args.i : args.input;
+/**
+ * Is CSS a requested output file type
+ * @instance
+ */
 const isCss = args.css;
+/**
+ * Is LESS a requested output file type
+ * @instance
+ */
 const isLess = args.less;
+/**
+ * Is SASS a requested output file type
+ * @instance
+ */
 const isSass = args.sass;
+/**
+ * Which color format will be written to the output files (Hex, RGB, HSL)
+ * @instance
+ */
 const colorFormat = (args.rgb)
     ? 'rgb'
     : (args.hsl)
         ? 'hsl'
         : 'hex';
+/**
+ * The file name to assign all output files
+ * @instance
+ */
 const name = (args.n)
     ? args.n
     : (args.name)
         ? args.name
         : path.basename(inputPath, path.extname(inputPath));
-console.log(name);
 //- Enter the matrix
 main();
 /**
@@ -138,7 +196,6 @@ function main() {
  * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data) {
-    console.log('inputPath', inputPath);
     const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, name);
     //- Create color palette and generate HTML
     hexColors = new PaletteBuilder(inputPath, name).buildHtmlOutput(data);

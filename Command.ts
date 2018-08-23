@@ -1,4 +1,5 @@
 /*! ***************************************************************************
+@license
 Copyright (c) 2018 Christopher Prindle. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 

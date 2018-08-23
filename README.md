@@ -1,4 +1,6 @@
-# Color Seek - Version 1.0 #
+# Color Seek #
+
+Version 0.1 | [Full Documentation (API)](https://cjprindle.github.io/color-seek).
 
 ## Overview ##
 
@@ -10,6 +12,7 @@ their value in each CSS format.
 
 
 ![Readme Image 1](images/readme-1.png)
+
 ---
 
 ### CSS Color Formats ###
@@ -69,12 +72,12 @@ All interaction with **Color Seek** is through the Command Line Interface (CLI).
 | Command                 | Description                                          |
 |-------------------------|------------------------------------------------------|
 | -i, --input [PATH]      | *The source file or url to search for color values   |
-| -o, --output [DIRECTORY]| The output file(s) directory                         |
-| -n, --name              | The output file(s) name (do not add extension)       |
+| -o, --output [DIRECTORY]| The file(s) output directory                         |
+| -n, --name              | The output file(s) name (_do not add extension_)     |
 | --css                   | Create a CSS rendering of the color palette          |
 | --gpl                   | Create a Gimp Palette rendering of the color palette |
 | --less                  | Create a LESS rendering of the color palette         |
-| --scss                  | Create a SASS rendering of the color palette         |
+| --sass                  | Create a SASS rendering of the color palette         |
 
 ***Required**
 
@@ -88,20 +91,28 @@ file will be generated.
 
 ### Examples ###
 
-The following examples demonstrate various options available with **Color Seek**.
+The following examples demonstrate various options available with **Color Seek**. As HTML files are always generated
+they will only be demonstrated in the first example.
 
-> Create CSS and HTML output from a file resource. The file used as input is a Visual Studio Code color theme that was exported as a JSON file. **Color Seek** creates 
-> a CSS file and a HTML page named _Monokai-Sharp.css_ and _Monkikai-Sharp.html_ respectively.
->
-    $ colorseek -i /c/docs/MonokaiSharp.json -css -n "Monokai-Sharp"
- 
+#### Create a CSS file from a Local File #### 
+
+    $ colorseek -i /c/docs/MonokaiSharp.json -n Monokai-Sharp --css
+
+**Color Seek** creates a HTML file and a CSS file named _Monkikai-Sharp.html_ and _Monokai-Sharp.css_ in the 
+**Color Seek** directory.
+
+(**NOTE**: The file used as input is a [Visual Studio Code](https://code.visualstudio.com) color theme exported
+to a JSON file.)
+
 ![readme-2](images/readme-2.png)
 
 ---
 
+#### Create a SASS file with RGB from a Stylesheet URL ####
 
-> Create a SASS and Html from a Url
 
+    $ colorseek -i https://material.io/static/m2/css/main.min.css -n "Material Theme" --sass --rgb
 
-In this example no output directory, output name, or file renditions was
-specified. Therefore, only a Html page displaying the unique colors found the the Json file is created.
+Extracting colors from a stylesheet url is as simple as a local file. The --sass switch tells **Color Seek** to use the
+.scss (SASS) file extension. Instead of hex values we instead choose the RGB color format by providing the --rgb 
+switch. Notice the use of double quotes around the name value. This is needed if you want a space in any value.

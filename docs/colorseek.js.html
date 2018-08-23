@@ -11,7 +11,7 @@
 	<![endif]-->
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
-	<link type="text/css" rel="stylesheet" href="styles/site.Simplex.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.Readable.css">
 
 </head>
 
@@ -47,7 +47,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-colorseek-Http.Http.html">colorseek~Http.Http</a></li><li><a href="module-colorseek-PaletteColor.PaletteColor.html">colorseek~PaletteColor.PaletteColor</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li>
+					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-colorseek_Http.Http.html">colorseek#Http.Http</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li><li><a href="PaletteColors.html">PaletteColors</a></li>
 				</ul>
 			</li>
 			
@@ -86,6 +86,7 @@
         <pre
             class="sunlight-highlight-javascript linenums">"use strict";
 /*! ***************************************************************************
+@license
 Copyright (c) 2018 Christopher Prindle. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -108,7 +109,7 @@ IN THE SOFTWARE.
 ******************************************************************************/
 /* ***************************************************************************
 * @author      Christopher Prindle
-* @version     1.0
+* @version     0.1
 * @description Searches the provided file or web page for color values in the
 *              following formats:
 *                  - Hex:  #FFFFFF
@@ -121,18 +122,19 @@ IN THE SOFTWARE.
 *                  - HTML (Web Page)
 *                  - LESS (Less Style Sheet)
 *                  - SCSS (Sass Style Sheet)
-* @fileOverview - EntryPoint
+* @file Entry point of the Color Seek application
 **************************************************************************** */
-/// &lt;reference path="./Command.ts" />
-/// &lt;reference path="./FileSystem.ts" />
-/// &lt;reference path="./Palette.ts" />
-/// &lt;reference path="./Web.ts" />
+/// &lt;reference path='./Command.ts' />
+/// &lt;reference path='./FileSystem.ts' />
+/// &lt;reference path='./Palette.ts' />
+/// &lt;reference path='./Web.ts' />
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Color Seek entry point
  * @module
  */
 const chalk_1 = require("chalk");
+const path = require("path");
 const minimist2 = require("minimist2");
 const FileSystem_1 = require("./FileSystem");
 const Web_1 = require("./Web");
@@ -141,25 +143,53 @@ const Palette_1 = require("./Palette");
 const Command_1 = require("./Command");
 /**
  *  Abstracts the console.log method
- *  @constant
- *  @type {}
- * */
+ *  @instance
+ */
 const log = console.log;
-const logerr = console.error;
+/**
+ *  Abstracts the process.exit method
+ *  @instance
+ */
 const exit = process.exit;
+/**
+ *  Displays 'Information' level messages to the console
+ *  @instance
+ */
 const info = chalk_1.default.green;
+/**
+ *  Displays 'Information' level messages to the console with bold text
+ *  @instance
+ */
 const infoBold = chalk_1.default.bold.green;
-const error = chalk_1.default.bold.red;
+/**
+ *  Displays 'Warning' level messages to the console
+ *  @instance
+ */
 const warning = chalk_1.default.bold.yellow;
+/**
+ *  A reference to Web.Http
+ *  @instance
+ */
 const Http = Web_1.Web.Http;
+/**
+ *  A reference to Palette.PaletteBuilder
+ *  @instance
+ */
 const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
-const PaletteColor = Palette_1.Palette.PaletteColor;
+/**
+ *  An array of command line arguments starting with the third array item
+ *  @instance
+ */
 const args = (minimist2)(process.argv.slice(2));
 /**
+ *  An array containing all colors found in the source file or URL
+ *  @instance
+ */
+let hexColors = [];
+/**
  * Creates all Console switches and commands
- * @constant
  * @type {Command[]}
- * @default
+ * @instance
  */
 const commands = [
     new Command_1.Command('-i, --input [PATH] _**required', 'The source file or url to search for color values   '),
@@ -171,20 +201,48 @@ const commands = [
     new Command_1.Command('--scss                        ', 'Create a Sass rendering of the color palette        ')
 ];
 /**
- * The file path or url specified on the command line (-i or --input)
- * @constant
- * @type {string}
- * @default
+ * The directory to save all output files
+ * @instance
  */
-const path = (args.i) ? args.i : args.input;
+let outputPath = (args.o) ? args.o : args.output;
 /**
- * The name to use when creating the color palette output files (-n or --name)
- * @constant
- * @type {string}
- * @inner
- * @default
+ * The source file or URL location
+ * @instance
  */
-const name = (args.n) ? args.n : args.name;
+const inputPath = (args.i) ? args.i : args.input;
+/**
+ * Is CSS a requested output file type
+ * @instance
+ */
+const isCss = args.css;
+/**
+ * Is LESS a requested output file type
+ * @instance
+ */
+const isLess = args.less;
+/**
+ * Is SASS a requested output file type
+ * @instance
+ */
+const isSass = args.sass;
+/**
+ * Which color format will be written to the output files (Hex, RGB, HSL)
+ * @instance
+ */
+const colorFormat = (args.rgb)
+    ? 'rgb'
+    : (args.hsl)
+        ? 'hsl'
+        : 'hex';
+/**
+ * The file name to assign all output files
+ * @instance
+ */
+const name = (args.n)
+    ? args.n
+    : (args.name)
+        ? args.name
+        : path.basename(inputPath, path.extname(inputPath));
 //- Enter the matrix
 main();
 /**
@@ -194,14 +252,14 @@ main();
  */
 function main() {
     try {
-        if (path) {
-            if (path.length) {
-                if (path.toLowerCase().startsWith('http')) {
-                    console.log('path', path);
-                    new Http().getUrlData(path, htmlTextHandler);
+        if (inputPath != null) {
+            if (inputPath.length) {
+                //- Determine input type
+                if (inputPath.toLowerCase().startsWith('http')) {
+                    new Http().getUrlData(inputPath, htmlTextHandler);
                 }
                 else {
-                    new FileSystem_1.FileSystem.FileAccess(path, name).readFile();
+                    new FileSystem_1.FileSystem.FileAccess(inputPath, name).readFile(htmlTextHandler);
                 }
             }
             else {
@@ -217,14 +275,29 @@ function main() {
     }
 }
 /**
- * Handles the html data sent from Web~Html~getUrlData
+ * Handles the html data sent from Web.Html.getUrlData()
  * @public
  * @function
  * @callback htmlTextHandler
- * @param data
+ * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data) {
-    new PaletteBuilder(path, name).buildHtmlOutput(data);
+    const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, name);
+    //- Create color palette and generate HTML
+    hexColors = new PaletteBuilder(inputPath, name).buildHtmlOutput(data);
+    if (!outputPath) {
+        outputPath = './';
+    }
+    //- Determine which output files to generate
+    if (isCss) {
+        fs.writeCss(outputPath, name, hexColors, colorFormat, 'css');
+    }
+    if (isLess) {
+        fs.writeCss(outputPath, name, hexColors, colorFormat, 'less');
+    }
+    if (isSass) {
+        fs.writeCss(outputPath, name, hexColors, colorFormat, 'scss');
+    }
 }
 /*
  * Print the CLI command list for Color Seek
@@ -277,13 +350,13 @@ function printHelp() {
 
 
 	<span class="copyright">
-	Christopher Prindle Copyright © 2018
+	Christopher Prindle Copyright � 2018
 	</span>
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Aug Th, 2018
+		on Aug 23, 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
