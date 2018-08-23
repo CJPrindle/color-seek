@@ -144,13 +144,19 @@
 
             <td class="type">
             
+                
+<span class="param-type">string</span>
+
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>The source file/url parsed for color values</p></td>
         </tr>
 
     
@@ -162,13 +168,19 @@
 
             <td class="type">
             
+                
+<span class="param-type">string</span>
+
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>The provided name for the generated output files</p></td>
         </tr>
 
     
@@ -341,7 +353,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="readFile"><span class="type-signature"></span>readFile()</h4>
+    <h4 class="name" id="readFile"><span class="type-signature"></span>readFile(callback)</h4>
     
     
 </dt>
@@ -358,6 +370,56 @@
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The function to call with the input source data when complete</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -396,7 +458,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="FileSystem.js.html">FileSystem.js</a>,
-				 <a href="FileSystem.js.html#sunlight-1-line-62">line 62</a>
+				 <a href="FileSystem.js.html#sunlight-1-line-63">line 63</a>
 			</li>
 		</ul>
 	</dd>
@@ -429,7 +491,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="writeCss"><span class="type-signature"></span>writeCss(outputPath, hexColors, colorFormat, styleSheetType)</h4>
+    <h4 class="name" id="writeCss"><span class="type-signature"></span>writeCss(outputPath, name, hexColors, colorFormat, styleSheetType)</h4>
     
     
 </dt>
@@ -496,6 +558,34 @@
             
 
             <td class="description last"><p>The type of stylesheet: CSS, SASS, LESS</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The name given to the output files</p></td>
         </tr>
 
     
@@ -626,7 +716,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="FileSystem.js.html">FileSystem.js</a>,
-				 <a href="FileSystem.js.html#sunlight-1-line-93">line 93</a>
+				 <a href="FileSystem.js.html#sunlight-1-line-94">line 94</a>
 			</li>
 		</ul>
 	</dd>
