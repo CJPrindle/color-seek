@@ -222,16 +222,12 @@
 <hr>
 <p>When no output directory is specified the current directory will to used. If no output name is specified the input file<br>name will be used.</p>
 <p>All file types can be rendered by adding the corresponding command switch. If no output type is given only the HTML<br>file will be generated.</p>
-<h3>Examples</h3><p>The following examples demonstrate various options available with <strong>Color Seek</strong>.</p>
-<pre class="prettyprint source"><code>$ colorseek -i /c/docs/MonokaiSharp.json -css -n &quot;Monokai-Sharp&quot;</code></pre><blockquote>
-<p>Create CSS and HTML output from a file resource. The file used as input is a Visual Studio Code color theme that was exported as a JSON file. <strong>Color Seek</strong> creates<br>a CSS file and a HTML page named <em>Monokai-Sharp.css</em> and <em>Monkikai-Sharp.html</em> respectively.</p>
-</blockquote>
+<h3>Examples</h3><p>The following examples demonstrate various options available with <strong>Color Seek</strong>. As HTML files are always generated<br>they will only be demonstrated in the first example.</p>
+<h4>Create a CSS file from a Local File</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/MonokaiSharp.json -n Monokai-Sharp --css</code></pre><p><strong>Color Seek</strong> creates a HTML file and a CSS file named <em>Monkikai-Sharp.html</em> and <em>Monokai-Sharp.css</em> in the<br><strong>Color Seek</strong> directory.</p>
+<p>(<strong>NOTE</strong>: The file used as input is a <a href="https://code.visualstudio.com">Visual Studio Code</a> color theme exported<br>to a JSON file.)</p>
 <p><img src="images/readme-2.png" alt="readme-2"></p>
 <hr>
-<blockquote>
-<p>Create a SASS and Html from a Url</p>
-</blockquote>
-<p>In this example no output directory, output name, or file renditions was<br>specified. Therefore, only a Html page displaying the unique colors found the the Json file is created.</p></article>
+<h4>Create a SASS file with RGB Colors from a URL</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -n &quot;Material Theme&quot; --sass --rgb</code></pre><p>Extracting colors from a stylesheet url is as simple as a local file. The --sass switch tells <strong>Color Seek</strong> to use the<br>.scss (SASS) file extension. Instead of hex values we instead choose the RGB color format by providing the --rgb<br>switch. Notice the use of double quotes around the name value. This is needed if you want a space in any value.</p></article>
     </section>
 
 

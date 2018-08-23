@@ -108,7 +108,7 @@ to a JSON file.)
 
 ---
 
-#### Create a SASS file with RGB from a Stylesheet URL ####
+#### Create a SASS file with RGB Colors from a URL ####
 
 
     $ colorseek -i https://material.io/static/m2/css/main.min.css -n "Material Theme" --sass --rgb
