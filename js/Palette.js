@@ -276,6 +276,7 @@ var Palette;
             //- Write out Html palette and open in browser
             fs.writeFileSync(fileName, html.toString());
             opn(fileName);
+            return hexColors;
         }
         /**
          * Generates the color palettes as Html

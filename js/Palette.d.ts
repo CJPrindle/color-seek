@@ -33,7 +33,7 @@ export declare namespace Palette {
          * @function
          * @param {string} searchText - The text to parse for colors values
          */
-        buildHtmlOutput(searchText: string): void;
+        buildHtmlOutput(searchText: string): string[];
         /**
          * Generates the color palettes as Html
          * @private

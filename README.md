@@ -88,14 +88,20 @@ file will be generated.
 
 ### Examples ###
 
-The following command line examples demonstrate **Color Seek** functionality.
+The following examples demonstrate various options available with **Color Seek**.
 
+> Create CSS and HTML output from a file resource. The file used as input is a Visual Studio Code color theme that was exported as a JSON file. **Color Seek** creates 
+> a CSS file and a HTML page named _Monokai-Sharp.css_ and _Monkikai-Sharp.html_ respectively.
+>
     $ colorseek -i /c/docs/MonokaiSharp.json -css -n "Monokai-Sharp"
-
-The file used as input is a Visual Studio Code color theme that was exported as a JSON file. **Color Seek** creates 
-a CSS file and a HTML page named _Monokai-Sharp.css_ and _Monkikai-Sharp.html_ respectively.
-
+ 
 ![readme-2](images/readme-2.png)
+
+---
+
+
+> Create a SASS and Html from a Url
+
 
 In this example no output directory, output name, or file renditions was
 specified. Therefore, only a Html page displaying the unique colors found the the Json file is created.

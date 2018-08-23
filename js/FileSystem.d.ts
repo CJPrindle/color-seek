@@ -23,6 +23,17 @@ export declare namespace FileSystem {
          * @public
          * @function
         */
-        readFile(): void;
+        readFile(callback: Function): void;
+        /**
+         * Writes color palette as a CSS file
+         * @public
+         * @function
+         * @param {string} outputPath - The type of stylesheet: CSS, SASS, LESS
+         * @param {string[]} hexColors    - A string array containing the color palette as Hexadecimal values
+         * @param {string} colorFormat    - CSS color format to use when writing file: Hex, HSL, or RGB
+         * @param {string} styleSheetType - The type of stylesheet: CSS, SASS, LESS
+         */
+        writeCss(outputPath: string, name: string, hexColors: string[], colorFormat: string, styleSheetType: string): void;
+        private formatStyleSheet;
     }
 }

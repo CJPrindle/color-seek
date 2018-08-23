@@ -208,7 +208,7 @@ export namespace Palette {
        * @function
        * @param {string} searchText - The text to parse for colors values
        */
-      public buildHtmlOutput(searchText: string): void {
+      public buildHtmlOutput(searchText: string): string[] {
 
          let hexColors = [...new Set([
             ...this.parseHSLColors(searchText),
@@ -297,6 +297,8 @@ export namespace Palette {
          //- Write out Html palette and open in browser
          fs.writeFileSync(fileName, html.toString());
          opn(fileName);
+
+         return hexColors;
       }
 
       /**

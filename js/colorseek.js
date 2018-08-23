@@ -37,16 +37,17 @@ IN THE SOFTWARE.
 *                  - SCSS (Sass Style Sheet)
 * @fileOverview - EntryPoint
 **************************************************************************** */
-/// <reference path="./Command.ts" />
-/// <reference path="./FileSystem.ts" />
-/// <reference path="./Palette.ts" />
-/// <reference path="./Web.ts" />
+/// <reference path='./Command.ts' />
+/// <reference path='./FileSystem.ts' />
+/// <reference path='./Palette.ts' />
+/// <reference path='./Web.ts' />
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Color Seek entry point
  * @module
  */
 const chalk_1 = require("chalk");
+const path = require("path");
 const minimist2 = require("minimist2");
 const FileSystem_1 = require("./FileSystem");
 const Web_1 = require("./Web");
@@ -56,19 +57,17 @@ const Command_1 = require("./Command");
 /**
  *  Abstracts the console.log method
  *  @constant
- *  @type {}
+ *  @type {Console.log}
  * */
 const log = console.log;
-const logerr = console.error;
 const exit = process.exit;
 const info = chalk_1.default.green;
 const infoBold = chalk_1.default.bold.green;
-const error = chalk_1.default.bold.red;
 const warning = chalk_1.default.bold.yellow;
 const Http = Web_1.Web.Http;
 const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
-const PaletteColor = Palette_1.Palette.PaletteColors;
 const args = (minimist2)(process.argv.slice(2));
+let hexColors = [];
 /**
  * Creates all Console switches and commands
  * @constant
@@ -84,21 +83,22 @@ const commands = [
     new Command_1.Command('--less                        ', 'Create a Less rendering of the color palette        '),
     new Command_1.Command('--scss                        ', 'Create a Sass rendering of the color palette        ')
 ];
-/**
- * The file path or url specified on the command line (-i or --input)
- * @constant
- * @type {string}
- * @default
- */
-const path = (args.i) ? args.i : args.input;
-/**
- * The name to use when creating the color palette output files (-n or --name)
- * @constant
- * @type {string}
- * @inner
- * @default
- */
-const name = (args.n) ? args.n : args.name;
+let outputPath = (args.o) ? args.o : args.output;
+const inputPath = (args.i) ? args.i : args.input;
+const isCss = args.css;
+const isLess = args.less;
+const isSass = args.sass;
+const colorFormat = (args.rgb)
+    ? 'rgb'
+    : (args.hsl)
+        ? 'hsl'
+        : 'hex';
+const name = (args.n)
+    ? args.n
+    : (args.name)
+        ? args.name
+        : path.basename(inputPath, path.extname(inputPath));
+console.log(name);
 //- Enter the matrix
 main();
 /**
@@ -108,14 +108,14 @@ main();
  */
 function main() {
     try {
-        if (path) {
-            if (path.length) {
-                if (path.toLowerCase().startsWith('http')) {
-                    console.log('path', path);
-                    new Http().getUrlData(path, htmlTextHandler);
+        if (inputPath != null) {
+            if (inputPath.length) {
+                //- Determine input type
+                if (inputPath.toLowerCase().startsWith('http')) {
+                    new Http().getUrlData(inputPath, htmlTextHandler);
                 }
                 else {
-                    new FileSystem_1.FileSystem.FileAccess(path, name).readFile();
+                    new FileSystem_1.FileSystem.FileAccess(inputPath, name).readFile(htmlTextHandler);
                 }
             }
             else {
@@ -131,14 +131,30 @@ function main() {
     }
 }
 /**
- * Handles the html data sent from Web~Html~getUrlData
+ * Handles the html data sent from Web.Html.getUrlData()
  * @public
  * @function
  * @callback htmlTextHandler
- * @param data
+ * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data) {
-    new PaletteBuilder(path, name).buildHtmlOutput(data);
+    console.log('inputPath', inputPath);
+    const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, name);
+    //- Create color palette and generate HTML
+    hexColors = new PaletteBuilder(inputPath, name).buildHtmlOutput(data);
+    if (!outputPath) {
+        outputPath = './';
+    }
+    //- Determine which output files to generate
+    if (isCss) {
+        fs.writeCss(outputPath, name, hexColors, colorFormat, 'css');
+    }
+    if (isLess) {
+        fs.writeCss(outputPath, name, hexColors, colorFormat, 'less');
+    }
+    if (isSass) {
+        fs.writeCss(outputPath, name, hexColors, colorFormat, 'scss');
+    }
 }
 /*
  * Print the CLI command list for Color Seek

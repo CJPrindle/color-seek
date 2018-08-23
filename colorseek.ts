@@ -36,16 +36,17 @@ IN THE SOFTWARE.
 *                  - SCSS (Sass Style Sheet)
 * @fileOverview - EntryPoint
 **************************************************************************** */
-/// <reference path="./Command.ts" />
-/// <reference path="./FileSystem.ts" />
-/// <reference path="./Palette.ts" />
-/// <reference path="./Web.ts" />
+/// <reference path='./Command.ts' />
+/// <reference path='./FileSystem.ts' />
+/// <reference path='./Palette.ts' />
+/// <reference path='./Web.ts' />
 
 /**
  * Color Seek entry point
  * @module
  */
 import chalk from 'chalk';
+import * as path  from 'path';
 import * as minimist2 from 'minimist2';
 import { FileSystem } from './FileSystem';
 import { Web } from './Web';
@@ -56,19 +57,18 @@ import { Command } from './Command';
 /** 
  *  Abstracts the console.log method
  *  @constant
- *  @type {}
+ *  @type {Console.log}
  * */
 const log = console.log;
-const logerr = console.error;
 const exit = process.exit;
 const info = chalk.green;
 const infoBold = chalk.bold.green;
-const error = chalk.bold.red;
 const warning = chalk.bold.yellow;
 const Http = Web.Http;
 const PaletteBuilder = Palette.PaletteBuilder;
-const PaletteColor = Palette.PaletteColors;
 const args = (minimist2)(process.argv.slice(2));
+
+let hexColors: string[] = [];
 
 /** 
  * Creates all Console switches and commands
@@ -86,23 +86,23 @@ const commands: Command[] = [
    new Command('--scss                        ','Create a Sass rendering of the color palette        ')
 ];
 
-/** 
- * The file path or url specified on the command line (-i or --input)
- * @constant 
- * @type {string} 
- * @default
- */
-const path: string = (args.i) ? args.i : args.input;
+let outputPath = (args.o) ? args.o : args.output;
+const inputPath = (args.i) ? args.i : args.input;
+const isCss = args.css ;
+const isLess = args.less;
+const isSass = args.sass;
+const colorFormat = (args.rgb)
+   ? 'rgb'
+   : (args.hsl)
+      ? 'hsl'
+      : 'hex';
+const name = (args.n) 
+   ? args.n
+   : (args.name)
+    ? args.name
+    : path.basename(inputPath, path.extname(inputPath));
 
-/**
- * The name to use when creating the color palette output files (-n or --name)
- * @constant
- * @type {string}
- * @inner
- * @default
- */
-const name: string = (args.n) ? args.n : args.name;
-
+console.log(name);
 //- Enter the matrix
 main();
 
@@ -113,13 +113,13 @@ main();
  */
 function main() {
    try {
-      if(path) {
-         if(path.length) {
-            if(path.toLowerCase().startsWith('http')) {
-               console.log('path', path);
-               new Http().getUrlData(path, htmlTextHandler);
+      if(inputPath != null) {
+         if(inputPath.length) {
+            //- Determine input type
+            if(inputPath.toLowerCase().startsWith('http')) {
+               new Http().getUrlData(inputPath, htmlTextHandler);
             } else {
-               new FileSystem.FileAccess(path, name).readFile();
+               new FileSystem.FileAccess(inputPath, name).readFile(htmlTextHandler);
             }
          } else {
             Helpers.outputError(new Error('Missing input file'));
@@ -134,14 +134,35 @@ function main() {
 }
 
 /**
- * Handles the html data sent from Web~Html~getUrlData
+ * Handles the html data sent from Web.Html.getUrlData()
  * @public
  * @function
  * @callback htmlTextHandler 
- * @param data
+ * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data: string): void {
-   new PaletteBuilder(path, name).buildHtmlOutput(data);
+  console.log('inputPath', inputPath) ;
+  const fs = new FileSystem.FileAccess(inputPath, name);
+
+   //- Create color palette and generate HTML
+   hexColors = new PaletteBuilder(inputPath, name).buildHtmlOutput(data);
+   
+   if(!outputPath) {
+    outputPath = './';
+   }
+
+   //- Determine which output files to generate
+   if(isCss) {
+      fs.writeCss(outputPath, name, hexColors, colorFormat, 'css');
+   }
+
+   if(isLess) {
+      fs.writeCss(outputPath, name, hexColors, colorFormat, 'less');
+   }
+
+   if(isSass) {
+      fs.writeCss(outputPath, name, hexColors, colorFormat, 'scss');
+   }
 }
 
 /*
