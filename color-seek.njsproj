@@ -77,6 +77,28 @@
     <Content Include="docs\PaletteBuilder.html" />
     <Content Include="docs\PaletteColors.html" />
     <Content Include="docs\quicksearch.html" />
+    <Content Include="docs\styles\darkstrap.css" />
+    <Content Include="docs\styles\prettify-tomorrow.css" />
+    <Content Include="docs\styles\site.Cerulean.css" />
+    <Content Include="docs\styles\site.Cosmo.css" />
+    <Content Include="docs\styles\site.cyborg.css" />
+    <Content Include="docs\styles\site.Darkly.css" />
+    <Content Include="docs\styles\site.darkstrap.css" />
+    <Content Include="docs\styles\site.dibs-bootstrap.css" />
+    <Content Include="docs\styles\site.flatly.css" />
+    <Content Include="docs\styles\site.journal.css" />
+    <Content Include="docs\styles\site.Lumen.css" />
+    <Content Include="docs\styles\site.Paper.css" />
+    <Content Include="docs\styles\site.Readable.css" />
+    <Content Include="docs\styles\site.sandstone.css" />
+    <Content Include="docs\styles\site.Simplex.css" />
+    <Content Include="docs\styles\site.slate.css" />
+    <Content Include="docs\styles\site.Spacelab.css" />
+    <Content Include="docs\styles\site.superhero.css" />
+    <Content Include="docs\styles\site.United.css" />
+    <Content Include="docs\styles\site.Yeti.css" />
+    <Content Include="docs\styles\sunlight.Dark.css" />
+    <Content Include="docs\styles\sunlight.default.css" />
     <Content Include="docs\Web.html" />
     <Content Include="docs\Web.js.html" />
     <Content Include="images\readme-1.png" />
@@ -107,6 +129,7 @@
   <ItemGroup>
     <Folder Include="docs\" />
     <Folder Include="docs\images\" />
+    <Folder Include="docs\styles\" />
     <Folder Include="images\" />
     <Folder Include="js\" />
   </ItemGroup>
