@@ -12,7 +12,7 @@ export declare namespace Web {
         /**
          * Connects to the provided Url and parses the text data
          * @function
-         * @param {string}  url - The Url to parse
+         * @param {string}  url       - The Url to parse
          * @param {Function} callback - The callback function for further processing
          */
         getUrlData(url: string, callback: Function): Promise<any>;

@@ -37,7 +37,7 @@ export namespace Web {
     /**
      * Connects to the provided Url and parses the text data
      * @function
-     * @param {string}  url - The Url to parse
+     * @param {string}  url       - The Url to parse
      * @param {Function} callback - The callback function for further processing
      */
     public async getUrlData(url: string, callback: Function): Promise<any> {
@@ -45,7 +45,7 @@ export namespace Web {
 
       request
         .get(url)
-        .on("data", chunk => (html += Buffer.from(chunk).toString()))
+        .on("data", chunk => html += Buffer.from(chunk).toString())
         .on("end", () => callback(html));
     }
   }

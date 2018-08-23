@@ -35,13 +35,13 @@ export class ColorConversion {
     * Converts a binary color value to a hexadecimal color value
     * @public
     * @function
-    * @param {string} bin
+    * @param {string} bin - The binary value to convert
     * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
     */
    public BinToRgb(bin: string): Array<number> {
       const pbin = parseInt(bin, 2);
       const red = pbin >> 16;
-      const green = (pbin >> 8) & 0xff;
+      const green = pbin >> 8 & 0xff;
       const blue = pbin & 0xff;
 
       return [red, green, blue];
@@ -86,7 +86,7 @@ export class ColorConversion {
       const hexValue = parseInt(hex, 16);
 
       const red = hexValue >> 16;
-      const green = (hexValue >> 8) & 0xff;
+      const green = hexValue >> 8 & 0xff;
       const blue = hexValue & 0xff;
 
       return [red, green, blue];
@@ -121,7 +121,7 @@ export class ColorConversion {
       hue /= 60;
 
       if(hue < 0) {
-         hue = 6 - (-hue % 6);
+         hue = 6 - -hue % 6;
       }
 
       hue %= 6;
@@ -129,7 +129,7 @@ export class ColorConversion {
       lightness = Math.max(0, Math.min(1, lightness / 100));
 
       c = (1 - Math.abs(2 * lightness - 1)) * saturation;
-      x = c * (1 - Math.abs((hue % 2) - 1));
+      x = c * 1 - Math.abs(hue % 2 - 1);
 
       if(hue < 1) {
          red = c;
@@ -244,7 +244,7 @@ export class ColorConversion {
     * @returns {string} A binary color value
     */
    public RgbToBin(red: number, green: number, blue: number): string {
-      const bin = (red << 16) | (green << 8) | blue;
+      const bin = red << 16 | green << 8 | blue;
       return (function (h: string) {
          return new Array(25 - h.length).join("0") + h;
       })(bin.toString(2));
@@ -292,7 +292,7 @@ export class ColorConversion {
     * @returns {string} A hexadecimal color value
     */
    public RgbToHex(red: number, green: number, blue: number): string {
-      const bin = (red << 16) | (green << 8) | blue;
+      const bin = red << 16 | green << 8 | blue;
 
       return (function (h: string) {
          return new Array(7 - h.length).join("0") + h;

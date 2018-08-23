@@ -39,14 +39,14 @@ var Web;
         /**
          * Connects to the provided Url and parses the text data
          * @function
-         * @param {string}  url - The Url to parse
+         * @param {string}  url       - The Url to parse
          * @param {Function} callback - The callback function for further processing
          */
         async getUrlData(url, callback) {
             let html = "";
             request
                 .get(url)
-                .on("data", chunk => (html += buffer_1.Buffer.from(chunk).toString()))
+                .on("data", chunk => html += buffer_1.Buffer.from(chunk).toString())
                 .on("end", () => callback(html));
         }
     }

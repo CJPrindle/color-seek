@@ -44,8 +44,7 @@ IN THE SOFTWARE.
 /// <reference path='./Web.ts' />
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Color Seek entry point
- * @module
+ * @module colorseek
  */
 const chalk_1 = require("chalk");
 const path = require("path");
@@ -94,7 +93,7 @@ const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
  *  An array of command line arguments starting with the third array item
  *  @instance
  */
-const args = (minimist2)(process.argv.slice(2));
+const args = minimist2(process.argv.slice(2));
 /**
  *  An array containing all colors found in the source file or URL
  *  @instance
@@ -118,12 +117,12 @@ const commands = [
  * The directory to save all output files
  * @instance
  */
-let outputPath = (args.o) ? args.o : args.output;
+let outputPath = args.o ? args.o : args.output;
 /**
  * The source file or URL location
  * @instance
  */
-const inputPath = (args.i) ? args.i : args.input;
+const inputPath = args.i ? args.i : args.input;
 /**
  * Is CSS a requested output file type
  * @instance
@@ -143,18 +142,18 @@ const isSass = args.sass;
  * Which color format will be written to the output files (Hex, RGB, HSL)
  * @instance
  */
-const colorFormat = (args.rgb)
+const colorFormat = args.rgb
     ? 'rgb'
-    : (args.hsl)
+    : args.hsl
         ? 'hsl'
         : 'hex';
 /**
  * The file name to assign all output files
  * @instance
  */
-const name = (args.n)
+const name = args.n
     ? args.n
-    : (args.name)
+    : args.name
         ? args.name
         : path.basename(inputPath, path.extname(inputPath));
 //- Enter the matrix
@@ -166,7 +165,7 @@ main();
  */
 function main() {
     try {
-        if (inputPath != null) {
+        if (inputPath !== null) {
             if (inputPath.length) {
                 //- Determine input type
                 if (inputPath.toLowerCase().startsWith('http')) {

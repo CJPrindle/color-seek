@@ -36,13 +36,13 @@ class ColorConversion {
      * Converts a binary color value to a hexadecimal color value
      * @public
      * @function
-     * @param {string} bin
+     * @param {string} bin - The binary value to convert
      * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
      */
     BinToRgb(bin) {
         const pbin = parseInt(bin, 2);
         const red = pbin >> 16;
-        const green = (pbin >> 8) & 0xff;
+        const green = pbin >> 8 & 0xff;
         const blue = pbin & 0xff;
         return [red, green, blue];
     }
@@ -81,7 +81,7 @@ class ColorConversion {
         hex = hex.replace(/[^0-9a-f]/gi, "");
         const hexValue = parseInt(hex, 16);
         const red = hexValue >> 16;
-        const green = (hexValue >> 8) & 0xff;
+        const green = hexValue >> 8 & 0xff;
         const blue = hexValue & 0xff;
         return [red, green, blue];
     }
@@ -112,13 +112,13 @@ class ColorConversion {
             lightness = 0;
         hue /= 60;
         if (hue < 0) {
-            hue = 6 - (-hue % 6);
+            hue = 6 - -hue % 6;
         }
         hue %= 6;
         saturation = Math.max(0, Math.min(1, saturation / 100));
         lightness = Math.max(0, Math.min(1, lightness / 100));
         c = (1 - Math.abs(2 * lightness - 1)) * saturation;
-        x = c * (1 - Math.abs((hue % 2) - 1));
+        x = c * 1 - Math.abs(hue % 2 - 1);
         if (hue < 1) {
             red = c;
             green = x;
@@ -232,7 +232,7 @@ class ColorConversion {
      * @returns {string} A binary color value
      */
     RgbToBin(red, green, blue) {
-        const bin = (red << 16) | (green << 8) | blue;
+        const bin = red << 16 | green << 8 | blue;
         return (function (h) {
             return new Array(25 - h.length).join("0") + h;
         })(bin.toString(2));
@@ -283,7 +283,7 @@ class ColorConversion {
      * @returns {string} A hexadecimal color value
      */
     RgbToHex(red, green, blue) {
-        const bin = (red << 16) | (green << 8) | blue;
+        const bin = red << 16 | green << 8 | blue;
         return (function (h) {
             return new Array(7 - h.length).join("0") + h;
         })(bin.toString(16).toUpperCase());

@@ -185,11 +185,11 @@ export namespace Palette {
     * @classdesc Contains methods for building the color palette
     */
    export class PaletteBuilder {
-      public inputSource: string; /** The input file path or Url */
-      public outputName: string;  /** The output file name */
-      public totalColors: number /** The total number of colors created */
-      public hueColors: PaletteColors[] = []; /** Contains all Hue based colors */
-      public grayColors: PaletteColors[] = []; /** Contains all gray based colors */
+      public inputSource: string;               /** The input file path or Url */
+      public outputName: string;                /** The output file name */
+      public totalColors: number                /** The total number of colors created */
+      public hueColors: PaletteColors[] = [];   /** Contains all Hue based colors */
+      public grayColors: PaletteColors[] = [];  /** Contains all gray based colors */
 
       /**
        * Sets the input file or url and the output file name (if provided)
@@ -208,6 +208,7 @@ export namespace Palette {
        * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
        * @function
        * @param {string} searchText - The text to parse for colors values
+       * @returns {string[]} An array of hexadecimal color values
        */
       public buildHtmlOutput(searchText: string): string[] {
 
@@ -229,7 +230,7 @@ export namespace Palette {
          //- Find 'Grays' (R,G,B values within +- 5%) and separate them
          this.hueColors.map((h, i, a) => {
             //- Get the Red hi-low range 
-            let pct = ((h.RGB[0] * .05));
+            let pct = h.RGB[0] * .05;
             const redMin = h.Red - pct;
             const redMax = h.Red + pct;
 
@@ -250,7 +251,7 @@ export namespace Palette {
 
          this.hueColors
             .sort((a, b) => {
-               return (b.Hue) - (a.Hue);
+               return b.Hue - a.Hue;
             }).map((v, i, a) => {
                hueSpectrum += `
                   <a href="#${v.Hex}" onclick="colorTarget('${v.Hex}')">
@@ -266,7 +267,7 @@ export namespace Palette {
 
          this.grayColors
             .sort((a, b) => {
-               return (b.Luminosity) - (a.Luminosity);
+               return b.Luminosity - a.Luminosity;
             })
             .map((v, i, a) => {
                graySpectrum += `
@@ -482,8 +483,8 @@ export namespace Palette {
       /**
        * Finds the indexes of a Search value in the provided string
        * @function
-       * @param {string} SearchStr - The value to Search for within the given string
-       * @param {string} str - The string to Search
+       * @param {string} SearchStr      - The value to Search for within the given string
+       * @param {string} str            - The string to Search
        * @param {boolean} caseSensitive - True/False for case sensitivity
        * @returns {number[]} An Array<number> containing the position indexes of the hex color values
        */
@@ -549,7 +550,7 @@ export namespace Palette {
       /**
        * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
        * constituent properties of each format.
-       * @param {string} - hexValue used to create the color formats
+       * @param {string} hexValue - Value used to create the color formats
        */
       public createColorFormats(hexValue: string): void {
          if(RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) { //- Valid Hexadecimal

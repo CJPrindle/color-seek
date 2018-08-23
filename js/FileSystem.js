@@ -43,8 +43,8 @@ var FileSystem;
     class FileAccess {
         /**
          * @constructor
-         * @param source
-         * @param name
+         * @param {string} source - The source file/url parsed for color values
+         * @param {string} name   - The provided name for the generated output files
          */
         constructor(source, name) {
             if (source) {
@@ -58,11 +58,11 @@ var FileSystem;
          * Reads a file and sends the text to be parsed for color values
          * @public
          * @function
+         * @param {Function} callback - The function to call with the input source data when complete
         */
         readFile(callback) {
             try {
                 let fileData = '';
-                let hexColors = [];
                 const palette = new PaletteBuilder(this.inputSource, this.outputName);
                 if (fs.existsSync(this.inputSource)) {
                     var readStream = fs.createReadStream(this.inputSource)
@@ -85,7 +85,8 @@ var FileSystem;
          * Writes color palette as a CSS file
          * @public
          * @function
-         * @param {string} outputPath - The type of stylesheet: CSS, SASS, LESS
+         * @param {string} outputPath     - The type of stylesheet: CSS, SASS, LESS
+         * @param {string} name           - The name given to the output files
          * @param {string[]} hexColors    - A string array containing the color palette as Hexadecimal values
          * @param {string} colorFormat    - CSS color format to use when writing file: Hex, HSL, or RGB
          * @param {string} styleSheetType - The type of stylesheet: CSS, SASS, LESS
@@ -126,6 +127,15 @@ var FileSystem;
                 }
             });
         }
+        /**
+         * Formats the color values based the file type provided
+         * @private
+         * @function
+         * @param {string} styleSheetType - The file type to create (css, less, etc)
+         * @param {string} cssFormat      - The color format to use (Hex, RGB, HSL)
+         * @param {number} count          - Value used to name each color entry
+         * @returns {string} A string formatted for the specified stylesheet type
+         */
         formatStyleSheet(styleSheetType, cssFormat, count) {
             let output = '';
             switch (styleSheetType) {

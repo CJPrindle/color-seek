@@ -17,7 +17,8 @@
     <ProjectGuid>981f1a7b-29e9-44e9-a85e-23217df5439a</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>js/colorseek.js</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>
@@ -107,6 +108,7 @@
     <Folder Include="docs\" />
     <Folder Include="docs\images\" />
     <Folder Include="images\" />
+    <Folder Include="js\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

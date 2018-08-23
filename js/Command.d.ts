@@ -31,8 +31,8 @@ export declare class Command {
     Description: string;
     /**
      * Sets the commands for the application
-     * @param argument - The valid switch value(s) for this command
-     * @param description - A description of the command
+     * @param {string} argument    - The valid switch value(s) for this command
+     * @param {string} description - A description of the command
     */
     constructor(argument: any, description: any);
 }

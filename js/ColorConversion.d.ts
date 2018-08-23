@@ -34,7 +34,7 @@ export declare class ColorConversion {
      * Converts a binary color value to a hexadecimal color value
      * @public
      * @function
-     * @param {string} bin
+     * @param {string} bin - The binary value to convert
      * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
      */
     BinToRgb(bin: string): Array<number>;

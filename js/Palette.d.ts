@@ -32,6 +32,7 @@ export declare namespace Palette {
          * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
          * @function
          * @param {string} searchText - The text to parse for colors values
+         * @returns {string[]} An array of hexadecimal color values
          */
         buildHtmlOutput(searchText: string): string[];
         /**
@@ -66,8 +67,8 @@ export declare namespace Palette {
         /**
          * Finds the indexes of a Search value in the provided string
          * @function
-         * @param {string} SearchStr - The value to Search for within the given string
-         * @param {string} str - The string to Search
+         * @param {string} SearchStr      - The value to Search for within the given string
+         * @param {string} str            - The string to Search
          * @param {boolean} caseSensitive - True/False for case sensitivity
          * @returns {number[]} An Array<number> containing the position indexes of the hex color values
          */
@@ -101,7 +102,7 @@ export declare namespace Palette {
         /**
          * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
          * constituent properties of each format.
-         * @param {string} - hexValue used to create the color formats
+         * @param {string} hexValue - Value used to create the color formats
          */
         createColorFormats(hexValue: string): void;
     }

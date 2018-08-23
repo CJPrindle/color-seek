@@ -33,14 +33,14 @@ export class Helpers {
     * Determines if value is in a given range 
     * @public 
     * @function
-    * @param {number} val - The value to test for between
     * @param {number} min - The minimum for the range
-    * @param {number} max  - The maximum for the range
+    * @param {number} max - The maximum for the range
+    * @param {number} val - The value to test for between
     * @returns {boolean} True if the value is within the given range, 
     *                    otherwise False
     */
    public static between(min: number, max: number, val: number) {
-      return (val >= min && val <= max);
+      return val >= min && val <= max;
    }
 
 
@@ -48,8 +48,8 @@ export class Helpers {
     * Generates a random integer
     * @public
     * @function
-    * @param min {number} - The minimum random value
-    * @param max {number} - The maximum random value
+    * @param {number} min - The minimum random value
+    * @param {number} max - The maximum random value
     * @returns {number} An integer within the specified range
     */
    static getRandomInteger(min: number = 1, max: number = 100): number {
@@ -60,9 +60,9 @@ export class Helpers {
     * Generates a random float
     * @public
     * @function
-    * @param min {number} - The minimum random value
-    * @param max {number} - The maximum random value
-    * @param places {number} - The maximum number of decimal places
+    * @param {number} min    - The minimum random value
+    * @param {number} max    - The maximum random value
+    * @param {number} places - The maximum number of decimal places
     * @returns {number} A float within the specified range
     */
    public static getRandomDecimal(
