@@ -31,161 +31,15 @@ import { ColorConversion } from './ColorConversion';
  */
 export namespace Palette {
    /**
-    * @instance
-    * @memberof Palette
-    */
-   export const namedColors = [
-      { key: "Black", value: "#000000" },
-      { key: "Navy", value: "#000080" },
-      { key: "DarkBlue", value: "#00008B" },
-      { key: "MediumBlue", value: "#0000CD" },
-      { key: "Blue", value: "#0000FF" },
-      { key: "DarkGreen", value: "#006400" },
-      { key: "Green", value: "#008000" },
-      { key: "Teal", value: "#008080" },
-      { key: "DarkCyan", value: "#008B8B" },
-      { key: "DeepSkyBlue", value: "#00BFFF" },
-      { key: "DarkTurquoise", value: "#00CED1" },
-      { key: "MediumSpringGreen", value: "#00FA9A" },
-      { key: "Lime", value: "#00FF00" },
-      { key: "SpringGreen", value: "#00FF7F" },
-      { key: "Aqua", value: "#00FFFF" },
-      { key: "Cyan", value: "#00FFFF" },
-      { key: "MidnightBlue", value: "#191970" },
-      { key: "DodgerBlue", value: "#1E90FF" },
-      { key: "LightSeaGreen", value: "#20B2AA" },
-      { key: "ForestGreen", value: "#228B22" },
-      { key: "SeaGreen", value: "#2E8B57" },
-      { key: "DarkSlateGray", value: "#2F4F4F" },
-      { key: "LimeGreen", value: "#32CD32" },
-      { key: "MediumSeaGreen", value: "#3CB371" },
-      { key: "Turquoise", value: "#40E0D0" },
-      { key: "RoyalBlue", value: "#4169E1" },
-      { key: "SteelBlue", value: "#4682B4" },
-      { key: "DarkSlateBlue", value: "#483D8B" },
-      { key: "MediumTurquoise", value: "#48D1CC" },
-      { key: "Indigo", value: "#4B0082" },
-      { key: "DarkOliveGreen", value: "#556B2F" },
-      { key: "CadetBlue", value: "#5F9EA0" },
-      { key: "CornflowerBlue", value: "#6495ED" },
-      { key: "MediumAquamarine", value: "#66CDAA" },
-      { key: "DimGray", value: "#696969" },
-      { key: "SlateBlue", value: "#6A5ACD" },
-      { key: "OliveDrab", value: "#6B8E23" },
-      { key: "SlateGray", value: "#708090" },
-      { key: "LightSlateGray", value: "#778899" },
-      { key: "MediumSlateBlue", value: "#7B68EE" },
-      { key: "LawnGreen", value: "#7CFC00" },
-      { key: "Chartreuse", value: "#7FFF00" },
-      { key: "Aquamarine", value: "#7FFFD4" },
-      { key: "Maroon", value: "#800000" },
-      { key: "Purple", value: "#800080" },
-      { key: "Olive", value: "#808000" },
-      { key: "SkyBlue", value: "#87CEEB" },
-      { key: "LightSkyBlue", value: "#87CEFA" },
-      { key: "BlueViolet", value: "#8A2BE2" },
-      { key: "DarkRed", value: "#8B0000" },
-      { key: "DarkMagenta", value: "#8B008B" },
-      { key: "SaddleBrown", value: "#8B4513" },
-      { key: "DarkSeaGreen", value: "#8FBC8F" },
-      { key: "LightGreen", value: "#90EE90" },
-      { key: "MediumPurple", value: "#9370DB" },
-      { key: "DarkViolet", value: "#9400D3" },
-      { key: "PaleGreen", value: "#98FB98" },
-      { key: "DarkOrchid", value: "#9932CC" },
-      { key: "YellowGreen", value: "#9ACD32" },
-      { key: "Sienna", value: "#A0522D" },
-      { key: "Brown", value: "#A52A2A" },
-      { key: "DarkGray", value: "#A9A9A9" },
-      { key: "LightBlue", value: "#ADD8E6" },
-      { key: "GreenYellow", value: "#ADFF2F" },
-      { key: "PaleTurquoise", value: "#AFEEEE" },
-      { key: "LightSteelBlue", value: "#B0C4DE" },
-      { key: "PowderBlue", value: "#B0E0E6" },
-      { key: "Firebrick", value: "#B22222" },
-      { key: "DarkGoldenrod", value: "#B8860B" },
-      { key: "MediumOrchid", value: "#BA55D3" },
-      { key: "RosyBrown", value: "#BC8F8F" },
-      { key: "DarkKhaki", value: "#BDB76B" },
-      { key: "Gray", value: "#BEBEBE" },
-      { key: "Silver", value: "#C0C0C0" },
-      { key: "MediumVioletRed", value: "#C71585" },
-      { key: "IndianRed", value: "#CD5C5C" },
-      { key: "Peru", value: "#CD853F" },
-      { key: "Chocolate", value: "#D2691E" },
-      { key: "Tan", value: "#D2B48C" },
-      { key: "LightGrey", value: "#D3D3D3" },
-      { key: "Thistle", value: "#D8BFD8" },
-      { key: "Orchid", value: "#DA70D6" },
-      { key: "Goldenrod", value: "#DAA520" },
-      { key: "PaleVioletRed", value: "#DB7093" },
-      { key: "Crimson", value: "#DC143C" },
-      { key: "Gainsboro", value: "#DCDCDC" },
-      { key: "Plum", value: "#DDA0DD" },
-      { key: "Burlywood", value: "#DEB887" },
-      { key: "LightCyan", value: "#E0FFFF" },
-      { key: "Lavender", value: "#E6E6FA" },
-      { key: "DarkSalmon", value: "#E9967A" },
-      { key: "Violet", value: "#EE82EE" },
-      { key: "PaleGoldenrod", value: "#EEE8AA" },
-      { key: "LightCoral", value: "#F08080" },
-      { key: "Khaki", value: "#F0D58C" },
-      { key: "AliceBlue", value: "#F0F8FF" },
-      { key: "Honeydew", value: "#F0FFF0" },
-      { key: "Azure", value: "#F0FFFF" },
-      { key: "SandyBrown", value: "#F4A460" },
-      { key: "Wheat", value: "#F5DEB3" },
-      { key: "Beige", value: "#F5F5DC" },
-      { key: "WhiteSmoke", value: "#F5F5F5" },
-      { key: "MintCream", value: "#F5FFFA" },
-      { key: "GhostWhite", value: "#F8F8FF" },
-      { key: "Salmon", value: "#FA8072" },
-      { key: "AntiqueWhite", value: "#FAEBD7" },
-      { key: "Linen", value: "#FAF0E6" },
-      { key: "LightGoldenrodYellow", value: "#FAFAD2" },
-      { key: "OldLace", value: "#FDF5E6" },
-      { key: "Red", value: "#FF0000" },
-      { key: "Fuchsia", value: "#FF00FF" },
-      { key: "Magenta", value: "#FF00FF" },
-      { key: "DeepPink", value: "#FF1493" },
-      { key: "OrangeRed", value: "#FF4500" },
-      { key: "Tomato", value: "#FF6347" },
-      { key: "HotPink", value: "#FF69B4" },
-      { key: "Coral", value: "#FF7F50" },
-      { key: "DarkOrange", value: "#FF8C00" },
-      { key: "LightSalmon", value: "#FFA07A" },
-      { key: "Orange", value: "#FFA500" },
-      { key: "LightPink", value: "#FFB6C1" },
-      { key: "Pink", value: "#FFC0CB" },
-      { key: "Gold", value: "#FFD700" },
-      { key: "PeachPuff", value: "#FFDAB9" },
-      { key: "NavajoWhite", value: "#FFDEAD" },
-      { key: "Moccasin", value: "#FFE4B5" },
-      { key: "Bisque", value: "#FFE4C4" },
-      { key: "MistyRose", value: "#FFE4E1" },
-      { key: "BlanchedAlmond", value: "#FFEBCD" },
-      { key: "PapayaWhip", value: "#FFEFD5" },
-      { key: "LavenderBlush", value: "#FFF0F5" },
-      { key: "Seashell", value: "#FFF5EE" },
-      { key: "CornSilk", value: "#FFF8DC" },
-      { key: "LemonChiffon", value: "#FFFACD" },
-      { key: "FloralWhite", value: "#FFFAF0" },
-      { key: "Snow", value: "#FFFAFA" },
-      { key: "Yellow", value: "#FFFF00" },
-      { key: "LightYellow", value: "#FFFFE0" },
-      { key: "Ivory", value: "#FFFFF0" },
-      { key: "White", value: "#FFFFFF" }
-   ];
-
-   /**
     * @public
     * @class
     * @classdesc Contains methods for building the color palette
     * @memberof Palette
     */
    export class PaletteBuilder {
-      public htmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml"><title>Color Seek - Color Palette</title><style>*{color:#999;font-family:Armata,'Gill Sans MT','Arial Nova','Open Sans','Helvetica Neue','Lucida Grande','Segoe UI',sans-serif;font-size:12px}body{background-color:#222;padding:20px}a{color:#fff777}a:visited{color:green}.center{text-align:center}.extra-large-text{font-size:3em;font-weight:600}.large-text{font-size:1.75em;font-weight:600}.container{background:#e0ffff;border:2px solid #c6c6c6;display:flex;flex-wrap:wrap;position:relative;padding-bottom:5px}.container.hues{background-color:#333}.palette-header{background-color:#b3b3b3;border:2px solid #e9e9e9;color:#141414;display:block;font-size:1.2em;font-weight:500;height:25px;margin:15px 0 0 0;padding:5px;position:relative;text-shadow:1px 1px 1px #b1b1b1}.palette-header span{color:#141414;font-size:1.33em;font-weight:600}.spectrum{display:inline-flex;position:absolute;right:0;top:1px}.strip{display:block;height:32px;margin:0;max-height:32px;width:8px}.swatch{border-radius:10px;box-shadow:0 4px 8px 0 rgba(0,0,0,.8),0 6px 20px 0 rgba(0,0,0,.8);display:inline-grid;height:160px;margin:6px;text-align:center;width:160px}.header{border-radius:0 0 4px 4px;height:75px;margin-bottom:auto;margin-left:auto;margin-right:auto;margin-top:auto;position:relative;text-align:left;width:70%}.header div{font-family:'Source Code Pro','Courier Prime Code',Cousine,Inconsolata,'Global Monospace',monospace;font-size:11px}.left{bottom:0;left:0;position:absolute;top:5px}.left div{font-weight:700}.right{bottom:0;position:absolute;right:0;text-align:right;top:5px}.colorseek{text-shadow:1px 1px 2px #1688d9}.strip:hover .tooltip{display:block}.tooltip{background:rgba(128,128,128,.74);color:#fff;display:none;height:auto;margin-left:-100px;margin-top:-16px;padding:4px;position:absolute;width:auto;z-index:1000}</style><script language=ecmaScript>let previousThumbnail = null;let previousStyle = null; function colorTarget(hex) { const thumbnail = document.getElementById(hex); if(previousThumbnail !== null) { previousThumbnail.style = previousStyle; } previousThumbnail = thumbnail; previousStyle = thumbnail.style; thumbnail.style.border = '5px yellow solid';}</script></head><body><div class="extra-large-text center">{name} Palette</div><div><span class=large-text>{total_colors} Colors Generated by</span> <b class="colorseek large-text">Color Seek</b></div><br><div style="position: relative"><span><span class=large-text>Original Source:</span> <i><span class=large-text>{source}</span></i></span> <span style="position: absolute; right: 0"><span>Go to:</span> <span>&nbsp;</span> <a href=#Hues>Hues</a> <span>&nbsp;</span> <a href=#Grays>Grays</a></span></div><div class=palette-header><span id=Hues>Hues</span> <span class=spectrum>{hue_spectrum}</span></div><div class="container hues">{hue_colors}</div><div class=palette-header><span id=Grays>Grays</span> <span class=spectrum>{gray_spectrum}</span></div><div class=container>{gray_colors}</div><br><div style="position: relative"><span><span>Color Seek is available on</span> <a href=http://www.github.com/cjprindle>GitHub</a></span> <span style="position: absolute; right: 0"><span>Go to:</span> <span>&nbsp;</span> <a href=#Hues>Hues</a> <span>&nbsp;</span> <a href=#Grays>Grays</a></span></div><br><hr></body></html>`;
+      public htmlTemplate = `<html xmlns="http://www.w3.org/1999/xhtml"><title>Color Seek - Color Palette</title><style>*{color:#999;font-family:'Gill Sans MT','Arial Nova','Open Sans','Helvetica Neue','Lucida Grande','Segoe UI',sans-serif;font-size:12px}body{background-color:#222;padding:20px}a{color:#fff777}a:visited{color:green}.center{text-align:center}.extra-large-text{font-size:2.5em;font-weight:600}.large-text{font-size:1.5em;font-weight:600}.container{background:#e0ffff;border:2px solid #c6c6c6;display:flex;flex-wrap:wrap;position:relative;padding-bottom:5px}.container.hues{background-color:#333}.palette-header{background-color:#b3b3b3;border:2px solid #e9e9e9;color:#141414;display:block;font-size:1.2em;font-weight:500;height:25px;margin:15px 0 0 0;padding:5px;position:relative;text-shadow:1px 1px 1px #b1b1b1}.palette-header span{color:#141414;font-size:1.33em;font-weight:600}.spectrum{display:inline-flex;position:absolute;right:0;top:1px}.strip{display:block;height:32px;margin:0;max-height:32px;width:8px}.swatch{border-radius:10px;box-shadow:0 4px 8px 0 rgba(0,0,0,.8),0 6px 20px 0 rgba(0,0,0,.8);display:inline-grid;height:160px;margin:6px;text-align:center;width:160px}.header{border-radius:0 0 4px 4px;height:75px;margin-bottom:auto;margin-left:auto;margin-right:auto;margin-top:auto;position:relative;text-align:left;width:70%}.header div{font-family:'Source Code Pro','Courier Prime Code',Cousine,Inconsolata,'Global Monospace',monospace;font-size:11px}.left{bottom:0;left:0;position:absolute;top:5px}.left div{font-weight:700}.right{bottom:0;position:absolute;right:0;text-align:right;top:5px}.colorseek{text-shadow:1px 1px 2px #1688d9}.strip:hover .tooltip{display:block}.tooltip{background:rgba(128,128,128,.74);color:#fff;display:none;height:auto;margin-left:-100px;margin-top:-16px;padding:4px;position:absolute;width:auto;z-index:1000}</style><script language=ecmaScript>let previousThumbnail = null;let previousStyle = null; function colorTarget(hex) { const thumbnail = document.getElementById(hex); if(previousThumbnail !== null) { previousThumbnail.style = previousStyle; } previousThumbnail = thumbnail; previousStyle = thumbnail.style; thumbnail.style.border = '5px yellow solid';}</script></head><body><div class="extra-large-text center">{name} Palette</div><div><span class=large-text>{total_colors} Colors Generated by</span> <b class="colorseek large-text">Color Seek</b></div><div style="position: relative"><span><span class=large-text>Original Source:</span> <i><span class=large-text>{source}</span></i></span> <span style="position: absolute; right: 0"><span>Go to:</span> <span>&nbsp;</span> <a href=#Hues>Hues</a> <span>&nbsp;</span> <a href=#Grays>Grays</a></span></div><div class=palette-header><span id=Hues>Hues</span> <span class=spectrum>{hue_spectrum}</span></div><div class="container hues">{hue_colors}</div><div class=palette-header><span id=Grays>Grays</span> <span class=spectrum>{gray_spectrum}</span></div><div class=container>{gray_colors}</div><br><div style="position: relative"><span><span>Color Seek is available on</span> <a href=http://www.github.com/cjprindle/color-seek>GitHub</a></span> <span style="position: absolute; right: 0"><span>Go to:</span> <span>&nbsp;</span> <a href=#Hues>Hues</a> <span>&nbsp;</span> <a href=#Grays>Grays</a></span></div><br><hr></body></html>`;
       public inputSource: string;               /** The input file path or Url */
+      public outputPath: string;           /** The output directory for the files */
       public outputName: string;                /** The output file name */
       public totalColors: number                /** The total number of colors created */
       public hueColors: PaletteColors[] = [];   /** Contains all Hue based colors */
@@ -194,11 +48,13 @@ export namespace Palette {
       /**
        * Sets the input file or url and the output file name (if provided)
        * @constructor
-       * @param {string} source - The source file/url parsed for color values
-       * @param {string} name   - The provided name for the generated output files
+       * @param {string} source     - The source file/url parsed for color values
+       * @param {string} outputPath - The path to save the output files
+       * @param {string} name       - The provided name for the generated output files
        */
-      constructor(source: string, name: string) {
+      constructor(source: string, outputPath: string, name: string) {
          this.inputSource = source ? source : "N/A";
+         this.outputPath = outputPath;
          this.outputName = name
             ? name
             : `Color Seek - ${Helpers.getMilliseconds(6)}`;
@@ -277,15 +133,8 @@ export namespace Palette {
                      </div>
                   </a>\n`;
             });
-
-         //- Open the template Html file
-         //let html = fs.readFileSync("template.html").toString();
-
-         //const fileName = `${this.outputName
-         //   .trim()
-         //   .replace(new RegExp(" ", "g"), "")}.html`;
-
-         const fileName = `${this.outputName}.html`;
+                 
+         const fileName = `${this.outputPath}/${this.outputName}.html`;
 
          //- Write color information into placeholders
          this.htmlTemplate = this.htmlTemplate

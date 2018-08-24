@@ -13,13 +13,14 @@ export declare namespace FileSystem {
     */
     class FileAccess {
         inputSource: string;
+        outputPath: string;
         outputName: string;
         /**
          * @constructor
          * @param {string} source - The source file/url parsed for color values
          * @param {string} name   - The provided name for the generated output files
          */
-        constructor(source: string, name: string);
+        constructor(source: string, outputPath: any, name: string);
         /**
          * Reads a file and sends the text to be parsed for color values
          * @public

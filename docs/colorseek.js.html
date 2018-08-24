@@ -141,13 +141,15 @@ const Helpers_1 = require("./lib/Helpers");
 const Palette_1 = require("./lib/Palette");
 const Command_1 = require("./lib/Command");
 /**
- *  Abstracts the console.log method
- *  @instance
+ * @summary Logger
+ * @description Reference to the console.log method
+ * @type {Console.log}
  */
 const log = console.log;
 /**
- *  Abstracts the process.exit method
- *  @instance
+ * @summary Logger
+ * @description Reference to the process.exit field
+ * @type {process.exit}
  */
 const exit = process.exit;
 /**
@@ -254,7 +256,7 @@ function main() {
                     new Web_1.Web.Http().getUrlData(inputPath, htmlTextHandler);
                 }
                 else {
-                    new FileSystem_1.FileSystem.FileAccess(inputPath, name).readFile(htmlTextHandler);
+                    new FileSystem_1.FileSystem.FileAccess(inputPath, outputPath, name).readFile(htmlTextHandler);
                 }
             }
             else {
@@ -278,12 +280,12 @@ function main() {
  * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data) {
-    const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, name);
-    //- Create color palette and generate HTML
-    hexColors = new Palette_1.Palette.PaletteBuilder(inputPath, name).buildHtmlOutput(data);
+    const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, outputPath, name);
     if (!outputPath) {
-        outputPath = './';
+        outputPath = '.';
     }
+    //- Create color palette and generate HTML
+    hexColors = new Palette_1.Palette.PaletteBuilder(inputPath, outputPath, name).buildHtmlOutput(data);
     //- Determine which output files to generate
     if (isCss) {
         fs.writeCss(outputPath, name, hexColors, colorFormat, 'css');

@@ -53,17 +53,18 @@ import { Web } from './lib/Web';
 import { Helpers } from './lib/Helpers';
 import { Palette } from './lib/Palette';
 import { Command } from './lib/Command';
-import { constant } from 'async';
 
-/** 
- *  Abstracts the console.log method
- *  @instance
- */
+ /**
+  * @summary Logger
+  * @description Reference to the console.log method
+  * @type {Console.log}
+  */
 const log = console.log;
-/** 
- *  Abstracts the process.exit method
- *  @instance
- */
+ /**
+  * @summary Logger
+  * @description Reference to the process.exit field
+  * @type {process.exit}
+  */
 const exit = process.exit;
 /** 
  *  Displays 'Information' level messages to the console
@@ -171,7 +172,7 @@ function main() {
             if(inputPath.toLowerCase().startsWith('http')) {
                new Web.Http().getUrlData(inputPath, htmlTextHandler);
             } else {
-               new FileSystem.FileAccess(inputPath, name).readFile(htmlTextHandler);
+               new FileSystem.FileAccess(inputPath, outputPath, name).readFile(htmlTextHandler);
             }
          } else {
             Helpers.outputError(new Error('Missing input file'));
@@ -194,14 +195,14 @@ function main() {
  * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data: string): void {
-  const fs = new FileSystem.FileAccess(inputPath, name);
+   const fs = new FileSystem.FileAccess(inputPath, outputPath, name);
+
+   if(!outputPath) {
+      outputPath = '.';
+   }
 
    //- Create color palette and generate HTML
-   hexColors = new Palette.PaletteBuilder(inputPath, name).buildHtmlOutput(data);
-   
-   if(!outputPath) {
-    outputPath = './';
-   }
+   hexColors = new Palette.PaletteBuilder(inputPath, outputPath, name).buildHtmlOutput(data);
 
    //- Determine which output files to generate
    if(isCss) {

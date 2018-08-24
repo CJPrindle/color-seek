@@ -43,6 +43,7 @@ export namespace FileSystem {
    */
    export class FileAccess {
       public inputSource: string;
+      public outputPath: string;
       public outputName: string;
 
       /**
@@ -50,8 +51,9 @@ export namespace FileSystem {
        * @param {string} source - The source file/url parsed for color values
        * @param {string} name   - The provided name for the generated output files
        */
-      constructor(source: string, name: string) {
+      constructor(source: string, outputPath, name: string) {
          this.inputSource = source;
+         this.outputPath = outputPath;
          this.outputName = name;
       }
 
@@ -63,7 +65,7 @@ export namespace FileSystem {
       */
       public readFile(callback: Function): void {
          let fileData: string = '';
-         const palette = new PaletteBuilder(this.inputSource, this.outputName);
+         const palette = new PaletteBuilder(this.inputSource, this.outputPath, this.outputName);
 
          if(fs.existsSync(this.inputSource)) {
             var readStream = fs.createReadStream(this.inputSource)

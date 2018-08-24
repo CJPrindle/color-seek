@@ -4,14 +4,6 @@
  */
 export declare namespace Palette {
     /**
-     * @instance
-     * @memberof Palette
-     */
-    const namedColors: {
-        key: string;
-        value: string;
-    }[];
-    /**
      * @public
      * @class
      * @classdesc Contains methods for building the color palette
@@ -20,6 +12,7 @@ export declare namespace Palette {
     class PaletteBuilder {
         htmlTemplate: string;
         inputSource: string; /** The input file path or Url */
+        outputPath: string; /** The output directory for the files */
         outputName: string; /** The output file name */
         totalColors: number; /** The total number of colors created */
         hueColors: PaletteColors[]; /** Contains all Hue based colors */
@@ -27,10 +20,11 @@ export declare namespace Palette {
         /**
          * Sets the input file or url and the output file name (if provided)
          * @constructor
-         * @param {string} source - The source file/url parsed for color values
-         * @param {string} name   - The provided name for the generated output files
+         * @param {string} source     - The source file/url parsed for color values
+         * @param {string} outputPath - The path to save the output files
+         * @param {string} name       - The provided name for the generated output files
          */
-        constructor(source: string, name: string);
+        constructor(source: string, outputPath: string, name: string);
         /**
          * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
          * @function

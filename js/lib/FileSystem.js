@@ -48,8 +48,9 @@ var FileSystem;
          * @param {string} source - The source file/url parsed for color values
          * @param {string} name   - The provided name for the generated output files
          */
-        constructor(source, name) {
+        constructor(source, outputPath, name) {
             this.inputSource = source;
+            this.outputPath = outputPath;
             this.outputName = name;
         }
         /**
@@ -60,7 +61,7 @@ var FileSystem;
         */
         readFile(callback) {
             let fileData = '';
-            const palette = new PaletteBuilder(this.inputSource, this.outputName);
+            const palette = new PaletteBuilder(this.inputSource, this.outputPath, this.outputName);
             if (fs.existsSync(this.inputSource)) {
                 var readStream = fs.createReadStream(this.inputSource)
                     .on('data', (chunk) => {

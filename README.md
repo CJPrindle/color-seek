@@ -12,6 +12,7 @@ their value in each CSS format.
 
 
 ![Readme Image 1](./img/readme-1.png)
+
 `Example: HTML Color Palette`
 
 ---
