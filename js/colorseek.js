@@ -58,37 +58,41 @@ const Command_1 = require("./lib/Command");
 /**
  * @summary Log Helper
  * @description Reference to the console.log method
- * @type {Console.log}
+ * @type {Console}
+ * @instance
  */
 const log = console.log;
 /**
  * @summary Application Exit Helper
  * @description Reference to the process.exit field
- * @type {process.exit}
+ * @type {any}
+ * @instance
  */
 const exit = process.exit;
 /**
  * @summary Console Helper
  * @description Displays 'Information' level messages to the console
- * @type {chalk.property}
+ * @type {any}
+ * @instance
  */
 const info = chalk_1.default.green;
 /**
  * @summary Console Helper
  * @description Displays bold 'Information' level messages to the console
- * @type {chalk.property}
+ * @type {any}
+ * @instance
  */
 const infoBold = chalk_1.default.bold.green;
 /**
  * @summary Console Helper
  * @description Displays 'Warning' level messages to the console
- * @type {chalk.property}
+ * @type {any}
  */
 const warning = chalk_1.default.bold.yellow;
 /**
  * @summary Command Line Arguments Helper
  * @description Returns the command line argument array starting on the third element
- * @type {minimist2}
+ * @type {any}
  */
 const args = minimist2(process.argv.slice(2));
 /**
@@ -150,7 +154,7 @@ const isSass = args.sass;
 /**
  * @summary Command Line Argument
  * @description Which color format will be written to the output files (Hex, RGB, HSL)
- * @type {any}
+ * @type {string}
  */
 const colorFormat = args.rgb
     ? 'rgb'
@@ -160,7 +164,7 @@ const colorFormat = args.rgb
 /**
  * @summary Command Line Argument
  * @description The file name to assign all output files
- * @type {any}
+ * @type string
  */
 const name = args.n
     ? args.n

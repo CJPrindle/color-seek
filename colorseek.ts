@@ -46,7 +46,7 @@ IN THE SOFTWARE.
  *  Color Palette builder from existing resources
  *  @module colorseek 
  */
-import chalk from 'chalk';
+import chalk, { Chalk } from 'chalk';
 import * as path from 'path';
 import * as minimist2 from 'minimist2';
 import { FileSystem } from './lib/FileSystem';
@@ -58,39 +58,43 @@ import { Command } from './lib/Command';
 /**
  * @summary Log Helper
  * @description Reference to the console.log method
- * @type {Console.log}
+ * @type {Console}
+ * @instance
  */
 const log = console.log;
 /**
  * @summary Application Exit Helper
  * @description Reference to the process.exit field
- * @type {process.exit}
+ * @type {any}
+ * @instance
  */
-const exit = process.exit;
+const exit: any = process.exit;
 /**
  * @summary Console Helper
  * @description Displays 'Information' level messages to the console
- * @type {chalk.property}
+ * @type {any}
+ * @instance
  */
-const info = chalk.green;
+const info: any = chalk.green;
 /** 
  * @summary Console Helper
  * @description Displays bold 'Information' level messages to the console
- * @type {chalk.property}
+ * @type {any}
+ * @instance
  */
-const infoBold = chalk.bold.green;
+const infoBold: any = chalk.bold.green;
 /** 
  * @summary Console Helper
  * @description Displays 'Warning' level messages to the console
- * @type {chalk.property}
+ * @type {any}
  */
-const warning = chalk.bold.yellow;
+const warning: any = chalk.bold.yellow;
 /** 
  * @summary Command Line Arguments Helper
  * @description Returns the command line argument array starting on the third element
- * @type {minimist2}
+ * @type {any}
  */
-const args = minimist2(process.argv.slice(2));
+const args: any = minimist2(process.argv.slice(2));
 /** 
  *  @summary Color Format
  *  @description An array containing all colors found in the source file or URL
@@ -114,45 +118,45 @@ const commands: Command[] = [
 /** 
  * @summary Command Line Argument
  * @description The directory to save all output files
- * @type {any}
+ * @type {string}
  */
-let outputPath = args.o ? args.o : args.output;
+let outputPath: string = args.o ? args.o : args.output;
 /** 
  * @summary Command Line Argument
  * @description The source file or URL location
- * @type {any}
+ * @type {string}
  */
-const inputPath = args.i ? args.i : args.input;
+const inputPath: string = args.i ? args.i : args.input;
 /** 
  * @summary Command Line Argument
  * @description Is CSS a requested output file type
  * @type {boolean}
  */
-const isCss = args.css;
+const isCss: boolean = args.css;
 /** 
  * @summary Command Line Argument
  * @description Is Gimp Palette File a requested output file type
  * @type {boolean}
  */
-const isGimp = args.gimp;
+const isGimp: boolean = args.gimp;
 /** 
  * @summary Command Line Argument
  * @description Is LESS a requested output file type
  * @type {boolean}
  */
-const isLess = args.less;
+const isLess: boolean = args.less;
 /** 
  * @summary Command Line Argument
  * @description Is SASS a requested output file type
  * @type {boolean}
  */
-const isSass = args.sass;
+const isSass: boolean = args.sass;
 /** 
  * @summary Command Line Argument
  * @description Which color format will be written to the output files (Hex, RGB, HSL)
- * @type {any}
+ * @type {string}
  */
-const colorFormat = args.rgb
+const colorFormat: string = args.rgb
    ? 'rgb'
    : args.hsl
       ? 'hsl'
@@ -160,9 +164,9 @@ const colorFormat = args.rgb
 /** 
  * @summary Command Line Argument
  * @description The file name to assign all output files
- * @type {any}
+ * @type string
  */
-const name = args.n
+const name: string = args.n
    ? args.n
    : args.name
       ? args.name
