@@ -44,7 +44,8 @@ IN THE SOFTWARE.
 /// <reference path='./lib/Web.ts' />
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @module colorseek
+ *  Color Palette builder from existing resources
+ *  @module colorseek
  */
 const chalk_1 = require("chalk");
 const path = require("path");
@@ -55,35 +56,39 @@ const Helpers_1 = require("./lib/Helpers");
 const Palette_1 = require("./lib/Palette");
 const Command_1 = require("./lib/Command");
 /**
- * @summary Logger
+ * @summary Log Helper
  * @description Reference to the console.log method
  * @type {Console.log}
  */
 const log = console.log;
 /**
- * @summary Logger
+ * @summary Application Exit Helper
  * @description Reference to the process.exit field
  * @type {process.exit}
  */
 const exit = process.exit;
 /**
- *  Displays 'Information' level messages to the console
- *  @instance
+ * @summary Console Helper
+ * @description Displays 'Information' level messages to the console
+ * @type {chalk.style}
  */
 const info = chalk_1.default.green;
 /**
- *  Displays 'Information' level messages to the console with bold text
- *  @instance
+ * @summary Console Helper
+ * @description Displays bold 'Information' level messages to the console
+ * @type {chalk.style}
  */
 const infoBold = chalk_1.default.bold.green;
 /**
- *  Displays 'Warning' level messages to the console
- *  @instance
+ * @summary Console Helper
+ * @description Displays 'Warning' level messages to the console
+ * @type {chalk.style}
  */
 const warning = chalk_1.default.bold.yellow;
 /**
- *  An array of command line arguments starting with the third array item
- *  @instance
+ * @summary Command Line Arguments Helper
+ * @description Returns the command line argument array starting on the third element
+ * @type {minimist2}
  */
 const args = minimist2(process.argv.slice(2));
 /**

@@ -42,11 +42,12 @@ IN THE SOFTWARE.
 /// <reference path='./lib/Palette.ts' />
 /// <reference path='./lib/Web.ts' />
 
-/**
- * @module colorseek
+/** 
+ *  Color Palette builder from existing resources
+ *  @module colorseek 
  */
 import chalk from 'chalk';
-import * as path  from 'path';
+import * as path from 'path';
 import * as minimist2 from 'minimist2';
 import { FileSystem } from './lib/FileSystem';
 import { Web } from './lib/Web';
@@ -54,36 +55,40 @@ import { Helpers } from './lib/Helpers';
 import { Palette } from './lib/Palette';
 import { Command } from './lib/Command';
 
- /**
-  * @summary Logger
-  * @description Reference to the console.log method
-  * @type {Console.log}
-  */
+/**
+ * @summary Log Helper
+ * @description Reference to the console.log method
+ * @type {Console.log}
+ */
 const log = console.log;
- /**
-  * @summary Logger
-  * @description Reference to the process.exit field
-  * @type {process.exit}
-  */
+/**
+ * @summary Application Exit Helper
+ * @description Reference to the process.exit field
+ * @type {process.exit}
+ */
 const exit = process.exit;
-/** 
- *  Displays 'Information' level messages to the console
- *  @instance
+/**
+ * @summary Console Helper
+ * @description Displays 'Information' level messages to the console
+ * @type {chalk.style}
  */
 const info = chalk.green;
 /** 
- *  Displays 'Information' level messages to the console with bold text
- *  @instance
+ * @summary Console Helper
+ * @description Displays bold 'Information' level messages to the console
+ * @type {chalk.style}
  */
 const infoBold = chalk.bold.green;
 /** 
- *  Displays 'Warning' level messages to the console
- *  @instance
+ * @summary Console Helper
+ * @description Displays 'Warning' level messages to the console
+ * @type {chalk.style}
  */
 const warning = chalk.bold.yellow;
 /** 
- *  An array of command line arguments starting with the third array item
- *  @instance
+ * @summary Command Line Arguments Helper
+ * @description Returns the command line argument array starting on the third element
+ * @type {minimist2}
  */
 const args = minimist2(process.argv.slice(2));
 /** 
@@ -97,13 +102,13 @@ let hexColors: string[] = [];
  * @instance
  */
 const commands: Command[] = [
-   new Command('-i, --input [PATH] _**required','The source file or url to search for color values   '),
-   new Command('-o, --output [DIRECTORY]      ','The output file(s) directory                        '),
-   new Command('-n, --name                    ','The output file(s) name (no extension)              '),
-   new Command('--css                         ','Create a Css rendering of the color palette         '),
-   new Command('--gpl                         ','Create a Gimp Palette rendering of the color palette'),
-   new Command('--less                        ','Create a Less rendering of the color palette        '),
-   new Command('--scss                        ','Create a Sass rendering of the color palette        ')
+   new Command('-i, --input [PATH] _**required', 'The source file or url to search for color values   '),
+   new Command('-o, --output [DIRECTORY]      ', 'The output file(s) directory                        '),
+   new Command('-n, --name                    ', 'The output file(s) name (no extension)              '),
+   new Command('--css                         ', 'Create a Css rendering of the color palette         '),
+   new Command('--gpl                         ', 'Create a Gimp Palette rendering of the color palette'),
+   new Command('--less                        ', 'Create a Less rendering of the color palette        '),
+   new Command('--scss                        ', 'Create a Sass rendering of the color palette        ')
 ];
 /** 
  * The directory to save all output files
@@ -149,11 +154,11 @@ const colorFormat = args.rgb
  * The file name to assign all output files
  * @instance
  */
-const name = args.n 
+const name = args.n
    ? args.n
    : args.name
-    ? args.name
-    : path.basename(inputPath, path.extname(inputPath));
+      ? args.name
+      : path.basename(inputPath, path.extname(inputPath));
 
 //- Enter the matrix
 main();
