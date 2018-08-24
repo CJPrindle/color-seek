@@ -18,6 +18,7 @@ export declare namespace Palette {
      * @memberof Palette
      */
     class PaletteBuilder {
+        htmlTemplate: string;
         inputSource: string; /** The input file path or Url */
         outputName: string; /** The output file name */
         totalColors: number; /** The total number of colors created */
