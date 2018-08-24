@@ -38,10 +38,10 @@ IN THE SOFTWARE.
 *                  - SCSS (Sass Style Sheet)
 * @file Entry point of the Color Seek application
 **************************************************************************** */
-/// <reference path='./Command.ts' />
-/// <reference path='./FileSystem.ts' />
-/// <reference path='./Palette.ts' />
-/// <reference path='./Web.ts' />
+/// <reference path='./lib/Command.ts' />
+/// <reference path='./lib/FileSystem.ts' />
+/// <reference path='./lib/Palette.ts' />
+/// <reference path='./lib/Web.ts' />
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @module colorseek
@@ -49,11 +49,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = require("chalk");
 const path = require("path");
 const minimist2 = require("minimist2");
-const FileSystem_1 = require("./FileSystem");
-const Web_1 = require("./Web");
-const Helpers_1 = require("./Helpers");
-const Palette_1 = require("./Palette");
-const Command_1 = require("./Command");
+const FileSystem_1 = require("./lib/FileSystem");
+const Web_1 = require("./lib/Web");
+const Helpers_1 = require("./lib/Helpers");
+const Palette_1 = require("./lib/Palette");
+const Command_1 = require("./lib/Command");
 /**
  *  Abstracts the console.log method
  *  @instance
@@ -79,16 +79,6 @@ const infoBold = chalk_1.default.bold.green;
  *  @instance
  */
 const warning = chalk_1.default.bold.yellow;
-/**
- *  A reference to Web.Http
- *  @instance
- */
-const Http = Web_1.Web.Http;
-/**
- *  A reference to Palette.PaletteBuilder
- *  @instance
- */
-const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
 /**
  *  An array of command line arguments starting with the third array item
  *  @instance
@@ -129,6 +119,11 @@ const inputPath = args.i ? args.i : args.input;
  */
 const isCss = args.css;
 /**
+ * Is Gimp Palette File a requested output file type
+ * @instance
+ */
+const isGimp = args.gimp;
+/**
  * Is LESS a requested output file type
  * @instance
  */
@@ -162,6 +157,7 @@ main();
   * Entry function for Color Seek
   * @public
   * @function
+  * @memberof Global
  */
 function main() {
     try {
@@ -169,7 +165,7 @@ function main() {
             if (inputPath.length) {
                 //- Determine input type
                 if (inputPath.toLowerCase().startsWith('http')) {
-                    new Http().getUrlData(inputPath, htmlTextHandler);
+                    new Web_1.Web.Http().getUrlData(inputPath, htmlTextHandler);
                 }
                 else {
                     new FileSystem_1.FileSystem.FileAccess(inputPath, name).readFile(htmlTextHandler);
@@ -191,19 +187,23 @@ function main() {
  * Handles the html data sent from Web.Html.getUrlData()
  * @public
  * @function
+ * @memberof Global
  * @callback htmlTextHandler
  * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data) {
     const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, name);
     //- Create color palette and generate HTML
-    hexColors = new PaletteBuilder(inputPath, name).buildHtmlOutput(data);
+    hexColors = new Palette_1.Palette.PaletteBuilder(inputPath, name).buildHtmlOutput(data);
     if (!outputPath) {
         outputPath = './';
     }
     //- Determine which output files to generate
     if (isCss) {
         fs.writeCss(outputPath, name, hexColors, colorFormat, 'css');
+    }
+    if (isGimp) {
+        fs.writeCss(outputPath, name, hexColors, 'gpl', 'gpl');
     }
     if (isLess) {
         fs.writeCss(outputPath, name, hexColors, colorFormat, 'less');
@@ -216,7 +216,8 @@ function htmlTextHandler(data) {
  * Print the CLI command list for Color Seek
  * @public
  * @function
-*/
+ * @memberof Global
+ */
 function printHelp() {
     log(infoBold('\nUsage: node colorseek [OPTIONS]\n'));
     commands.forEach((c) => log(info(' ' + c.Argument + '\t' + c.Description)));

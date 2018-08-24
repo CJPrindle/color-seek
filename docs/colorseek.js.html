@@ -47,7 +47,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="ColorConversion.html">ColorConversion</a></li><li><a href="Command.html">Command</a></li><li><a href="FileAccess.html">FileAccess</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="module-colorseek_Http.Http.html">colorseek#Http.Http</a></li><li><a href="PaletteBuilder.html">PaletteBuilder</a></li><li><a href="PaletteColors.html">PaletteColors</a></li>
+					<li><a href="FileSystem.FileAccess.html">FileSystem.FileAccess</a></li><li><a href="Global.ColorConversion.html">Global.ColorConversion</a></li><li><a href="Global.Command.html">Global.Command</a></li><li><a href="Global.Helpers.html">Global.Helpers</a></li><li><a href="Palette.PaletteBuilder.html">Palette.PaletteBuilder</a></li><li><a href="Palette.PaletteColors.html">Palette.PaletteColors</a></li><li><a href="Web.Http.html">Web.Http</a></li>
 				</ul>
 			</li>
 			
@@ -124,10 +124,10 @@ IN THE SOFTWARE.
 *                  - SCSS (Sass Style Sheet)
 * @file Entry point of the Color Seek application
 **************************************************************************** */
-/// &lt;reference path='./Command.ts' />
-/// &lt;reference path='./FileSystem.ts' />
-/// &lt;reference path='./Palette.ts' />
-/// &lt;reference path='./Web.ts' />
+/// &lt;reference path='./lib/Command.ts' />
+/// &lt;reference path='./lib/FileSystem.ts' />
+/// &lt;reference path='./lib/Palette.ts' />
+/// &lt;reference path='./lib/Web.ts' />
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @module colorseek
@@ -135,11 +135,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = require("chalk");
 const path = require("path");
 const minimist2 = require("minimist2");
-const FileSystem_1 = require("./FileSystem");
-const Web_1 = require("./Web");
-const Helpers_1 = require("./Helpers");
-const Palette_1 = require("./Palette");
-const Command_1 = require("./Command");
+const FileSystem_1 = require("./lib/FileSystem");
+const Web_1 = require("./lib/Web");
+const Helpers_1 = require("./lib/Helpers");
+const Palette_1 = require("./lib/Palette");
+const Command_1 = require("./lib/Command");
 /**
  *  Abstracts the console.log method
  *  @instance
@@ -165,16 +165,6 @@ const infoBold = chalk_1.default.bold.green;
  *  @instance
  */
 const warning = chalk_1.default.bold.yellow;
-/**
- *  A reference to Web.Http
- *  @instance
- */
-const Http = Web_1.Web.Http;
-/**
- *  A reference to Palette.PaletteBuilder
- *  @instance
- */
-const PaletteBuilder = Palette_1.Palette.PaletteBuilder;
 /**
  *  An array of command line arguments starting with the third array item
  *  @instance
@@ -215,6 +205,11 @@ const inputPath = args.i ? args.i : args.input;
  */
 const isCss = args.css;
 /**
+ * Is Gimp Palette File a requested output file type
+ * @instance
+ */
+const isGimp = args.gimp;
+/**
  * Is LESS a requested output file type
  * @instance
  */
@@ -248,6 +243,7 @@ main();
   * Entry function for Color Seek
   * @public
   * @function
+  * @memberof Global
  */
 function main() {
     try {
@@ -255,7 +251,7 @@ function main() {
             if (inputPath.length) {
                 //- Determine input type
                 if (inputPath.toLowerCase().startsWith('http')) {
-                    new Http().getUrlData(inputPath, htmlTextHandler);
+                    new Web_1.Web.Http().getUrlData(inputPath, htmlTextHandler);
                 }
                 else {
                     new FileSystem_1.FileSystem.FileAccess(inputPath, name).readFile(htmlTextHandler);
@@ -277,19 +273,23 @@ function main() {
  * Handles the html data sent from Web.Html.getUrlData()
  * @public
  * @function
+ * @memberof Global
  * @callback htmlTextHandler
  * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data) {
     const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, name);
     //- Create color palette and generate HTML
-    hexColors = new PaletteBuilder(inputPath, name).buildHtmlOutput(data);
+    hexColors = new Palette_1.Palette.PaletteBuilder(inputPath, name).buildHtmlOutput(data);
     if (!outputPath) {
         outputPath = './';
     }
     //- Determine which output files to generate
     if (isCss) {
         fs.writeCss(outputPath, name, hexColors, colorFormat, 'css');
+    }
+    if (isGimp) {
+        fs.writeCss(outputPath, name, hexColors, 'gpl', 'gpl');
     }
     if (isLess) {
         fs.writeCss(outputPath, name, hexColors, colorFormat, 'less');
@@ -302,7 +302,8 @@ function htmlTextHandler(data) {
  * Print the CLI command list for Color Seek
  * @public
  * @function
-*/
+ * @memberof Global
+ */
 function printHelp() {
     log(infoBold('\nUsage: node colorseek [OPTIONS]\n'));
     commands.forEach((c) => log(info(' ' + c.Argument + '\t' + c.Description)));
@@ -355,7 +356,7 @@ function printHelp() {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Aug 23, 2018
+		on Aug 24, 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

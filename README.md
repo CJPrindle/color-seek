@@ -11,7 +11,8 @@ In addition, a HTML page is created which displays the palette as a grid of swat
 their value in each CSS format.
 
 
-![Readme Image 1](images/readme-1.png)
+![Readme Image 1](./img/readme-1.png)
+`Example: HTML Color Palette`
 
 ---
 
@@ -25,20 +26,16 @@ CSS currently accepts three formats for color specification.
 | RGB       | `rgb(32, 128, 255)`          | Range for Red (0-255), Green (0-255), Blue (0-255)             |
 | HSL       | `hsl(359, 25%, 100%)`        | Range for Hue (0-359), Saturation (0-100%), Lightness (0-100%) |
 
-#### Possible CSS4 Color Formats ####
+#### CMYK ####
 
-Proposals exist for additional color formats in CSS4. One, _CMYK_, is well known outside of CSS and has been in use
-for many years in printing and graphic design. Therefore, we've decided to add it as a bit of future-proofing.
-
-| Format    | Example                      | Description                                   |
-|-----------|------------------------------|-----------------------------------------------|
-| CMYK      | `cmyk(100, 25, 50, 75)`      | Range of Cyan, Magenta, Yellow, Black (0-100) |
-
+_CMYK_ is a proposed color format for CSS4. It is well known outside of CSS and has been in use
+for many years in printing and graphic design. It is included on the HTML output and will be a color format option
+when/if it is included in CSS.
 
 #### Named Colors ####
 
-Another naming convention for color values is a _named color_. There are currently 140 color names available ranging
-from _black_ to white. **Color Seek** looks for named colors and converts them to hexadecimal. 
+This version **does not** parse named colors. It is on the list of enhancements.
+
 
 ### Output File Types ###
 
@@ -91,28 +88,44 @@ file will be generated.
 
 ### Examples ###
 
-The following examples demonstrate various options available with **Color Seek**. As HTML files are always generated
-they will only be demonstrated in the first example.
+The following examples demonstrate various options available with **Color Seek**. 
 
-#### Create a CSS file from a Local File #### 
+**NOTE**: An HTML rendition of the color palette is **always** included.
+
+#### Create CSS with Hex Colors from a Local File Source #### 
 
     $ colorseek -i /c/docs/MonokaiSharp.json -n Monokai-Sharp --css
 
-**Color Seek** creates a HTML file and a CSS file named _Monkikai-Sharp.html_ and _Monokai-Sharp.css_ in the 
-**Color Seek** directory.
+The outcome is a CSS file located in the **Color Seek** directory named _Monokai-Sharp.css_
 
-(**NOTE**: The file used as input is a [Visual Studio Code](https://code.visualstudio.com) color theme exported
+(**NOTE**: The input file is a [Visual Studio Code](https://code.visualstudio.com) color theme exported
 to a JSON file.)
 
-![readme-2](images/readme-2.png)
+![readme-2](./img/readme-2.png)
+
+`Example: CSS Output with Hex Color Values`
 
 ---
 
-#### Create a SASS file with RGB Colors from a URL ####
+#### Create SASS with RGB Colors from a URL Source ####
 
 
     $ colorseek -i https://material.io/static/m2/css/main.min.css -n "Material Theme" --sass --rgb
 
-Extracting colors from a stylesheet url is as simple as a local file. The --sass switch tells **Color Seek** to use the
-.scss (SASS) file extension. Instead of hex values we instead choose the RGB color format by providing the --rgb 
-switch. Notice the use of double quotes around the name value. This is needed if you want a space in any value.
+Using a URL is identical to a file. **Color Seek** figures out the input type automatically. The --sass command switch 
+creates a file named _Material Theme.scss__
+
+RGB or HSL color formats require a command switch (--rgb or --hsl).
+
+**NOTE**: Double quotes are required for command line entries with one or more spaces.
+
+#### Create Multiple File Formats in a Specified Directory ####
+
+
+    $ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n "Material Styles" --css --sass --less --rgb
+
+Multiple file types can be created by adding them to the command line. However, only one color format may be assigned.
+
+The '-o' ('--output') command switch specifies the output directory for each file generated. All files will have the 
+name applied via the -n (--name) command switch or use the input source name if none is provided.
+

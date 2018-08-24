@@ -63,10 +63,12 @@
     <Content Include="docs\FileSystem.js.html" />
     <Content Include="docs\Helpers.html" />
     <Content Include="docs\Helpers.js.html" />
-    <Content Include="docs\images\readme-1.png" />
-    <Content Include="docs\images\readme-1.png" />
-    <Content Include="docs\images\readme-2.png" />
-    <Content Include="docs\images\readme-2.png" />
+    <Content Include="docs\img\glyphicons-halflings-white.png" />
+    <Content Include="docs\img\glyphicons-halflings.png" />
+    <Content Include="docs\img\readme-1.png" />
+    <Content Include="docs\img\readme-2.png" />
+    <Content Include="docs\img\readme-3.png" />
+    <Content Include="docs\img\readme-4.png" />
     <Content Include="docs\index.html" />
     <Content Include="docs\module-colorseek.html" />
     <Content Include="docs\module-colorseek_Http.Http.html" />
@@ -101,8 +103,10 @@
     <Content Include="docs\styles\sunlight.default.css" />
     <Content Include="docs\Web.html" />
     <Content Include="docs\Web.js.html" />
-    <Content Include="images\readme-1.png" />
-    <Content Include="images\readme-2.png" />
+    <Content Include="img\readme-1.png" />
+    <Content Include="img\readme-2.png" />
+    <Content Include="img\readme-3.png" />
+    <Content Include="img\readme-4.png" />
     <Content Include="jsdoc.conf" />
     <AdditionalFiles Include="template.html">
       <Publish>True</Publish>
@@ -113,25 +117,26 @@
     <TypeScriptCompile Include="colorseek.ts" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <TypeScriptCompile Include="Command.ts" />
-    <TypeScriptCompile Include="Helpers.ts" />
-    <TypeScriptCompile Include="FileSystem.ts">
+    <TypeScriptCompile Include="lib\Command.ts" />
+    <TypeScriptCompile Include="lib\Helpers.ts" />
+    <TypeScriptCompile Include="lib\FileSystem.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Palette.ts" />
-    <TypeScriptCompile Include="Web.ts">
+    <TypeScriptCompile Include="lib\Palette.ts" />
+    <TypeScriptCompile Include="lib\Web.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorConversion.ts" />
+    <Compile Include="lib\ColorConversion.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="docs\" />
-    <Folder Include="docs\images\" />
+    <Folder Include="docs\img\" />
     <Folder Include="docs\styles\" />
-    <Folder Include="images\" />
+    <Folder Include="img\" />
     <Folder Include="js\" />
+    <Folder Include="lib\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

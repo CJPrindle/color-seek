@@ -20,8 +20,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 ******************************************************************************/
-/// <reference path="Command.d.ts" />
-/// <reference path="FileSystem.d.ts" />
-/// <reference path="Palette.d.ts" />
-/// <reference path="Web.d.ts" />
+/// <reference path="lib/Command.d.ts" />
+/// <reference path="lib/FileSystem.d.ts" />
+/// <reference path="lib/Palette.d.ts" />
+/// <reference path="lib/Web.d.ts" />
 export {};
