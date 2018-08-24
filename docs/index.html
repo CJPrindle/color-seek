@@ -133,7 +133,7 @@
 </tbody>
 </table>
 <h4>CMYK</h4><p><em>CMYK</em> is a proposed color format for CSS4. It is well known outside of CSS and has been in use<br>for many years in printing and graphic design. It is included on the HTML output and will be a color format option<br>when/if it is included in CSS.</p>
-<h4>Named Colors</h4><p>This version <strong>does not</strong> parse named colors. It is on the list of enhancements.</p>
+<h4>Named Colors</h4><p>This version <strong>does not</strong> parse <em>Named Colors</em>. It is on the list of enhancements.</p>
 <h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available<br>as output options. You may also choose the Gimp Color Palette format as well. An HTML file is always generated<br>automatically regardless of what other options as selected.</p>
 <h4>File Formats</h4><p>Each of the formats below can be generated when creating a palette.</p>
 <table>
@@ -209,16 +209,48 @@
 <p>All file types can be rendered by adding the corresponding command switch. If no output type is given only the HTML<br>file will be generated.</p>
 <h3>Examples</h3><p>The following examples demonstrate various options available with <strong>Color Seek</strong>. </p>
 <p><strong>NOTE</strong>: An HTML rendition of the color palette is <strong>always</strong> included.</p>
-<h4>Create CSS with Hex Colors from a Local File Source</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/MonokaiSharp.json -n Monokai-Sharp --css</code></pre><p>The outcome is a CSS file located in the <strong>Color Seek</strong> directory named <em>Monokai-Sharp.css</em></p>
-<p>(<strong>NOTE</strong>: The input file is a <a href="https://code.visualstudio.com">Visual Studio Code</a> color theme exported<br>to a JSON file.)</p>
+<h4>Create CSS with Hex Colors from a Local File Source</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/Halcyon.json --css</code></pre><ul>
+<li>A CSS file was created named <em>Halcyon.css</em></li>
+<li>If the -o (--output) command switch is not set all output files will be saved to the <strong>Color Seek</strong> directory</li>
+<li>If the -n (--name) command switch is not set all output files will use the input file name</li>
+</ul>
+<p>(<strong>FYI</strong>: The input file used is a <a href="https://code.visualstudio.com">Visual Studio Code</a> color theme exported<br>to a JSON file.)</p>
 <p><img src="./img/readme-2.png" alt="readme-2"></p>
 <p><code>Example: CSS Output with Hex Color Values</code></p>
 <hr>
-<h4>Create SASS with RGB Colors from a URL Source</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -n &quot;Material Theme&quot; --sass --rgb</code></pre><p>Using a URL is identical to a file. <strong>Color Seek</strong> figures out the input type automatically. The --sass command switch<br>creates a file named _Material Theme.scss__</p>
-<p>RGB or HSL color formats require a command switch (--rgb or --hsl).</p>
+<h4>Create SASS with RGB Colors from a URL Source</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -n &quot;Material Theme&quot; --sass --rgb</code></pre><ul>
+<li><p>Using a URL is identical to using a file. <strong>Color Seek</strong> determines the input source automatically. </p>
+</li>
+<li><p>The --sass command switch creates a file named <em>Material Theme.scss</em></p>
+</li>
+<li><p>All color formats expect Hex <em>(default)</em> the require a command switch (--rgb, --hsl, etc).</p>
+</li>
+</ul>
 <p><strong>NOTE</strong>: Double quotes are required for command line entries with one or more spaces.</p>
-<h4>Create Multiple File Formats in a Specified Directory</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --rgb</code></pre><p>Multiple file types can be created by adding them to the command line. However, only one color format may be assigned.</p>
-<p>The '-o' ('--output') command switch specifies the output directory for each file generated. All files will have the<br>name applied via the -n (--name) command switch or use the input source name if none is provided.</p></article>
+<p><img src="./img/readme-3.png" alt="readme-3"></p>
+<p><code>Example: A SASS File with RGB Color Values</code></p>
+<h4>Create Multiple Files with HSL colors in a Specified Directory</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --hsl</code></pre><ul>
+<li><p>Multiple files can be created by adding a command switch</p>
+</li>
+<li><p>The '-o' ('--output') command switch specifies the output directory for all files</p>
+</li>
+<li><p>All files are assigned the -n (--name) value</p>
+</li>
+<li><p>The HSL color format is used in all files</p>
+</li>
+</ul>
+<p><img src="./img/readme-6.png" alt="readme-6"></p>
+<p><code>Example: Multiple Files Created with One Command</code></p>
+<h4>Create a Gimp Palette File</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/Halcyon.json --gimp</code></pre><ul>
+<li><p>A Gimp Palette File has a custom format and will ignore color format command switches</p>
+</li>
+<li><p>Creates a file with the '.gpl' extension</p>
+</li>
+</ul>
+<p><img src="./img/readme-5.png" alt="readme-5"></p>
+<p><code>Example: A Gimp Palette File</code></p>
+<h2>Summary</h2><p>Thus concludes this overview. If you find <strong>Color Seek</strong> useful please let me know. I encourage all feedback and<br>suggestions so please do not hesitate to contact me.</p>
+<h4>ENJOY!</h4></article>
     </section>
 
 

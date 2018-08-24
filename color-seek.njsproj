@@ -69,6 +69,8 @@
     <Content Include="docs\img\readme-2.png" />
     <Content Include="docs\img\readme-3.png" />
     <Content Include="docs\img\readme-4.png" />
+    <Content Include="docs\img\readme-5.png" />
+    <Content Include="docs\img\readme-6.png" />
     <Content Include="docs\index.html" />
     <Content Include="docs\module-colorseek.html" />
     <Content Include="docs\module-colorseek_Http.Http.html" />
@@ -107,6 +109,8 @@
     <Content Include="img\readme-2.png" />
     <Content Include="img\readme-3.png" />
     <Content Include="img\readme-4.png" />
+    <Content Include="img\readme-5.png" />
+    <Content Include="img\readme-6.png" />
     <Content Include="jsdoc.conf" />
     <Content Include="tsconfig.json">
       <SubType>Code</SubType>

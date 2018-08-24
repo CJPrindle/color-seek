@@ -35,7 +35,7 @@ when/if it is included in CSS.
 
 #### Named Colors ####
 
-This version **does not** parse named colors. It is on the list of enhancements.
+This version **does not** parse _Named Colors_. It is on the list of enhancements.
 
 
 ### Output File Types ###
@@ -95,11 +95,13 @@ The following examples demonstrate various options available with **Color Seek**
 
 #### Create CSS with Hex Colors from a Local File Source #### 
 
-    $ colorseek -i /c/docs/MonokaiSharp.json -n Monokai-Sharp --css
+    $ colorseek -i /c/docs/Halcyon.json --css
 
-The outcome is a CSS file located in the **Color Seek** directory named _Monokai-Sharp.css_
++ A CSS file was created named *Halcyon.css*
++ If the -o (--output) command switch is not set all output files will be saved to the **Color Seek** directory
++ If the -n (--name) command switch is not set all output files will use the input file name
 
-(**NOTE**: The input file is a [Visual Studio Code](https://code.visualstudio.com) color theme exported
+(**FYI**: The input file used is a [Visual Studio Code](https://code.visualstudio.com) color theme exported
 to a JSON file.)
 
 ![readme-2](./img/readme-2.png)
@@ -113,20 +115,51 @@ to a JSON file.)
 
     $ colorseek -i https://material.io/static/m2/css/main.min.css -n "Material Theme" --sass --rgb
 
-Using a URL is identical to a file. **Color Seek** figures out the input type automatically. The --sass command switch 
-creates a file named _Material Theme.scss__
++ Using a URL is identical to using a file. **Color Seek** determines the input source automatically. 
 
-RGB or HSL color formats require a command switch (--rgb or --hsl).
++ The --sass command switch creates a file named _Material Theme.scss_
+
++ All color formats expect Hex _(default)_ the require a command switch (--rgb, --hsl, etc).
 
 **NOTE**: Double quotes are required for command line entries with one or more spaces.
 
-#### Create Multiple File Formats in a Specified Directory ####
+![readme-3](./img/readme-3.png)
+
+`Example: A SASS File with RGB Color Values`
+
+#### Create Multiple Files with HSL colors in a Specified Directory ####
 
 
-    $ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n "Material Styles" --css --sass --less --rgb
+    $ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n "Material Styles" --css --sass --less --hsl
 
-Multiple file types can be created by adding them to the command line. However, only one color format may be assigned.
++ Multiple files can be created by adding a command switch
+ 
++ The '-o' ('--output') command switch specifies the output directory for all files
+ 
++ All files are assigned the -n (--name) value
 
-The '-o' ('--output') command switch specifies the output directory for each file generated. All files will have the 
-name applied via the -n (--name) command switch or use the input source name if none is provided.
++ The HSL color format is used in all files
 
+![readme-6](./img/readme-6.png)
+
+`Example: Multiple Files Created with One Command`
+
+#### Create a Gimp Palette File ####
+
+    $ colorseek -i /c/docs/Halcyon.json --gimp
+
++ A Gimp Palette File has a custom format and will ignore color format command switches
+
++ Creates a file with the '.gpl' extension
+
+![readme-5](./img/readme-5.png)
+
+`Example: A Gimp Palette File`
+
+
+## Summary ##
+
+Thus concludes this overview. If you find **Color Seek** useful please let me know. I encourage all feedback and 
+suggestions so please do not hesitate to contact me.
+
+#### ENJOY! ####
