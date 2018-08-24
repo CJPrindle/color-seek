@@ -70,19 +70,19 @@ const exit = process.exit;
 /**
  * @summary Console Helper
  * @description Displays 'Information' level messages to the console
- * @type {chalk.style}
+ * @type {chalk.property}
  */
 const info = chalk.green;
 /** 
  * @summary Console Helper
  * @description Displays bold 'Information' level messages to the console
- * @type {chalk.style}
+ * @type {chalk.property}
  */
 const infoBold = chalk.bold.green;
 /** 
  * @summary Console Helper
  * @description Displays 'Warning' level messages to the console
- * @type {chalk.style}
+ * @type {chalk.property}
  */
 const warning = chalk.bold.yellow;
 /** 
@@ -92,14 +92,15 @@ const warning = chalk.bold.yellow;
  */
 const args = minimist2(process.argv.slice(2));
 /** 
- *  An array containing all colors found in the source file or URL
- *  @instance
+ *  @summary Color Format
+ *  @description An array containing all colors found in the source file or URL
+ *  @type {Array<string>}
  */
 let hexColors: string[] = [];
 /** 
- * Creates all Console switches and commands
+ * @summary Global.Command Object
+ * @description Creates all Console switches and commands
  * @type {Command[]}
- * @instance
  */
 const commands: Command[] = [
    new Command('-i, --input [PATH] _**required', 'The source file or url to search for color values   '),
@@ -111,39 +112,45 @@ const commands: Command[] = [
    new Command('--scss                        ', 'Create a Sass rendering of the color palette        ')
 ];
 /** 
- * The directory to save all output files
- * @instance
+ * @summary Command Line Argument
+ * @description The directory to save all output files
+ * @type {any}
  */
 let outputPath = args.o ? args.o : args.output;
 /** 
- * The source file or URL location
- * @instance
+ * @summary Command Line Argument
+ * @description The source file or URL location
+ * @type {any}
  */
 const inputPath = args.i ? args.i : args.input;
 /** 
- * Is CSS a requested output file type
- * @instance
+ * @summary Command Line Argument
+ * @description Is CSS a requested output file type
+ * @type {boolean}
  */
 const isCss = args.css;
 /** 
- * Is Gimp Palette File a requested output file type
- * @instance
+ * @summary Command Line Argument
+ * @description Is Gimp Palette File a requested output file type
+ * @type {boolean}
  */
 const isGimp = args.gimp;
-
 /** 
- * Is LESS a requested output file type
- * @instance
+ * @summary Command Line Argument
+ * @description Is LESS a requested output file type
+ * @type {boolean}
  */
 const isLess = args.less;
 /** 
- * Is SASS a requested output file type
- * @instance
+ * @summary Command Line Argument
+ * @description Is SASS a requested output file type
+ * @type {boolean}
  */
 const isSass = args.sass;
 /** 
- * Which color format will be written to the output files (Hex, RGB, HSL)
- * @instance
+ * @summary Command Line Argument
+ * @description Which color format will be written to the output files (Hex, RGB, HSL)
+ * @type {any}
  */
 const colorFormat = args.rgb
    ? 'rgb'
@@ -151,8 +158,9 @@ const colorFormat = args.rgb
       ? 'hsl'
       : 'hex';
 /** 
- * The file name to assign all output files
- * @instance
+ * @summary Command Line Argument
+ * @description The file name to assign all output files
+ * @type {any}
  */
 const name = args.n
    ? args.n

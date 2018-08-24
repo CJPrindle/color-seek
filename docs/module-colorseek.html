@@ -91,6 +91,8 @@
     <div class="container-overview">
     
         
+            <div class="description"><p>Color Palette builder from existing resources</p></div>
+        
 
         
 <dl class="details">
@@ -162,20 +164,31 @@
         <dl>
             
 <hr>
-<dt class="name" id="args">
-    <h4 id="args"><span class="type-signature">&lt;constant> </span>args<span class="type-signature"></span></h4>
+<dt class="name" id="~args">
+    <h4 id="~args"><span class="type-signature">&lt;inner, constant> </span>args<span class="type-signature"> :minimist2</span></h4>
 
     
-    <p class="summary"><p>An array of command line arguments starting with the third array item</p>.</p>
+    <p class="summary"><p>Command Line Arguments Helper</p></p>
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>An array of command line arguments starting with the third array item</p>
+        <p>Returns the command line argument array starting on the third element</p>
     </div>
     
 
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">minimist2</span>
+
+
+
+            </li>
+        </ul>
     
 
     
@@ -214,7 +227,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-88">line 88</a>
+				 <a href="colorseek.js.html#sunlight-1-line-93">line 93</a>
 			</li>
 		</ul>
 	</dd>
@@ -234,11 +247,11 @@
         
             
 <hr>
-<dt class="name" id="colorFormat">
-    <h4 id="colorFormat"><span class="type-signature">&lt;constant> </span>colorFormat<span class="type-signature"></span></h4>
+<dt class="name" id="~colorFormat">
+    <h4 id="~colorFormat"><span class="type-signature">&lt;inner, constant> </span>colorFormat<span class="type-signature"> :any</span></h4>
 
     
-    <p class="summary"><p>Which color format will be written to the output files (Hex, RGB, HSL)</p>.</p>
+    <p class="summary"><p>Command Line Argument</p></p>
     
 </dt>
 <dd>
@@ -249,6 +262,17 @@
     
 
     
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">any</span>
+
+
+
+            </li>
+        </ul>
+    
 
     
 <dl class="details">
@@ -286,7 +310,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-142">line 142</a>
+				 <a href="colorseek.js.html#sunlight-1-line-155">line 155</a>
 			</li>
 		</ul>
 	</dd>
@@ -306,11 +330,11 @@
         
             
 <hr>
-<dt class="name" id="commands">
-    <h4 id="commands"><span class="type-signature">&lt;constant> </span>commands<span class="type-signature"> :Array.&lt;Command></span></h4>
+<dt class="name" id="~commands">
+    <h4 id="~commands"><span class="type-signature">&lt;inner, constant> </span>commands<span class="type-signature"> :Array.&lt;Command></span></h4>
 
     
-    <p class="summary"><p>Creates all Console switches and commands</p>.</p>
+    <p class="summary"><p>Global.Command Object</p></p>
     
 </dt>
 <dd>
@@ -326,6 +350,172 @@
             <li>
                 
 <span class="param-type">Array.&lt;Command></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="colorseek.js.html">colorseek.js</a>,
+				 <a href="colorseek.js.html#sunlight-1-line-105">line 105</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="~exit">
+    <h4 id="~exit"><span class="type-signature">&lt;inner, constant> </span>exit<span class="type-signature"> :process.exit</span></h4>
+
+    
+    <p class="summary"><p>Application Exit Helper</p></p>
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Reference to the process.exit field</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">process.exit</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="colorseek.js.html">colorseek.js</a>,
+				 <a href="colorseek.js.html#sunlight-1-line-69">line 69</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="~hexColors">
+    <h4 id="~hexColors"><span class="type-signature">&lt;inner> </span>hexColors<span class="type-signature"> :Array.&lt;string></span></h4>
+
+    
+    <p class="summary"><p>Color Format</p></p>
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>An array containing all colors found in the source file or URL</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Array.&lt;string></span>
 
 
 
@@ -389,83 +579,11 @@
         
             
 <hr>
-<dt class="name" id="hexColors">
-    <h4 id="hexColors"><span class="type-signature"></span>hexColors<span class="type-signature"></span></h4>
+<dt class="name" id="~info">
+    <h4 id="~info"><span class="type-signature">&lt;inner, constant> </span>info<span class="type-signature"> :chalk.property</span></h4>
 
     
-    <p class="summary"><p>An array containing all colors found in the source file or URL</p>.</p>
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>An array containing all colors found in the source file or URL</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-93">line 93</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="info">
-    <h4 id="info"><span class="type-signature">&lt;constant> </span>info<span class="type-signature"></span></h4>
-
-    
-    <p class="summary"><p>Displays 'Information' level messages to the console</p>.</p>
+    <p class="summary"><p>Console Helper</p></p>
     
 </dt>
 <dd>
@@ -476,6 +594,17 @@
     
 
     
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">chalk.property</span>
+
+
+
+            </li>
+        </ul>
+    
 
     
 <dl class="details">
@@ -513,7 +642,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-73">line 73</a>
+				 <a href="colorseek.js.html#sunlight-1-line-75">line 75</a>
 			</li>
 		</ul>
 	</dd>
@@ -533,20 +662,31 @@
         
             
 <hr>
-<dt class="name" id="infoBold">
-    <h4 id="infoBold"><span class="type-signature">&lt;constant> </span>infoBold<span class="type-signature"></span></h4>
+<dt class="name" id="~infoBold">
+    <h4 id="~infoBold"><span class="type-signature">&lt;inner, constant> </span>infoBold<span class="type-signature"> :chalk.property</span></h4>
 
     
-    <p class="summary"><p>Displays 'Information' level messages to the console with bold text</p>.</p>
+    <p class="summary"><p>Console Helper</p></p>
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Displays 'Information' level messages to the console with bold text</p>
+        <p>Displays bold 'Information' level messages to the console</p>
     </div>
     
 
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">chalk.property</span>
+
+
+
+            </li>
+        </ul>
     
 
     
@@ -585,7 +725,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-78">line 78</a>
+				 <a href="colorseek.js.html#sunlight-1-line-81">line 81</a>
 			</li>
 		</ul>
 	</dd>
@@ -605,11 +745,11 @@
         
             
 <hr>
-<dt class="name" id="inputPath">
-    <h4 id="inputPath"><span class="type-signature">&lt;constant> </span>inputPath<span class="type-signature"></span></h4>
+<dt class="name" id="~inputPath">
+    <h4 id="~inputPath"><span class="type-signature">&lt;inner, constant> </span>inputPath<span class="type-signature"> :any</span></h4>
 
     
-    <p class="summary"><p>The source file or URL location</p>.</p>
+    <p class="summary"><p>Command Line Argument</p></p>
     
 </dt>
 <dd>
@@ -620,6 +760,17 @@
     
 
     
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">any</span>
+
+
+
+            </li>
+        </ul>
+    
 
     
 <dl class="details">
@@ -657,7 +808,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-117">line 117</a>
+				 <a href="colorseek.js.html#sunlight-1-line-125">line 125</a>
 			</li>
 		</ul>
 	</dd>
@@ -677,11 +828,11 @@
         
             
 <hr>
-<dt class="name" id="isCss">
-    <h4 id="isCss"><span class="type-signature">&lt;constant> </span>isCss<span class="type-signature"></span></h4>
+<dt class="name" id="~isCss">
+    <h4 id="~isCss"><span class="type-signature">&lt;inner, constant> </span>isCss<span class="type-signature"> :boolean</span></h4>
 
     
-    <p class="summary"><p>Is CSS a requested output file type</p>.</p>
+    <p class="summary"><p>Command Line Argument</p></p>
     
 </dt>
 <dd>
@@ -692,6 +843,17 @@
     
 
     
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+
+            </li>
+        </ul>
+    
 
     
 <dl class="details">
@@ -729,7 +891,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-122">line 122</a>
+				 <a href="colorseek.js.html#sunlight-1-line-131">line 131</a>
 			</li>
 		</ul>
 	</dd>
@@ -749,11 +911,11 @@
         
             
 <hr>
-<dt class="name" id="isGimp">
-    <h4 id="isGimp"><span class="type-signature">&lt;constant> </span>isGimp<span class="type-signature"></span></h4>
+<dt class="name" id="~isGimp">
+    <h4 id="~isGimp"><span class="type-signature">&lt;inner, constant> </span>isGimp<span class="type-signature"> :boolean</span></h4>
 
     
-    <p class="summary"><p>Is Gimp Palette File a requested output file type</p>.</p>
+    <p class="summary"><p>Command Line Argument</p></p>
     
 </dt>
 <dd>
@@ -764,149 +926,16 @@
     
 
     
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
 
 
 
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-127">line 127</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="isLess">
-    <h4 id="isLess"><span class="type-signature">&lt;constant> </span>isLess<span class="type-signature"></span></h4>
-
-    
-    <p class="summary"><p>Is LESS a requested output file type</p>.</p>
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Is LESS a requested output file type</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-132">line 132</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="isSass">
-    <h4 id="isSass"><span class="type-signature">&lt;constant> </span>isSass<span class="type-signature"></span></h4>
-
-    
-    <p class="summary"><p>Is SASS a requested output file type</p>.</p>
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Is SASS a requested output file type</p>
-    </div>
-    
-
+            </li>
+        </ul>
     
 
     
@@ -965,233 +994,17 @@
         
             
 <hr>
-<dt class="name" id="name">
-    <h4 id="name"><span class="type-signature">&lt;constant> </span>name<span class="type-signature"></span></h4>
+<dt class="name" id="~isLess">
+    <h4 id="~isLess"><span class="type-signature">&lt;inner, constant> </span>isLess<span class="type-signature"> :boolean</span></h4>
 
     
-    <p class="summary"><p>The file name to assign all output files</p>.</p>
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The file name to assign all output files</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-151">line 151</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="outputPath">
-    <h4 id="outputPath"><span class="type-signature"></span>outputPath<span class="type-signature"></span></h4>
-
-    
-    <p class="summary"><p>The directory to save all output files</p>.</p>
+    <p class="summary"><p>Command Line Argument</p></p>
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>The directory to save all output files</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-112">line 112</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="warning">
-    <h4 id="warning"><span class="type-signature">&lt;constant> </span>warning<span class="type-signature"></span></h4>
-
-    
-    <p class="summary"><p>Displays 'Warning' level messages to the console</p>.</p>
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Displays 'Warning' level messages to the console</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-83">line 83</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="~exit">
-    <h4 id="~exit"><span class="type-signature">&lt;inner, constant> </span>exit<span class="type-signature"> :process.exit</span></h4>
-
-    
-    <p class="summary"><p>Logger</p></p>
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Reference to the process.exit field</p>
+        <p>Is LESS a requested output file type</p>
     </div>
     
 
@@ -1200,7 +1013,7 @@
         <ul>
             <li>
                 
-<span class="param-type">process.exit</span>
+<span class="param-type">boolean</span>
 
 
 
@@ -1244,7 +1057,90 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-68">line 68</a>
+				 <a href="colorseek.js.html#sunlight-1-line-143">line 143</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="~isSass">
+    <h4 id="~isSass"><span class="type-signature">&lt;inner, constant> </span>isSass<span class="type-signature"> :boolean</span></h4>
+
+    
+    <p class="summary"><p>Command Line Argument</p></p>
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Is SASS a requested output file type</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="colorseek.js.html">colorseek.js</a>,
+				 <a href="colorseek.js.html#sunlight-1-line-149">line 149</a>
 			</li>
 		</ul>
 	</dd>
@@ -1268,7 +1164,7 @@
     <h4 id="~log"><span class="type-signature">&lt;inner, constant> </span>log<span class="type-signature"> :Console.log</span></h4>
 
     
-    <p class="summary"><p>Logger</p></p>
+    <p class="summary"><p>Log Helper</p></p>
     
 </dt>
 <dd>
@@ -1327,7 +1223,256 @@
 		<ul class="dummy">
 			<li>
 				<a href="colorseek.js.html">colorseek.js</a>,
-				 <a href="colorseek.js.html#sunlight-1-line-62">line 62</a>
+				 <a href="colorseek.js.html#sunlight-1-line-63">line 63</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="~name">
+    <h4 id="~name"><span class="type-signature">&lt;inner, constant> </span>name<span class="type-signature"> :any</span></h4>
+
+    
+    <p class="summary"><p>Command Line Argument</p></p>
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The file name to assign all output files</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">any</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="colorseek.js.html">colorseek.js</a>,
+				 <a href="colorseek.js.html#sunlight-1-line-165">line 165</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="~outputPath">
+    <h4 id="~outputPath"><span class="type-signature">&lt;inner> </span>outputPath<span class="type-signature"> :any</span></h4>
+
+    
+    <p class="summary"><p>Command Line Argument</p></p>
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The directory to save all output files</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">any</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="colorseek.js.html">colorseek.js</a>,
+				 <a href="colorseek.js.html#sunlight-1-line-119">line 119</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="~warning">
+    <h4 id="~warning"><span class="type-signature">&lt;inner, constant> </span>warning<span class="type-signature"> :chalk.property</span></h4>
+
+    
+    <p class="summary"><p>Console Helper</p></p>
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Displays 'Warning' level messages to the console</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">chalk.property</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="colorseek.js.html">colorseek.js</a>,
+				 <a href="colorseek.js.html#sunlight-1-line-87">line 87</a>
 			</li>
 		</ul>
 	</dd>
