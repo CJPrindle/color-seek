@@ -87,24 +87,29 @@ const infoBold: any = chalk.bold.green;
  * @summary Console Helper
  * @description Displays 'Warning' level messages to the console
  * @type {any}
+ * @instance
+
  */
 const warning: any = chalk.bold.yellow;
 /** 
  * @summary Command Line Arguments Helper
  * @description Returns the command line argument array starting on the third element
  * @type {any}
+ * @instance
  */
 const args: any = minimist2(process.argv.slice(2));
 /** 
  *  @summary Color Format
  *  @description An array containing all colors found in the source file or URL
  *  @type {Array<string>}
+ * @instance
  */
 let hexColors: string[] = [];
 /** 
  * @summary Global.Command Object
  * @description Creates all Console switches and commands
  * @type {Command[]}
+ * @instance
  */
 const commands: Command[] = [
    new Command('-i, --input [PATH] _**required', 'The source file or url to search for color values   '),
@@ -119,42 +124,49 @@ const commands: Command[] = [
  * @summary Command Line Argument
  * @description The directory to save all output files
  * @type {string}
+ * @instance
  */
 let outputPath: string = args.o ? args.o : args.output;
 /** 
  * @summary Command Line Argument
  * @description The source file or URL location
  * @type {string}
+ * @instance
  */
 const inputPath: string = args.i ? args.i : args.input;
 /** 
  * @summary Command Line Argument
  * @description Is CSS a requested output file type
  * @type {boolean}
+ * @instance
  */
 const isCss: boolean = args.css;
 /** 
  * @summary Command Line Argument
  * @description Is Gimp Palette File a requested output file type
  * @type {boolean}
+ * @instance
  */
 const isGimp: boolean = args.gimp;
 /** 
  * @summary Command Line Argument
  * @description Is LESS a requested output file type
  * @type {boolean}
+ * @instance
  */
 const isLess: boolean = args.less;
 /** 
  * @summary Command Line Argument
  * @description Is SASS a requested output file type
  * @type {boolean}
+ * @instance
  */
 const isSass: boolean = args.sass;
 /** 
  * @summary Command Line Argument
  * @description Which color format will be written to the output files (Hex, RGB, HSL)
  * @type {string}
+ * @instance
  */
 const colorFormat: string = args.rgb
    ? 'rgb'
@@ -165,6 +177,7 @@ const colorFormat: string = args.rgb
  * @summary Command Line Argument
  * @description The file name to assign all output files
  * @type string
+ * @instance
  */
 const name: string = args.n
    ? args.n
