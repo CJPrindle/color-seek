@@ -1,7 +1,7 @@
 {
-  "name": "color-seek",
+  "name": "color-seek-cli",
   "version": "0.1.0",
-  "description": "color-finder",
+  "description": "color-seek-cli allows you to build a color palette from a source file or URL",
   "main": "colorseek.js",
   "author": {
     "name": "Christopher Prindle",

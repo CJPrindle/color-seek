@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Color Seek Home Index</title>
+	<title>color-seek-cli home Index</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html">Color Seek Home</a>
+		<a class="navbar-brand" href="index.html">color-seek-cli home</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -100,8 +100,8 @@
 
 
     <section class="readme-section">
-        <article><h1>Color Seek</h1><p>Version 0.1 | <a href="https://cjprindle.github.io/color-seek">Full Documentation (API)</a>.</p>
-<h2>Overview</h2><p><strong>Color Seek</strong> allows you to build a color palette from a source file or URL. The source is scanned for valid<br>CSS color values and the results are formatted, purged of duplicates, and then sorted to produce the<br><em>Color Palette</em>. The palette can then be transformed into several predefined file formats for use in your projects.<br>In addition, a HTML page is created which displays the palette as a grid of swatches, with the colors displaying<br>their value in each CSS format.</p>
+        <article><h1>color-seek-cli</h1><p>Version 0.1 | <a href="https://cjprindle.github.io/color-seek">Full Documentation (API)</a>.</p>
+<h2>Overview</h2><p><strong>color-seek-cli</strong> allows you to build a color palette from a source file or URL. The source is scanned for valid<br>CSS color values and the results are formatted, purged of duplicates, and then sorted to produce the<br><em>Color Palette</em>. The palette can then be transformed into several predefined file formats for use in your projects.<br>In addition, a HTML page is created which displays the palette as a grid of swatches, with the colors displaying<br>their value in each CSS format.</p>
 <p><img src="./img/readme-1.png" alt="Readme Image 1"></p>
 <p><code>Example: HTML Color Palette</code></p>
 <hr>
@@ -164,8 +164,8 @@
 </tbody>
 </table>
 <hr>
-<h2>Using Color Seek</h2><h3>Command Line</h3><p>All interaction with <strong>Color Seek</strong> is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.</p>
-<h4>Help</h4><p>'colorseek -h' or 'colorseek --help' displays the available commands:</p>
+<h2>Using color-seek-cli</h2><h3>Command Line</h3><p>All interaction with <strong>color-seek-cli</strong> is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.</p>
+<h4>Help</h4><p>'color-seek-cli -h' or 'color-seek-cli --help' displays the available commands:</p>
 <table>
 <thead>
 <tr>
@@ -205,22 +205,22 @@
 </tbody>
 </table>
 <p><code>*Required</code></p>
-<p>When no output directory is specified the <strong>Color Seek</strong> directory will be used. If no output name is specified the<br>input file name will be used.</p>
+<p>When no output directory is specified the <strong>color-seek-cli</strong> directory will be used. If no output name is specified the<br>input file name will be used.</p>
 <p>All file types can be rendered by adding the corresponding command switch. If no output type is given then only the<br>HTML file will be generated.</p>
 <hr>
-<h3>Examples</h3><p>The following examples demonstrate various options available with <strong>Color Seek</strong>. </p>
+<h3>Examples</h3><p>The following examples demonstrate various options available with <strong>color-seek-cli</strong>. </p>
 <p><strong>NOTE</strong>: An HTML rendition of the color palette is <strong>always</strong> included.</p>
-<h4>Create CSS with Hex Colors from a Local File Source</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/Halcyon.json --css</code></pre><ul>
+<h4>Create CSS with Hex Colors from a Local File Source</h4><pre class="prettyprint source"><code>$ color-seek-cli -i /c/docs/Halcyon.json --css</code></pre><ul>
 <li>A CSS file was created named <em>Halcyon.css</em></li>
-<li>If the -o (--output) command switch is not set all output files will be saved to the <strong>Color Seek</strong> directory</li>
+<li>If the -o (--output) command switch is not set all output files will be saved to the <strong>color-seek-cli</strong> directory</li>
 <li>If the -n (--name) command switch is not set all output files will use the input file name</li>
 </ul>
 <p>(<strong>FYI</strong>: The input file used is a <a href="https://code.visualstudio.com">Visual Studio Code</a> color theme exported<br>to a JSON file.)</p>
 <p><img src="./img/readme-2.png" alt="readme-2"></p>
 <p><code>Example: CSS Output with Hex Color Values</code></p>
 <hr>
-<h4>Create SASS with RGB Colors from a URL Source</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -n &quot;Material Theme&quot; --sass --rgb</code></pre><ul>
-<li><p>Using a URL is identical to using a file. <strong>Color Seek</strong> determines the input source automatically. </p>
+<h4>Create SASS with RGB Colors from a URL Source</h4><pre class="prettyprint source"><code>$ color-seek-cli -i https://material.io/static/m2/css/main.min.css -n &quot;Material Theme&quot; --sass --rgb</code></pre><ul>
+<li><p>Using a URL is identical to using a file. <strong>color-seek-cli</strong> determines the input source automatically. </p>
 </li>
 <li><p>The --sass command switch creates a file named <em>Material Theme.scss</em></p>
 </li>
@@ -231,7 +231,7 @@
 <p><img src="./img/readme-3.png" alt="readme-3"></p>
 <p><code>Example: A SASS File with RGB Color Values</code></p>
 <hr>
-<h4>Create Multiple Files with HSL colors in a Specifie#d Directory</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --hsl</code></pre><ul>
+<h4>Create Multiple Files with HSL colors in a Specifie#d Directory</h4><pre class="prettyprint source"><code>$ color-seek-cli -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --hsl</code></pre><ul>
 <li><p>Multiple files can be created by adding a command switch</p>
 </li>
 <li><p>The '-o' ('--output') command switch specifies the output directory for all files</p>
@@ -244,7 +244,7 @@
 <p><img src="./img/readme-6.png" alt="readme-6"></p>
 <p><code>Example: Multiple Files Created with One Command</code></p>
 <hr>
-<h4>Create a Gimp Palette File</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/Halcyon.json --gimp</code></pre><ul>
+<h4>Create a Gimp Palette File</h4><pre class="prettyprint source"><code>$ color-seek-cli -i /c/docs/Halcyon.json --gimp</code></pre><ul>
 <li><p>A Gimp Palette File has a custom format and will ignore color format command switches</p>
 </li>
 <li><p>Creates a file with the '.gpl' extension</p>
@@ -253,7 +253,7 @@
 <p><img src="./img/readme-5.png" alt="readme-5"></p>
 <p><code>Example: A Gimp Palette File</code></p>
 <hr>
-<h2>Summary</h2><p>Thus concludes this overview. If you find <strong>Color Seek</strong> useful please let me know. I encourage all feedback and<br>suggestions so please do not hesitate to contact me.</p>
+<h2>Summary</h2><p>Thus concludes this overview. If you find <strong>color-seek-cli</strong> useful please let me know. I encourage all feedback and<br>suggestions so please do not hesitate to contact me.</p>
 <h3>ENJOY!</h3></article>
     </section>
 
