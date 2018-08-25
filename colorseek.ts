@@ -56,12 +56,29 @@ import { Palette } from './lib/Palette';
 import { Command } from './lib/Command';
 
 /**
+ * @summary Global.Command Object
+ * @description Creates all Console switches and commands
+ * @type {Command[]}
+ * @instance
+ */
+const commands: Command[] = [
+   new Command('-i, --input [PATH]      ', '[REQUIRED] The source file or url to search for color values   '),
+   new Command('-o, --output [DIRECTORY]', 'The output file(s) directory                        '),
+   new Command('-n, --name              ', 'The output file(s) name (no extension)              '),
+   new Command('--css                   ', 'Create a Css rendering of the color palette         '),
+   new Command('--gpl                   ', 'Create a Gimp Palette rendering of the color palette'),
+   new Command('--less                  ', 'Create a Less rendering of the color palette        '),
+   new Command('--scss                  ', 'Create a Sass rendering of the color palette        ')
+];
+
+/**
  * @summary Log Helper
  * @description Reference to the console.log method
  * @type {Console}
  * @instance
  */
 const log = console.log;
+
 /**
  * @summary Application Exit Helper
  * @description Reference to the process.exit field
@@ -69,100 +86,112 @@ const log = console.log;
  * @instance
  */
 const exit: any = process.exit;
+
 /**
  * @summary Console Helper
  * @description Displays 'Information' level messages to the console
  * @type {any}
  * @instance
  */
-const info: any = chalk.green;
-/** 
+const info: any = chalk.hex('#8CF069');
+
+/**
  * @summary Console Helper
  * @description Displays bold 'Information' level messages to the console
  * @type {any}
  * @instance
  */
 const infoBold: any = chalk.bold.green;
-/** 
+
+/**
+ * @summary Console Helper
+ * @description Displays message sent to the printHelp method
+ * @type {any}
+ * @instance
+ */
+const helpMessage: any = chalk.bold.hex('#69A0F0');
+
+/**
  * @summary Console Helper
  * @description Displays 'Warning' level messages to the console
  * @type {any}
  * @instance
-
  */
-const warning: any = chalk.bold.yellow;
-/** 
+const warning: any = chalk.bold.hex('#F0EB69');
+
+/**
  * @summary Command Line Arguments Helper
  * @description Returns the command line argument array starting on the third element
  * @type {any}
  * @instance
  */
 const args: any = minimist2(process.argv.slice(2));
-/** 
+
+/**
  *  @summary Color Format
  *  @description An array containing all colors found in the source file or URL
  *  @type {Array<string>}
  *  @instance
  */
 let hexColors: string[] = [];
-/** 
- * @summary Global.Command Object
- * @description Creates all Console switches and commands
- * @type {Command[]}
- * @instance
- */
-const commands: Command[] = [
-   new Command('-i, --input [PATH] _**required', 'The source file or url to search for color values   '),
-   new Command('-o, --output [DIRECTORY]      ', 'The output file(s) directory                        '),
-   new Command('-n, --name                    ', 'The output file(s) name (no extension)              '),
-   new Command('--css                         ', 'Create a Css rendering of the color palette         '),
-   new Command('--gpl                         ', 'Create a Gimp Palette rendering of the color palette'),
-   new Command('--less                        ', 'Create a Less rendering of the color palette        '),
-   new Command('--scss                        ', 'Create a Sass rendering of the color palette        ')
-];
-/** 
+
+/**
  * @summary Command Line Argument
- * @description The directory to save all output files
+ * @description Request for the help menu
  * @type {string}
  * @instance
  */
-let outputPath: string = args.o ? args.o : args.output;
-/** 
+const helpMe: string = args.h ? args.h : args.help;
+
+/**
  * @summary Command Line Argument
  * @description The source file path or URL location
  * @type {string}
  * @instance
  */
 const inputPath: string = args.i ? args.i : args.input;
-/** 
+
+/**
+ * @summary Command Line Argument
+ * @description The directory to save all output files
+ * @type {string}
+ * @instance
+ */
+let outputPath: string = args.o ? args.o : args.output;
+
+/**
  * @summary Command Line Argument
  * @description Is CSS a requested output file type
  * @type {boolean}
  * @instance
  */
 const isCss: boolean = args.css;
-/** 
+
+/**
  * @summary Command Line Argument
  * @description Is Gimp Palette File a requested output file type
  * @type {boolean}
  * @instance
  */
 const isGimp: boolean = args.gimp;
-/** 
+
+/**
  * @summary Command Line Argument
  * @description Is LESS a requested output file type
  * @type {boolean}
  * @instance
  */
 const isLess: boolean = args.less;
-/** 
+
+/**
  * @summary Command Line Argument
  * @description Is SASS a requested output file type
  * @type {boolean}
  * @instance
  */
 const isSass: boolean = args.sass;
-/** 
+
+/**
  * @summary Command Line Argument
  * @description The color format to create (Hex, Gimp, RGB, HSL)
  * @type {string}
@@ -173,17 +202,14 @@ const colorFormat: string = args.rgb
    : args.hsl
       ? 'hsl'
       : 'hex';
-/** 
+
+/**
  * @summary Command Line Argument
  * @description The file name to assign all output files
  * @type string
  * @instance
  */
-const name: string = args.n
-   ? args.n
-   : args.name
-      ? args.name
-      : path.basename(inputPath, path.extname(inputPath));
+let name: string = args.n ? args.n : args.name;
 
 //- Enter the matrix
 main();
@@ -196,10 +222,22 @@ main();
   * @memberof Global
  */
  function main() {
-   try {
-      if(inputPath !== null) {
+    try {
+      //- Cry for HELP?
+      if(helpMe) {
+         printHelp();
+         return;
+      }
+
+      //- Check if input source is valid
+      if(inputPath) {
          if(inputPath.length) {
-            //- Determine input type
+            //- Check if the file name needs to be set
+            if(!name) {
+               name = path.basename(inputPath, path.extname(inputPath));
+            }
+
+            //- Determine if input is a file or a URL
             if(inputPath.toLowerCase().startsWith('http')) {
                new Web.Http().getUrlData(inputPath, htmlTextHandler);
             } else {
@@ -209,7 +247,7 @@ main();
             Helpers.outputError(new Error('Missing input file'));
          }
       } else {
-         printHelp();
+         printHelp('Input Path is Required');
       }
    }
    catch(e) {
@@ -262,10 +300,17 @@ function htmlTextHandler(data: string): void {
  * @description Print the CLI command list for Color Seek
  * @memberof Global
  */
-function printHelp() {
-   log(infoBold('\nUsage: node colorseek [OPTIONS]\n'));
-   commands.forEach((c) => log(info(' ' + c.Argument + '\t' + c.Description)));
+function printHelp(message: string = '') {
+
+   if(message.length) {
+      log(helpMessage('-----------------------------------------------------'));
+      log(helpMessage(`SYSTEM MESSAGE: ${message}`));
+      log(helpMessage('-----------------------------------------------------'));
+   }
+
+   log(info('\nUsage: colorseek [OPTIONS]\n'));
+   commands.forEach((c) => log(infoBold(' ' + c.Argument + '\t' + c.Description)));
    log(warning('\nIf no output type is specified then only a [DIRECTORY]/[NAME].html file will be created.'));
-   log(warning('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --html).'));
+   log(warning('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --sass).'));
    exit();
 }
