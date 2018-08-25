@@ -30,9 +30,10 @@ const chalk_1 = require("chalk");
  */
 class Helpers {
     /**
-     * Determines if value is in a given range
      * @public
      * @function
+     * @summary Value Between
+     * @description Determines if value is in a given range
      * @param {number} min - The minimum for the range
      * @param {number} max - The maximum for the range
      * @param {number} val - The value to test for between
@@ -43,9 +44,10 @@ class Helpers {
         return val >= min && val <= max;
     }
     /**
-     * Generates a random integer
      * @public
      * @function
+     * @summary Random Integer
+     * @description Generates a random integer based on the min/max values
      * @param {number} min - The minimum random value
      * @param {number} max - The maximum random value
      * @returns {number} An integer within the specified range
@@ -54,9 +56,10 @@ class Helpers {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
     /**
-     * Generates a random float
      * @public
      * @function
+     * @summary Random Float
+     * @description Generates a random float based on the min/max values
      * @param {number} min    - The minimum random value
      * @param {number} max    - The maximum random value
      * @param {number} places - The maximum number of decimal places
@@ -67,9 +70,10 @@ class Helpers {
         return parseFloat(val.toFixed(places));
     }
     /**
-     * The milliseconds since Jan, 1 1970
      * @public
      * @function
+     * @summary Milliseconds All Time
+     * @description The milliseconds since Jan, 1 1970
      * @param {number} numOfDigits - Truncates the value from the end of the number
      * @returns {number} The milliseconds since Jan, 1 1970 as truncated
      */
@@ -83,9 +87,10 @@ class Helpers {
         return mSecs;
     }
     /**
-     * Outputs the provided Error object to the console
      * @public
      * @function
+     * @summary Error Output
+     * @description Outputs the provided Error object to the console
      * @param {Error} error     - The error to show in the console
      * @param {boolean} logOnly - Determines if console will write to error or log
      */

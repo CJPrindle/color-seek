@@ -33,14 +33,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 class ColorConversion {
     /**
-     *  Default Constructor
      *  @constructor
+     *  @description Default Constructor
      */
     constructor() { }
     /**
-     * Converts a binary color value to a hexadecimal color value
      * @public
      * @function
+     * @summary Binary to Hex
+     * @description Converts a binary color value to a hexadecimal color value
      * @param {string} bin - The binary value to convert
      * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
      */
@@ -52,9 +53,10 @@ class ColorConversion {
         return [red, green, blue];
     }
     /**
-     * Converts CMYK color values to RGB color values
      * @public
      * @function
+     * @summary CMYK to RGB
+     * @description Converts CMYK color values to RGB color values
      * @param {number} cyan    - color value (0-100)
      * @param {number} magenta - color value (0-100)
      * @param {number} yellow  - color value (0-100)
@@ -76,14 +78,15 @@ class ColorConversion {
         ];
     }
     /**
-     * Converts a hexadecimal color value to RGB color values
      * @public
      * @function
+     * @summary Hex to RGB
+     * @description Converts a hexadecimal color value to RGB color values
      * @param {string} hex - A hexadecimal
      * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
      */
     HexToRgb(hex) {
-        hex = hex.replace(/[^0-9a-f]/gi, "");
+        hex = hex.replace(/[^0-9a-f]/gi, '');
         const hexValue = parseInt(hex, 16);
         const red = hexValue >> 16;
         const green = hexValue >> 8 & 0xff;
@@ -91,9 +94,10 @@ class ColorConversion {
         return [red, green, blue];
     }
     /**
-     * Converts HSL color values to RGB color values
      * @public
      * @function
+     * @summary HSL to RGB
+     * @description Converts HSL color values to RGB color values
      * @param {number} hue        - color value (0-359)
      * @param {number} saturation - color value (0-100)%
      * @param {number} lightness  - color value (0-100)%
@@ -106,9 +110,9 @@ class ColorConversion {
         let m = 0;
         let c = 0;
         let x = 0;
-        hue = Number(String(hue).replace(/[^0-9\.]/gi, ""));
-        saturation = Number(String(saturation).replace(/[^0-9\.]/gi, ""));
-        lightness = Number(String(lightness).replace(/[^0-9\.]/gi, ""));
+        hue = Number(String(hue).replace(/[^0-9\.]/gi, ''));
+        saturation = Number(String(saturation).replace(/[^0-9\.]/gi, ''));
+        lightness = Number(String(lightness).replace(/[^0-9\.]/gi, ''));
         if (!isFinite(hue))
             hue = 0;
         if (!isFinite(saturation))
@@ -162,9 +166,10 @@ class ColorConversion {
         ];
     }
     /**
-     * Converts HSV color values to RGB color values
      * @public
      * @function
+     * @summary HSV to RGB
+     * @description Converts HSV color values to RGB color values
      * @param {number} hue        - color value (0-359)
      * @param {number} saturation - color value (0-100)%
      * @param {number} value      - color value (0-100)%
@@ -228,9 +233,10 @@ class ColorConversion {
         return [red, green, blue];
     }
     /**
-     * Converts RGB color values to a binary color value
      * @public
      * @function
+     * @summary RGB to Binary
+     * @description Converts RGB color values to a binary color value
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -239,13 +245,14 @@ class ColorConversion {
     RgbToBin(red, green, blue) {
         const bin = red << 16 | green << 8 | blue;
         return (function (h) {
-            return new Array(25 - h.length).join("0") + h;
+            return new Array(25 - h.length).join('0') + h;
         })(bin.toString(2));
     }
     /**
-     * Converts RGB color values to CMYK color values
      * @public
      * @function
+     * @summary RGB to CMYK
+     * @description Converts RGB color values to CMYK color values
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -279,9 +286,10 @@ class ColorConversion {
         ];
     }
     /**
-     * Converts RGB color values to  hexadecimal color value
      * @public
      * @function
+     * @summary RGB to Hex
+     * @description Converts RGB color values to  hexadecimal color value
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -290,13 +298,14 @@ class ColorConversion {
     RgbToHex(red, green, blue) {
         const bin = red << 16 | green << 8 | blue;
         return (function (h) {
-            return new Array(7 - h.length).join("0") + h;
+            return new Array(7 - h.length).join('0') + h;
         })(bin.toString(16).toUpperCase());
     }
     /**
-     * Converts RGB color values to HSL color values
      * @public
      * @function
+     * @summary RGB to HSL
+     * @description Converts RGB color values to HSL color values
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -340,9 +349,10 @@ class ColorConversion {
         ];
     }
     /**
-     * Converts RGB color values to HSV color values
      * @public
      * @function
+     * @summary RGB to HSV
+     * @description Converts RGB color values to HSV color values
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -389,7 +399,7 @@ class ColorConversion {
         return [hue, saturation, value];
     }
     round(value, decimals) {
-        return Number(Math.round(eval(value + "e" + decimals)) + "e-" + decimals);
+        return Number(Math.round(eval(value + 'e' + decimals)) + 'e-' + decimals);
     }
 }
 exports.ColorConversion = ColorConversion;

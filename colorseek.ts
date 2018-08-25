@@ -43,8 +43,8 @@ IN THE SOFTWARE.
 /// <reference path='./lib/Web.ts' />
 
 /** 
- *  Color Palette builder from existing resources
  *  @module colorseek 
+ *  @description Creates a color palette by parsing a file or URL
  */
 import chalk, { Chalk } from 'chalk';
 import * as path from 'path';
@@ -102,7 +102,7 @@ const args: any = minimist2(process.argv.slice(2));
  *  @summary Color Format
  *  @description An array containing all colors found in the source file or URL
  *  @type {Array<string>}
- * @instance
+ *  @instance
  */
 let hexColors: string[] = [];
 /** 
@@ -129,7 +129,7 @@ const commands: Command[] = [
 let outputPath: string = args.o ? args.o : args.output;
 /** 
  * @summary Command Line Argument
- * @description The source file or URL location
+ * @description The source file path or URL location
  * @type {string}
  * @instance
  */
@@ -164,7 +164,7 @@ const isLess: boolean = args.less;
 const isSass: boolean = args.sass;
 /** 
  * @summary Command Line Argument
- * @description Which color format will be written to the output files (Hex, RGB, HSL)
+ * @description The color format to create (Hex, Gimp, RGB, HSL)
  * @type {string}
  * @instance
  */
@@ -189,12 +189,13 @@ const name: string = args.n
 main();
 
 /**
-  * Entry function for Color Seek
   * @public
   * @function
+  * @summary Main
+  * @description Entry function for Color Seek
   * @memberof Global
  */
-function main() {
+ function main() {
    try {
       if(inputPath !== null) {
          if(inputPath.length) {
@@ -217,9 +218,11 @@ function main() {
 }
 
 /**
- * Handles the html data sent from Web.Html.getUrlData()
  * @public
  * @function
+ * @summary Html Text Handler Callback
+ * @description Handles the html data sent from Web.Html.getUrlData() to be 
+ *              written to disk
  * @memberof Global
  * @callback htmlTextHandler 
  * @param {string} data - The file or URL text
@@ -253,9 +256,10 @@ function htmlTextHandler(data: string): void {
 }
 
 /*
- * Print the CLI command list for Color Seek
  * @public
  * @function
+ * @summary Print Help
+ * @description Print the CLI command list for Color Seek
  * @memberof Global
  */
 function printHelp() {

@@ -10,60 +10,66 @@ export declare namespace Palette {
      * @memberof Palette
      */
     class PaletteBuilder {
-        htmlTemplate: string;
-        inputSource: string; /** The input file path or Url */
-        outputPath: string; /** The output directory for the files */
-        outputName: string; /** The output file name */
-        totalColors: number; /** The total number of colors created */
-        hueColors: PaletteColors[]; /** Contains all Hue based colors */
-        grayColors: PaletteColors[]; /** Contains all gray based colors */
+        private htmlTemplate;
+        private inputSource;
+        private outputPath;
+        private outputName;
+        private totalColors;
+        private hueColors;
+        private grayColors;
         /**
-         * Sets the input file or url and the output file name (if provided)
          * @constructor
+         * @description Sets the input file or url and the output file name (if provided)
          * @param {string} source     - The source file/url parsed for color values
          * @param {string} outputPath - The path to save the output files
          * @param {string} name       - The provided name for the generated output files
          */
         constructor(source: string, outputPath: string, name: string);
         /**
-         * Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
+         * @public
          * @function
+         * @summary Build HTML Output
+         * @description Creates the color palette Html file. Sorts the color swatches by 'Luminosity'
          * @param {string} searchText - The text to parse for colors values
          * @returns {string[]} An array of hexadecimal color values
          */
         buildHtmlOutput(searchText: string): string[];
         /**
-         * Generates the color palettes as Html
          * @private
          * @function
+         * @description Generates the color palettes as Html
          * @param {Array<PaletteColors>} paletteColors - An array of PaletteColors objects
          * @returns {string} Html string containing the color swatches
          */
         private createSwatches;
         /**
-         * Finds RGB color values (ex: rgb(255,255,255) in current search text
+         * @private
          * @function
+         * @description Finds RGB color values (ex: rgb(255,255,255) in current search text
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
         private parseHSLColors;
         /**
-         * Finds RGB color values (ex: rgb(255,255,255) in current search text
+         * @private
          * @function
+         * @description Finds RGB color values (ex: rgb(255,255,255) in current search text
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
         private parseRGBColors;
         /**
-         * Finds hex color values (ex: #FFFFFF) in current search text
+         * @private
          * @function
+         * @description Finds hex color values (ex: #FFFFFF) in current search text
          * @param {string} searchText - The text to parse
          * @returns {string[]} An Array<string> containing the parsed hex colors
          */
         private parseHexColors;
         /**
-         * Finds the indexes of a Search value in the provided string
+         * @private
          * @function
+         * @description Finds the indexes of a Search value in the provided string
          * @param {string} SearchStr      - The value to Search for within the given string
          * @param {string} str            - The string to Search
          * @param {boolean} caseSensitive - True/False for case sensitivity
@@ -171,11 +177,15 @@ export declare namespace Palette {
         Black: number;
         /**
          * @constructor
+         * @description Default Constructor
          */
         constructor();
         /**
-         * Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and assigns the
-         * constituent properties of each format.
+         * @public
+         * @function
+         * @summary Color Format Creation
+         * @description Creates the color formats (Hexadecimal, RGB, HSL, CMYK) used to create the color palette and
+         *              assigns the constituent properties of each format.
          * @param {string} hexValue - Value used to create the color formats
          */
         createColorFormats(hexValue: string): void;

@@ -31,22 +31,24 @@ IN THE SOFTWARE.
  */
 export declare class ColorConversion {
     /**
-     *  Default Constructor
      *  @constructor
+     *  @description Default Constructor
      */
     constructor();
     /**
-     * Converts a binary color value to a hexadecimal color value
      * @public
      * @function
+     * @summary Binary to Hex
+     * @description Converts a binary color value to a hexadecimal color value
      * @param {string} bin - The binary value to convert
      * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
      */
     BinToRgb(bin: string): Array<number>;
     /**
-     * Converts CMYK color values to RGB color values
      * @public
      * @function
+     * @summary CMYK to RGB
+     * @description Converts CMYK color values to RGB color values
      * @param {number} cyan    - color value (0-100)
      * @param {number} magenta - color value (0-100)
      * @param {number} yellow  - color value (0-100)
@@ -55,17 +57,19 @@ export declare class ColorConversion {
      */
     CmykToRgb(cyan: number, magenta: number, yellow: number, black: number): Array<number>;
     /**
-     * Converts a hexadecimal color value to RGB color values
      * @public
      * @function
+     * @summary Hex to RGB
+     * @description Converts a hexadecimal color value to RGB color values
      * @param {string} hex - A hexadecimal
      * @returns {Array<number>} An Array of Red (0-255), Green (0-255), and Blue (0-255) values
      */
     HexToRgb(hex: string): Array<number>;
     /**
-     * Converts HSL color values to RGB color values
      * @public
      * @function
+     * @summary HSL to RGB
+     * @description Converts HSL color values to RGB color values
      * @param {number} hue        - color value (0-359)
      * @param {number} saturation - color value (0-100)%
      * @param {number} lightness  - color value (0-100)%
@@ -73,9 +77,10 @@ export declare class ColorConversion {
      */
     HslToRgb(hue: number, saturation: number, lightness: number): Array<number>;
     /**
-     * Converts HSV color values to RGB color values
      * @public
      * @function
+     * @summary HSV to RGB
+     * @description Converts HSV color values to RGB color values
      * @param {number} hue        - color value (0-359)
      * @param {number} saturation - color value (0-100)%
      * @param {number} value      - color value (0-100)%
@@ -83,9 +88,10 @@ export declare class ColorConversion {
      */
     HsvToRgb(hue: number, saturation: number, value: number): Array<number>;
     /**
-     * Converts RGB color values to a binary color value
      * @public
      * @function
+     * @summary RGB to Binary
+     * @description Converts RGB color values to a binary color value
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -93,9 +99,10 @@ export declare class ColorConversion {
      */
     RgbToBin(red: number, green: number, blue: number): string;
     /**
-     * Converts RGB color values to CMYK color values
      * @public
      * @function
+     * @summary RGB to CMYK
+     * @description Converts RGB color values to CMYK color values
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -103,9 +110,10 @@ export declare class ColorConversion {
      */
     RgbToCmyk(red: number, green: number, blue: number): Array<number>;
     /**
-     * Converts RGB color values to  hexadecimal color value
      * @public
      * @function
+     * @summary RGB to Hex
+     * @description Converts RGB color values to  hexadecimal color value
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -113,9 +121,10 @@ export declare class ColorConversion {
      */
     RgbToHex(red: number, green: number, blue: number): string;
     /**
-     * Converts RGB color values to HSL color values
      * @public
      * @function
+     * @summary RGB to HSL
+     * @description Converts RGB color values to HSL color values
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)
@@ -123,9 +132,10 @@ export declare class ColorConversion {
      */
     RgbToHsl(red: number, green: number, blue: number): Array<number>;
     /**
-     * Converts RGB color values to HSV color values
      * @public
      * @function
+     * @summary RGB to HSV
+     * @description Converts RGB color values to HSV color values
      * @param {number} red   - color value (0-255)
      * @param {number} green - color value (0-255)
      * @param {number} blue  - color value (0-255)

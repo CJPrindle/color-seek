@@ -29,31 +29,33 @@ import { Buffer } from "buffer";
  */
 export namespace Web {
   /**
-   * public
+   * @public
    * @class
    * @classdesc Provides access to HTML and/or CSS files to parse for color values
    * @memberof Web
    */
   export class Http {
      /**
-      * Default Constructor
       * @constructor
+      * @description Default Constructor
       */
      constructor() { }
 
      /**
-     * Connects to the provided Url and parses the text data
+     * @public
      * @function
+     * @summary URL Connect
+     * @description Connects to the provided Url and parses the text data
      * @param {string}  url       - The Url to parse
      * @param {Function} callback - The callback function for further processing
      */
     public async getUrlData(url: string, callback: Function): Promise<any> {
-      let html = "";
+      let html = '';
 
       request
         .get(url)
-        .on("data", chunk => html += Buffer.from(chunk).toString())
-        .on("end", () => callback(html));
+        .on('data', chunk => html += Buffer.from(chunk).toString())
+        .on('end', () => callback(html));
     }
   }
 }

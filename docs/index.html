@@ -118,7 +118,7 @@
 <tr>
 <td>Hex</td>
 <td><code>#1188FF</code></td>
-<td>Hexadecimals of Red (11), Green (88), Blue (FF)</td>
+<td>Hexadecimals of Red (00-FF), Green (00-FF), Blue (00-FF)</td>
 </tr>
 <tr>
 <td>RGB</td>
@@ -134,7 +134,8 @@
 </table>
 <h4>CMYK</h4><p><em>CMYK</em> is a proposed color format for CSS4. It is well known outside of CSS and has been in use<br>for many years in printing and graphic design. It is included on the HTML output and will be a color format option<br>when/if it is included in CSS.</p>
 <h4>Named Colors</h4><p>This version <strong>does not</strong> parse <em>Named Colors</em>. It is on the list of enhancements.</p>
-<h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available<br>as output options. You may also choose the Gimp Color Palette format as well. An HTML file is always generated<br>automatically regardless of what other options as selected.</p>
+<h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available<br>as output options. You may also create a Gimp Color Palette. </p>
+<p>An HTML file is generated automatically regardless of other options selected.</p>
 <h4>File Formats</h4><p>Each of the formats below can be generated when creating a palette.</p>
 <table>
 <thead>
@@ -175,7 +176,7 @@
 <tbody>
 <tr>
 <td>-i, --input [PATH]</td>
-<td>*The source file or url to search for color values</td>
+<td>The source file or url to search for color values *</td>
 </tr>
 <tr>
 <td>-o, --output [DIRECTORY]</td>
@@ -187,26 +188,25 @@
 </tr>
 <tr>
 <td>--css</td>
-<td>Create a CSS rendering of the color palette</td>
+<td>Create a CSS file</td>
 </tr>
 <tr>
 <td>--gpl</td>
-<td>Create a Gimp Palette rendering of the color palette</td>
+<td>Create a Gimp Color Palette file</td>
 </tr>
 <tr>
 <td>--less</td>
-<td>Create a LESS rendering of the color palette</td>
+<td>Create a LESS file</td>
 </tr>
 <tr>
 <td>--sass</td>
-<td>Create a SASS rendering of the color palette</td>
+<td>Create a SASS file</td>
 </tr>
 </tbody>
 </table>
-<p><strong>*Required</strong></p>
+<pre class="prettyprint source"><code>* Required</code></pre><p>When no output directory is specified the <strong>Color Seek</strong> directory will be used. If no output name is specified the<br>input file name will be used.</p>
+<p>All file types can be rendered by adding the corresponding command switch. If no output type is given then only the<br>HTML file will be generated.</p>
 <hr>
-<p>When no output directory is specified the current directory will to used. If no output name is specified the input file<br>name will be used.</p>
-<p>All file types can be rendered by adding the corresponding command switch. If no output type is given only the HTML<br>file will be generated.</p>
 <h3>Examples</h3><p>The following examples demonstrate various options available with <strong>Color Seek</strong>. </p>
 <p><strong>NOTE</strong>: An HTML rendition of the color palette is <strong>always</strong> included.</p>
 <h4>Create CSS with Hex Colors from a Local File Source</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/Halcyon.json --css</code></pre><ul>
@@ -229,7 +229,8 @@
 <p><strong>NOTE</strong>: Double quotes are required for command line entries with one or more spaces.</p>
 <p><img src="./img/readme-3.png" alt="readme-3"></p>
 <p><code>Example: A SASS File with RGB Color Values</code></p>
-<h4>Create Multiple Files with HSL colors in a Specified Directory</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --hsl</code></pre><ul>
+<hr>
+<h4>Create Multiple Files with HSL colors in a Specifie#d Directory</h4><pre class="prettyprint source"><code>$ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --hsl</code></pre><ul>
 <li><p>Multiple files can be created by adding a command switch</p>
 </li>
 <li><p>The '-o' ('--output') command switch specifies the output directory for all files</p>
@@ -241,6 +242,7 @@
 </ul>
 <p><img src="./img/readme-6.png" alt="readme-6"></p>
 <p><code>Example: Multiple Files Created with One Command</code></p>
+<hr>
 <h4>Create a Gimp Palette File</h4><pre class="prettyprint source"><code>$ colorseek -i /c/docs/Halcyon.json --gimp</code></pre><ul>
 <li><p>A Gimp Palette File has a custom format and will ignore color format command switches</p>
 </li>
@@ -249,8 +251,9 @@
 </ul>
 <p><img src="./img/readme-5.png" alt="readme-5"></p>
 <p><code>Example: A Gimp Palette File</code></p>
+<hr>
 <h2>Summary</h2><p>Thus concludes this overview. If you find <strong>Color Seek</strong> useful please let me know. I encourage all feedback and<br>suggestions so please do not hesitate to contact me.</p>
-<h4>ENJOY!</h4></article>
+<h3>ENJOY!</h3></article>
     </section>
 
 

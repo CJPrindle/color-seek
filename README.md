@@ -23,7 +23,7 @@ CSS currently accepts three formats for color specification.
 
 | Format    | Example                      | Description                                                    |
 |-----------|------------------------------|----------------------------------------------------------------|
-| Hex       | `#1188FF`                    | Hexadecimals of Red (11), Green (88), Blue (FF)                |
+| Hex       | `#1188FF`                    | Hexadecimals of Red (00-FF), Green (00-FF), Blue (00-FF)       |
 | RGB       | `rgb(32, 128, 255)`          | Range for Red (0-255), Green (0-255), Blue (0-255)             |
 | HSL       | `hsl(359, 25%, 100%)`        | Range for Hue (0-359), Saturation (0-100%), Lightness (0-100%) |
 
@@ -41,8 +41,9 @@ This version **does not** parse _Named Colors_. It is on the list of enhancement
 ### Output File Types ###
 
 A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available 
-as output options. You may also choose the Gimp Color Palette format as well. An HTML file is always generated 
-automatically regardless of what other options as selected.
+as output options. You may also create a Gimp Color Palette. 
+
+An HTML file is generated automatically regardless of other options selected.
 
 #### File Formats ####
 
@@ -67,25 +68,25 @@ All interaction with **Color Seek** is through the Command Line Interface (CLI).
 
 'colorseek -h' or 'colorseek --help' displays the available commands:
 
-| Command                 | Description                                          |
-|-------------------------|------------------------------------------------------|
-| -i, --input [PATH]      | *The source file or url to search for color values   |
-| -o, --output [DIRECTORY]| The file(s) output directory                         |
-| -n, --name              | The output file(s) name (_do not add extension_)     |
-| --css                   | Create a CSS rendering of the color palette          |
-| --gpl                   | Create a Gimp Palette rendering of the color palette |
-| --less                  | Create a LESS rendering of the color palette         |
-| --sass                  | Create a SASS rendering of the color palette         |
+| Command                 | Description                                         |
+|-------------------------|-----------------------------------------------------|
+| -i, --input [PATH]      | The source file or url to search for color values * |
+| -o, --output [DIRECTORY]| The file(s) output directory                        |
+| -n, --name              | The output file(s) name (_do not add extension_)    |
+| --css                   | Create a CSS file                                   |
+| --gpl                   | Create a Gimp Color Palette file                    |
+| --less                  | Create a LESS file                                  |
+| --sass                  | Create a SASS file                                  |
 
-***Required**
+    * Required
+
+When no output directory is specified the **Color Seek** directory will be used. If no output name is specified the 
+input file name will be used.
+
+All file types can be rendered by adding the corresponding command switch. If no output type is given then only the 
+HTML file will be generated.
 
 ---
-
-When no output directory is specified the current directory will to used. If no output name is specified the input file
-name will be used.
-
-All file types can be rendered by adding the corresponding command switch. If no output type is given only the HTML 
-file will be generated.
 
 ### Examples ###
 
@@ -112,7 +113,6 @@ to a JSON file.)
 
 #### Create SASS with RGB Colors from a URL Source ####
 
-
     $ colorseek -i https://material.io/static/m2/css/main.min.css -n "Material Theme" --sass --rgb
 
 + Using a URL is identical to using a file. **Color Seek** determines the input source automatically. 
@@ -127,7 +127,9 @@ to a JSON file.)
 
 `Example: A SASS File with RGB Color Values`
 
-#### Create Multiple Files with HSL colors in a Specified Directory ####
+---
+
+#### Create Multiple Files with HSL colors in a Specifie#d Directory ####
 
 
     $ colorseek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n "Material Styles" --css --sass --less --hsl
@@ -144,6 +146,8 @@ to a JSON file.)
 
 `Example: Multiple Files Created with One Command`
 
+---
+
 #### Create a Gimp Palette File ####
 
     $ colorseek -i /c/docs/Halcyon.json --gimp
@@ -156,10 +160,11 @@ to a JSON file.)
 
 `Example: A Gimp Palette File`
 
+---
 
 ## Summary ##
 
 Thus concludes this overview. If you find **Color Seek** useful please let me know. I encourage all feedback and 
 suggestions so please do not hesitate to contact me.
 
-#### ENJOY! ####
+### ENJOY! ###
