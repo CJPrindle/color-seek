@@ -78,7 +78,8 @@ All interaction with **Color Seek** is through the Command Line Interface (CLI).
 | --less                  | Create a LESS file                                  |
 | --sass                  | Create a SASS file                                  |
 
-    * Required
+`*Required`
+
 
 When no output directory is specified the **Color Seek** directory will be used. If no output name is specified the 
 input file name will be used.
