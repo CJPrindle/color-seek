@@ -119,7 +119,7 @@ to a JSON file.)
 
 + The --sass command switch creates a file named _Material Theme.scss_
 
-+ All color formats expect Hex _(default)_ the require a command switch (--rgb, --hsl, etc).
++ All color formats except Hex _(default)_ require a command switch (--rgb, --hsl, etc).
 
 **NOTE**: Double quotes are required for command line entries with one or more spaces.
 
