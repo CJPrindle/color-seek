@@ -112,6 +112,10 @@
     <Content Include="img\readme-5.png" />
     <Content Include="img\readme-6.png" />
     <Content Include="jsdoc.conf" />
+    <Content Include="samples\Dracula.html" />
+    <Content Include="samples\Dracula.scss" />
+    <Content Include="samples\Halcyon.css" />
+    <Content Include="samples\Halcyon.html" />
     <Content Include="tsconfig.json">
       <SubType>Code</SubType>
     </Content>
