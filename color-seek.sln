@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "color-seek-cli", "color-seek-cli.njsproj", "{981F1A7B-29E9-44E9-A85E-23217DF5439A}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "color-seek", "color-seek.njsproj", "{981F1A7B-29E9-44E9-A85E-23217DF5439A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

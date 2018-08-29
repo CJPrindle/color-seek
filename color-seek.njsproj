@@ -2,7 +2,7 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <Name>color-seek-cli</Name>
+    <Name>color-seek</Name>
     <RootNamespace>color-seek</RootNamespace>
     <ScriptArguments>-i http://www.jerue.com</ScriptArguments>
     <NodejsPort>9988</NodejsPort>
@@ -139,6 +139,7 @@
     <Folder Include="js\" />
     <Folder Include="js\lib\" />
     <Folder Include="lib\" />
+    <Folder Include="samples\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

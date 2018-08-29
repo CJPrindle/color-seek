@@ -1,10 +1,10 @@
-# color-seek-cli #
+# color-seek #
 
 Version 0.1 | [Full Documentation (API)](https://cjprindle.github.io/color-seek).
 
 ## Overview ##
 
-**color-seek-cli** allows you to build a color palette from a source file or URL. The source is scanned for valid
+**color-seek** allows you to build a color palette from a source file or URL. The source is scanned for valid
 CSS color values and the results are formatted, purged of duplicates, and then sorted to produce the 
 _Color Palette_. The palette can then be transformed into several predefined file formats for use in your projects.
 In addition, a HTML page is created which displays the palette as a grid of swatches, with the colors displaying 
@@ -58,15 +58,15 @@ Each of the formats below can be generated when creating a palette.
 
 ---
 
-## Using color-seek-cli ##
+## Using color-seek ##
 
 ### Command Line ###
 
-All interaction with **color-seek-cli** is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.
+All interaction with **color-seek** is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.
 
 #### Help ####
 
-'color-seek-cli -h' or 'color-seek-cli --help' displays the available commands:
+'color-seek -h' or 'color-seek --help' displays the available commands:
 
 | Command                 | Description                                         |
 |-------------------------|-----------------------------------------------------|
@@ -81,7 +81,7 @@ All interaction with **color-seek-cli** is through the Command Line Interface (C
 `*Required`
 
 
-When no output directory is specified the **color-seek-cli** directory will be used. If no output name is specified the 
+When no output directory is specified the **color-seek** directory will be used. If no output name is specified the 
 input file name will be used.
 
 All file types can be rendered by adding the corresponding command switch. If no output type is given then only the 
@@ -91,16 +91,16 @@ HTML file will be generated.
 
 ### Examples ###
 
-The following examples demonstrate various options available with **color-seek-cli**. 
+The following examples demonstrate various options available with **color-seek**. 
 
 **NOTE**: An HTML rendition of the color palette is **always** included.
 
 #### Create CSS with Hex Colors from a Local File Source #### 
 
-    $ color-seek-cli -i /c/docs/Halcyon.json --css
+    $ color-seek -i /c/docs/Halcyon.json --css
 
 + A CSS file was created named *Halcyon.css*
-+ If the -o (--output) command switch is not set all output files will be saved to the **color-seek-cli** directory
++ If the -o (--output) command switch is not set all output files will be saved to the **color-seek** directory
 + If the -n (--name) command switch is not set all output files will use the input file name
 
 (**FYI**: The input file used is a [Visual Studio Code](https://code.visualstudio.com) color theme exported
@@ -114,9 +114,9 @@ to a JSON file.)
 
 #### Create SASS with RGB Colors from a URL Source ####
 
-    $ color-seek-cli -i https://material.io/static/m2/css/main.min.css -n "Material Theme" --sass --rgb
+    $ color-seek -i https://material.io/static/m2/css/main.min.css -n "Material Theme" --sass --rgb
 
-+ Using a URL is identical to using a file. **color-seek-cli** determines the input source automatically. 
++ Using a URL is identical to using a file. **color-seek** determines the input source automatically. 
 
 + The --sass command switch creates a file named _Material Theme.scss_
 
@@ -133,7 +133,7 @@ to a JSON file.)
 #### Create Multiple Files with HSL colors in a Specifie#d Directory ####
 
 
-    $ color-seek-cli -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n "Material Styles" --css --sass --less --hsl
+    $ color-seek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n "Material Styles" --css --sass --less --hsl
 
 + Multiple files can be created by adding a command switch
  
@@ -151,7 +151,7 @@ to a JSON file.)
 
 #### Create a Gimp Palette File ####
 
-    $ color-seek-cli -i /c/docs/Halcyon.json --gimp
+    $ color-seek -i /c/docs/Halcyon.json --gimp
 
 + A Gimp Palette File has a custom format and will ignore color format command switches
 
@@ -165,7 +165,7 @@ to a JSON file.)
 
 ## Summary ##
 
-Thus concludes this overview. If you find **color-seek-cli** useful please let me know. I encourage all feedback and 
+Thus concludes this overview. If you find **color-seek** useful please let me know. I encourage all feedback and 
 suggestions so please do not hesitate to contact me.
 
 ### ENJOY! ###
