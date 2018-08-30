@@ -43,7 +43,7 @@ This version **does not** parse _Named Colors_. It is on the list of enhancement
 A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available 
 as output options. You may also create a Gimp Color Palette. 
 
-An HTML file is generated automatically regardless of other options selected.
+An HTML file is automatically generated with all options.
 
 #### File Formats ####
 
