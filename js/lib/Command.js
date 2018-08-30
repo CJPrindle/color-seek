@@ -25,7 +25,7 @@ IN THE SOFTWARE.
 /**
  * @class
  * @classdesc Contains the list of Color Seek Command line switches
- * @memberof Global
+ * @memberof ColorSeek
 */
 class Command {
     /**

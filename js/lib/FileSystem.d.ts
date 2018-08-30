@@ -9,7 +9,7 @@ export declare namespace FileSystem {
      * @memberof FileSystem
      * @property {string} inputSource - The source file/url parsed for color values
      * @property {string} outputName  - The provided name for the generated output files
-     * @memberof FileSystem
+ 
     */
     class FileAccess {
         inputSource: string;

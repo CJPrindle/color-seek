@@ -1,7 +1,7 @@
 /**
  * @class
  * @classdesc Contains helper methods usable across the application
- * @memberof Global
+ * @memberof ColorSeek
  */
 export declare class Helpers {
     /**

@@ -25,7 +25,7 @@ import chalk from 'chalk';
 /**
  * @class
  * @classdesc Contains helper methods usable across the application
- * @memberof Global
+ * @memberof ColorSeek
  */
 export class Helpers {
 

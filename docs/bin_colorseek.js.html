@@ -40,7 +40,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="FileSystem.FileAccess.html">FileSystem.FileAccess</a></li><li><a href="Global.ColorConversion.html">Global.ColorConversion</a></li><li><a href="Global.Command.html">Global.Command</a></li><li><a href="Global.Helpers.html">Global.Helpers</a></li><li><a href="Palette.PaletteBuilder.html">Palette.PaletteBuilder</a></li><li><a href="Palette.PaletteColors.html">Palette.PaletteColors</a></li><li><a href="Web.Http.html">Web.Http</a></li>
+					<li><a href="ColorSeek.ColorConversion.html">ColorSeek.ColorConversion</a></li><li><a href="ColorSeek.Command.html">ColorSeek.Command</a></li><li><a href="ColorSeek.Helpers.html">ColorSeek.Helpers</a></li><li><a href="FileSystem.FileAccess.html">FileSystem.FileAccess</a></li><li><a href="Palette.PaletteBuilder.html">Palette.PaletteBuilder</a></li><li><a href="Palette.PaletteColors.html">Palette.PaletteColors</a></li><li><a href="Web.Http.html">Web.Http</a></li>
 				</ul>
 			</li>
 			
@@ -99,7 +99,7 @@ const Command_1 = require("../lib/Command");
  * @summary Global.Command Object
  * @description Creates all Console switches and commands
  * @type {Command[]}
- * @instance
+ * @member
  */
 const commands = [
     new Command_1.Command('-i, --input [PATH]      ', '[REQUIRED] The source file or url to search for color values   '),
@@ -114,112 +114,112 @@ const commands = [
  * @summary Log Helper
  * @description Reference to the console.log method
  * @type {Console}
- * @instance
+ * @member
  */
 const log = console.log;
 /**
  * @summary Application Exit Helper
  * @description Reference to the process.exit field
  * @type {any}
- * @instance
+ * @member
  */
 const exit = process.exit;
 /**
  * @summary Console Helper
  * @description Displays 'Information' level messages to the console
  * @type {any}
- * @instance
+ * @member
  */
 const info = chalk_1.default.hex('#8CF069');
 /**
  * @summary Console Helper
  * @description Displays bold 'Information' level messages to the console
  * @type {any}
- * @instance
+ * @member
  */
 const infoBold = chalk_1.default.bold.green;
 /**
  * @summary Console Helper
  * @description Displays message sent to the printHelp method
  * @type {any}
- * @instance
+ * @member
  */
 const helpMessage = chalk_1.default.bold.hex('#69A0F0');
 /**
  * @summary Console Helper
  * @description Displays 'Warning' level messages to the console
  * @type {any}
- * @instance
+ * @member
  */
 const warning = chalk_1.default.bold.hex('#F0EB69');
 /**
  * @summary Command Line Arguments Helper
  * @description Returns the command line argument array starting on the third element
  * @type {any}
- * @instance
+ * @member
  */
 const args = minimist2(process.argv.slice(2));
 /**
  *  @summary Color Format
  *  @description An array containing all colors found in the source file or URL
  *  @type {Array&lt;string>}
- *  @instance
+ *  @member
  */
 let hexColors = [];
 /**
  * @summary Command Line Argument
  * @description Request for the help menu
  * @type {string}
- * @instance
+ * @member
  */
 const helpMe = args.h ? args.h : args.help;
 /**
  * @summary Command Line Argument
  * @description The source file path or URL location
  * @type {string}
- * @instance
+ * @member
  */
 const inputPath = args.i ? args.i : args.input;
 /**
  * @summary Command Line Argument
  * @description The directory to save all output files
  * @type {string}
- * @instance
+ * @member
  */
 let outputPath = args.o ? args.o : args.output;
 /**
  * @summary Command Line Argument
  * @description Is CSS a requested output file type
  * @type {boolean}
- * @instance
+ * @member
  */
 const isCss = args.css;
 /**
  * @summary Command Line Argument
  * @description Is Gimp Palette File a requested output file type
  * @type {boolean}
- * @instance
+ * @member
  */
 const isGimp = args.gimp;
 /**
  * @summary Command Line Argument
  * @description Is LESS a requested output file type
  * @type {boolean}
- * @instance
+ * @member
  */
 const isLess = args.less;
 /**
  * @summary Command Line Argument
  * @description Is SASS a requested output file type
  * @type {boolean}
- * @instance
+ * @member
  */
 const isSass = args.sass;
 /**
  * @summary Command Line Argument
  * @description The color format to create (Hex, Gimp, RGB, HSL)
  * @type {string}
- * @instance
+ * @member
  */
 const colorFormat = args.rgb
     ? 'rgb'
@@ -229,8 +229,8 @@ const colorFormat = args.rgb
 /**
  * @summary Command Line Argument
  * @description The file name to assign all output files
- * @type string
- * @instance
+ * @type {string}
+ * @member
  */
 let name = args.n ? args.n : args.name;
 //- Enter the matrix

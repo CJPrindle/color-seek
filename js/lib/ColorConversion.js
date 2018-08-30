@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * - RGB
  * - HSL
  * - CMYK
- * @memberof Global
+ * @memberof ColorSeek
  */
 class ColorConversion {
     /**

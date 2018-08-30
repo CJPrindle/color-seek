@@ -26,7 +26,7 @@ const chalk_1 = require("chalk");
 /**
  * @class
  * @classdesc Contains helper methods usable across the application
- * @memberof Global
+ * @memberof ColorSeek
  */
 class Helpers {
     /**

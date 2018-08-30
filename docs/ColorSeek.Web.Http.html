@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>color-seek home Namespace: FileSystem</title>
+	<title>color-seek home Class: Http</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,7 +40,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="ColorSeek.ColorConversion.html">ColorSeek.ColorConversion</a></li><li><a href="ColorSeek.Command.html">ColorSeek.Command</a></li><li><a href="ColorSeek.Helpers.html">ColorSeek.Helpers</a></li><li><a href="FileSystem.FileAccess.html">FileSystem.FileAccess</a></li><li><a href="Palette.PaletteBuilder.html">Palette.PaletteBuilder</a></li><li><a href="Palette.PaletteColors.html">Palette.PaletteColors</a></li><li><a href="Web.Http.html">Web.Http</a></li>
+					<li><a href="ColorSeek.ColorConversion.html">ColorSeek.ColorConversion</a></li><li><a href="ColorSeek.Command.html">ColorSeek.Command</a></li><li><a href="ColorSeek.FileSystem.FileAccess.html">ColorSeek.FileSystem.FileAccess</a></li><li><a href="ColorSeek.Helpers.html">ColorSeek.Helpers</a></li><li><a href="ColorSeek.Palette.PaletteBuilder.html">ColorSeek.Palette.PaletteBuilder</a></li><li><a href="ColorSeek.Palette.PaletteColors.html">ColorSeek.Palette.PaletteColors</a></li><li><a href="ColorSeek.Web.Http.html">ColorSeek.Web.Http</a></li>
 				</ul>
 			</li>
 			
@@ -79,14 +79,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Namespace: FileSystem</h1>
+	<h1 class="page-title">Class: Http</h1>
 <section>
 
 <header>
     
         <h2>
-        FileSystem
+        Http
         </h2>
+        
+            <div class="class-description"><p>Provides access to HTML and/or CSS files to parse for color values</p></div>
         
     
 </header>
@@ -96,10 +98,28 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Contains file system related classes</p></div>
-        
+<hr>
+<dt>
+    <h4 class="name" id="Http"><span class="type-signature"></span>new Http()</h4>
+    
+    
+</dt>
+<dd>
 
-        
+    
+    <div class="description">
+        <p>Default Constructor</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
 <dl class="details">
     
 
@@ -134,8 +154,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="lib_FileSystem.js.html">lib/FileSystem.js</a>,
-				 <a href="lib_FileSystem.js.html#sunlight-1-line-33">line 33</a>
+				<a href="lib_Web.js.html">lib/Web.js</a>,
+				 <a href="lib_Web.js.html#sunlight-1-line-39">line 39</a>
 			</li>
 		</ul>
 	</dd>
@@ -149,7 +169,21 @@
 </dl>
 
 
-        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
     
     </div>
 
@@ -158,20 +192,181 @@
     
 
     
-        <h3 class="subsection-title">Classes</h3>
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
 
         <dl>
-            <dt><a href="FileSystem.FileAccess.html">FileAccess</a></dt>
-            <dd></dd>
+            
+<hr>
+<dt>
+    <h4 class="name" id="getUrlData"><span class="type-signature">&lt;async> </span>getUrlData(url, callback)</h4>
+    
+    
+    <p class="summary"><p>URL Connect</p></p>
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Connects to the provided Url and parses the text data</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Url to parse</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback function for further processing</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="lib_Web.js.html">lib/Web.js</a>,
+				 <a href="lib_Web.js.html#sunlight-1-line-53">line 53</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
         </dl>
-    
-
-    
-
-    
-
-    
-
     
 
     

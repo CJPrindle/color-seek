@@ -27,7 +27,7 @@ IN THE SOFTWARE.
  * - RGB
  * - HSL
  * - CMYK
- * @memberof Global
+ * @memberof ColorSeek
  */
 export declare class ColorConversion {
     /**
