@@ -112,10 +112,17 @@
     <Content Include="img\readme-5.png" />
     <Content Include="img\readme-6.png" />
     <Content Include="jsdoc.conf" />
+    <Content Include="samples\Abyss Gimp.gpl" />
+    <Content Include="samples\Abyss Gimp.html" />
     <Content Include="samples\Dracula.html" />
     <Content Include="samples\Dracula.scss" />
     <Content Include="samples\Halcyon.css" />
     <Content Include="samples\Halcyon.html" />
+    <Content Include="samples\Material.css" />
+    <Content Include="samples\Material.html" />
+    <Content Include="samples\Material.less" />
+    <Content Include="samples\Material.scss" />
+    <Content Include="samples\README.md" />
     <Content Include="tsconfig.json">
       <SubType>Code</SubType>
     </Content>
