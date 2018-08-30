@@ -52,6 +52,57 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="docs\bin_colorseek.js.html" />
+    <Content Include="docs\classes.list.html" />
+    <Content Include="docs\ColorSeek.ColorConversion.html" />
+    <Content Include="docs\ColorSeek.Command.html" />
+    <Content Include="docs\ColorSeek.Helpers.html" />
+    <Content Include="docs\FileSystem.FileAccess.html" />
+    <Content Include="docs\FileSystem.html" />
+    <Content Include="docs\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="docs\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="docs\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="docs\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="docs\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="docs\global.html" />
+    <Content Include="docs\img\glyphicons-halflings-white.png" />
+    <Content Include="docs\img\glyphicons-halflings.png" />
+    <Content Include="docs\index.html" />
+    <Content Include="docs\lib_ColorConversion.js.html" />
+    <Content Include="docs\lib_Command.js.html" />
+    <Content Include="docs\lib_FileSystem.js.html" />
+    <Content Include="docs\lib_Helpers.js.html" />
+    <Content Include="docs\lib_Palette.js.html" />
+    <Content Include="docs\lib_Web.js.html" />
+    <Content Include="docs\namespaces.list.html" />
+    <Content Include="docs\Palette.html" />
+    <Content Include="docs\Palette.PaletteBuilder.html" />
+    <Content Include="docs\Palette.PaletteColors.html" />
+    <Content Include="docs\quicksearch.html" />
+    <Content Include="docs\scripts\prettify\Apache-License-2.0.txt" />
+    <Content Include="docs\styles\darkstrap.css" />
+    <Content Include="docs\styles\prettify-tomorrow.css" />
+    <Content Include="docs\styles\site.cosmo.css" />
+    <Content Include="docs\styles\site.cyborg.css" />
+    <Content Include="docs\styles\site.darkly.css" />
+    <Content Include="docs\styles\site.darkstrap.css" />
+    <Content Include="docs\styles\site.dibs-bootstrap.css" />
+    <Content Include="docs\styles\site.flatly.css" />
+    <Content Include="docs\styles\site.journal.css" />
+    <Content Include="docs\styles\site.lumen.css" />
+    <Content Include="docs\styles\site.paper.css" />
+    <Content Include="docs\styles\site.readable.css" />
+    <Content Include="docs\styles\site.sandstone.css" />
+    <Content Include="docs\styles\site.simplex.css" />
+    <Content Include="docs\styles\site.slate.css" />
+    <Content Include="docs\styles\site.spacelab.css" />
+    <Content Include="docs\styles\site.superhero.css" />
+    <Content Include="docs\styles\site.united.css" />
+    <Content Include="docs\styles\site.yeti.css" />
+    <Content Include="docs\styles\sunlight.dark.css" />
+    <Content Include="docs\styles\sunlight.default.css" />
+    <Content Include="docs\Web.html" />
+    <Content Include="docs\Web.Http.html" />
     <Content Include="img\readme-1.png" />
     <Content Include="img\readme-2.png" />
     <Content Include="img\readme-3.png" />
@@ -87,11 +138,25 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="docs\scripts\docstrap.lib.js" />
+    <Compile Include="docs\scripts\fulltext-search-ui.js" />
+    <Compile Include="docs\scripts\fulltext-search.js" />
+    <Compile Include="docs\scripts\lunr.min.js" />
+    <Compile Include="docs\scripts\prettify\jquery.min.js" />
+    <Compile Include="docs\scripts\prettify\lang-css.js" />
+    <Compile Include="docs\scripts\prettify\prettify.js" />
+    <Compile Include="docs\scripts\sunlight.js" />
+    <Compile Include="docs\scripts\toc.js" />
     <Compile Include="lib\ColorConversion.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="docs\" />
+    <Folder Include="docs\fonts\" />
+    <Folder Include="docs\img\" />
+    <Folder Include="docs\scripts\" />
+    <Folder Include="docs\scripts\prettify\" />
+    <Folder Include="docs\styles\" />
     <Folder Include="img\" />
     <Folder Include="js\" />
     <Folder Include="js\bin\" />
