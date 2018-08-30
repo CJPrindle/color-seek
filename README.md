@@ -11,7 +11,7 @@ In addition, a HTML page is created which displays the palette as a grid of colo
 their CSS values in each color format.
 
 
-![Readme Image 1](./img/readme-1.png)
+![Readme Image 1](https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-1.png)
 
 `Example: HTML Color Palette`
 
@@ -106,7 +106,7 @@ The following examples demonstrate various options available with **color-seek**
 (**FYI**: The input file used is a [Visual Studio Code](https://code.visualstudio.com) color theme exported
 to a JSON file.)
 
-![readme-2](./img/readme-2.png)
+![readme-2](https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-2.png)
 
 `Example: CSS Output with Hex Color Values`
 
@@ -124,7 +124,7 @@ to a JSON file.)
 
 **NOTE**: Double quotes are required for command line entries with one or more spaces.
 
-![readme-3](./img/readme-3.png)
+![readme-3](https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-3.png)
 
 `Example: A SASS File with RGB Color Values`
 
@@ -143,7 +143,7 @@ to a JSON file.)
 
 + The HSL color format is used in all files
 
-![readme-6](./img/readme-6.png)
+![readme-6](https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-6.png)
 
 `Example: Multiple Files Created with One Command`
 
@@ -157,7 +157,7 @@ to a JSON file.)
 
 + Creates a file with the '.gpl' extension
 
-![readme-5](./img/readme-5.png)
+![readme-5](https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-5.png)
 
 `Example: A Gimp Palette File`
 
