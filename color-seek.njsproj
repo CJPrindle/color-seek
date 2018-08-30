@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="docs\" />
     <Folder Include="img\" />
     <Folder Include="js\" />
     <Folder Include="js\bin\" />
