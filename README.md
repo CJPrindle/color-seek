@@ -4,11 +4,11 @@ Version 0.1 | [Full Documentation (API)](https://cjprindle.github.io/color-seek)
 
 ## Overview ##
 
-**color-seek** allows you to build a color palette from a source file or URL. The source is scanned for valid
-CSS color values and the results are formatted, purged of duplicates, and then sorted to produce the 
-_Color Palette_. The palette can then be transformed into several predefined file formats for use in your projects.
-In addition, a HTML page is created which displays the palette as a grid of swatches, with the colors displaying 
-their value in each CSS format.
+**color-seek** is a command line tool which allows you to build a color palette from a source file or URL. The source 
+is scanned for valid CSS color values and the results are formatted, purged of duplicates, and then sorted to produce 
+the _Color Palette_. The palette can then be transformed into several predefined file formats for use in your projects.
+In addition, a HTML page is created which displays the palette as a grid of color swatches, with each displaying 
+their CSS values in each color format.
 
 
 ![Readme Image 1](./img/readme-1.png)
@@ -19,7 +19,7 @@ their value in each CSS format.
 
 ### CSS Color Formats ###
 
-CSS currently accepts three formats for color specification.
+CSS currently supports three formats for color specification.
 
 | Format    | Example                      | Description                                                    |
 |-----------|------------------------------|----------------------------------------------------------------|
@@ -43,7 +43,7 @@ This version **does not** parse _Named Colors_. It is on the list of enhancement
 A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available 
 as output options. You may also create a Gimp Color Palette. 
 
-An HTML file is automatically generated with all options.
+An HTML file containing color swatches is automatically generated with all options.
 
 #### File Formats ####
 
@@ -62,7 +62,8 @@ Each of the formats below can be generated when creating a palette.
 
 ### Command Line ###
 
-All interaction with **color-seek** is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.
+All interaction with **color-seek** is through the Command Line Interface (CLI). All valid commands and switches are 
+available via the help display.
 
 #### Help ####
 
@@ -79,7 +80,6 @@ All interaction with **color-seek** is through the Command Line Interface (CLI).
 | --sass                  | Create a SASS file                                  |
 
 `*Required`
-
 
 When no output directory is specified the **color-seek** directory will be used. If no output name is specified the 
 input file name will be used.
@@ -130,7 +130,7 @@ to a JSON file.)
 
 ---
 
-#### Create Multiple Files with HSL colors in a Specifie#d Directory ####
+#### Create Multiple Files with HSL colors in a Specified Directory ####
 
 
     $ color-seek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n "Material Styles" --css --sass --less --hsl
