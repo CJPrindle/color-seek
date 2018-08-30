@@ -101,11 +101,11 @@
 
     <section class="readme-section">
         <article><h1>color-seek</h1><p>Version 0.1 | <a href="https://cjprindle.github.io/color-seek">Full Documentation (API)</a>.</p>
-<h2>Overview</h2><p><strong>color-seek</strong> allows you to build a color palette from a source file or URL. The source is scanned for valid<br>CSS color values and the results are formatted, purged of duplicates, and then sorted to produce the<br><em>Color Palette</em>. The palette can then be transformed into several predefined file formats for use in your projects.<br>In addition, a HTML page is created which displays the palette as a grid of swatches, with the colors displaying<br>their value in each CSS format.</p>
-<p><img src="./img/readme-1.png" alt="Readme Image 1"></p>
+<h2>Overview</h2><p><strong>color-seek</strong> is a command line tool which allows you to build a color palette from a source file or URL. The source<br>is scanned for valid CSS color values and the results are formatted, purged of duplicates, and then sorted to produce<br>the <em>Color Palette</em>. The palette can then be transformed into several predefined file formats for use in your projects.<br>In addition, a HTML page is created which displays the palette as a grid of color swatches, with each displaying<br>their CSS values in each color format.</p>
+<p><img src="https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-1.png" alt="Readme Image 1"></p>
 <p><code>Example: HTML Color Palette</code></p>
 <hr>
-<h3>CSS Color Formats</h3><p>CSS currently accepts three formats for color specification.</p>
+<h3>CSS Color Formats</h3><p>CSS currently supports three formats for color specification.</p>
 <table>
 <thead>
 <tr>
@@ -135,7 +135,7 @@
 <h4>CMYK</h4><p><em>CMYK</em> is a proposed color format for CSS4. It is well known outside of CSS and has been in use<br>for many years in printing and graphic design. It is included on the HTML output and will be a color format option<br>when/if it is included in CSS.</p>
 <h4>Named Colors</h4><p>This version <strong>does not</strong> parse <em>Named Colors</em>. It is on the list of enhancements.</p>
 <h3>Output File Types</h3><p>A color palette can be rendered into several formats simultaneously. Along with CSS, SASS and LESS are available<br>as output options. You may also create a Gimp Color Palette. </p>
-<p>An HTML file is automatically generated with all options.</p>
+<p>An HTML file containing color swatches is automatically generated with all options.</p>
 <h4>File Formats</h4><p>Each of the formats below can be generated when creating a palette.</p>
 <table>
 <thead>
@@ -164,7 +164,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Using color-seek</h2><h3>Command Line</h3><p>All interaction with <strong>color-seek</strong> is through the Command Line Interface (CLI). All valid commands and switches are available via the help display.</p>
+<h2>Using color-seek</h2><h3>Command Line</h3><p>All interaction with <strong>color-seek</strong> is through the Command Line Interface (CLI). All valid commands and switches are<br>available via the help display.</p>
 <h4>Help</h4><p>'color-seek -h' or 'color-seek --help' displays the available commands:</p>
 <table>
 <thead>
@@ -216,7 +216,7 @@
 <li>If the -n (--name) command switch is not set all output files will use the input file name</li>
 </ul>
 <p>(<strong>FYI</strong>: The input file used is a <a href="https://code.visualstudio.com">Visual Studio Code</a> color theme exported<br>to a JSON file.)</p>
-<p><img src="./img/readme-2.png" alt="readme-2"></p>
+<p><img src="https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-2.png" alt="readme-2"></p>
 <p><code>Example: CSS Output with Hex Color Values</code></p>
 <hr>
 <h4>Create SASS with RGB Colors from a URL Source</h4><pre class="prettyprint source"><code>$ color-seek -i https://material.io/static/m2/css/main.min.css -n &quot;Material Theme&quot; --sass --rgb</code></pre><ul>
@@ -228,10 +228,10 @@
 </li>
 </ul>
 <p><strong>NOTE</strong>: Double quotes are required for command line entries with one or more spaces.</p>
-<p><img src="./img/readme-3.png" alt="readme-3"></p>
+<p><img src="https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-3.png" alt="readme-3"></p>
 <p><code>Example: A SASS File with RGB Color Values</code></p>
 <hr>
-<h4>Create Multiple Files with HSL colors in a Specifie#d Directory</h4><pre class="prettyprint source"><code>$ color-seek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --hsl</code></pre><ul>
+<h4>Create Multiple Files with HSL colors in a Specified Directory</h4><pre class="prettyprint source"><code>$ color-seek -i https://material.io/static/m2/css/main.min.css -o c:\\docs -n &quot;Material Styles&quot; --css --sass --less --hsl</code></pre><ul>
 <li><p>Multiple files can be created by adding a command switch</p>
 </li>
 <li><p>The '-o' ('--output') command switch specifies the output directory for all files</p>
@@ -241,7 +241,7 @@
 <li><p>The HSL color format is used in all files</p>
 </li>
 </ul>
-<p><img src="./img/readme-6.png" alt="readme-6"></p>
+<p><img src="https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-6.png" alt="readme-6"></p>
 <p><code>Example: Multiple Files Created with One Command</code></p>
 <hr>
 <h4>Create a Gimp Palette File</h4><pre class="prettyprint source"><code>$ color-seek -i /c/docs/Halcyon.json --gimp</code></pre><ul>
@@ -250,7 +250,7 @@
 <li><p>Creates a file with the '.gpl' extension</p>
 </li>
 </ul>
-<p><img src="./img/readme-5.png" alt="readme-5"></p>
+<p><img src="https://raw.githubusercontent.com/CJPrindle/color-seek/master/img/readme-5.png" alt="readme-5"></p>
 <p><code>Example: A Gimp Palette File</code></p>
 <hr>
 <h2>Summary</h2><p>Thus concludes this overview. If you find <strong>color-seek</strong> useful please let me know. I encourage all feedback and<br>suggestions so please do not hesitate to contact me.</p>
