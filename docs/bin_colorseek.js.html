@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>color-seek home Source: colorseek.js</title>
+	<title>color-seek home Source: bin/colorseek.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -38,16 +38,16 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-colorseek.html">colorseek</a></li>
+					<li><a href="FileSystem.FileAccess.html">FileSystem.FileAccess</a></li><li><a href="Global.ColorConversion.html">Global.ColorConversion</a></li><li><a href="Global.Command.html">Global.Command</a></li><li><a href="Global.Helpers.html">Global.Helpers</a></li><li><a href="Palette.PaletteBuilder.html">Palette.PaletteBuilder</a></li><li><a href="Palette.PaletteColors.html">Palette.PaletteColors</a></li><li><a href="Web.Http.html">Web.Http</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
-				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="FileSystem.FileAccess.html">FileSystem.FileAccess</a></li><li><a href="Global.ColorConversion.html">Global.ColorConversion</a></li><li><a href="Global.Command.html">Global.Command</a></li><li><a href="Global.Helpers.html">Global.Helpers</a></li><li><a href="Palette.PaletteBuilder.html">Palette.PaletteBuilder</a></li><li><a href="Palette.PaletteColors.html">Palette.PaletteColors</a></li><li><a href="Web.Http.html">Web.Http</a></li>
+					<li><a href="global.html#args">args</a></li><li><a href="global.html#colorFormat">colorFormat</a></li><li><a href="global.html#commands">commands</a></li><li><a href="global.html#exit">exit</a></li><li><a href="global.html#helpMe">helpMe</a></li><li><a href="global.html#helpMessage">helpMessage</a></li><li><a href="global.html#hexColors">hexColors</a></li><li><a href="global.html#info">info</a></li><li><a href="global.html#infoBold">infoBold</a></li><li><a href="global.html#inputPath">inputPath</a></li><li><a href="global.html#isCss">isCss</a></li><li><a href="global.html#isGimp">isGimp</a></li><li><a href="global.html#isLess">isLess</a></li><li><a href="global.html#isSass">isSass</a></li><li><a href="global.html#log">log</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#outputPath">outputPath</a></li><li><a href="global.html#warning">warning</a></li>
 				</ul>
 			</li>
 			
@@ -79,68 +79,22 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: colorseek.js</h1>
+		<h1 class="page-title">Source: bin/colorseek.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">"use strict";
-/*! ***************************************************************************
-@license
-Copyright (c) 2018 Christopher Prindle. All rights reserved.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-IN THE SOFTWARE.
-******************************************************************************/
-/* ***************************************************************************
-* @author      Christopher Prindle
-* @version     0.1
-* @description Searches the provided file or web page for color values in the
-*              following formats:
-*                  - Hex:  #FFFFFF
-*                  - RGB: rgba(255, 255, 255, 1.0)
-*                  - HSL: hsl(359, 100%, 100%, 1.0)
-*              The resulting color palette can be saved to the following
-*              formats:
-*                  - CSS (Cascading Style Sheet)
-*                  - GPL (Gimp Color PaletteBuilder)
-*                  - HTML (Web Page)
-*                  - LESS (Less Style Sheet)
-*                  - SCSS (Sass Style Sheet)
-* @file Entry point of the Color Seek application
-**************************************************************************** */
-/// &lt;reference path='./lib/Command.ts' />
-/// &lt;reference path='./lib/FileSystem.ts' />
-/// &lt;reference path='./lib/Palette.ts' />
-/// &lt;reference path='./lib/Web.ts' />
+            class="sunlight-highlight-javascript linenums">#!/usr/bin/env node
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- *  @module colorseek
- *  @description Creates a color palette by parsing a file or URL
- */
 const chalk_1 = require("chalk");
 const path = require("path");
 const minimist2 = require("minimist2");
-const FileSystem_1 = require("./lib/FileSystem");
-const Web_1 = require("./lib/Web");
-const Helpers_1 = require("./lib/Helpers");
-const Palette_1 = require("./lib/Palette");
-const Command_1 = require("./lib/Command");
+const FileSystem_1 = require("../lib/FileSystem");
+const Web_1 = require("../lib/Web");
+const Helpers_1 = require("../lib/Helpers");
+const Palette_1 = require("../lib/Palette");
+const Command_1 = require("../lib/Command");
 /**
  * @summary Global.Command Object
  * @description Creates all Console switches and commands
