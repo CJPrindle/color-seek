@@ -5,7 +5,7 @@
     "url": "http://www.github.com/cjprindle"
   },
   "bin": {
-    "color-seek": "./bin/colorseek.js"
+    "color-seek": "./bin/color-seek.js"
   },
   "dependencies": {
     "chalk": "^2.4.1",
