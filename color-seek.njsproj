@@ -52,7 +52,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="docs\bin_colorseek.js.html" />
+    <Content Include="docs\bin_color-seek.js.html" />
     <Content Include="docs\classes.list.html" />
     <Content Include="docs\ColorSeek.ColorConversion.html" />
     <Content Include="docs\ColorSeek.Command.html" />
@@ -68,9 +68,9 @@
     <Content Include="docs\img\glyphicons-halflings-white.png" />
     <Content Include="docs\img\glyphicons-halflings.png" />
     <Content Include="docs\index.html" />
-    <Content Include="docs\lib_ColorConversion.js.html" />
+    <Content Include="docs\lib_color-conversion.js.html" />
     <Content Include="docs\lib_Command.js.html" />
-    <Content Include="docs\lib_FileSystem.js.html" />
+    <Content Include="docs\lib_file-system.js.html" />
     <Content Include="docs\lib_Helpers.js.html" />
     <Content Include="docs\lib_Palette.js.html" />
     <Content Include="docs\lib_Web.js.html" />
@@ -111,6 +111,7 @@
     <Content Include="img\readme-5.png" />
     <Content Include="img\readme-6.png" />
     <Content Include="jsdoc.conf" />
+    <Content Include="package.json" />
     <Content Include="samples\Abyss Gimp.gpl" />
     <Content Include="samples\Abyss Gimp.html" />
     <Content Include="samples\Abyss.json" />
@@ -129,7 +130,6 @@
       <SubType>Code</SubType>
     </Content>
     <TypeScriptCompile Include="bin\color-seek.ts" />
-    <Content Include="package.json" />
     <Content Include="README.md" />
     <TypeScriptCompile Include="lib\command.ts" />
     <TypeScriptCompile Include="lib\helpers.ts" />
