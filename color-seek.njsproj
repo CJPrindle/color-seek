@@ -5,7 +5,7 @@
     <Name>color-seek</Name>
     <RootNamespace>color-seek</RootNamespace>
     <ScriptArguments>-i http://www.jerue.com</ScriptArguments>
-    <NodejsPort>9988</NodejsPort>
+    <NodejsPort>9990</NodejsPort>
     <DebuggerPort>9987</DebuggerPort>
     <NodeExePath>c:\local\nodejs\node.exe</NodeExePath>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
