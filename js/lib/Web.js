@@ -60,4 +60,4 @@ var Web;
     }
     Web.Http = Http;
 })(Web = exports.Web || (exports.Web = {}));
-//# sourceMappingURL=Web.js.map
+//# sourceMappingURL=web.js.map

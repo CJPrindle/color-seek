@@ -1,4 +1,4 @@
-﻿/*! ***************************************************************************
+/*! ***************************************************************************
 @license MIT License
 Copyright (c) 2018 Christopher Prindle. All rights reserved.
 
@@ -22,8 +22,8 @@ IN THE SOFTWARE.
 ******************************************************************************/
 import * as fs from 'fs';
 import * as opn from 'opn';
-import { Helpers } from './Helpers';
-import { ColorConversion } from './ColorConversion';
+import { Helpers } from './helpers';
+import { ColorConversion } from './color-conversion';
 
 /**
  * Contains classes related to the parsing of provided data
@@ -135,7 +135,7 @@ export namespace Palette {
                      </div>
                   </a>\n`;
             });
-                 
+
          const fileName = `${this.outputPath}/${this.outputName}.html`;
 
          //- Write color information into placeholders

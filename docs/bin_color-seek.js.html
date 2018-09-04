@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>color-seek home Source: bin/colorseek.js</title>
+	<title>color-seek home Source: bin/color-seek.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,7 +79,7 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: bin/colorseek.js</h1>
+		<h1 class="page-title">Source: bin/color-seek.js</h1>
     
 <section>
     <article>
@@ -90,11 +90,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = require("chalk");
 const path = require("path");
 const minimist2 = require("minimist2");
-const FileSystem_1 = require("../lib/FileSystem");
-const Web_1 = require("../lib/Web");
-const Helpers_1 = require("../lib/Helpers");
-const Palette_1 = require("../lib/Palette");
-const Command_1 = require("../lib/Command");
+const file_system_1 = require("../lib/file-system");
+const web_1 = require("../lib/web");
+const helpers_1 = require("../lib/helpers");
+const palette_1 = require("../lib/palette");
+const command_1 = require("../lib/command");
 /**
  * @summary Global.Command Object
  * @description Creates all Console switches and commands
@@ -102,13 +102,13 @@ const Command_1 = require("../lib/Command");
  * @member
  */
 const commands = [
-    new Command_1.Command('-i, --input [PATH]      ', '[REQUIRED] The source file or url to search for color values   '),
-    new Command_1.Command('-o, --output [DIRECTORY]', 'The output file(s) directory                        '),
-    new Command_1.Command('-n, --name              ', 'The output file(s) name (no extension)              '),
-    new Command_1.Command('--css                   ', 'Create a Css rendering of the color palette         '),
-    new Command_1.Command('--gpl                   ', 'Create a Gimp Palette rendering of the color palette'),
-    new Command_1.Command('--less                  ', 'Create a Less rendering of the color palette        '),
-    new Command_1.Command('--scss                  ', 'Create a Sass rendering of the color palette        ')
+    new command_1.Command('-i, --input [PATH]      ', '[REQUIRED] The source file or url to search for color values   '),
+    new command_1.Command('-o, --output [DIRECTORY]', 'The output file(s) directory                        '),
+    new command_1.Command('-n, --name              ', 'The output file(s) name (no extension)              '),
+    new command_1.Command('--css                   ', 'Create a Css rendering of the color palette         '),
+    new command_1.Command('--gpl                   ', 'Create a Gimp Palette rendering of the color palette'),
+    new command_1.Command('--less                  ', 'Create a Less rendering of the color palette        '),
+    new command_1.Command('--scss                  ', 'Create a Sass rendering of the color palette        ')
 ];
 /**
  * @summary Log Helper
@@ -258,14 +258,14 @@ function main() {
                 }
                 //- Determine if input is a file or a URL
                 if (inputPath.toLowerCase().startsWith('http')) {
-                    new Web_1.Web.Http().getUrlData(inputPath, htmlTextHandler);
+                    new web_1.Web.Http().getUrlData(inputPath, htmlTextHandler);
                 }
                 else {
-                    new FileSystem_1.FileSystem.FileAccess(inputPath, outputPath, name).readFile(htmlTextHandler);
+                    new file_system_1.FileSystem.FileAccess(inputPath, outputPath, name).readFile(htmlTextHandler);
                 }
             }
             else {
-                Helpers_1.Helpers.outputError(new Error('Missing input file'));
+                helpers_1.Helpers.outputError(new Error('Missing input file'));
             }
         }
         else {
@@ -273,7 +273,7 @@ function main() {
         }
     }
     catch (e) {
-        Helpers_1.Helpers.outputError(e);
+        helpers_1.Helpers.outputError(e);
     }
 }
 /**
@@ -287,12 +287,12 @@ function main() {
  * @param {string} data - The file or URL text
  */
 function htmlTextHandler(data) {
-    const fs = new FileSystem_1.FileSystem.FileAccess(inputPath, outputPath, name);
+    const fs = new file_system_1.FileSystem.FileAccess(inputPath, outputPath, name);
     if (!outputPath) {
         outputPath = '.';
     }
     //- Create color palette and generate HTML
-    hexColors = new Palette_1.Palette.PaletteBuilder(inputPath, outputPath, name).buildHtmlOutput(data);
+    hexColors = new palette_1.Palette.PaletteBuilder(inputPath, outputPath, name).buildHtmlOutput(data);
     //- Determine which output files to generate
     if (isCss) {
         fs.writeCss(outputPath, name, hexColors, colorFormat, 'css');
@@ -326,7 +326,7 @@ function printHelp(message = '') {
     log(warning('Multiple versions of the color palette can be created by specifying multiple output types (ex: --css --sass).'));
     exit();
 }
-//# sourceMappingURL=colorseek.js.map</pre>
+//# sourceMappingURL=color-seek.js.map</pre>
     </article>
 </section>
 
@@ -371,7 +371,7 @@ function printHelp(message = '') {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Aug 30, 2018
+		on Sep 04, 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

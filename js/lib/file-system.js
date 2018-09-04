@@ -24,8 +24,8 @@ IN THE SOFTWARE.
 ******************************************************************************/
 const fs = require("fs");
 const buffer_1 = require("buffer");
-const Helpers_1 = require("./Helpers");
-const ColorConversion_1 = require("./ColorConversion");
+const helpers_1 = require("./helpers");
+const color_conversion_1 = require("./color-conversion");
 /**
   * Contains file system related classes
   * @namespace
@@ -36,21 +36,18 @@ var FileSystem;
      * @class
      * @classdesc Provides file read and write functionality
      * @memberof FileSystem
-     * @property {string} inputSource - The source file/url parsed for color values
-     * @property {string} outputName  - The provided name for the generated output files
- 
-    */
+     */
     class FileAccess {
         /**
          * @constructor
          * @param {string} source     - The source file/url parsed for color values
          * @param {string} outputPath - The provided directory to save the generated output files
-         * @param {string} name       - The provided name for the generated output files
+         * @param {string} outputName       - The provided name for the generated output files
          */
-        constructor(source, outputPath, name) {
-            this.inputSource = source;
+        constructor(inputSource, outputPath, outputName) {
+            this.inputSource = inputSource;
             this.outputPath = outputPath;
-            this.outputName = name;
+            this.outputName = outputName;
         }
         /**
          * @public
@@ -72,7 +69,7 @@ var FileSystem;
                 });
             }
             else {
-                Helpers_1.Helpers.outputError(new Error('File does not exist'));
+                helpers_1.Helpers.outputError(new Error('File does not exist'));
             }
         }
         /**
@@ -90,7 +87,7 @@ var FileSystem;
         writeCss(outputPath, name, hexColors, colorFormat = 'hex', styleType) {
             let cssFormat = '';
             let count = 0;
-            const colorConv = new ColorConversion_1.ColorConversion();
+            const colorConv = new color_conversion_1.ColorConversion();
             let r, g, b;
             let h, s, l;
             //- Start with the header
@@ -130,11 +127,11 @@ var FileSystem;
                     });
                     break;
                 default:
-                    Helpers_1.Helpers.outputError(new Error('Invalid Stylesheet type: ' + styleType));
+                    helpers_1.Helpers.outputError(new Error('Invalid Stylesheet type: ' + styleType));
             }
             const write = fs.writeFile(`${outputPath}/${name}.${styleType}`, styleSheet, (err) => {
                 if (err) {
-                    Helpers_1.Helpers.outputError(err);
+                    helpers_1.Helpers.outputError(err);
                 }
             });
         }
@@ -163,11 +160,11 @@ var FileSystem;
                     output = `$color-${count}: ${cssFormat}\n`;
                     break;
                 default:
-                    Helpers_1.Helpers.outputError(new Error('Invalid Stylesheet type: ' + styleType));
+                    helpers_1.Helpers.outputError(new Error('Invalid Stylesheet type: ' + styleType));
             }
             return output;
         }
     }
     FileSystem.FileAccess = FileAccess;
 })(FileSystem = exports.FileSystem || (exports.FileSystem = {}));
-//# sourceMappingURL=FileSystem.js.map
+//# sourceMappingURL=file-system.js.map

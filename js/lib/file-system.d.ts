@@ -7,21 +7,18 @@ export declare namespace FileSystem {
      * @class
      * @classdesc Provides file read and write functionality
      * @memberof FileSystem
-     * @property {string} inputSource - The source file/url parsed for color values
-     * @property {string} outputName  - The provided name for the generated output files
- 
-    */
+     */
     class FileAccess {
         inputSource: string;
-        outputPath: string;
+        outputPath: any;
         outputName: string;
         /**
          * @constructor
          * @param {string} source     - The source file/url parsed for color values
          * @param {string} outputPath - The provided directory to save the generated output files
-         * @param {string} name       - The provided name for the generated output files
+         * @param {string} outputName       - The provided name for the generated output files
          */
-        constructor(source: string, outputPath: any, name: string);
+        constructor(inputSource: string, outputPath: any, outputName: string);
         /**
          * @public
          * @function

@@ -52,4 +52,4 @@ class Command {
     }
 }
 exports.Command = Command;
-//# sourceMappingURL=Command.js.map
+//# sourceMappingURL=command.js.map

@@ -24,8 +24,8 @@ IN THE SOFTWARE.
 ******************************************************************************/
 const fs = require("fs");
 const opn = require("opn");
-const Helpers_1 = require("./Helpers");
-const ColorConversion_1 = require("./ColorConversion");
+const helpers_1 = require("./helpers");
+const color_conversion_1 = require("./color-conversion");
 /**
  * Contains classes related to the parsing of provided data
  * @namespace
@@ -54,7 +54,7 @@ var Palette;
             this.outputPath = outputPath;
             this.outputName = name
                 ? name
-                : `Color Seek - ${Helpers_1.Helpers.getMilliseconds(6)}`;
+                : `Color Seek - ${helpers_1.Helpers.getMilliseconds(6)}`;
         }
         /**
          * @public
@@ -85,8 +85,8 @@ var Palette;
                 const redMin = h.Red - pct;
                 const redMax = h.Red + pct;
                 //- Determine if both green and blue are within red's range
-                const isG = Helpers_1.Helpers.between(redMin, redMax, h.Green);
-                const isB = Helpers_1.Helpers.between(redMin, redMax, h.Blue);
+                const isG = helpers_1.Helpers.between(redMin, redMax, h.Green);
+                const isB = helpers_1.Helpers.between(redMin, redMax, h.Blue);
                 if (isG && isB) {
                     this.grayColors.push(h);
                 }
@@ -216,7 +216,7 @@ var Palette;
                 //- split into array and get each value
                 const arrHSL = hsl.substring(0, hsl.indexOf(')')).split(',');
                 [h, s, l] = arrHSL;
-                const colorConv = new ColorConversion_1.ColorConversion();
+                const colorConv = new color_conversion_1.ColorConversion();
                 //- Convert to RGB
                 const arrRGB = colorConv.HslToRgb(h, s, l);
                 //- Convert RGB -> Hex
@@ -249,7 +249,7 @@ var Palette;
                 let rgb = searchText.substring(str, end);
                 const arrRGB = rgb.substring(0, rgb.indexOf(')')).split(',');
                 [r, g, b] = arrRGB;
-                const hex = new ColorConversion_1.ColorConversion().RgbToHex(r, g, b);
+                const hex = new color_conversion_1.ColorConversion().RgbToHex(r, g, b);
                 hexColors.push('#' + hex);
             }
             return [
@@ -290,7 +290,7 @@ var Palette;
                     }
                 }
                 catch (e) {
-                    Helpers_1.Helpers.outputError(e, true);
+                    helpers_1.Helpers.outputError(e, true);
                 }
             }
             return [
@@ -440,7 +440,7 @@ var Palette;
          */
         createColorFormats(hexValue) {
             if (RegExp(/^#[0-9A-F]{6}$/i).test(hexValue)) { //- Valid Hexadecimal
-                const ColorConvert = new ColorConversion_1.ColorConversion();
+                const ColorConvert = new color_conversion_1.ColorConversion();
                 this.Hex = hexValue;
                 //- Assign RGB and the individual properties
                 this.RGB = ColorConvert.HexToRgb(hexValue.substring(1));
@@ -455,10 +455,10 @@ var Palette;
                 this.Luminosity = Math.sqrt(.241 * this.Red + .691 * this.Green + .068 * this.Blue);
             }
             else {
-                Helpers_1.Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));
+                helpers_1.Helpers.outputError(new Error(`Invalid Hex value ${hexValue}`));
             }
         }
     }
     Palette.PaletteColors = PaletteColors;
 })(Palette = exports.Palette || (exports.Palette = {}));
-//# sourceMappingURL=Palette.js.map
+//# sourceMappingURL=palette.js.map

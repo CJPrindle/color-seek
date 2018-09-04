@@ -113,10 +113,13 @@
     <Content Include="jsdoc.conf" />
     <Content Include="samples\Abyss Gimp.gpl" />
     <Content Include="samples\Abyss Gimp.html" />
+    <Content Include="samples\Abyss.json" />
     <Content Include="samples\Dracula.html" />
+    <Content Include="samples\Dracula.json" />
     <Content Include="samples\Dracula.scss" />
     <Content Include="samples\Halcyon.css" />
     <Content Include="samples\Halcyon.html" />
+    <Content Include="samples\Halcyon.json" />
     <Content Include="samples\Material.css" />
     <Content Include="samples\Material.html" />
     <Content Include="samples\Material.less" />
@@ -125,18 +128,16 @@
     <Content Include="tsconfig.json">
       <SubType>Code</SubType>
     </Content>
-    <TypeScriptCompile Include="bin\colorseek.ts" />
+    <TypeScriptCompile Include="bin\color-seek.ts" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <TypeScriptCompile Include="lib\Command.ts" />
-    <TypeScriptCompile Include="lib\Helpers.ts" />
-    <TypeScriptCompile Include="lib\FileSystem.ts">
+    <TypeScriptCompile Include="lib\command.ts" />
+    <TypeScriptCompile Include="lib\helpers.ts" />
+    <TypeScriptCompile Include="lib\file-system.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="lib\Palette.ts" />
-    <TypeScriptCompile Include="lib\Web.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
+    <TypeScriptCompile Include="lib\palette.ts" />
+    <TypeScriptCompile Include="lib\web.ts" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="docs\scripts\docstrap.lib.js" />
@@ -148,7 +149,7 @@
     <Compile Include="docs\scripts\prettify\prettify.js" />
     <Compile Include="docs\scripts\sunlight.js" />
     <Compile Include="docs\scripts\toc.js" />
-    <Compile Include="lib\ColorConversion.ts" />
+    <Compile Include="lib\color-conversion.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

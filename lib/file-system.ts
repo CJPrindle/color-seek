@@ -22,8 +22,8 @@ IN THE SOFTWARE.
 ******************************************************************************/
 import * as fs from 'fs';
 import { Buffer } from 'buffer';
-import { Helpers } from './Helpers';
-import { ColorConversion } from './ColorConversion';
+import { Helpers } from './helpers';
+import { ColorConversion } from './color-conversion';
 
 /**
   * Contains file system related classes
@@ -34,26 +34,16 @@ export namespace FileSystem {
     * @class 
     * @classdesc Provides file read and write functionality
     * @memberof FileSystem
-    * @property {string} inputSource - The source file/url parsed for color values
-    * @property {string} outputName  - The provided name for the generated output files
-
-   */
+    */
    export class FileAccess {
-      public inputSource: string;
-      public outputPath: string;
-      public outputName: string;
 
       /**
        * @constructor
        * @param {string} source     - The source file/url parsed for color values
        * @param {string} outputPath - The provided directory to save the generated output files
-       * @param {string} name       - The provided name for the generated output files
+       * @param {string} outputName       - The provided name for the generated output files
        */
-      constructor(source: string, outputPath, name: string) {
-         this.inputSource = source;
-         this.outputPath = outputPath;
-         this.outputName = name;
-      }
+      constructor(public inputSource: string, public outputPath, public outputName: string) {}
 
       /**
        * @public
