@@ -82,7 +82,7 @@
     <Content Include="docs\scripts\prettify\Apache-License-2.0.txt" />
     <Content Include="docs\styles\darkstrap.css" />
     <Content Include="docs\styles\prettify-tomorrow.css" />
-    <Content Include="docs\styles\site.cerulean.css" />
+    <Content Include="docs\styles\site.Cerulean.css" />
     <Content Include="docs\styles\site.cosmo.css" />
     <Content Include="docs\styles\site.cyborg.css" />
     <Content Include="docs\styles\site.darkly.css" />
