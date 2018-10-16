@@ -85,7 +85,7 @@ export namespace Palette {
          });
 
          //- Find 'Grays' (R,G,B values within +- 5%) and separate them
-         this.hueColors.map((h, i, a) => {
+         this.hueColors.map((h) => {
             //- Get the Red hi-low range 
             let pct = h.RGB[0] * .05;
             const redMin = h.Red - pct;
