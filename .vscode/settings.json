@@ -5,5 +5,13 @@
         "logerr",
         "nbsp",
         "pbin"
-    ]
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.map": true,
+    }
 }
